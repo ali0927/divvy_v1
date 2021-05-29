@@ -1,4 +1,5 @@
 import { PublicKey } from "@solana/web3.js";
+import { ENV } from "../contexts/connection";
 
 export const WRAPPED_SOL_MINT = new PublicKey(
   "So11111111111111111111111111111111111111112"
@@ -29,6 +30,11 @@ export const PROGRAM_IDS = [
     name: "localnet",
   },
 ];
+
+// Use ENV union type in connection.tsx when accessing these
+export const DIVVY_PROGRAM_IDS: { [env: string] : PublicKey; } = {
+  "devnet" : new PublicKey("SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8") // THIS IS A PLACEHOLDER !!
+};
 
 export const setProgramIds = (envName: string) => {
   let instance = PROGRAM_IDS.find((env) => env.name === envName);
