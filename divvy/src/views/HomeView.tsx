@@ -3,12 +3,17 @@ import { useUserBalance } from "../hooks/useUserBalance";
 import { WRAPPED_SOL_MINT } from "../utils/ids";
 import { LABELS } from "../constants";
 import { Wallet } from "../components/Wallet/Wallet";
-import { RightSideBar as RightSideBar } from "../components/RightSideBar";
-import { MyLiquidity } from "../components/MyLiquidity/MyLiquidity";
+import { RightSideBar } from "../components/RightSideBar";
+import { LeftSideBar } from "../components/LeftSideBar";
+import { NavBar } from "../components/Nav/NavBar";
+
 export const HomeView = () => {
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
   return (
     <div className="App ">
+      <LeftSideBar>
+        <NavBar />
+      </LeftSideBar>
       <header className="App-header">
         <Wallet />
         <img src={logo} alt="logo" />
@@ -18,7 +23,9 @@ export const HomeView = () => {
         </p>
       </header>
       <RightSideBar>
-        <MyLiquidity />
+        <div className="sidebar-section">
+          <h3>Bets. To be developed.</h3>
+        </div>
       </RightSideBar>
     </div>
   );

@@ -3,11 +3,10 @@ import { WithdrawLiquidity } from "./WithdrawLiquidity";
 export const MyLiquidity = (props: {}) => {
   return (
     <div>
-      <h3>My Liquidity Stats</h3>
-      <br />
+      <div className="sidebar-section">
+        <h3>My Liquidity Stats</h3>
+      </div>
       <DepositLiquidity />
-      <br />
-      <br />
       <WithdrawLiquidity />
     </div>
   );

@@ -3,19 +3,31 @@ import { WalletProvider } from "./contexts/wallet";
 import { ConnectionProvider } from "./contexts/connection";
 import { AccountsProvider } from "./contexts/accounts";
 import { MarketProvider } from "./contexts/market";
-import { HomeView } from "./views/home";
+import { HomeView } from "./views/HomeView";
+import { LiquidityView } from "./views/LiquidityView";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <ConnectionProvider>
-      <WalletProvider>
-        <AccountsProvider>
-          <MarketProvider>
-            <HomeView></HomeView>
-          </MarketProvider>
-        </AccountsProvider>
-      </WalletProvider>
-    </ConnectionProvider>
+    <BrowserRouter>
+      <ConnectionProvider>
+        <WalletProvider>
+          <AccountsProvider>
+            <MarketProvider>
+              {/* Routes are ordered specific to general. the '/' route must be placed last */}
+              <Switch>
+                <Route path="/liquidity">
+                  <LiquidityView />
+                </Route>
+                <Route path="/">
+                  <HomeView />
+                </Route>
+              </Switch>
+            </MarketProvider>
+          </AccountsProvider>
+        </WalletProvider>
+      </ConnectionProvider>
+    </BrowserRouter>
   );
 }
 
