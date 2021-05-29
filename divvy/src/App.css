@@ -1,5 +1,6 @@
 .App {
-    text-align: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .App-logo {
@@ -20,8 +21,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    text-align: center;
     font-size: calc(10px + 2vmin);
     color: white;
+}
+
+.RightSideBar {
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 20em;
+    padding: 1.5em;
 }
 
 .App-link {
@@ -59,4 +69,42 @@
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-center {
+    justify-content: center;
+}
+
+.flex-horizontal {
+    flex-direction: row;
+}
+
+.flex-vertical {
+    flex-direction: column;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.ant-input {
+    background-color: #242424;
+}
+
+.ant-form-item {
+    color: #242424;
+}
+
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+    /* Remove the red * for required inputs */
+    margin-right: 0;
+    content: "";
 }

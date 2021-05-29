@@ -1,11 +1,13 @@
 import { useLocalStorageState } from "./../utils/utils";
 import {
   Account,
+  Keypair,
   clusterApiUrl,
   Connection,
   PublicKey,
   Transaction,
   TransactionInstruction,
+  SendOptions,
 } from "@solana/web3.js";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { notify } from "./../utils/notifications";
@@ -13,13 +15,13 @@ import { ExplorerLink } from "../components/ExplorerLink";
 import { setProgramIds } from "../utils/ids";
 import { WalletAdapter } from "./wallet";
 import { cache, getMultipleAccounts, MintParser } from "./accounts";
-import { TokenListProvider, ENV as ChainID, TokenInfo } from "@solana/spl-token-registry";
+import {
+  TokenListProvider,
+  ENV as ChainID,
+  TokenInfo,
+} from "@solana/spl-token-registry";
 
-export type ENV =
-  | "mainnet-beta"
-  | "testnet"
-  | "devnet"
-  | "localnet";
+export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
 
 export const ENDPOINTS = [
   {
@@ -46,6 +48,7 @@ export const ENDPOINTS = [
 
 const DEFAULT = ENDPOINTS[0].endpoint;
 const DEFAULT_SLIPPAGE = 0.25;
+const DEFAULT_COMMITMENT = "confirmed";
 
 interface ConnectionConfig {
   connection: Connection;
@@ -64,8 +67,8 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
   setEndpoint: () => {},
   slippage: DEFAULT_SLIPPAGE,
   setSlippage: (val: number) => {},
-  connection: new Connection(DEFAULT, "recent"),
-  sendConnection: new Connection(DEFAULT, "recent"),
+  connection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
+  sendConnection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
   env: ENDPOINTS[0].name,
   tokens: [],
   tokenMap: new Map<string, TokenInfo>(),
@@ -82,12 +85,14 @@ export function ConnectionProvider({ children = undefined as any }) {
     DEFAULT_SLIPPAGE.toString()
   );
 
-  const connection = useMemo(() => new Connection(endpoint, "recent"), [
-    endpoint,
-  ]);
-  const sendConnection = useMemo(() => new Connection(endpoint, "recent"), [
-    endpoint,
-  ]);
+  const connection = useMemo(
+    () => new Connection(endpoint, DEFAULT_COMMITMENT),
+    [endpoint]
+  );
+  const sendConnection = useMemo(
+    () => new Connection(endpoint, DEFAULT_COMMITMENT),
+    [endpoint]
+  );
 
   const chain =
     ENDPOINTS.find((end) => end.endpoint === endpoint) || ENDPOINTS[0];
@@ -109,15 +114,19 @@ export function ConnectionProvider({ children = undefined as any }) {
         return map;
       }, new Map<string, TokenInfo>());
 
-      const accounts = await getMultipleAccounts(connection, [...knownMints.keys()], 'single');
+      const accounts = await getMultipleAccounts(
+        connection,
+        [...knownMints.keys()],
+        "single"
+      );
       accounts.keys.forEach((key, index) => {
         const account = accounts.array[index];
-        if(!account) {
+        if (!account) {
           return;
         }
 
         cache.add(new PublicKey(key), account, MintParser);
-      })
+      });
 
       setTokenMap(knownMints);
       setTokens(list);
@@ -234,9 +243,8 @@ export const sendTransaction = async (
   connection: Connection,
   wallet: WalletAdapter,
   instructions: TransactionInstruction[],
-  signers: Account[],
   awaitConfirmation = true
-) => {
+): Promise<[ok: boolean, txid: string]> => {
   if (!wallet?.publicKey) {
     throw new Error("Wallet is not connected");
   }
@@ -244,34 +252,35 @@ export const sendTransaction = async (
   let transaction = new Transaction();
   instructions.forEach((instruction) => transaction.add(instruction));
   transaction.recentBlockhash = (
-    await connection.getRecentBlockhash("max")
+    await connection.getRecentBlockhash()
   ).blockhash;
-  transaction.setSigners(
-    // fee payied by the wallet owner
-    wallet.publicKey,
-    ...signers.map((s) => s.publicKey)
-  );
-  if (signers.length > 0) {
-    transaction.partialSign(...signers);
-  }
+  transaction.feePayer = wallet.publicKey;
   transaction = await wallet.signTransaction(transaction);
-  const rawTransaction = transaction.serialize();
-  let options = {
+  notify({
+    message: "Sending transaction...",
+    type: "info",
+  });
+  let options: SendOptions = {
     skipPreflight: true,
-    commitment: "singleGossip",
+    preflightCommitment: "singleGossip",
   };
+  const txid = await connection.sendRawTransaction(
+    transaction.serialize(),
+    options
+  );
 
-  const txid = await connection.sendRawTransaction(rawTransaction, options);
+  let ok = true;
 
   if (awaitConfirmation) {
     const status = (
       await connection.confirmTransaction(
         txid,
-        options && (options.commitment as any)
+        options && (options.preflightCommitment as any)
       )
     ).value;
 
     if (status?.err) {
+      ok = false;
       const errors = await getErrorForTransaction(connection, txid);
       notify({
         message: "Transaction failed...",
@@ -285,12 +294,8 @@ export const sendTransaction = async (
         ),
         type: "error",
       });
-
-      throw new Error(
-        `Raw transaction ${txid} failed (${JSON.stringify(status)})`
-      );
     }
   }
 
-  return txid;
+  return [ok, txid];
 };
