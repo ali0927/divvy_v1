@@ -4,14 +4,16 @@ import {
   TransactionInstruction,
 } from "@solana/web3.js";
 
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Slider } from "antd";
+import React, { useState } from "react";
 import {
   useConnection,
   useConnectionConfig,
   sendTransaction,
 } from "../../contexts/connection";
 import { useWallet } from "../../contexts/wallet";
-import { DIVVY_PROGRAM_IDS } from "../../utils/ids";
+import { useUserBalance } from "../../hooks";
+import { DIVVY_PROGRAM_IDS, USDT_MINT } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
 
@@ -19,6 +21,7 @@ export const DepositLiquidity = (props: {}) => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
+  const usdtBalance = useUserBalance(USDT_MINT);
   const [form] = Form.useForm();
 
   const onFinish = async (values: any) => {
@@ -33,15 +36,28 @@ export const DepositLiquidity = (props: {}) => {
       return;
     }
 
+    let usdtPublicKey: PublicKey, hpPublicKey: PublicKey;
+    try {
+      usdtPublicKey = new PublicKey(usdtAddress);
+      hpPublicKey = new PublicKey(hpAddress);
+    } catch {
+      notify({
+        message: "Transaction failed...",
+        description: "A token address is invalid.",
+        type: "error",
+      });
+      return;
+    }
+
     const instruction = new TransactionInstruction({
       keys: [
         { pubkey: wallet.wallet.publicKey, isSigner: false, isWritable: true },
         {
-          pubkey: new PublicKey(usdtAddress),
+          pubkey: usdtPublicKey,
           isSigner: false,
           isWritable: true,
         },
-        { pubkey: new PublicKey(hpAddress), isSigner: false, isWritable: true },
+        { pubkey: hpPublicKey, isSigner: false, isWritable: true },
       ],
       programId: DIVVY_PROGRAM_IDS[connectionConfig.env],
       data: Buffer.from(usdtAmount + ",deposit", "utf-8"),
@@ -88,7 +104,7 @@ export const DepositLiquidity = (props: {}) => {
         rules={[{ required: true, message: "Please input the USDT amount." }]}
         className="text-muted"
       >
-        <Input type="number" />
+        <Input type="number" min="0" max={usdtBalance.balance} />
       </Form.Item>
 
       <Form.Item

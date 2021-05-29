@@ -39,15 +39,28 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
+    let usdtPublicKey: PublicKey, hpPublicKey: PublicKey;
+    try {
+      usdtPublicKey = new PublicKey(usdtAddress);
+      hpPublicKey = new PublicKey(hpAddress);
+    } catch {
+      notify({
+        message: "Transaction failed...",
+        description: "A token address is invalid.",
+        type: "error",
+      });
+      return;
+    }
+
     const instruction = new TransactionInstruction({
       keys: [
         { pubkey: wallet.wallet.publicKey, isSigner: false, isWritable: true },
         {
-          pubkey: new PublicKey(usdtAddress),
+          pubkey: usdtPublicKey,
           isSigner: false,
           isWritable: true,
         },
-        { pubkey: new PublicKey(hpAddress), isSigner: false, isWritable: true },
+        { pubkey: hpPublicKey, isSigner: false, isWritable: true },
       ],
       programId: DIVVY_PROGRAM_IDS[connectionConfig.env],
       data: data,
@@ -105,7 +118,7 @@ export const WithdrawLiquidity = (props: {}) => {
         name="usdtAmount"
         rules={[{ required: true, message: "Please input the USDT amount." }]}
       >
-        <Input type="number" />
+        <Input type="number" min="0" />
       </Form.Item>
 
       <Form.Item
