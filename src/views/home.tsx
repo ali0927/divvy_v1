@@ -12,7 +12,7 @@ export const HomeView = () => {
       <header className="App-header">
         <Wallet />
         <img src={logo} alt="logo" />
-        <p>Divvy.. now you see me, now you don't!</p>
+        <p>Divvy.. now you see me, now you don't! ???? OR DO YOU</p>
         <p>
           {LABELS.SOL_BALANCE}: {SOL.balance}
         </p>
