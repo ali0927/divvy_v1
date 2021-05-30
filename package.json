@@ -1,0 +1,11 @@
+{
+    "name": "divvy",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "start": "cd divvy && react-scripts start"
+    },
+    "author": "Divvy",
+    "license": "ISC"
+  }
+  
