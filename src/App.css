@@ -1,3 +1,10 @@
+/*@primary-light: white;
+@primary-dark: #1f1f1f;*/
+
+body {
+    background-color: #0d0d0d;
+}
+
 .App {
     display: flex;
     flex-direction: row;
@@ -15,7 +22,6 @@
 }
 
 .App-header {
-    background-color: #282c34;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -27,24 +33,18 @@
     color: white;
 }
 
-.RightSideBar {
-    justify-content: flex-end;
-    flex-direction: column;
-    width: 20em;
-    padding: 1.5em;
-}
-
 .App-link {
     color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.LeftSideBar {
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.RightSideBar {
+    justify-content: flex-end;
+    flex-direction: column;
 }
 
 .wallet {
@@ -71,28 +71,56 @@
     align-items: center;
 }
 
-.flex-container {
-    display: flex;
-}
-
 .flex-center {
     justify-content: center;
 }
 
 .flex-horizontal {
+    display: flex;
     flex-direction: row;
 }
 
 .flex-vertical {
+    display: flex;
     flex-direction: column;
 }
 
 .flex-start {
     justify-content: flex-start;
+    text-align: start;
+    width: 100%;
 }
 
 .flex-end {
     justify-content: flex-end;
+    text-align: end;
+    width: 100%;
+}
+
+.sidebar-section {
+    width: 20em;
+    padding: 1em 1.56em;
+    outline: 1px solid #1f1f1f;
+    margin: 1px;
+}
+
+.balance-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.balance {
+    white-space: nowrap;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: white;
 }
 
 .ant-input {
@@ -104,7 +132,7 @@
 }
 
 .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
-    /* Remove the red * for required inputs */
+    /* Remove the red '*' for required inputs */
     margin-right: 0;
     content: "";
 }

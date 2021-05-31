@@ -92,56 +92,58 @@ export const WithdrawLiquidity = (props: {}) => {
   };
 
   return (
-    <Form
-      form={form}
-      name="withdrawLiquidity"
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      layout="vertical"
-    >
-      <h3>Withdraw your liquidity.</h3>
-
-      <div
-        className="flex-container flex-horizontal"
-        style={{ alignItems: "center" }}
+    <div className="sidebar-section">
+      <Form
+        form={form}
+        name="withdrawLiquidity"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
       >
-        <p style={{ width: "50%" }}>
-          <small>Available amount to withdraw</small>
-        </p>
-        <p className="flex-end" style={{ textAlign: "right", width: "50%" }}>
-          XXX.XX USDT
-        </p>
-      </div>
+        <h3>Withdraw your liquidity.</h3>
 
-      <Form.Item
-        label="USDT amount to withdraw:"
-        name="usdtAmount"
-        rules={[{ required: true, message: "Please input the USDT amount." }]}
-      >
-        <Input type="number" min="0" />
-      </Form.Item>
+        <div className="balance-container">
+          <p>
+            <small>Available amount to withdraw</small>
+          </p>
+          <p className="balance">XXX.XX USDT</p>
+        </div>
 
-      <Form.Item
-        label="USDT Address:"
-        name="usdtAddress"
-        rules={[{ required: true, message: "Please enter your USDT address." }]}
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          label="USDT amount to withdraw:"
+          name="usdtAmount"
+          rules={[{ required: true, message: "Please input the USDT amount." }]}
+        >
+          <Input type="number" min="0" />
+        </Form.Item>
 
-      <Form.Item
-        label="House Pool Address"
-        name="hpAddress"
-        rules={[
-          { required: true, message: "Please enter your house pool address." },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          label="USDT Address:"
+          name="usdtAddress"
+          rules={[
+            { required: true, message: "Please enter your USDT address." },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Button type="primary" htmlType="submit">
-        Withdraw
-      </Button>
-    </Form>
+        <Form.Item
+          label="House Pool Address"
+          name="hpAddress"
+          rules={[
+            {
+              required: true,
+              message: "Please enter your house pool address.",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Button type="primary" htmlType="submit">
+          Withdraw
+        </Button>
+      </Form>
+    </div>
   );
 };

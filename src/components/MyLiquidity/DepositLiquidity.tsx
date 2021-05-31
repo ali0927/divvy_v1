@@ -4,8 +4,7 @@ import {
   TransactionInstruction,
 } from "@solana/web3.js";
 
-import { Form, Input, Button, Slider } from "antd";
-import React, { useState } from "react";
+import { Form, Input, Button } from "antd";
 import {
   useConnection,
   useConnectionConfig,
@@ -89,45 +88,52 @@ export const DepositLiquidity = (props: {}) => {
   };
 
   return (
-    <Form
-      form={form}
-      name="depositLiquidity"
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      layout="vertical"
-    >
-      <h3>Provide liquidity to Divvy.</h3>
-
-      <Form.Item
-        label="USDT amount to deposit:"
-        name="usdtAmount"
-        rules={[{ required: true, message: "Please input the USDT amount." }]}
-        className="text-muted"
+    <div className="sidebar-section">
+      <Form
+        form={form}
+        name="depositLiquidity"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
       >
-        <Input type="number" min="0" max={usdtBalance.balance} />
-      </Form.Item>
+        <h3>Provide liquidity to Divvy.</h3>
 
-      <Form.Item
-        label="USDT Address:"
-        name="usdtAddress"
-        rules={[{ required: true, message: "Please enter your USDT address." }]}
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          label="USDT amount to deposit:"
+          name="usdtAmount"
+          rules={[{ required: true, message: "Please input the USDT amount." }]}
+          className="text-muted"
+        >
+          <Input type="number" min="0" max={usdtBalance.balance} />
+        </Form.Item>
 
-      <Form.Item
-        label="House Pool Address"
-        name="hpAddress"
-        rules={[
-          { required: true, message: "Please enter your house pool address." },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          label="USDT Address:"
+          name="usdtAddress"
+          rules={[
+            { required: true, message: "Please enter your USDT address." },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Button type="primary" htmlType="submit">
-        Deposit
-      </Button>
-    </Form>
+        <Form.Item
+          label="House Pool Address"
+          name="hpAddress"
+          rules={[
+            {
+              required: true,
+              message: "Please enter your house pool address.",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Button type="primary" htmlType="submit">
+          Deposit
+        </Button>
+      </Form>
+    </div>
   );
 };
