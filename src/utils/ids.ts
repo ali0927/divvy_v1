@@ -27,6 +27,8 @@ export const DIVVY_PROGRAM_IDS: { [env: string] : PublicKey; } = {
   "devnet" : new PublicKey("SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8") // THIS IS A PLACEHOLDER !!
 };
 
+export const ESCROW_PROGRAM_ID = new PublicKey("TokenLending1111111111111111111111111111111"); // THIS IS A PLACEHOLDER !!
+
 export const setProgramIds = (envName: string) => {
   let instance = PROGRAM_IDS.find((env) => env.name === envName);
   if (!instance) {
