@@ -25,10 +25,17 @@ export const WithdrawLiquidity = (props: {}) => {
   const onFinish = async (values: any) => {
     const { usdtAmount, usdtAddress, hpAddress } = form.getFieldsValue();
 
-    const usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
-    if (isNaN(Number(usdtLamports))) {
+    let usdtLamports: bigint;
+    try {
+      usdtLamports = BigInt(usdtAmount) * BigInt(LAMPORTS_PER_USDT);
+    } catch {
+      notify({
+        message: "Transaction failed...",
+        description: "Invalid USDT amount.",
+        type: "error",
+      });
+      return;
     }
-    const data = Buffer.from(usdtLamports + ",withdraw", "utf-8");
 
     if (wallet.wallet?.publicKey == null) {
       notify({
@@ -52,9 +59,16 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
+    const arrayData = new ArrayBuffer(16);
+    const view = new DataView(arrayData);
+    view.setBigUint64(0, BigInt(1), true); // enum index 1 is the 'withdraw' action
+    view.setBigUint64(8, usdtLamports, true);
+    const data = Buffer.from(arrayData);
+    console.log(data);
+
     const instruction = new TransactionInstruction({
       keys: [
-        { pubkey: wallet.wallet.publicKey, isSigner: false, isWritable: true },
+        { pubkey: wallet.wallet.publicKey, isSigner: true, isWritable: true },
         {
           pubkey: usdtPublicKey,
           isSigner: false,

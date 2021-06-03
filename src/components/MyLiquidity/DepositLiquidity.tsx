@@ -5,6 +5,7 @@ import {
 } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
+import { LAMPORTS_PER_USDT } from "../../constants";
 import {
   useConnection,
   useConnectionConfig,
@@ -34,7 +35,17 @@ export const DepositLiquidity = (props: {}) => {
       });
       return;
     }
-
+    let usdtLamports: bigint;
+    try {
+      usdtLamports = BigInt(usdtAmount) * BigInt(LAMPORTS_PER_USDT);
+    } catch {
+      notify({
+        message: "Transaction failed...",
+        description: "Invalid USDT amount.",
+        type: "error",
+      });
+      return;
+    }
     let usdtPublicKey: PublicKey, hpPublicKey: PublicKey;
     try {
       usdtPublicKey = new PublicKey(usdtAddress);
@@ -48,9 +59,16 @@ export const DepositLiquidity = (props: {}) => {
       return;
     }
 
+    const arrayData = new ArrayBuffer(16);
+    const view = new DataView(arrayData);
+    view.setBigUint64(0, BigInt(0), true); // enum index 1 is the 'withdraw' action
+    view.setBigUint64(8, usdtLamports, true);
+    const data = Buffer.from(arrayData);
+    console.log(data);
+
     const instruction = new TransactionInstruction({
       keys: [
-        { pubkey: wallet.wallet.publicKey, isSigner: false, isWritable: true },
+        { pubkey: wallet.wallet.publicKey, isSigner: true, isWritable: true },
         {
           pubkey: usdtPublicKey,
           isSigner: false,
@@ -59,7 +77,7 @@ export const DepositLiquidity = (props: {}) => {
         { pubkey: hpPublicKey, isSigner: false, isWritable: true },
       ],
       programId: DIVVY_PROGRAM_IDS[connectionConfig.env],
-      data: Buffer.from(usdtAmount + ",deposit", "utf-8"),
+      data: data,
     });
     const transaction = new Transaction();
     transaction.add(instruction);
@@ -104,7 +122,7 @@ export const DepositLiquidity = (props: {}) => {
           rules={[{ required: true, message: "Please input the USDT amount." }]}
           className="text-muted"
         >
-          <Input type="number" min="0" max={usdtBalance.balance} />
+          <Input type="number" min="0" /*max={usdtBalance.balance}*/ />
         </Form.Item>
 
         <Form.Item
