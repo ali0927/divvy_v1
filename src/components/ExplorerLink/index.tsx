@@ -5,6 +5,7 @@ import { PublicKey } from "@solana/web3.js";
 
 export const ExplorerLink = (props: {
   address: string | PublicKey;
+  cluster: string | undefined;
   type: string;
   code?: boolean;
   style?: React.CSSProperties;
@@ -23,13 +24,17 @@ export const ExplorerLink = (props: {
 
   const length = props.length ?? 9;
 
+  const clusterParam =
+    props.cluster !== undefined ? "?cluster=" + props.cluster : "";
+
   return (
     <a
-      href={`https://explorer.solana.com/${type}/${address}`}
+      href={`https://explorer.solana.com/${type}/${address}${clusterParam}`}
       // eslint-disable-next-line react/jsx-no-target-blank
       target="_blank"
       rel="noreferrer"
       title={address}
+      className="ExplorerLink"
       style={props.style}
     >
       {code ? (

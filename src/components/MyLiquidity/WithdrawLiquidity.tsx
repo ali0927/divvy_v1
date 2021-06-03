@@ -1,8 +1,4 @@
-import {
-  PublicKey,
-  Transaction,
-  TransactionInstruction,
-} from "@solana/web3.js";
+import { PublicKey } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
 import { LAMPORTS_PER_USDT } from "../../constants";
@@ -15,6 +11,7 @@ import { useWallet } from "../../contexts/wallet";
 import { DIVVY_PROGRAM_IDS } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
+import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
 
 export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();
@@ -59,30 +56,18 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
-    const arrayData = new ArrayBuffer(16);
-    const view = new DataView(arrayData);
-    view.setBigUint64(0, BigInt(1), true); // enum index 1 is the 'withdraw' action
-    view.setBigUint64(8, usdtLamports, true);
-    const data = Buffer.from(arrayData);
-    console.log(data);
+    const instruction = depositLiquidityInstruction(
+      DIVVY_PROGRAM_IDS[connectionConfig.env],
+      wallet.wallet.publicKey,
+      usdtPublicKey,
+      hpPublicKey,
+      "withdraw",
+      Number(usdtLamports)
+    );
 
-    const instruction = new TransactionInstruction({
-      keys: [
-        { pubkey: wallet.wallet.publicKey, isSigner: true, isWritable: true },
-        {
-          pubkey: usdtPublicKey,
-          isSigner: false,
-          isWritable: true,
-        },
-        { pubkey: hpPublicKey, isSigner: false, isWritable: true },
-      ],
-      programId: DIVVY_PROGRAM_IDS[connectionConfig.env],
-      data: data,
-    });
-    const transaction = new Transaction();
-    transaction.add(instruction);
     const [ok, txid] = await sendTransaction(
       connection,
+      connectionConfig.env,
       wallet.wallet,
       [instruction],
       true
@@ -93,7 +78,11 @@ export const WithdrawLiquidity = (props: {}) => {
         message: "Transaction success...",
         description: (
           <>
-            <ExplorerLink address={txid} type="transaction" />
+            <ExplorerLink
+              address={txid}
+              cluster={connectionConfig.env}
+              type="transaction"
+            />
           </>
         ),
         type: "error",

@@ -390,7 +390,7 @@ export function AccountsProvider({ children = null as any }) {
         programIds().token,
         (info) => {
           // TODO: fix type in web3.js
-          const id = (info.accountId as unknown) as string;
+          const id = info.accountId as unknown as string;
           // TODO: do we need a better way to identify layout (maybe a enum identifing type?)
           if (info.accountInfo.data.length === AccountLayout.span) {
             const data = deserializeAccount(info.accountInfo.data);

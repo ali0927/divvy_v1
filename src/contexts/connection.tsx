@@ -241,6 +241,7 @@ const getErrorForTransaction = async (connection: Connection, txid: string) => {
 
 export const sendTransaction = async (
   connection: Connection,
+  env: ENV,
   wallet: WalletAdapter,
   instructions: TransactionInstruction[],
   awaitConfirmation = true
@@ -289,7 +290,7 @@ export const sendTransaction = async (
             {errors.map((err) => (
               <div>{err}</div>
             ))}
-            <ExplorerLink address={txid} type="transaction" />
+            <ExplorerLink address={txid} cluster={env} type="transaction" />
           </>
         ),
         type: "error",
