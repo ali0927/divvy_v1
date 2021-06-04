@@ -8,9 +8,8 @@ export const LiquidityGlobalStats = () => {
   return (
     <div>
       <div className="horizontal-outline" />
-      <h1>{escrowUsdtBalance.balance.toFixed(2)} USDT</h1>
-      <p className="text-secondary">Total in the Liquidity Pool</p>
-      <div className="horizontal-outline" />
+      <h1>{"999,000.99"} USDT</h1>
+      <div className="text-secondary liquidity-total">Total in the Liquidity Pool</div>
     </div>
   );
 };

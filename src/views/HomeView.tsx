@@ -5,7 +5,9 @@ import { LABELS } from "../constants";
 import { RightSideBar } from "../components/RightSideBar";
 import { LeftSideBar } from "../components/LeftSideBar";
 import { NavBar } from "../components/Nav/NavBar";
-
+import { HomeCarousel } from "../components/Home/HomeCarousel";
+import { SingleMarketHeader } from "../components/SingleMarket/SingleMarketHeader";
+import { SingleMarketMatches } from "../components/SingleMarket/SingleMarketMatches";
 export const HomeView = () => {
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
   return (
@@ -14,11 +16,14 @@ export const HomeView = () => {
         <NavBar />
       </LeftSideBar>
       <header className="App-header">
-        <img src={logo} alt="logo" />
+        {/* <img src={logo} alt="logo" />
         <p>Divvy.. now you see me, now you don't!</p>
         <p>
           {LABELS.SOL_BALANCE}: {SOL.balance}
-        </p>
+        </p> */}
+        <HomeCarousel />
+        <SingleMarketHeader />
+        <SingleMarketMatches />
       </header>
       <RightSideBar>
         <div className="sidebar-section">
