@@ -8,6 +8,7 @@ import { NavBar } from "../components/Nav/NavBar";
 import { HomeCarousel } from "../components/Home/HomeCarousel";
 import { SingleMarketHeader } from "../components/SingleMarket/SingleMarketHeader";
 import { SingleMarketMatches } from "../components/SingleMarket/SingleMarketMatches";
+import { BetSlips } from "../components/Home/BetSlips";
 export const HomeView = () => {
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
   return (
@@ -26,9 +27,7 @@ export const HomeView = () => {
         <SingleMarketMatches />
       </header>
       <RightSideBar>
-        <div className="sidebar-section">
-          <h3>Bets. To be developed.</h3>
-        </div>
+        <BetSlips />
       </RightSideBar>
     </div>
   );
