@@ -12,7 +12,7 @@ export const LiquidityAvailabilityBar = () => {
                 '0%': '#7c01ff',
                 '100%': '#00d77d',
             }}
-            percent={60}
+            percent={91}
             showInfo={false}
         />
     );

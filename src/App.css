@@ -140,7 +140,10 @@ body {
 .odds-active {
   background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
   border-radius: 22.5px;
-  height: 48px;
+  height: 36px;
+  width: 60%;
+  padding-top: 8px;
+  font-size: 13px;
 }
 
 .single-match {
@@ -268,7 +271,14 @@ body {
   height: 40px;
   margin-left: 4px;
 }
-
+.ant-btn {
+  background-color: #242424;
+  border-color: #242424;
+}
+.ant-btn:hover {
+  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+  border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+}
 .search-button {
   border-width: 0px;
   display: contents;

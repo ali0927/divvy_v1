@@ -4,9 +4,9 @@ export const GameName = () => {
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
             <h2>
-                UEFA Hero
+                UEFA Euro 2020
             </h2>
-            <Tag style={{ marginTop: -8, color: 'gray', marginLeft: 6 }}>32 Matches</Tag>
+            <Tag style={{ marginTop: -8, color: 'gray', marginLeft: 6 }}>2 Matches</Tag>
         </div>
     );
 };

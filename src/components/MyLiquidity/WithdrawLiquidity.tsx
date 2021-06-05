@@ -100,24 +100,23 @@ export const WithdrawLiquidity = (props: {}) => {
         onFinishFailed={onFinishFailed}
         layout="vertical"
       >
-        <h3>Withdraw your liquidity.</h3>
+        <h3>Divvy House Withdrawal</h3>
 
         <div className="balance-container">
           <p>
-            <small>Available amount to withdraw</small>
+            <small>Withdrawable balance</small>
           </p>
-          <p className="balance">XXX.XX USDT</p>
+          <p className="balance">12 USDT</p>
         </div>
-
         <Form.Item
-          label="USDT amount to withdraw:"
+          // label="USDT amount to withdraw:"
           name="usdtAmount"
           rules={[{ required: true, message: "Please input the USDT amount." }]}
         >
-          <Input type="number" min="0" />
+          <Input placeholder={"USDT"} type="number" min="0" />
         </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
           label="USDT Address:"
           name="usdtAddress"
           rules={[
@@ -138,7 +137,7 @@ export const WithdrawLiquidity = (props: {}) => {
           ]}
         >
           <Input />
-        </Form.Item>
+        </Form.Item> */}
 
         <Button type="primary" htmlType="submit">
           Withdraw

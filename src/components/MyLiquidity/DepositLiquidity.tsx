@@ -96,18 +96,22 @@ export const DepositLiquidity = (props: {}) => {
         onFinishFailed={onFinishFailed}
         layout="vertical"
       >
-        <h3>Provide liquidity to Divvy.</h3>
-
+        <h3>Divvy House Deposit</h3>
+        <div className="balance-container">
+          <p>
+            <small>Wallet balance</small>
+          </p>
+          <p className="balance">12 USDT</p>
+        </div>
         <Form.Item
-          label="USDT amount to deposit:"
+          label="Amount to deposit"
           name="usdtAmount"
           rules={[{ required: true, message: "Please input the USDT amount." }]}
           className="text-muted"
         >
-          <Input type="number" min="0" max={usdtBalance.balance} />
-        </Form.Item>
+          <Input placeholder={"USDT"} min="0" max={usdtBalance.balance} />        </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
           label="USDT Address:"
           name="usdtAddress"
           rules={[
@@ -128,7 +132,7 @@ export const DepositLiquidity = (props: {}) => {
           ]}
         >
           <Input />
-        </Form.Item>
+        </Form.Item> */}
 
         <Button type="primary" htmlType="submit">
           Deposit

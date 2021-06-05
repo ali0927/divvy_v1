@@ -11,6 +11,17 @@ import { SingleMarketMatches } from "../components/SingleMarket/SingleMarketMatc
 import { BetSlips } from "../components/Home/BetSlips";
 export const HomeView = () => {
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
+  interface SelectOdd {
+    betType: String,
+    teamId: String,
+    teamSelection: String
+  }
+  // const selectOdds: React.FC<String> = (data: String) => {
+  //   // console.log(betType, teamId, teamSelection)
+  //   <div>
+  //   </div>
+  //   // return "hello";
+  // }
   return (
     <div className="App ">
       <LeftSideBar>
@@ -22,7 +33,7 @@ export const HomeView = () => {
         <p>
           {LABELS.SOL_BALANCE}: {SOL.balance}
         </p> */}
-        <HomeCarousel />
+        {/* <HomeCarousel /> */}
         <SingleMarketHeader />
         <SingleMarketMatches />
       </header>

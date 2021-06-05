@@ -8,12 +8,7 @@ export const SingleMarketMatches = () => {
         <div className="single-market">
             <Collapse accordion={true} style={{ display: "grid" }} ghost={true} expandIconPosition="right">
                 <Panel header={<GameName />} key="1">
-                    <SingleMatchComponent />
-                    <Divider style={{ color: "gray" }} />
-                    <SingleMatchComponent />
-                </Panel>
-                <Panel header={<GameName />} key="2">
-                    <SingleMatchComponent />
+                    <SingleMatchComponent  />
                     <Divider style={{ color: "gray" }} />
                     <SingleMatchComponent />
                 </Panel>
