@@ -12,8 +12,8 @@ export const MyDashboardLink = () => {
         <h3>My Dashboard</h3>
         <small>
           <div className="balance-container">
-            <span>Liquidity pool balance</span>
-            <span className="balance">X.XX D</span>
+            <span>House Pool balance</span>
+            <span className="balance">1,000,000 USDT</span>
           </div>
         </small>
       </Link>

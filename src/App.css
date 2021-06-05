@@ -23,7 +23,7 @@ body {
 
 .App-header {
   align-items: center;
-  width: 63%;
+  width: 60.7%;
   margin-top: 4em;
 }
 
@@ -43,7 +43,7 @@ body {
 
 .carousel-image {
   height: 200px;
-  width: 400px;
+  width: 95%;
   border-radius: 10px;
 }
 
@@ -127,8 +127,23 @@ body {
 
 .team-logo {
   border-radius: 10000px;
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
+}
+
+.odds {
+  width: 60%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.odds-active {
+  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+  border-radius: 22.5px;
+  height: 36px;
+  width: 60%;
+  padding-top: 8px;
+  font-size: 13px;
 }
 
 .single-match {
@@ -169,14 +184,72 @@ body {
   text-align: right;
 }
 
+.bets-left {
+  float: left;
+  width: 50%;
+  text-align: center;
+  height: 55px;
+  padding: 14px 0 17px;
+  border: solid 1px #1f1f1f;
+  background-color: #0d0d0d;
+  cursor: pointer;
+}
+.bets-right {
+  float: right;
+  width: 50%;
+  text-align: center;
+  height: 55px;
+  padding: 14px 0 17px;
+  border: solid 1px #1f1f1f;
+  background-color: #0d0d0d;
+  cursor: pointer;
+}
+.secondary-team {
+  width: 179px;
+  height: 12px;
+  margin: 0 3px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: #4d4d4d;
+}
+.primary-team {
+  width: 213px;
+  height: 24px;
+  margin: 1px 27px 7px 0;
+  font-size: 16px;
+  font-weight: 800;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  color: white;
+}
+.bets-active {
+  border-width: 0.1px;
+  border-color: white;
+  background-color: #242424;
+}
+
 /* .search-button-data {
 } */
 
 .sidebar-section {
   width: 20em;
-  padding: 1em 1.56em;
   outline: 1px solid #1f1f1f;
   margin: 1px;
+  min-height: 100%;
+  padding: 1em;
+}
+
+.sidebar-section-bets {
+  width: 20em;
+  outline: 1px solid #1f1f1f;
+  margin: 1px;
+  min-height: 100%;
 }
 
 .balance-container {
@@ -198,7 +271,14 @@ body {
   height: 40px;
   margin-left: 4px;
 }
-
+.ant-btn {
+  background-color: #242424;
+  border-color: #242424;
+}
+.ant-btn:hover {
+  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+  border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+}
 .search-button {
   border-width: 0px;
   display: contents;
@@ -246,4 +326,19 @@ h2 {
   /* Remove the red '*' for required inputs */
   margin-right: 0;
   content: "";
+}
+
+.wins-left {
+  float: left;
+  width: 50%;
+}
+
+.wins-right {
+  float: right;
+  width: 50%;
+}
+
+.text-secondary-wins {
+  color: gray;
+  margin-bottom: -4px;
 }
