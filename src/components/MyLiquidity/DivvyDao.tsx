@@ -5,6 +5,7 @@ import {
 } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
+import { env } from "yargs";
 import { LAMPORTS_PER_USDT } from "../../constants";
 import {
     useConnection,
@@ -69,6 +70,7 @@ export const DivvyDao = (props: {}) => {
         transaction.add(instruction);
         const [ok, txid] = await sendTransaction(
             connection,
+            connectionConfig.env,
             wallet.wallet,
             [instruction],
             true
@@ -79,7 +81,7 @@ export const DivvyDao = (props: {}) => {
                 message: "Transaction success...",
                 description: (
                     <>
-                        <ExplorerLink address={txid} type="transaction" />
+                        <ExplorerLink address={txid} type="transaction" cluster={connectionConfig.env} />
                     </>
                 ),
                 type: "error",
