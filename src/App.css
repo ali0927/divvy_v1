@@ -300,6 +300,10 @@ a:hover {
   padding: 4em;
 }
 
+.ExplorerLink {
+    color: rgb(26, 13, 171) !important;
+}
+
 h1 {
   font-size: 3.1em;
   margin-bottom: 2px;

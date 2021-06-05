@@ -34,6 +34,7 @@ export const HomeView = () => {
           {LABELS.SOL_BALANCE}: {SOL.balance}
         </p> */}
         {/* <HomeCarousel /> */}
+        <HomeCarousel />
         <SingleMarketHeader />
         <SingleMarketMatches />
       </header>

@@ -1,8 +1,4 @@
-import {
-  PublicKey,
-  Transaction,
-  TransactionInstruction,
-} from "@solana/web3.js";
+import { PublicKey } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
 import { LAMPORTS_PER_USDT } from "../../constants";
@@ -15,6 +11,7 @@ import { useWallet } from "../../contexts/wallet";
 import { DIVVY_PROGRAM_IDS } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
+import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
 
 export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();
@@ -25,10 +22,17 @@ export const WithdrawLiquidity = (props: {}) => {
   const onFinish = async (values: any) => {
     const { usdtAmount, usdtAddress, hpAddress } = form.getFieldsValue();
 
-    const usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
-    if (isNaN(Number(usdtLamports))) {
+    let usdtLamports: bigint;
+    try {
+      usdtLamports = BigInt(usdtAmount) * BigInt(LAMPORTS_PER_USDT);
+    } catch {
+      notify({
+        message: "Transaction failed...",
+        description: "Invalid USDT amount.",
+        type: "error",
+      });
+      return;
     }
-    const data = Buffer.from(usdtLamports + ",withdraw", "utf-8");
 
     if (wallet.wallet?.publicKey == null) {
       notify({
@@ -52,23 +56,18 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
-    const instruction = new TransactionInstruction({
-      keys: [
-        { pubkey: wallet.wallet.publicKey, isSigner: false, isWritable: true },
-        {
-          pubkey: usdtPublicKey,
-          isSigner: false,
-          isWritable: true,
-        },
-        { pubkey: hpPublicKey, isSigner: false, isWritable: true },
-      ],
-      programId: DIVVY_PROGRAM_IDS[connectionConfig.env],
-      data: data,
-    });
-    const transaction = new Transaction();
-    transaction.add(instruction);
+    const instruction = depositLiquidityInstruction(
+      DIVVY_PROGRAM_IDS[connectionConfig.env],
+      wallet.wallet.publicKey,
+      usdtPublicKey,
+      hpPublicKey,
+      "withdraw",
+      Number(usdtLamports)
+    );
+
     const [ok, txid] = await sendTransaction(
       connection,
+      connectionConfig.env,
       wallet.wallet,
       [instruction],
       true
@@ -79,7 +78,11 @@ export const WithdrawLiquidity = (props: {}) => {
         message: "Transaction success...",
         description: (
           <>
-            <ExplorerLink address={txid} type="transaction" />
+            <ExplorerLink
+              address={txid}
+              cluster={connectionConfig.env}
+              type="transaction"
+            />
           </>
         ),
         type: "error",
