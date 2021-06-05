@@ -69,6 +69,7 @@ export const StakeHT = (props: {}) => {
         transaction.add(instruction);
         const [ok, txid] = await sendTransaction(
             connection,
+            connectionConfig.env,
             wallet.wallet,
             [instruction],
             true
@@ -79,7 +80,7 @@ export const StakeHT = (props: {}) => {
                 message: "Transaction success...",
                 description: (
                     <>
-                        <ExplorerLink address={txid} type="transaction" />
+                        <ExplorerLink address={txid} type="transaction" cluster={connectionConfig.env} />
                     </>
                 ),
                 type: "error",
