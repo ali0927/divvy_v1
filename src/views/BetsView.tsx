@@ -1,3 +1,9 @@
+import React, { useEffect, useState } from "react";
+import { useUserBalance } from "../hooks/useUserBalance";
+import { WRAPPED_SOL_MINT } from "../utils/ids";
+import { BetType, Game, LABELS } from "../constants";
+import FlagTurkey from '../img/flags/Turkey.svg';
+import FlagItaly from '../img/flags/Italy.svg';
 import { RightSideBar } from "../components/RightSideBar";
 import { LeftSideBar } from "../components/LeftSideBar";
 import { NavBar } from "../components/Nav/NavBar";
@@ -5,26 +11,100 @@ import { HomeCarousel } from "../components/Home/HomeCarousel";
 import { SingleMarketHeader } from "../components/SingleMarket/SingleMarketHeader";
 import { SingleMarketMatches } from "../components/SingleMarket/SingleMarketMatches";
 import { BetSlips } from "../components/Home/BetSlips";
+import { BetSlip } from "../constants"
 export const BetsView = () => {
-  interface SelectOdd {
-    betType: String,
-    teamId: String,
-    teamSelection: String
+  const GAMES = [
+    {
+      teamA: {
+        "name": "Turkey",
+        "logo": FlagTurkey,
+        "id": "turkey",
+        favorite: false
+      },
+      teamB: {
+        "name": "Italy",
+        "logo": FlagItaly,
+        "id": "italy",
+        favorite: true
+      },
+      draw: true,
+      teamAodds: {
+        moneyline: 1.13,
+        spread: 1.75,
+        total: 1.56,
+      },
+      teamBodds: {
+        moneyline: 1.78,
+        spread: 1.75,
+        total: 1.56,
+        favorite: true
+      },
+      drawodds: {
+        moneyline: 1,
+        spread: 2.8,
+        total: 3,
+        favorite: false
+      },
+      spread: 1,
+      total: 2
+    }]
+  const [betSlips, setBetSlips] = useState(Array<BetSlip>());
+  const [games, setGames] = useState(Array<Game>());
+  useEffect(() => {
+    setGames(GAMES);
+  }, [])
+  const setbetSlips = (betSlip: BetSlip) => {
+    setBetSlips([...betSlips, betSlip])
+  }
+  const removebetSlip = (index: number) => {
+    var bets = betSlips;
+    bets.splice(index, 1);
+    setBetSlips(bets)
+  }
+  const editBetSlip = (betId: string, amount: number) => {
+    var bet: BetSlip;
+    var bets: Array<BetSlip> = [];
+    betSlips.map((value: BetSlip) => {
+      if (value.id == betId) {
+        bet = value
+        bet.betAmount = amount;
+        bets.push(bet)
+      }
+      else {
+        bets.push(value)
+      }
+    })
+    setBetSlips(bets)
+  }
+  const placeBets = () => {
+    var bet: BetSlip;
+    var bets: Array<BetSlip> = [];
+    betSlips.map((value: BetSlip) => {
+      if (value.type == BetType.Current) {
+        bet = value
+        bet.type = BetType.Pending
+        bets.push(bet)
+      }
+      else {
+        bets.push(value)
+      }
+    })
+    setBetSlips(bets)
   }
 
   return (
-    <div className="App ">
+    <div className="App " >
       <LeftSideBar>
         <NavBar />
       </LeftSideBar>
       <header className="App-header">
         <HomeCarousel />
         <SingleMarketHeader />
-        <SingleMarketMatches />
+        <SingleMarketMatches games={games} setbetSlips={setbetSlips} />
       </header>
       <RightSideBar>
-        <BetSlips />
+        <BetSlips editBetSlip={editBetSlip} betSlips={betSlips} setbetSlips={setbetSlips} removebetSlip={removebetSlip} placeBets={placeBets} />
       </RightSideBar>
-    </div>
+    </div >
   );
 };

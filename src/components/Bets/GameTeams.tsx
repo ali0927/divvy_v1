@@ -1,12 +1,14 @@
 import React from 'react';
-export const GameTeams = (props: {}) => {
+import { BetSlip, BetType, OddsType } from '../../constants';
+export const GameTeams = (props: { selectionTeam: String, otherTeam: String, betSlip: BetSlip }) => {
     return (
         <div style={{ width: "15em" }}>
             <p className="secondary-team">
-                WSG Swarowski vs
+                {props.otherTeam + " vs " + props.selectionTeam}
             </p>
             <p className="primary-team">
-                Cashpoint SCR Altach
+                {props.betSlip.oddsType == OddsType.total ? props.otherTeam + " vs " : null}
+                {props.selectionTeam}
             </p>
         </div>
     );

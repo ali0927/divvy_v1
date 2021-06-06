@@ -1,2 +1,3 @@
-export * from "./labels";
+export * from "./labels"
+export * from "./bets"
 export * from "./math"

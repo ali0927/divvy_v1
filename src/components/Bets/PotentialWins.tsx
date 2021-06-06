@@ -1,5 +1,6 @@
 import React from 'react';
-export const PotentialWins = (props: {}) => {
+import { BetSlip } from '../../constants';
+export const PotentialWins = (props: { betSlip: BetSlip }) => {
     return (
         <div>
             <div className="wins-left">
@@ -7,7 +8,7 @@ export const PotentialWins = (props: {}) => {
                     Original Stake
                 </p>
                 <h3>
-                    0,000D
+                    {props.betSlip.betAmount}
                 </h3>
             </div>
             <div className="wins-right">
@@ -15,7 +16,7 @@ export const PotentialWins = (props: {}) => {
                     Potential Win
                 </p>
                 <h3>
-                    0,000D
+                    {props.betSlip.betAmount * props.betSlip.odds}
                 </h3>
             </div>
         </div>

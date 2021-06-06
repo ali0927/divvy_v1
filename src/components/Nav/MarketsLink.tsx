@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input, Button } from 'antd'
 import { SearchOutlined } from "@ant-design/icons"
 export const MarketsLink = () => {
-    const markets = [{ value: "football", name: "Football" }, { value: "baseball", name: "Baseball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }, { value: "basketball", name: "Basketball" }];
+    const markets = [{ value: "football", name: "Football" }, { value: "basketball", name: "Basketball" }, { value: "mma", name: "MMA" },];
     const MarketsUI = () => {
         let market = new Array();
         markets.map((data, index) => {

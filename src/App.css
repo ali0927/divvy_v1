@@ -5,33 +5,33 @@
 /* Will need to link more font weights, maybe using a sass mixin. */
 
 @font-face {
-    font-family: 'Nunito Sans';
-    src: url('font/NunitoSans-SemiBold.eot');
+    font-family: "Nunito Sans";
+    src: url("font/NunitoSans-SemiBold.eot");
     /* IE9+ Compat Modes */
-    src: url('font/NunitoSans-SemiBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('font/NunitoSans-SemiBold.woff2') format('woff2'), /* Super modern browsers */
-    url('font/NunitoSans-SemiBold.woff') format('woff'), /* Modern browsers */
-    url('font/NunitoSans-SemiBold.ttf') format('truetype'), /* Safari, Android, iOS */
-    url('font/NunitoSans-SemiBold.svg#FontName') format('svg');
+    src: url("font/NunitoSans-SemiBold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("font/NunitoSans-SemiBold.woff2") format("woff2"), /* Super modern browsers */
+    url("font/NunitoSans-SemiBold.woff") format("woff"), /* Modern browsers */
+    url("font/NunitoSans-SemiBold.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("font/NunitoSans-SemiBold.svg#FontName") format("svg");
     font-weight: 600;
     /* Legacy iOS */
 }
 
 @font-face {
-    font-family: 'Nunito Sans';
-    src: url('font/NunitoSans-ExtraBold.eot');
+    font-family: "Nunito Sans";
+    src: url("font/NunitoSans-ExtraBold.eot");
     /* IE9+ Compat Modes */
-    src: url('font/NunitoSans-ExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('font/NunitoSans-ExtraBold.woff2') format('woff2'), /* Super modern browsers */
-    url('font/NunitoSans-ExtraBold.woff') format('woff'), /* Modern browsers */
-    url('font/NunitoSans-ExtraBold.ttf') format('truetype'), /* Safari, Android, iOS */
-    url('font/NunitoSans-ExtraBold.svg#FontName') format('svg');
+    src: url("font/NunitoSans-ExtraBold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("font/NunitoSans-ExtraBold.woff2") format("woff2"), /* Super modern browsers */
+    url("font/NunitoSans-ExtraBold.woff") format("woff"), /* Modern browsers */
+    url("font/NunitoSans-ExtraBold.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("font/NunitoSans-ExtraBold.svg#FontName") format("svg");
     font-weight: 800;
     /* Legacy iOS */
 }
 
 * {
-    font-family: 'Nunito Sans';
+    font-family: "Nunito Sans";
 }
 
 body {
@@ -160,16 +160,17 @@ body {
 }
 
 .team-logo {
-    border-radius: 10000px;
-    width: 40px;
-    height: 40px;
+    /* border-radius: 10000px; */
+    width: 37px;
+    height: 43px;
+    margin-top: 5px;
 }
 
 .odds {
     border-radius: 22.5px;
     height: 36px;
     width: 60%;
-    padding-top: 16px;
+    padding-top: 9px;
     font-size: 13px;
     text-align: center;
     cursor: pointer;
@@ -181,6 +182,7 @@ body {
 
 .single-match {
     background: "#0d0d0d";
+    justify-content: space-around;
 }
 
 .liquidity-left {
@@ -276,10 +278,6 @@ body {
     background-color: #242424;
 }
 
-
-/* .search-button-data {
-} */
-
 .sidebar-section {
     width: 20em;
     outline: 1px solid #1f1f1f;
@@ -292,7 +290,7 @@ body {
     width: 20em;
     outline: 1px solid #1f1f1f;
     margin: 1px;
-    min-height: 100%;
+    height: 100vh;
 }
 
 .balance-container {
@@ -357,7 +355,9 @@ a:hover {
 }
 
 .single-market {
-    padding: 4em;
+    padding: 1em;
+    padding-left: 2em;
+    padding-top: 1em;
 }
 
 .ExplorerLink {
@@ -386,11 +386,13 @@ h1 {
 .wins-left {
     float: left;
     width: 50%;
+    text-align: left;
 }
 
 .wins-right {
     float: right;
     width: 50%;
+    text-align: right;
 }
 
 .text-secondary-wins {
