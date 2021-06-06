@@ -74,7 +74,6 @@ export const StakeHT = (props: {}) => {
             [instruction],
             true
         );
-
         if (ok) {
             notify({
                 message: "Transaction success...",
