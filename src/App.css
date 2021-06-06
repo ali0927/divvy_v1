@@ -1,409 +1,401 @@
 /*@primary-light: white;
 @primary-dark: #1f1f1f;*/
 
+
 /* Will need to link more font weights, maybe using a sass mixin. */
 
 @font-face {
-  font-family: "Nunito Sans";
-  src: url("font/NunitoSans-SemiBold.eot");
-  /* IE9+ Compat Modes */
-  src: url("font/NunitoSans-SemiBold.eot?#iefix") format("embedded-opentype"),
-    /* IE6-IE8 */ url("font/NunitoSans-SemiBold.woff2") format("woff2"),
-    /* Super modern browsers */ url("font/NunitoSans-SemiBold.woff")
-      format("woff"),
-    /* Modern browsers */ url("font/NunitoSans-SemiBold.ttf") format("truetype"),
-    /* Safari, Android, iOS */ url("font/NunitoSans-SemiBold.svg#FontName")
-      format("svg");
-  font-weight: 600;
-  /* Legacy iOS */
+    font-family: "Nunito Sans";
+    src: url("font/NunitoSans-SemiBold.eot");
+    /* IE9+ Compat Modes */
+    src: url("font/NunitoSans-SemiBold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("font/NunitoSans-SemiBold.woff2") format("woff2"), /* Super modern browsers */
+    url("font/NunitoSans-SemiBold.woff") format("woff"), /* Modern browsers */
+    url("font/NunitoSans-SemiBold.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("font/NunitoSans-SemiBold.svg#FontName") format("svg");
+    font-weight: 600;
+    /* Legacy iOS */
 }
 
 @font-face {
-  font-family: "Nunito Sans";
-  src: url("font/NunitoSans-ExtraBold.eot");
-  /* IE9+ Compat Modes */
-  src: url("font/NunitoSans-ExtraBold.eot?#iefix") format("embedded-opentype"),
-    /* IE6-IE8 */ url("font/NunitoSans-ExtraBold.woff2") format("woff2"),
-    /* Super modern browsers */ url("font/NunitoSans-ExtraBold.woff")
-      format("woff"),
-    /* Modern browsers */ url("font/NunitoSans-ExtraBold.ttf")
-      format("truetype"),
-    /* Safari, Android, iOS */ url("font/NunitoSans-ExtraBold.svg#FontName")
-      format("svg");
-  font-weight: 800;
-  /* Legacy iOS */
+    font-family: "Nunito Sans";
+    src: url("font/NunitoSans-ExtraBold.eot");
+    /* IE9+ Compat Modes */
+    src: url("font/NunitoSans-ExtraBold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("font/NunitoSans-ExtraBold.woff2") format("woff2"), /* Super modern browsers */
+    url("font/NunitoSans-ExtraBold.woff") format("woff"), /* Modern browsers */
+    url("font/NunitoSans-ExtraBold.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("font/NunitoSans-ExtraBold.svg#FontName") format("svg");
+    font-weight: 800;
+    /* Legacy iOS */
 }
 
 * {
-  font-family: "Nunito Sans";
+    font-family: "Nunito Sans";
 }
 
 body {
-  background-color: #0d0d0d;
+    background-color: #0d0d0d;
 }
 
 .App {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  align-items: center;
-  width: 60.7%;
-  margin-top: 4em;
+    align-items: center;
+    width: 60.7%;
+    margin-top: 4em;
 }
 
 .carousel {
-  width: 90%;
-  margin-left: 5%;
+    width: 90%;
+    margin-left: 5%;
 }
 
 .dots {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .carousel-item {
-  height: 200px;
-  width: 400px;
-  border-radius: 10px;
+    height: 200px;
+    width: 400px;
+    border-radius: 10px;
 }
 
 .carousel-image {
-  height: 200px;
-  width: 95%;
-  border-radius: 10px;
+    height: 200px;
+    width: 95%;
+    border-radius: 10px;
 }
 
 .liquidity-header {
-  min-height: 100vh;
-  flex-direction: column;
-  padding-right: 10%;
-  padding-left: 8%;
-  align-items: center;
-  width: 100%;
-  margin-top: 4em;
+    min-height: 100vh;
+    flex-direction: column;
+    padding-right: 10%;
+    padding-left: 8%;
+    align-items: center;
+    width: 100%;
+    margin-top: 4em;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 .LeftSideBar {
-  justify-content: flex-start;
-  flex-direction: column;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 .RightSideBar {
-  justify-content: flex-end;
-  flex-direction: column;
+    justify-content: flex-end;
+    flex-direction: column;
 }
 
 .wallet {
-  display: flex;
-  flex-direction: row;
-  -webkit-box-align: center;
-  align-items: center;
-  justify-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-self: flex-end;
 }
 
 .wallet-wrapper {
-  padding-left: 0.7rem;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
+    padding-left: 0.7rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
 }
 
 .wallet-key {
-  padding: 0.1rem 0.5rem 0.1rem 0.7rem;
-  margin-left: 0.3rem;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
+    padding: 0.1rem 0.5rem 0.1rem 0.7rem;
+    margin-left: 0.3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
 }
 
 .flex-center {
-  justify-content: center;
+    justify-content: center;
 }
 
 .flex-horizontal {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .flex-vertical {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .flex-start {
-  justify-content: flex-start;
-  text-align: start;
-  width: 100%;
+    justify-content: flex-start;
+    text-align: start;
+    width: 100%;
 }
 
 .flex-end {
-  justify-content: flex-end;
-  text-align: end;
-  width: 100%;
+    justify-content: flex-end;
+    text-align: end;
+    width: 100%;
 }
 
 .progress-bar {
-  width: 100%;
+    width: 100%;
 }
 
 .team-logo {
-  /* border-radius: 10000px; */
-  width: 37px;
-  height: 43px;
-  margin-top: 5px;
+    /* border-radius: 10000px; */
+    width: 37px;
+    height: 43px;
+    margin-top: 5px;
 }
 
 .odds {
-  border-radius: 22.5px;
-  height: 36px;
-  width: 60%;
-  padding-top: 9px;
-  font-size: 13px;
-  text-align: center;
-  cursor: pointer;
+    border-radius: 22.5px;
+    height: 36px;
+    width: 60%;
+    padding-top: 9px;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
 }
 
 .odds-active {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+    background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
 }
 
 .single-match {
-  background: "#0d0d0d";
-  justify-content: space-around;
+    background: "#0d0d0d";
+    justify-content: space-around;
 }
 
 .liquidity-left {
-  float: left;
-  width: 50%;
-  text-align: left;
+    float: left;
+    width: 50%;
+    text-align: left;
 }
 
 .liquidity-right {
-  float: right;
-  width: 50%;
-  text-align: right;
+    float: right;
+    width: 50%;
+    text-align: right;
 }
 
 .liquidity-total {
-  margin-top: -10px;
-  margin-bottom: 20px;
+    margin-top: -10px;
+    margin-bottom: 20px;
 }
 
 .left {
-  float: left;
-  width: 40%;
+    float: left;
+    width: 40%;
 }
 
 .right {
-  float: right;
-  width: 60%;
+    float: right;
+    width: 60%;
 }
 
 .search-left {
-  float: left;
-  width: 50%;
-  text-align: left;
+    float: left;
+    width: 50%;
+    text-align: left;
 }
 
 .search-right {
-  float: right;
-  width: 50%;
-  text-align: right;
+    float: right;
+    width: 50%;
+    text-align: right;
 }
 
 .bets-left {
-  float: left;
-  width: 50%;
-  text-align: center;
-  height: 55px;
-  padding: 14px 0 17px;
-  border: solid 1px #1f1f1f;
-  background-color: #0d0d0d;
-  cursor: pointer;
+    float: left;
+    width: 50%;
+    text-align: center;
+    height: 55px;
+    padding: 14px 0 17px;
+    border: solid 1px #1f1f1f;
+    background-color: #0d0d0d;
+    cursor: pointer;
 }
 
 .bets-right {
-  float: right;
-  width: 50%;
-  text-align: center;
-  height: 55px;
-  padding: 14px 0 17px;
-  border: solid 1px #1f1f1f;
-  background-color: #0d0d0d;
-  cursor: pointer;
+    float: right;
+    width: 50%;
+    text-align: center;
+    height: 55px;
+    padding: 14px 0 17px;
+    border: solid 1px #1f1f1f;
+    background-color: #0d0d0d;
+    cursor: pointer;
 }
 
 .secondary-team {
-  width: 179px;
-  height: 12px;
-  margin: 0 3px 0 0;
-  font-size: 12px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  color: #4d4d4d;
+    width: 179px;
+    height: 12px;
+    margin: 0 3px 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #4d4d4d;
 }
 
 .primary-team {
-  width: 213px;
-  height: 24px;
-  margin: 1px 27px 7px 0;
-  font-size: 16px;
-  font-weight: 800;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.5;
-  letter-spacing: 0.2px;
-  color: white;
+    width: 213px;
+    height: 24px;
+    margin: 1px 27px 7px 0;
+    font-size: 16px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+    color: white;
 }
 
 .bets-active {
-  border-width: 0.1px;
-  border-color: white;
-  background-color: #242424;
+    border-width: 0.1px;
+    border-color: white;
+    background-color: #242424;
 }
 
-/* .search-button-data {
-} */
-
 .sidebar-section {
-  width: 20em;
-  outline: 1px solid #1f1f1f;
-  margin: 1px;
-  min-height: 100%;
-  padding: 1em;
+    width: 20em;
+    outline: 1px solid #1f1f1f;
+    margin: 1px;
+    min-height: 100%;
+    padding: 1em;
 }
 
 .sidebar-section-bets {
-  width: 20em;
-  outline: 1px solid #1f1f1f;
-  margin: 1px;
-  height: 100vh;
+    width: 20em;
+    outline: 1px solid #1f1f1f;
+    margin: 1px;
+    height: 100vh;
 }
 
 .balance-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .horizontal-outline {
-  border-bottom: 1px solid #1f1f1f;
+    border-bottom: 1px solid #1f1f1f;
 }
 
 .balance {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 .search-item {
-  height: 40px;
-  margin-left: 4px;
+    height: 40px;
+    margin-left: 4px;
 }
 
 .ant-btn {
-  background-color: #242424;
-  border-color: #242424;
-  color: white;
+    background-color: #242424;
+    border-color: #242424;
+    color: white;
 }
 
 .ant-btn:hover {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  color: white;
+    background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+    border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+    color: white;
 }
 
 .ant-btn:active {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  color: white;
+    background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+    border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+    color: white;
 }
 
 .ant-btn:focus {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  color: white;
+    background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+    border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+    color: white;
 }
 
 .search-button {
-  border-width: 0px;
-  display: contents;
+    border-width: 0px;
+    display: contents;
 }
 
 .text-secondary {
-  color: gray;
+    color: gray;
 }
 
 a {
-  color: white;
+    color: white;
 }
 
 a:hover {
-  color: white;
+    color: white;
 }
 
 .single-market {
-  padding: 1em;
-  padding-left: 2em;
-  padding-top: 1em;
+    padding: 1em;
+    padding-left: 2em;
+    padding-top: 1em;
 }
 
 .ExplorerLink {
-  color: rgb(26, 13, 171) !important;
+    color: rgb(26, 13, 171) !important;
 }
 
 h1 {
-  font-size: 3.1em;
-  margin-bottom: 2px;
+    font-size: 3.1em;
+    margin-bottom: 2px;
 }
 
 .form-grey .ant-input {
-  background-color: #242424;
+    background-color: #242424;
 }
 
 .ant-form-item {
-  color: #242424;
+    color: #242424;
 }
 
-.ant-form-item-label
-  > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
-  /* Remove the red '*' for required inputs */
-  margin-right: 0;
-  content: "";
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+    /* Remove the red '*' for required inputs */
+    margin-right: 0;
+    content: "";
 }
 
 .wins-left {
-  float: left;
-  width: 50%;
-  text-align: left;
+    float: left;
+    width: 50%;
+    text-align: left;
 }
 
 .wins-right {
-  float: right;
-  width: 50%;
-  text-align: right;
+    float: right;
+    width: 50%;
+    text-align: right;
 }
 
 .text-secondary-wins {
-  color: gray;
-  margin-bottom: -4px;
+    color: gray;
+    margin-bottom: -4px;
 }

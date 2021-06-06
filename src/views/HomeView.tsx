@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import logo from "../divvy-logo-v1.png";
 import { useUserBalance } from "../hooks/useUserBalance";
 import { WRAPPED_SOL_MINT } from "../utils/ids";
 import { BetType, Game, LABELS } from "../constants";
+import FlagTurkey from '../img/flags/Turkey.svg';
+import FlagItaly from '../img/flags/Italy.svg';
 import { RightSideBar } from "../components/RightSideBar";
 import { LeftSideBar } from "../components/LeftSideBar";
 import { NavBar } from "../components/Nav/NavBar";
@@ -12,18 +13,17 @@ import { SingleMarketMatches } from "../components/SingleMarket/SingleMarketMatc
 import { BetSlips } from "../components/Home/BetSlips";
 import { BetSlip } from "../constants"
 export const HomeView = () => {
-  const SOL = useUserBalance(WRAPPED_SOL_MINT);
   const GAMES = [
     {
       teamA: {
         "name": "Turkey",
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg",
+        "logo": FlagTurkey,
         "id": "turkey",
         favorite: false
       },
       teamB: {
         "name": "Italy",
-        "logo": "https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg",
+        "logo": FlagItaly,
         "id": "italy",
         favorite: true
       },
