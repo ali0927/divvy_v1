@@ -29,7 +29,7 @@ export const DIVVY_PROGRAM_IDS: { [env: string] : PublicKey; } = {
   "devnet" : new PublicKey("D7QWZHKyUwmGVp2oxF5GVLgKj2JJ8oYkTMXmc1zNHtEu") // THIS IS A PLACEHOLDER !!
 };
 
-export const ESCROW_PROGRAM_ID = new PublicKey("2theHfNiJdVSiz8BT39ASgnXNzEkVSDtfU1zyap1KWog"); // THIS IS A PLACEHOLDER !!
+export const ESCROW_STATE_ID = new PublicKey("2theHfNiJdVSiz8BT39ASgnXNzEkVSDtfU1zyap1KWog"); // THIS IS A PLACEHOLDER !!
 
 export const setProgramIds = (envName: string) => {
   let instance = PROGRAM_IDS.find((env) => env.name === envName);

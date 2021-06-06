@@ -1,9 +1,9 @@
 import { useUserBalance } from "../../hooks";
 import { Link } from "react-router-dom";
-import { ESCROW_PROGRAM_ID, USDT_MINT } from "../../utils/ids";
+import { ESCROW_STATE_ID, USDT_MINT } from "../../utils/ids";
 
 export const LiquidityViewLink = () => {
-  const escrowUsdtBalance = useUserBalance(ESCROW_PROGRAM_ID, USDT_MINT);
+  const escrowUsdtBalance = useUserBalance(ESCROW_STATE_ID, USDT_MINT);
   return (
     <div className="sidebar-section">
       <Link to="/liquidity">

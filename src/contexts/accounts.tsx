@@ -33,10 +33,15 @@ export interface ParsedAccountBase {
   info: any; // TODO: change to unkown
 }
 
-export type AccountParser = (
+export type AccountParserBase = (
   pubkey: PublicKey,
   data: AccountInfo<Buffer>
 ) => ParsedAccountBase | undefined;
+
+export type AccountParser<T> = (
+  id: PublicKey,
+  acc: AccountInfo<Buffer>
+) => ParsedAccount<T> | undefined;
 
 export interface ParsedAccount<T> extends ParsedAccountBase {
   info: T;
@@ -93,14 +98,14 @@ export const GenericAccountParser = (
   return details;
 };
 
-export const keyToAccountParser = new Map<string, AccountParser>();
+export const keyToAccountParser = new Map<string, AccountParserBase>();
 
 export const cache = {
   emitter: new EventEmitter(),
   query: async (
     connection: Connection,
     pubKey: string | PublicKey,
-    parser?: AccountParser
+    parser?: AccountParserBase
   ) => {
     let id: PublicKey;
     if (typeof pubKey === "string") {
@@ -136,7 +141,7 @@ export const cache = {
   add: (
     id: PublicKey | string,
     obj: AccountInfo<Buffer>,
-    parser?: AccountParser
+    parser?: AccountParserBase
   ) => {
     if (obj.data.length === 0) {
       return;
@@ -189,7 +194,7 @@ export const cache = {
     return false;
   },
 
-  byParser: (parser: AccountParser) => {
+  byParser: (parser: AccountParserBase) => {
     const result: string[] = [];
     for (const id of keyToAccountParser.keys()) {
       if (keyToAccountParser.get(id) === parser) {
@@ -199,7 +204,7 @@ export const cache = {
 
     return result;
   },
-  registerParser: (pubkey: PublicKey | string, parser: AccountParser) => {
+  registerParser: (pubkey: PublicKey | string, parser: AccountParserBase) => {
     if (pubkey) {
       const address = typeof pubkey === "string" ? pubkey : pubkey?.toBase58();
       keyToAccountParser.set(address, parser);
