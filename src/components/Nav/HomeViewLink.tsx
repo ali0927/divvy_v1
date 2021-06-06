@@ -1,12 +1,12 @@
-import logo from "../../divvy-logo-v1.png";
+import { ReactComponent as Logo } from "../../img/Divvy_UI_Logo_Beta.svg"
 import { Link } from "react-router-dom";
 
 export const HomeViewLink = () => {
   return (
-    <div className="sidebar-section">
-      <Link to="/">
-        <img src={logo} alt="logo" />
-      </Link>
-    </div>
+    <Link to="/">
+      <div className="sidebar-section" style={{display:"flex", alignContent:"center"}}>
+        <Logo/>
+      </div>
+    </Link>
   );
 };

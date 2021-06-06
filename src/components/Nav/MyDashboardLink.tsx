@@ -6,8 +6,8 @@ export const MyDashboardLink = () => {
   };
 
   return (
-    <div className="sidebar-section">
-      <Link to="/" onClick={abort}>
+    <Link to="/" onClick={abort}>
+      <div className="sidebar-section">
         {/* Link to the real MyDashboard when it is complete */}
         <h3>My Dashboard</h3>
         <small>
@@ -16,7 +16,7 @@ export const MyDashboardLink = () => {
             <span className="balance">1,000,000 USDT</span>
           </div>
         </small>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };

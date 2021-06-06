@@ -5,8 +5,8 @@ import { ESCROW_STATE_ID, USDT_MINT } from "../../utils/ids";
 export const LiquidityViewLink = () => {
   const escrowUsdtBalance = useUserBalance(ESCROW_STATE_ID, USDT_MINT);
   return (
-    <div className="sidebar-section">
-      <Link to="/liquidity">
+    <Link to="/liquidity">
+      <div className="sidebar-section">
         <h3>House Pool</h3>
         <small>
           <div className="balance-container">
@@ -25,7 +25,7 @@ export const LiquidityViewLink = () => {
             <span className="balance">911,112 USDT</span>
           </div>
         </small>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
