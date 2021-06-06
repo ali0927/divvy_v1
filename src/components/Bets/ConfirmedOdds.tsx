@@ -1,18 +1,18 @@
 import React from 'react';
-export const ConfirmedOdds = (props: {}) => {
+import { BetSlip, BetType, OddsType } from '../../constants';
+export const ConfirmedOdds = (props: { oddsType: String, odds: BetSlip }) => {
     return (
-        <div>
+        <div style={{ width: "17em" }}>
             <div className="wins-left">
-                <p className="text-secondary-wins">
-                    Original Odds:
-                </p>
-                <h5>
-                    Money Line
-                </h5>
+                <h4>
+                    {props.oddsType}
+                    {props.oddsType == OddsType.spread ? (props.odds.selectionTeam.favorite ? " (-" : " (+") + String(props.odds.spread) + ")" : null}
+                    {props.oddsType == OddsType.total ? (props.odds.selectionTeam.favorite ? " (O " : " (U ") + String(props.odds.total) + ")" : null}
+                </h4>
             </div>
             <div className="wins-right">
-                <h3 style={{ marginTop: 4 }}>
-                    +175
+                <h3 style={{ marginTop: 0 }}>
+                    {props.odds.odds}
                 </h3>
             </div>
         </div>

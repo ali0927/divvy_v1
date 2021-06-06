@@ -1,6 +1,9 @@
 import React from 'react';
 import { Carousel } from 'antd';
 import logo from "../../logo.svg";
+import car1 from "../../img/TI.jpeg"
+import car2 from "../../img/EC.jpeg"
+import car3 from "../../img/DF.jpeg"
 export const HomeCarousel = () => {
     const contentStyle = {
         height: 160,
@@ -13,7 +16,7 @@ export const HomeCarousel = () => {
         infinite: true,
         centerPadding: "200px",
         // slidesToShow: 3,
-        speed: 500,
+        speed: 5000,
         autoplay: true,
         dotsClass: "dots"
         
@@ -33,19 +36,13 @@ export const HomeCarousel = () => {
     return (
         <Carousel className="carousel" {...CarouselSettings}>
             <div className="carousel-item">
-                <img className="carousel-image" src={"https://www.girardatlarge.com/wp-content/uploads/2017/09/laremy-tunsil-1280x640.jpg"} />
+                <img className="carousel-image" src={car1} />
             </div>
             <div className="carousel-item">
-                <img className="carousel-image" src={"https://www.girardatlarge.com/wp-content/uploads/2017/09/laremy-tunsil-1280x640.jpg"} />
+                <img className="carousel-image" src={car2} />
             </div>
             <div className="carousel-item">
-                <img className="carousel-image" src={"https://www.girardatlarge.com/wp-content/uploads/2017/09/laremy-tunsil-1280x640.jpg"} />
-            </div>
-            <div className="carousel-item">
-                <img className="carousel-image" src={"https://www.girardatlarge.com/wp-content/uploads/2017/09/laremy-tunsil-1280x640.jpg"} />
-            </div>
-            <div className="carousel-item">
-                <img className="carousel-image" src={"https://www.girardatlarge.com/wp-content/uploads/2017/09/laremy-tunsil-1280x640.jpg"} />
+                <img className="carousel-image" src={car3} />
             </div>
         </Carousel>
 
