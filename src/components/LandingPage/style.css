@@ -257,6 +257,7 @@ section.landing-page__difference h2 {
 }
 section.landing-page__difference > div:nth-child(2) {
     padding-left: 30px;
+    padding-top: 90px;
 }
 section.landing-page__difference > div:first-child {
     padding-right: 30px;
@@ -269,9 +270,6 @@ section.landing-page__difference .card {
     background-color: #1A1A1A;
     padding: 50px 30px 30px;
     margin-top: 70px;
-}
-section.landing-page__difference .card:first-child {
-    margin-top: 150px;
 }
 section.landing-page__difference .card-image {
     width: 70%;
