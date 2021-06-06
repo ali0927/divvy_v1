@@ -9,7 +9,7 @@ export const MyDashboardLink = () => {
     <Link to="/" onClick={abort}>
       <div className="sidebar-section">
         {/* Link to the real MyDashboard when it is complete */}
-        <h3>My Dashboard</h3>
+        <h2>My Dashboard</h2>
         <small>
           <div className="balance-container">
             <span>House Pool balance</span>

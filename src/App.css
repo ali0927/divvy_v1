@@ -1,6 +1,39 @@
 /*@primary-light: white;
 @primary-dark: #1f1f1f;*/
 
+
+/* Will need to link more font weights, maybe using a sass mixin. */
+
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('font/NunitoSans-SemiBold.eot');
+    /* IE9+ Compat Modes */
+    src: url('font/NunitoSans-SemiBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('font/NunitoSans-SemiBold.woff2') format('woff2'), /* Super modern browsers */
+    url('font/NunitoSans-SemiBold.woff') format('woff'), /* Modern browsers */
+    url('font/NunitoSans-SemiBold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('font/NunitoSans-SemiBold.svg#FontName') format('svg');
+    font-weight: 600;
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('font/NunitoSans-ExtraBold.eot');
+    /* IE9+ Compat Modes */
+    src: url('font/NunitoSans-ExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('font/NunitoSans-ExtraBold.woff2') format('woff2'), /* Super modern browsers */
+    url('font/NunitoSans-ExtraBold.woff') format('woff'), /* Modern browsers */
+    url('font/NunitoSans-ExtraBold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('font/NunitoSans-ExtraBold.svg#FontName') format('svg');
+    font-weight: 800;
+    /* Legacy iOS */
+}
+
+* {
+    font-family: 'Nunito Sans';
+}
+
 body {
     background-color: #0d0d0d;
 }
@@ -334,10 +367,6 @@ a:hover {
 h1 {
     font-size: 3.1em;
     margin-bottom: 2px;
-}
-
-h2 {
-    font-size: 200%;
 }
 
 .form-grey .ant-input {

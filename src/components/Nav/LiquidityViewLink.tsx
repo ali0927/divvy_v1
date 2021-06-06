@@ -7,7 +7,7 @@ export const LiquidityViewLink = () => {
   return (
     <Link to="/liquidity">
       <div className="sidebar-section">
-        <h3>House Pool</h3>
+        <h2>House Pool</h2>
         <small>
           <div className="balance-container">
             <span>House Pool balance</span>
