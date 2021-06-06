@@ -186,6 +186,7 @@ body {
 
 .single-match {
   background: "#0d0d0d";
+  justify-content: space-around;
 }
 
 .liquidity-left {

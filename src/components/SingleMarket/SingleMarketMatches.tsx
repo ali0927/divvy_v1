@@ -7,7 +7,7 @@ const { Panel } = Collapse;
 export const SingleMarketMatches = (props: { games: Array<Game>, setbetSlips: any }) => {
     return (
         <div className="single-market">
-            <Collapse accordion={true} style={{ display: "grid" }} ghost={true} expandIconPosition="right">
+            <Collapse defaultActiveKey={"1"} accordion={true} style={{ display: "grid" }} ghost={true} expandIconPosition="right">
                 <Panel header={<GameName />} key="1">
                     {props.games.map((value: Game, index: number) => {
                         return (

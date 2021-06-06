@@ -5,7 +5,7 @@ import { GameName } from "./GameName";
 import { Odds, BetSlip, BetType, Game, OddsType, Team } from "../../constants";
 const { Panel } = Collapse;
 export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game, selection: Team, otherteam: Team }) => {
-    const [selection, setSelection] = useState("money")
+    const [selection, setSelection] = useState("")
     function makeid(length: number) {
         var result = [];
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
