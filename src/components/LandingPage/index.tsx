@@ -8,7 +8,7 @@ import { DAO } from "./DAO";
 import { Tokenomics } from "./Tokenomics";
 import { Roadmap } from "./Roadmap";
 import { Community } from "./Community";
-const Fade = require('react-reveal/Fade')
+import Fade from "react-reveal/Fade";
 
 export const LandingPage = () => {
     return (
