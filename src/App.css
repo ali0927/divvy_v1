@@ -340,8 +340,8 @@ h2 {
     font-size: 200%;
 }
 
-.ant-input {
-  background-color: #242424;
+.form-grey .ant-input {
+    background-color: #242424;
 }
 
 .ant-form-item {

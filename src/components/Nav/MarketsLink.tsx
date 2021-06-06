@@ -25,7 +25,7 @@ export const MarketsLink = () => {
     }
     return (
         <div>
-            <Input style={{ background: "#0d0d0d", height: "40px", width: "100%" }} placeholder={"Search for bets"} prefix={<SearchOutlined />} />
+            <Input style={{ border: "0px", marginLeft: "1px", outline: "1px solid #1f1f1f", height: "40px", width: "20em" }} placeholder={"Search for bets"} prefix={<SearchOutlined />} />
             <div className="sidebar-section">
                 {MarketsUI()}
             </div>

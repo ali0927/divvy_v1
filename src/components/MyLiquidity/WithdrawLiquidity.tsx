@@ -102,6 +102,7 @@ export const WithdrawLiquidity = (props: {}) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         layout="vertical"
+        className="form-grey"
       >
         <h3>Divvy House Withdrawal</h3>
 

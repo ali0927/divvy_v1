@@ -101,6 +101,7 @@ export const DivvyDao = (props: {}) => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 layout="vertical"
+                className="form-grey"
             >
                 <h3>Divvy DAO</h3>
 

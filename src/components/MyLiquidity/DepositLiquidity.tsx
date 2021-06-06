@@ -102,6 +102,7 @@ export const DepositLiquidity = (props: {}) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         layout="vertical"
+        className="form-grey"
       >
         <h3>Divvy House Deposit</h3>
         <div className="balance-container">

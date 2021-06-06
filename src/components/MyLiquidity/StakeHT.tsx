@@ -100,6 +100,7 @@ export const StakeHT = (props: {}) => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 layout="vertical"
+                className="form-grey"
             >
                 <h3>Stake your House Tokens</h3>
                 <div className="balance-container">
