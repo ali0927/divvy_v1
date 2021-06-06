@@ -132,18 +132,17 @@ body {
 }
 
 .odds {
-  width: 60%;
-  text-align: center;
-  cursor: pointer;
+    border-radius: 22.5px;
+    height: 36px;
+    width: 60%;
+    padding-top: 16px;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
 }
 
 .odds-active {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  border-radius: 22.5px;
-  height: 36px;
-  width: 60%;
-  padding-top: 8px;
-  font-size: 13px;
+    background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
 }
 
 .single-match {
