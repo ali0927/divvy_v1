@@ -7,6 +7,7 @@ import { EscrowProvider } from "./contexts/escrow";
 import { HomeView } from "./views/HomeView";
 import { LiquidityView } from "./views/LiquidityView";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { LandingPageView } from "./views/LandingPageView";
 
 function App() {
   return (
@@ -18,10 +19,13 @@ function App() {
               <EscrowProvider>
                 {/* Routes are ordered specific to general. the '/' route must be placed last */}
                 <Switch>
-                  <Route path="/liquidity">
+                <Route path="/liquidity">
                     <LiquidityView />
                   </Route>
                   <Route path="/">
+                    <LandingPageView />
+                  </Route>
+                  <Route path="/app">
                     <HomeView />
                   </Route>
                 </Switch>
