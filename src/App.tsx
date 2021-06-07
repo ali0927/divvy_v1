@@ -4,9 +4,10 @@ import { ConnectionProvider } from "./contexts/connection";
 import { AccountsProvider } from "./contexts/accounts";
 import { MarketProvider } from "./contexts/market";
 import { EscrowProvider } from "./contexts/escrow";
-import { HomeView } from "./views/HomeView";
+import { BetsView } from "./views/BetsView";
 import { LiquidityView } from "./views/LiquidityView";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { LandingPageView } from "./views/LandingPageView";
 
 function App() {
   return (
@@ -21,8 +22,11 @@ function App() {
                   <Route path="/liquidity">
                     <LiquidityView />
                   </Route>
+                  <Route path="/app">
+                    <BetsView />
+                  </Route>
                   <Route path="/">
-                    <HomeView />
+                    <LandingPageView />
                   </Route>
                 </Switch>
               </EscrowProvider>
