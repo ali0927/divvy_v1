@@ -155,10 +155,25 @@ section.landing-page__about .content {
 }
 section.landing-page__about .divvy-logo {
     flex-basis: 40%;
+    position: relative;
+    padding: 5px;
 }
 section.landing-page__about .divvy-logo video {
     width: 100%;
     height: auto;
+}
+section.landing-page__about .divvy-logo:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../img/landing-page/divvy_mask.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 /* Be The House */
@@ -247,7 +262,15 @@ section.landing-page__tokenomics .content li.reserves:before {
     background: #79D284;
 }
 section.landing-page__tokenomics .chart {
-    width: 50%;
+    width: 575px;
+    height: 575px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../img/landing-page/divvy_fold_temp.png');
+    background-size: 17.5%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* Difference */
@@ -341,6 +364,12 @@ section.landing-page__community .content {
     section.landing-page__difference .heading-lg {
         font-size: 90px;
         line-height: 90px;
+    }
+    section.landing-page__tokenomics {
+        flex-direction: column;
+    }
+    section.landing-page__tokenomics .content {
+        width: auto;
     }
 }
 
@@ -447,9 +476,6 @@ section.landing-page__community .content {
     section.landing-page__tokenomics ul {
         text-align: left;
     }
-    section.landing-page__tokenomics .chart {
-        width: 80%;
-    }
     section.landing-page__difference .card-body h3 {
         line-height: 25px;
     }
@@ -512,4 +538,14 @@ section.landing-page__community .content {
     section.landing-page__difference .card-body h3 {
         margin-bottom: 20px;
     }
+    section.landing-page__tokenomics {
+        padding: 40px 20px;
+    }
+    section.landing-page__tokenomics .content {
+        margin: 0;
+    }
+    section.landing-page__tokenomics .chart {
+        width: 90%;
+        height: 100vw;
+    }    
 }
