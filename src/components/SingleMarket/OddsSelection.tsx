@@ -43,11 +43,11 @@ export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game,
             </div>
             <Divider style={{ height: 32 }} type="vertical" />
             <div onClick={() => setSlip("spread", props.odds.spread, OddsType.spread)} className={selection === 'spread' ? "odds odds-active" : "odds"}>
-                <b>{(props.selection.favorite ? "(-" : "(+") + String(props.game.spread) + ") " + String(props.odds.spread) + ")"}</b>
+                <b>{(props.selection.favorite ? "(-" : "(+") + String(props.game.spread) + ") " + String(props.odds.spread) }</b>
             </div>
             <Divider style={{ height: 32 }} type="vertical" />
             <div onClick={() => setSlip("total", props.odds.total, OddsType.total)} className={selection === 'total' ? "odds odds-active" : "odds"}>
-                <b>{(props.otherteam.favorite ? "U " : "O ") + String(props.game.total) + " (" + String(props.odds.total) + ")"}</b>
+                <b>{(props.otherteam.favorite ? "(U " : "(O ") + String(props.game.total) + ") " + String(props.odds.total)}</b>
             </div>
         </div>
     )

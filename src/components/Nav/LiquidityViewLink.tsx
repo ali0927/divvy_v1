@@ -1,9 +1,9 @@
 import { useUserBalance } from "../../hooks";
 import { Link } from "react-router-dom";
-import { ESCROW_STATE_ID, USDT_MINT } from "../../utils/ids";
-
+import { useContext } from "react";
+import { HousePoolLiquidityContext } from "../../contexts/hpliquidity";
 export const LiquidityViewLink = () => {
-  const escrowUsdtBalance = useUserBalance(ESCROW_STATE_ID, USDT_MINT);
+  const { accountData, hpBalance } = useContext(HousePoolLiquidityContext);
   return (
     <Link to="/liquidity">
       <div className="sidebar-section">
@@ -13,7 +13,7 @@ export const LiquidityViewLink = () => {
             <span>House Pool balance</span>
             <span className="balance">
               {/* {escrowUsdtBalance.balance.toFixed(2)} USDT */}
-              {"1,000,000"} USDT
+              {hpBalance} USDT
             </span>
           </div>
           <div className="balance-container">
