@@ -43,6 +43,33 @@ img.img-fluid {
     height: auto;
 }
 
+.btn {
+    background: url('../../img/landing-page/btn.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 320px;
+    height: 58px;
+    line-height: 58px;
+    padding: 0 30px;
+    transition: opacity .3s;
+    display: inline-block;
+}
+.btn:hover {
+    opacity: .9;
+}
+.btn-sm {
+    background: url('../../img/landing-page/btn_sm.png');
+    width: 215px;
+    height: 39px;
+    line-height: 39px;
+    padding: 0 20px;
+}
+.btn:after {
+    content: "›";
+    float: right;
+}
+
 .justify-start {
     justify-content: flex-start;
 }
@@ -87,9 +114,15 @@ img.img-fluid {
     align-items: center;
     justify-content: space-between;
 }
+.landing-page__header .logo {
+    margin-right: auto;
+}
 .landing-page__header .social-links {
     line-height: 1;
     text-align: right;
+}
+.landing-page__header .cta {
+    margin-left: 30px;
 }
 .landing-page__header .social-links img {
     height: 24px;
@@ -142,6 +175,9 @@ section.landing-page__about {
 section.landing-page__about .content {
     width: 420px;
     max-width: 100%;
+}
+section.landing-page__about .cta {
+    margin-top: 30px;
 }
 section.landing-page__about .divvy-logo {
     flex-basis: 40%;
@@ -429,6 +465,13 @@ section.landing-page__community .content {
         background-size: auto;
         background-position: center bottom;
     }
+    section.landing-page__about .btn {
+        background: url('../../img/landing-page/btn_sm.png');
+        width: 215px;
+        height: 39px;
+        line-height: 39px;
+        padding: 0 20px;    
+    }
     section.landing-page__dao {
         padding: 80px 40px 60%;
     }
@@ -485,6 +528,14 @@ section.landing-page__community .content {
     }
     .landing-page__header {
         margin-bottom: 80px;
+        flex-wrap: wrap;
+    }
+    .landing-page__header .social-links {
+        display: flex;
+        flex-basis: 100%;
+        justify-content: center;
+        margin-top: 50px;
+        order: 3;
     }
     section .content {
         text-align: center;
