@@ -8,7 +8,7 @@ export const About = () => {
               <p>Coming soon on Solana</p>
             </div>
             <div className="divvy-logo">
-              <video poster={divvyLogo}>
+              <video poster={divvyLogo} autoPlay muted loop>
                 <source src="/video/divvy_logo_anim.mp4" type="video/mp4" />
               </video>
             </div>

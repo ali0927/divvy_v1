@@ -155,10 +155,25 @@ section.landing-page__about .content {
 }
 section.landing-page__about .divvy-logo {
     flex-basis: 40%;
+    position: relative;
+    padding: 5px;
 }
 section.landing-page__about .divvy-logo video {
     width: 100%;
     height: auto;
+}
+section.landing-page__about .divvy-logo:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../img/landing-page/divvy_mask.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 /* Be The House */
