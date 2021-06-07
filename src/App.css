@@ -34,6 +34,49 @@
     font-family: "Nunito Sans";
 }
 
+html {
+    scrollbar-face-color: #1f1f1f;
+    scrollbar-base-color: #1f1f1f;
+    scrollbar-3dlight-color: #1f1f1f;
+    scrollbar-highlight-color: #1f1f1f;
+    scrollbar-track-color: transparent;
+    scrollbar-arrow-color: transparent;
+    scrollbar-shadow-color: #1f1f1f;
+    scrollbar-dark-shadow-color: #1f1f1f;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-button {
+    visibility: collapse;
+    background-color: #1f1f1f;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 1px;
+    background-color: #1f1f1f;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #1f1f1f;
+}
+
+::-webkit-resizer {
+    background-color: #1f1f1f;
+}
+
 body {
     background-color: #0d0d0d;
 }
@@ -56,13 +99,13 @@ body {
 
 .App-header {
     align-items: center;
-    width: 60.7%;
+    width: 100%;
     margin-top: 4em;
 }
 
 .carousel {
-    width: 90%;
-    margin-left: 5%;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .dots {
@@ -79,6 +122,7 @@ body {
     height: 200px;
     width: 95%;
     border-radius: 10px;
+    padding: 15px;
 }
 
 .liquidity-header {
@@ -289,7 +333,6 @@ body {
 .sidebar-section-bets {
     width: 20em;
     outline: 1px solid #1f1f1f;
-    margin: 1px;
     height: 100vh;
 }
 
