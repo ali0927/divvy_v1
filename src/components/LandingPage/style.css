@@ -81,25 +81,15 @@ img.img-fluid {
 
 .landing-page__header {
     margin-top: 50px;
-    margin-bottom: 120px;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-}
-.landing-page__header .logo {
-    width: 20%;
-}
-.landing-page__header .tagline,
-.landing-page__header .message {
-    font-size: 12px;
-    margin: 0;
-    line-height: 15px;
-    width: 20%;
+    align-items: center;
+    justify-content: space-between;
 }
 .landing-page__header .social-links {
     line-height: 1;
     text-align: right;
-    width: 40%;
 }
 .landing-page__header .social-links img {
     height: 24px;
@@ -210,6 +200,11 @@ section.landing-page__dao .content {
 /* Roadmap */
 section.landing-page__roadmap {
     background-color: transparent;
+    padding-bottom: 50%;
+    background-image: url('../../img/landing-page/divvy_roadmap_desktop.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center bottom;
 }
 
 /* Tokenomics */
@@ -344,14 +339,7 @@ section.landing-page__community .content {
     width: 40%;
 }
 
-@media (max-width: 1200px) {
-    .landing-page__header .header-primary {
-        flex-basis: 60%;
-    }
-    .landing-page__header .header-secondary {
-        flex-basis: 40%;
-    }
-
+@media (max-width: 1199px) {
     section.landing-page__about {
         padding: 80px 40px;
     }
@@ -373,7 +361,7 @@ section.landing-page__community .content {
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .heading-lg {
         font-size: 100px;
         line-height: 100px;
@@ -421,7 +409,7 @@ section.landing-page__community .content {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .heading-lg {
         font-size: 80px;
         line-height: 80px;
@@ -434,24 +422,19 @@ section.landing-page__community .content {
         font-size: 24px;
         line-height: 24px;
     }
-    .landing-page__header {
-        flex-wrap: wrap;
-    }
-    .landing-page__header .logo {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    .landing-page__header .tagline,
-    .landing-page__header .message {
-        width: 30%;
-    }
     section.landing-page__be-the-house {
-        padding: 150px 40px 150px;
+        padding: 200px 40px 80px;
         justify-content: center;
-        background-size: 200%;
+        background-image: url('../../img/landing-page/divvy_house_mobile.png');
+        background-size: auto;
+        background-position: center bottom;
     }
     section.landing-page__dao {
         padding: 80px 40px 60%;
+    }
+    section.landing-page__roadmap {
+        padding-bottom: 90%;
+        background-image: url('../../img/landing-page/divvy_roadmap_mobile.png');    
     }
     section.landing-page__community {
         flex-direction: column;
@@ -479,6 +462,15 @@ section.landing-page__community .content {
     section.landing-page__difference .card-body h3 {
         line-height: 25px;
     }
+    .landing-page__footer .message,
+    .landing-page__footer .copyright,
+    .landing-page__footer .logo,
+    .landing-page__footer .credits {
+        width: auto;
+    }
+    .landing-page__footer {
+        justify-content: space-between;
+    }
 }
 
 @media (max-width: 575px) {
@@ -493,21 +485,6 @@ section.landing-page__community .content {
     }
     .landing-page__header {
         margin-bottom: 80px;
-    }
-    .landing-page__header .logo {
-        margin-bottom: 15px;
-        text-align: center;
-    }
-    .landing-page__header .tagline,
-    .landing-page__header .message {
-        width: 100%;
-        text-align: center;
-        margin: 15px auto;
-    }
-    .landing-page__header .social-links {
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
     }
     section .content {
         text-align: center;
@@ -526,8 +503,9 @@ section.landing-page__community .content {
         margin-bottom: 50px;
     }
     section.landing-page__be-the-house {
-        padding: 150px 40px 150px;
-        background-size: cover;
+        padding: 200px 40px 75px;
+        background-size: auto;
+        background-position: center bottom;
     }
     section.landing-page__be-the-house .content {
         width: auto;
@@ -548,4 +526,31 @@ section.landing-page__community .content {
         width: 90%;
         height: 100vw;
     }    
+}
+
+@media (max-width: 479px) {
+    .landing-page__footer .message,
+    .landing-page__footer .copyright,
+    .landing-page__footer .logo,
+    .landing-page__footer .credits {
+        width: 50%;
+        margin-top: 15px;
+    }
+    .landing-page__footer {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .landing-page__footer .logo {
+        order: 1;
+    }
+    .landing-page__footer .credits {
+        order: 2;
+    }
+    .landing-page__footer .message {
+        order: 3;
+    }
+    .landing-page__footer .copyright {
+        order: 4;
+        text-align: right;
+    }
 }
