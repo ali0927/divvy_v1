@@ -56,9 +56,18 @@ export const BetsView = () => {
   const setbetSlips = (betSlip: BetSlip) => {
     setBetSlips([...betSlips, betSlip])
   }
-  const removebetSlip = (index: number) => {
+  const removebetSlip = (betId: string) => {
     var bets = betSlips;
-    bets.splice(index, 1);
+    var bet: BetSlip;
+    var bets: Array<BetSlip> = [];
+    betSlips.map((value: BetSlip) => {
+      if (value.id == betId) {
+        //do nothing
+      }
+      else {
+        bets.push(value)
+      }
+    })
     setBetSlips(bets)
   }
   const editBetSlip = (betId: string, amount: number) => {

@@ -3,11 +3,15 @@ import { Form, Input, Divider } from "antd";
 import { ConfirmedOdds } from "./ConfirmedOdds";
 import { BetSlip } from "../../constants/bets";
 import { useState } from "react";
+import { CloseOutlined } from "@ant-design/icons"
 export const MyBetSlip = (props: { betSlips: Array<BetSlip>, setbetSlips: any, index: number, betSlip: BetSlip, removebetSlip: any, editBetSlip: any }) => {
     const [stake, setStake] = useState(0)
     return (
-        <div style={{ margin: 20 }} >
-            <GameTeams selectionTeam={props.betSlip.selectionTeam.name} otherTeam={props.betSlip.otherTeam.name} betSlip={props.betSlip} />
+        <div style={{ margin: 20 }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <GameTeams selectionTeam={props.betSlip.selectionTeam.name} otherTeam={props.betSlip.otherTeam.name} betSlip={props.betSlip} />
+                <CloseOutlined onClick={() => props.removebetSlip(props.betSlip.id)} style={{ marginTop: 5 }} />
+            </div>
             <ConfirmedOdds oddsType={props.betSlip.oddsType} odds={props.betSlip} />
             <div style={{ display: "inline-flex" }}>
                 <Form.Item

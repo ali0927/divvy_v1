@@ -1,50 +1,22 @@
-import React from 'react';
-import { Carousel } from 'antd';
-import logo from "../../logo.svg";
-import car1 from "../../img/TI.jpeg"
-import car2 from "../../img/EC.jpeg"
-import car3 from "../../img/DF.jpeg"
+import car1 from "../../img/carousel/Austria-vs-North-Macedonia.jpeg"
+import car2 from "../../img/carousel/Belgium-vs-Russia.jpeg"
+import car3 from "../../img/carousel/Denmark-vs-Finland.jpeg"
+import car4 from "../../img/carousel/England-vs-Croatia.jpeg"
+import car5 from "../../img/carousel/Netherlands-vs-Ukraine.jpeg"
+import car6 from "../../img/carousel/Scotland-vs-Czech-Republic.jpeg"
+import car7 from "../../img/carousel/Turkey-vs-Italy.jpeg"
+import car8 from "../../img/carousel/Wales-vs-Switzerland.jpeg"
 export const HomeCarousel = () => {
-    const contentStyle = {
-        height: 160,
-        color: "#fff",
-        background: "#364d79",
-        width: "40%"
-    };
-    const CarouselSettings = {
-        centerMode: true,
-        infinite: true,
-        centerPadding: "200px",
-        // slidesToShow: 3,
-        speed: 5000,
-        autoplay: true,
-        dotsClass: "dots"
-        
-    };
-    const items = [1, 2, 3, 4, 5];
-    const CarouselItems = () => {
-        let Items = new Array();
-        items.map((value, index) => {
-            Items.push(
-                <div className="carousel-item">
-
-                </div>
-            )
-        })
-        return Items
-    }
     return (
-        <Carousel className="carousel" {...CarouselSettings}>
-            <div className="carousel-item">
-                <img className="carousel-image" src={car1} />
-            </div>
-            <div className="carousel-item">
-                <img className="carousel-image" src={car2} />
-            </div>
-            <div className="carousel-item">
-                <img className="carousel-image" src={car3} />
-            </div>
-        </Carousel>
-
+        <div className="carousel" style={{display: "flex"}}>
+            <img className="carousel-image" src={car1} alt="car1"/>
+            <img className="carousel-image" src={car2} alt="car2"/>
+            <img className="carousel-image" src={car3} alt="car3"/>
+            <img className="carousel-image" src={car4} alt="car4"/>
+            <img className="carousel-image" src={car5} alt="car5"/>
+            <img className="carousel-image" src={car6} alt="car6"/>
+            <img className="carousel-image" src={car7} alt="car7"/>
+            <img className="carousel-image" src={car8} alt="car8"/>
+        </div>
     );
 };
