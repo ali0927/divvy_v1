@@ -20,7 +20,8 @@ export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
-  const hpTokenAccount = useAccountByMint(IDS.HP_MINT_ACCOUNT)
+  const hpTokenAccount = useAccountByMint(IDS.HP_MINT)
+  const usdtTokenAccount = useAccountByMint(IDS.USDT_MINT)
   let [usdtAmount, setUsdtAmount] = useState("");
 
   const onFinish = async (values: any) => {
@@ -52,10 +53,21 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
+    if(usdtTokenAccount?.info == null) {
+      notify({
+        message: "Transaction failed...",
+        description: "User does not have a USDT token account.",
+        type: "error",
+      });
+      return;
+    }
+
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("escrow")], IDS.DIVVY_PROGRAM_ID);
     
     const instruction = depositLiquidityInstruction(
+      wallet.wallet.publicKey,
       hpTokenAccount.pubkey,
+      usdtTokenAccount.pubkey,
       "withdraw",
       usdtLamports,
       bumpSeed

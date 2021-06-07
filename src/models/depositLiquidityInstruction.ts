@@ -3,7 +3,7 @@ import { struct, nu64, u8 } from "buffer-layout";
 import * as IDS from "../utils/ids";
 
 const LAYOUT = struct<DepositLiquidityData>([
-    nu64("action"),
+    u8("action"),
     nu64("amount"),
     u8("divvyPdaBumpSeed")
 ])
@@ -15,7 +15,9 @@ interface DepositLiquidityData {
 };
 
 export const depositLiquidityInstruction = (
-    hpTokenAccount: PublicKey,
+    userAccount: PublicKey,
+    userHpTokenAccount: PublicKey,
+    userUsdtTokenAccount: PublicKey,
     action: "deposit" | "withdraw",
     usdtLamports: number,
     divvyPdaBumpSeed: number): TransactionInstruction => {
@@ -30,10 +32,13 @@ export const depositLiquidityInstruction = (
 
     const instruction = new TransactionInstruction({
         keys: [
-            { pubkey: IDS.HP_MINT_ACCOUNT, isSigner: false, isWritable: true },
+            { pubkey: userAccount, isSigner: true, isWritable: true },
+            { pubkey: IDS.HP_MINT, isSigner: false, isWritable: true },
             { pubkey: IDS.TOKEN_PROGRAM_ID, isSigner: false, isWritable: true },
-            { pubkey: hpTokenAccount, isSigner: false, isWritable: true },
+            { pubkey: userHpTokenAccount, isSigner: false, isWritable: true },
             { pubkey: IDS.DIVVY_PDA_ACCOUNT, isSigner: false, isWritable: true },
+            { pubkey: userUsdtTokenAccount, isSigner: false, isWritable: true },
+            { pubkey: IDS.DIVVY_USDT_ACCOUNT, isSigner: false, isWritable: true }
         ],
         programId: IDS.DIVVY_PROGRAM_ID,
         data: dataBuffer,

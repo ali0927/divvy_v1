@@ -40,7 +40,7 @@ export const EscrowProvider = ({ children = null as any }) => {
     return () => {
       connection.removeAccountChangeListener(subscriptionId);
     };
-  }, []);
+  }, [connection]);
 
   return (
     <EscrowContext.Provider

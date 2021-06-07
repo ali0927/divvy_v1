@@ -19,7 +19,8 @@ export const DepositLiquidity = (props: {}) => {
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
   const usdtBalance = useUserBalance(IDS.USDT_MINT);
-  const hpTokenAccount = useAccountByMint(IDS.HP_MINT_ACCOUNT)
+  const hpTokenAccount = useAccountByMint(IDS.HP_MINT)
+  const usdtTokenAccount = useAccountByMint(IDS.USDT_MINT)
   // const [form] = Form.useForm();
   // const [valuesForm, setValuesForm] = useState({});
   let [usdtAmount, setUsdtAmount] = useState("");
@@ -56,12 +57,23 @@ export const DepositLiquidity = (props: {}) => {
       return;
     }
 
+    if(usdtTokenAccount == null){
+      notify({
+        message: "Transaction failed...",
+        description: "User does not have a USDT token account.",
+        type: "error",
+      });
+      return;
+    }
+
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("escrow")], IDS.DIVVY_PROGRAM_ID);
     
-    console.log(usdtLamports);
+    console.log(usdtLamports + " bump seed " + bumpSeed);
 
     const instruction = depositLiquidityInstruction(
+      wallet.wallet.publicKey,
       hpTokenAccount.pubkey,
+      usdtTokenAccount.pubkey,
       "deposit",
       usdtLamports,
       bumpSeed
