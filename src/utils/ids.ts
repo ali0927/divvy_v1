@@ -27,7 +27,7 @@ export const PROGRAM_IDS = [
 export const DIVVY_PROGRAM_ID = new PublicKey("CBhSxLuxnkciaUVxbZ38avf998VVSy4XZQpoZDSXHKG5")
 export const DIVVY_PDA_ACCOUNT = new PublicKey("6cdK5Kgtj7aeqJs3qSefSn25SCXrPfZsqjHsUqwJf7nM");
 export const DIVVY_USDT_ACCOUNT = new PublicKey("9kZBknDMoTGTpAy6GRFMrfwXz7HeNqtLoyqJdXA3uV1e");
-export const USDT_MINT = new PublicKey("3AuJgMxExNnpS86QSLEMoWUbBUtHtMuBRU8qJMyVTVc3"); // test token
+export const USDT_MINT = new PublicKey("H3UUG2LKXMWoQLqFJL3g2J26o7jBFUErTQQpFT2uGPYP");
 export const HP_MINT = new PublicKey("4s5FNFMBrdBLwZnrXVtUMgrN73yttwvxVW2gh7rjhe5J");
 export const ESCROW_STATE_ID = new PublicKey("2theHfNiJdVSiz8BT39ASgnXNzEkVSDtfU1zyap1KWog");
 

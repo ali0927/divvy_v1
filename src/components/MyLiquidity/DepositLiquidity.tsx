@@ -70,6 +70,7 @@ export const DepositLiquidity = (props: {}) => {
     
     console.log(usdtLamports + " bump seed " + bumpSeed);
 
+    console.log(usdtTokenAccount.pubkey.toBase58());
     const instruction = depositLiquidityInstruction(
       wallet.wallet.publicKey,
       hpTokenAccount.pubkey,

@@ -90,8 +90,7 @@ export const WithdrawLiquidity = (props: {}) => {
             cluster={connectionConfig.env}
             type="transaction"
           />
-        ),
-        type: "error",
+        )
       });
     }
   };
