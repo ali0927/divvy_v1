@@ -93,7 +93,7 @@ export const DepositLiquidity = (props: {}) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-
+  
   return (
     <div className="sidebar-section">
       <Form
@@ -111,13 +111,17 @@ export const DepositLiquidity = (props: {}) => {
           </p>
           <p className="balance">12 USDT</p>
         </div>
+
         <Form.Item
-          label="Amount to deposit"
+          // label="USDT amount to withdraw:"
           name="usdtAmount"
           rules={[{ required: true, message: "Please input the USDT amount." }]}
-          className="text-muted"
         >
-          <Input placeholder={"USDT"} min="0" max={usdtBalance.balance} />        </Form.Item>
+          <Input.Group compact>
+            <Input placeholder={"USDT"} min="0" style={{width:"75%"}}/>
+            <Button style={{border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+          </Input.Group>
+        </Form.Item>
 
         {/* <Form.Item
           label="USDT Address:"
