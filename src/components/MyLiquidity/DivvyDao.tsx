@@ -13,7 +13,7 @@ import {
     sendTransaction,
 } from "../../contexts/connection";
 import { useWallet } from "../../contexts/wallet";
-import { DIVVY_PROGRAM_IDS } from "../../utils/ids";
+import { DIVVY_PROGRAM_ID } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
 
@@ -63,7 +63,7 @@ export const DivvyDao = (props: {}) => {
                 },
                 { pubkey: hpPublicKey, isSigner: false, isWritable: true },
             ],
-            programId: DIVVY_PROGRAM_IDS[connectionConfig.env],
+            programId: DIVVY_PROGRAM_ID,
             data: data,
         });
         const transaction = new Transaction();
