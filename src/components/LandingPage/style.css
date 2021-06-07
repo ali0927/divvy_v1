@@ -84,7 +84,7 @@ img.img-fluid {
     margin-bottom: 120px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
 }
 .landing-page__header .logo {
     width: 20%;
@@ -101,13 +101,17 @@ img.img-fluid {
     text-align: right;
     width: 40%;
 }
+.landing-page__header .social-links img {
+    height: 24px;
+    width: auto;
+}
 
 .landing-page__footer {
     padding-top: 120px;
     padding-bottom: 50px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     font-size: 12px;
     line-height: 15px;
 }

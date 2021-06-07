@@ -13,7 +13,7 @@ export const Tokenomics = () => {
               <li className="marketing">10.0% Partnership &amp; Marketing</li>
               <li className="dev-grants">10.0% Dev Grants</li>
               <li className="liquidity">1.8% Liquidity</li>
-              <li className="reserves">3.8% Reserves</li>
+              <li className="reserves">3.7% Reserves</li>
             </ul>
           </div>
           <div className="chart">
