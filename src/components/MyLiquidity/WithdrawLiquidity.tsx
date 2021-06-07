@@ -8,32 +8,22 @@ import {
   sendTransaction,
 } from "../../contexts/connection";
 import { useWallet } from "../../contexts/wallet";
-import { DIVVY_PROGRAM_IDS } from "../../utils/ids";
+import { DIVVY_PROGRAM_ID } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
 import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
+import { useState } from "react";
+import { useAccountByMint, useUserBalance } from "../../hooks";
+import * as IDS from "../../utils/ids";
 
 export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
-  const [form] = Form.useForm();
+  const hpTokenAccount = useAccountByMint(IDS.HP_MINT_ACCOUNT)
+  let [usdtAmount, setUsdtAmount] = useState("");
 
   const onFinish = async (values: any) => {
-    const { usdtAmount, usdtAddress, hpAddress } = form.getFieldsValue();
-
-    let usdtLamports: bigint;
-    try {
-      usdtLamports = BigInt(usdtAmount) * BigInt(LAMPORTS_PER_USDT);
-    } catch {
-      notify({
-        message: "Transaction failed...",
-        description: "Invalid USDT amount.",
-        type: "error",
-      });
-      return;
-    }
-
     if (wallet.wallet?.publicKey == null) {
       notify({
         message: "Transaction failed...",
@@ -43,26 +33,32 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
-    let usdtPublicKey: PublicKey, hpPublicKey: PublicKey;
-    try {
-      usdtPublicKey = new PublicKey(usdtAddress);
-      hpPublicKey = new PublicKey(hpAddress);
-    } catch {
+    let usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
+    if(isNaN(usdtLamports)) {
       notify({
         message: "Transaction failed...",
-        description: "A token address is invalid.",
+        description: "Invalid USDT amount.",
         type: "error",
       });
       return;
     }
 
+    if(hpTokenAccount?.info == null) {
+      notify({
+        message: "Transaction failed...",
+        description: "User does not have a HP token account.",
+        type: "error",
+      });
+      return;
+    }
+
+    const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("escrow")], IDS.DIVVY_PROGRAM_ID);
+    
     const instruction = depositLiquidityInstruction(
-      DIVVY_PROGRAM_IDS[connectionConfig.env],
-      wallet.wallet.publicKey,
-      usdtPublicKey,
-      hpPublicKey,
+      hpTokenAccount.pubkey,
       "withdraw",
-      Number(usdtLamports)
+      usdtLamports,
+      bumpSeed
     );
 
     const [ok, txid] = await sendTransaction(
@@ -77,33 +73,19 @@ export const WithdrawLiquidity = (props: {}) => {
       notify({
         message: "Transaction success...",
         description: (
-          <>
-            <ExplorerLink
-              address={txid}
-              cluster={connectionConfig.env}
-              type="transaction"
-            />
-          </>
+          <ExplorerLink
+            address={txid}
+            cluster={connectionConfig.env}
+            type="transaction"
+          />
         ),
         type: "error",
       });
     }
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
-    <div className="sidebar-section">
-      <Form
-        form={form}
-        name="withdrawLiquidity"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        layout="vertical"
-        className="form-grey"
-      >
+    <div className="sidebar-section form-grey">
         <h3>Divvy House Withdrawal</h3>
 
         <div className="balance-container">
@@ -115,41 +97,16 @@ export const WithdrawLiquidity = (props: {}) => {
         <Form.Item
           // label="USDT amount to withdraw:"
           name="usdtAmount"
-          rules={[{ required: true, message: "Please input the USDT amount." }]}
         >
           <Input.Group compact>
-            <Input placeholder={"USDT"} min="0" style={{width:"75%"}}/>
+            <Input placeholder={"USDT"} value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{width:"75%"}}/>
             <Button style={{border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
           </Input.Group>
         </Form.Item>
 
-        {/* <Form.Item
-          label="USDT Address:"
-          name="usdtAddress"
-          rules={[
-            { required: true, message: "Please enter your USDT address." },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="House Pool Address"
-          name="hpAddress"
-          rules={[
-            {
-              required: true,
-              message: "Please enter your house pool address.",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item> */}
-
-        <Button type="primary" htmlType="submit">
+        <Button onClick={onFinish}>
           Withdraw
         </Button>
-      </Form>
     </div>
   );
 };

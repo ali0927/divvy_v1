@@ -1,8 +1,8 @@
 import { useUserBalance } from "../../hooks";
-import { ESCROW_STATE_ID, USDT_MINT } from "../../utils/ids";
+import { DIVVY_PDA_ACCOUNT, ESCROW_STATE_ID, USDT_MINT } from "../../utils/ids";
 
 export const LiquidityGlobalStats = () => {
-  const escrowUsdtBalance = useUserBalance(ESCROW_STATE_ID, USDT_MINT);
+  const escrowUsdtBalance = useUserBalance(DIVVY_PDA_ACCOUNT, USDT_MINT);
 
   return (
     <div>

@@ -1,38 +1,41 @@
 import { PublicKey, TransactionInstruction } from "@solana/web3.js";
-import {struct, nu64} from "buffer-layout";
+import { struct, nu64, u8 } from "buffer-layout";
+import * as IDS from "../utils/ids";
 
 const LAYOUT = struct<DepositLiquidityData>([
     nu64("action"),
-    nu64("amount")
+    nu64("amount"),
+    u8("divvyPdaBumpSeed")
 ])
 
 interface DepositLiquidityData {
     action: number;
     amount: number;
+    divvyPdaBumpSeed: number;
 };
 
 export const depositLiquidityInstruction = (
-    divvyProgramId:PublicKey,
-    userPubKey: PublicKey,
-    userUsdtPubKey:PublicKey,
-    userHpPubKey:PublicKey,
+    hpTokenAccount: PublicKey,
     action: "deposit" | "withdraw",
-    usdtLamports: number): TransactionInstruction => {
+    usdtLamports: number,
+    divvyPdaBumpSeed: number): TransactionInstruction => {
 
     const data: DepositLiquidityData = {
         action: action === "deposit" ? 0 : 1,
-        amount: Number(usdtLamports),
+        amount: usdtLamports,
+        divvyPdaBumpSeed: divvyPdaBumpSeed
     };
-    const dataBuffer = Buffer.alloc(16);
+    const dataBuffer = Buffer.alloc(LAYOUT.span);
     LAYOUT.encode(data, dataBuffer);
 
     const instruction = new TransactionInstruction({
         keys: [
-            { pubkey: userPubKey, isSigner: true, isWritable: true },
-            { pubkey: userUsdtPubKey, isSigner: false, isWritable: true },
-            { pubkey: userHpPubKey, isSigner: false, isWritable: true },
+            { pubkey: IDS.HP_MINT_ACCOUNT, isSigner: false, isWritable: true },
+            { pubkey: IDS.TOKEN_PROGRAM_ID, isSigner: false, isWritable: true },
+            { pubkey: hpTokenAccount, isSigner: false, isWritable: true },
+            { pubkey: IDS.DIVVY_PDA_ACCOUNT, isSigner: false, isWritable: true },
         ],
-        programId: divvyProgramId,
+        programId: IDS.DIVVY_PROGRAM_ID,
         data: dataBuffer,
     });
     return instruction;
