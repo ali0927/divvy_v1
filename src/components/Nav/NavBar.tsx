@@ -1,4 +1,4 @@
-import { HomeViewLink } from "./HomeViewLink";
+import { BetsViewLink } from "./BetsViewLink";
 import { LiquidityViewLink } from "./LiquidityViewLink";
 import { ConnectLink } from "./ConnectLink";
 import { MyDashboardLink } from "./MyDashboardLink";
@@ -7,7 +7,7 @@ import { MarketsLink } from "./MarketsLink";
 export const NavBar = () => {
   return (
     <div>
-      <HomeViewLink />
+      <BetsViewLink />
       <LiquidityViewLink />
       <ConnectLink />
       <MyDashboardLink />
