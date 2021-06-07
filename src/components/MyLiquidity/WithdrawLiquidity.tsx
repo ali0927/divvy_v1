@@ -117,7 +117,10 @@ export const WithdrawLiquidity = (props: {}) => {
           name="usdtAmount"
           rules={[{ required: true, message: "Please input the USDT amount." }]}
         >
-          <Input placeholder={"USDT"} type="number" min="0" />
+          <Input.Group compact>
+            <Input placeholder={"USDT"} min="0" style={{width:"75%"}}/>
+            <Button style={{border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+          </Input.Group>
         </Form.Item>
 
         {/* <Form.Item

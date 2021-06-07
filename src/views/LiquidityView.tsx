@@ -7,21 +7,30 @@ import { LiquidityGlobalStats } from "../components/Liquidity/LiquidityGlobalSta
 import { LiquidityDistribution } from "../components/Liquidity/LiquidityDistribution";
 import { LiquidityAvailabilityBar } from "../components/Liquidity/LiquidityAvailabilityBar";
 import { LiquidityAvailability } from "../components/Liquidity/LiquidityAvailability";
+import { Button } from "antd";
+import { Link } from "react-router-dom";
 export const LiquidityView = () => {
   return (
     <div className="App ">
       <LeftSideBar>
         <NavBar />
       </LeftSideBar>
-      <div className="liquidity-header">
-        <div className="left">
-          <video autoPlay={true} loop={true} width={200} height={200} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />
+      <div style={{ width: "100%" }}>
+        <div style={{margin: "1.5em", marginBottom: "5em"}}>
+          <Link to="/app">
+            <Button>Return To Betting</Button>
+          </Link>
         </div>
-        <div className="right">
-          <LiquidityGlobalStats />
-          <LiquidityAvailabilityBar />
-          <LiquidityAvailability />
-          <LiquidityDistribution />
+        <div className="liquidity-header">
+          <div className="left">
+            <video autoPlay={true} loop={true} width={200} height={200} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />
+          </div>
+          <div className="right">
+            <LiquidityGlobalStats />
+            <LiquidityAvailabilityBar />
+            <LiquidityAvailability />
+            <LiquidityDistribution />
+          </div>
         </div>
       </div>
       <RightSideBar>

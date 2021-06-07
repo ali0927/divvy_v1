@@ -111,42 +111,14 @@ export const DivvyDao = (props: {}) => {
                     </p>
                     <p className="balance">12 HT</p>
                 </div>
+    
                 <div className="balance-container">
                     <p>
                         <small>DVY Reward</small>
                     </p>
                     <p className="balance">12 DVY</p>
                 </div>
-                {/* <Form.Item
-            label="Deposit "
-            name="usdtAmount"
-            rules={[{ required: true, message: "Please input the USDT amount." }]}
-          >
-            <Input placeholder={"USDT"} type="number" min="0" />
-          </Form.Item>
-   */}
-                {/* <Form.Item
-            label="USDT Address:"
-            name="usdtAddress"
-            rules={[
-              { required: true, message: "Please enter your USDT address." },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-  
-          <Form.Item
-            label="House Pool Address"
-            name="hpAddress"
-            rules={[
-              {
-                required: true,
-                message: "Please enter your house pool address.",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item> */}
+                
                 <div style={{ display: "flex" }}>
                     <Button type="primary" htmlType="submit">
                         Withdraw
