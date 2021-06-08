@@ -15,7 +15,7 @@ export const Header = () => {
             <a href="https://t.me/Divvy_bet" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faTelegram} /></a>
             <a href="https://github.com/DivvyBet" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
           </div>
-          <div className="cta">
+          <div className="links">
               <Download />
           </div>
           <div className="cta">
