@@ -82,7 +82,6 @@ export const StakeHT = (props: {}) => {
                         <ExplorerLink address={txid} type="transaction" cluster={connectionConfig.env} />
                     </>
                 ),
-                type: "error",
             });
         }
     };
@@ -104,7 +103,7 @@ export const StakeHT = (props: {}) => {
                 <h3>Stake your House Tokens</h3>
                 <div className="balance-container">
                     <p>
-                        <small>House Token Balance</small>
+                        <small className="text-secondary">House Token Balance</small>
                     </p>
                     <p className="balance">12 HT</p>
                 </div>
@@ -113,8 +112,8 @@ export const StakeHT = (props: {}) => {
                     rules={[{ required: true, message: "Please input the USDT amount." }]}
                 >
                     <Input.Group compact>
-                      <Input placeholder={"House Token"} min="0" style={{width:"75%"}}/>
-                      <Button style={{border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+                      <Input placeholder={"House Token"} min="0" style={{width:"75%"}} disabled={true}/>
+                      <Button style={{border: "1px solid rgb(67, 67, 67)" }} disabled={true}>MAX</Button>
                     </Input.Group>
                 </Form.Item>
 

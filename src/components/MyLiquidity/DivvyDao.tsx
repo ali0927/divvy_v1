@@ -107,23 +107,23 @@ export const DivvyDao = (props: {}) => {
 
                 <div className="balance-container">
                     <p>
-                        <small>Staked Balance</small>
+                        <small className="text-secondary">Staked Balance</small>
                     </p>
                     <p className="balance">12 HT</p>
                 </div>
     
                 <div className="balance-container">
                     <p>
-                        <small>DVY Reward</small>
+                        <small className="text-secondary">DVY Reward</small>
                     </p>
                     <p className="balance">12 DVY</p>
                 </div>
                 
                 <div style={{ display: "flex" }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" disabled={true}>
                         Withdraw
                     </Button>
-                    <Button style={{ marginLeft: 10}} type="primary" htmlType="submit">
+                    <Button style={{ marginLeft: 10}} type="primary" htmlType="submit" disabled={true}>
                         Withdraw & Claim
                     </Button>
                 </div>

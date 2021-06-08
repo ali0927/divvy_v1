@@ -1,19 +1,17 @@
-import { useUserBalance } from "../../hooks";
-import { ReactComponent as Logo } from "../../img/Divvy_UI_Logo_NoText_Beta.svg";
-import { ESCROW_STATE_ID, USDT_MINT } from "../../utils/ids";
 
+import { useContext } from "react";
+import { HousePoolLiquidityContext } from "../../contexts/hpliquidity";
 export const LiquidityAvailability = () => {
-  const escrowUsdtBalance = useUserBalance(ESCROW_STATE_ID, USDT_MINT);
-
+  const { hpBalance } = useContext(HousePoolLiquidityContext);
   return (
     <div>
       <div className="liquidity-left">
-        <h6>91% Available Liquidity</h6>
-        <p className="text-primary">911,112 USDT</p>
+        <h6>100% Available Liquidity</h6>
+        <p className="text-primary">{hpBalance} USDT</p>
       </div>
-      <div className="liquidity-right text-secondary">
-        <h6 className="text-secondary">9% Locked Liquidity</h6>
-        <p>88,888 USDT</p>
+      <div className="liquidity-right">
+        <h6 className="text-secondary">0% Locked Liquidity</h6>
+        <p className="text-secondary">0 USDT</p>
       </div>
     </div>
   );
