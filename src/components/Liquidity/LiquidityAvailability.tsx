@@ -11,9 +11,9 @@ export const LiquidityAvailability = () => {
         <h6>91% Available Liquidity</h6>
         <p className="text-primary">911,112 USDT</p>
       </div>
-      <div className="liquidity-right text-secondary">
+      <div className="liquidity-right">
         <h6 className="text-secondary">9% Locked Liquidity</h6>
-        <p>88,888 USDT</p>
+        <p className="text-secondary">88,888 USDT</p>
       </div>
     </div>
   );

@@ -82,7 +82,6 @@ export const StakeHT = (props: {}) => {
                         <ExplorerLink address={txid} type="transaction" cluster={connectionConfig.env} />
                     </>
                 ),
-                type: "error",
             });
         }
     };
@@ -104,7 +103,7 @@ export const StakeHT = (props: {}) => {
                 <h3>Stake your House Tokens</h3>
                 <div className="balance-container">
                     <p>
-                        <small>House Token Balance</small>
+                        <small className="text-secondary">House Token Balance</small>
                     </p>
                     <p className="balance">12 HT</p>
                 </div>
