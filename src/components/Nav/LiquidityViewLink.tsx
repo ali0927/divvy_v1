@@ -6,7 +6,7 @@ export const LiquidityViewLink = () => {
   const { accountData, hpBalance } = useContext(HousePoolLiquidityContext);
   return (
     <Link to="/liquidity">
-      <div className="sidebar-section">
+      <div className="sidebar-section text-secondary">
         <h2>House Pool</h2>
         <small>
           <div className="balance-container">

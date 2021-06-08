@@ -32,7 +32,7 @@ export const MarketsLink = () => {
                                 <div className="search-left">
                                     {data.name}
                                 </div>
-                                <div className="search-right">
+                                <div className="search-right text-secondary">
                                     {parseInt(String((Math.random() + 1) * 10))}
                                 </div>
                             </div>

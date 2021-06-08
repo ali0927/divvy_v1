@@ -9,7 +9,7 @@ export const MyLiquidity = (props: {}) => {
         <h3>My House Pool Stats</h3>
         <div className="balance-container">
           <p>
-            <small>House balance</small>
+            <small className="text-secondary">House balance</small>
           </p>
           <p className="balance">12 USDT</p>
         </div>

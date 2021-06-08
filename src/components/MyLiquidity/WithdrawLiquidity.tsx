@@ -101,7 +101,7 @@ export const WithdrawLiquidity = (props: {}) => {
 
         <div className="balance-container">
           <p>
-            <small>Withdrawable balance</small>
+            <small className="text-secondary">Withdrawable balance</small>
           </p>
           <p className="balance">12 USDT</p>
         </div>

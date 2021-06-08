@@ -107,7 +107,7 @@ export const DepositLiquidity = (props: {}) => {
         <h3>Divvy House Deposit</h3>
         <div className="balance-container">
           <p>
-            <small>Wallet balance</small>
+            <small className="text-secondary">Wallet balance</small>
           </p>
           <p className="balance">12 USDT</p>
         </div>
