@@ -26,7 +26,10 @@ export interface Game {
     teamBodds: Odds,
     drawodds: Odds,
     spread: number,
-    total: number
+    total: number,
+    id: string,
+    date: string,
+    time: string,
 }
 export interface BetSlip {
     publicAddress: string,

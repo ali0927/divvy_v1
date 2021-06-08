@@ -32,7 +32,7 @@ export const MyBets = (props: { betSlips: Array<BetSlip>, setbetSlips: any, remo
         layout="vertical"
         className="form-grey"
       >
-        <div style={{ height: "78vh", overflowX: "hidden", overflowY: "auto" }}>
+        <div style={{ height: "75vh", overflowX: "hidden", overflowY: "auto" }}>
           {props.betSlips.map((value: BetSlip, index: number) => {
             if (value.type === BetType.Current) {
               return <MyBetSlip betSlips={props.betSlips} setbetSlips={props.setbetSlips} index={index} betSlip={value} removebetSlip={props.removebetSlip} editBetSlip={props.editBetSlip} />
