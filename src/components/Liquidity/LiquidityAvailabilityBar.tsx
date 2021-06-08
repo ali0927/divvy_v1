@@ -1,9 +1,5 @@
-import { useUserBalance } from "../../hooks";
-import { ReactComponent as Logo } from "../../img/Divvy_UI_Logo_NoText_Beta.svg";
-import { ESCROW_STATE_ID, USDT_MINT } from "../../utils/ids";
 import { Progress } from "antd";
 export const LiquidityAvailabilityBar = () => {
-  const escrowUsdtBalance = useUserBalance(ESCROW_STATE_ID, USDT_MINT);
 
   return (
     <Progress
@@ -12,7 +8,7 @@ export const LiquidityAvailabilityBar = () => {
         "0%": "#7c01ff",
         "100%": "#00d77d",
       }}
-      percent={91}
+      percent={100}
       showInfo={false}
     />
   );

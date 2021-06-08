@@ -120,10 +120,10 @@ export const DivvyDao = (props: {}) => {
                 </div>
                 
                 <div style={{ display: "flex" }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" disabled={true}>
                         Withdraw
                     </Button>
-                    <Button style={{ marginLeft: 10}} type="primary" htmlType="submit">
+                    <Button style={{ marginLeft: 10}} type="primary" htmlType="submit" disabled={true}>
                         Withdraw & Claim
                     </Button>
                 </div>
