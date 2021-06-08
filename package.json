@@ -20,6 +20,7 @@
     "@types/react-dom": "^17.0.5",
     "@types/react-router-dom": "^5.1.7",
     "antd": "^4.16.1",
+    "axios": "^0.21.1",
     "bs58": "^4.0.1",
     "buffer-layout": "^1.2.1",
     "jazzicon": "^1.5.0",

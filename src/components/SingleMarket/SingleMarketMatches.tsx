@@ -8,7 +8,7 @@ export const SingleMarketMatches = (props: { games: Array<Game>, setbetSlips: an
     return (
         <div className="single-market">
             <Collapse defaultActiveKey={"1"} accordion={true} style={{ display: "grid" }} ghost={true} expandIconPosition="right">
-                <Panel header={<GameName />} key="1">
+                <Panel header={<GameName matches={props.games.length} />} key="1">
                     {props.games.map((value: Game, index: number) => {
                         return (
                             <>
