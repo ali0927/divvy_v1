@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { SingleMatchComponent } from "./SingleMatchComponent"
-import { Collapse, Divider } from "antd";
-import { GameName } from "./GameName";
+import { Divider } from "antd";
 import { Odds, BetSlip, BetType, Game, OddsType, Team } from "../../constants";
-const { Panel } = Collapse;
 export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game, selection: Team, otherteam: Team }) => {
     const [selection, setSelection] = useState("")
     function makeid(length: number) {

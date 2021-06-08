@@ -112,8 +112,8 @@ export const StakeHT = (props: {}) => {
                     rules={[{ required: true, message: "Please input the USDT amount." }]}
                 >
                     <Input.Group compact>
-                      <Input placeholder={"House Token"} min="0" style={{width:"75%"}}/>
-                      <Button style={{border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+                      <Input placeholder={"House Token"} min="0" style={{width:"75%"}} disabled={true}/>
+                      <Button style={{border: "1px solid rgb(67, 67, 67)" }} disabled={true}>MAX</Button>
                     </Input.Group>
                 </Form.Item>
 
