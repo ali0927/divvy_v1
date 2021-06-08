@@ -1,4 +1,5 @@
 import logo from '../../img/landing-page/divvy_logo.svg'
+import Download from './Download'
 const { FontAwesomeIcon } = require('@fortawesome/react-fontawesome')
 const { faDiscord, faTwitter, faTelegram, faGithub } = require('@fortawesome/free-brands-svg-icons')
 
@@ -15,9 +16,11 @@ export const Header = () => {
             <a href="https://github.com/DivvyBet" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
           </div>
           <div className="cta">
-            <a className="btn btn-sm" href="/app">Try it out today</a>
+              <Download />
           </div>
+          <div className="cta">
+            <a className="btn btn-sm" href="/app">Try it out today</a>
+          </div>   
       </header>
     );
   };
-  
