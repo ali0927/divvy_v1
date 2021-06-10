@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useUserBalance } from "../hooks/useUserBalance";
-import { WRAPPED_SOL_MINT } from "../utils/ids";
-import { BetType, Game, LABELS } from "../constants";
-import FlagTurkey from '../img/flags/Turkey.svg';
-import FlagItaly from '../img/flags/Italy.svg';
+import { useEffect, useState } from "react";
+import { BetType, Game } from "../constants";
 import { RightSideBar } from "../components/RightSideBar";
 import { LeftSideBar } from "../components/LeftSideBar";
 import { NavBar } from "../components/Nav/NavBar";
@@ -14,43 +10,7 @@ import { BetSlips } from "../components/Home/BetSlips";
 import { BetSlip } from "../constants"
 import { codes } from "../constants/processed"
 import axios from "axios";
-import { getDefaultWatermarks } from "istanbul-lib-report";
 export const BetsView = () => {
-  const GAMES = [
-    {
-      teamA: {
-        "name": "Turkey",
-        "logo": FlagTurkey,
-        "id": "turkey",
-        favorite: false
-      },
-      teamB: {
-        "name": "Italy",
-        "logo": FlagItaly,
-        "id": "italy",
-        favorite: true
-      },
-      draw: true,
-      teamAodds: {
-        moneyline: 1.13,
-        spread: 1.75,
-        total: 1.56,
-      },
-      teamBodds: {
-        moneyline: 1.78,
-        spread: 1.75,
-        total: 1.56,
-        favorite: true
-      },
-      drawodds: {
-        moneyline: 1,
-        spread: 2.8,
-        total: 3,
-        favorite: false
-      },
-      spread: 1,
-      total: 2
-    }]
   const [betSlips, setBetSlips] = useState(Array<BetSlip>());
   const [games, setGames] = useState(Array<Game>());
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -62,24 +22,33 @@ export const BetsView = () => {
     var d = new Date(timestamp * 1000);
     return ((d.getHours() < 10 ? "0" : "") + d.getHours() + ':' + d.getMinutes());
   }
+
+  const countryCodeToFlagCode = (countryCode: string) => {
+    let code = codes[countryCode].code.toLowerCase();
+
+    if(code ==="wl") { // This is a hack for wales smh
+      return "gb-wls";
+    }    
+    return code;
+  }
+
   useEffect(() => {
     var game: any = {};
-    axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=ed81b7346a8fccf13100261227562940&sport=soccer_uefa_european_championship&region=us").then((data) => {
-      data.data.data.map((item: any) => {
+    axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=1c1cef445a730e7dd8d5f98395977688&sport=soccer_uefa_european_championship&region=us").then((data) => {
+      data.data.data.forEach((item: any) => {
         if (item.sites.length) {
-          const teamA: string = item.teams[0];
           const id: string = item.id
           game[id] = ({
             teamA: {
-              "name": codes[item.teams[0]].code,
-              "logo": codes[item.teams[0]].emoji,
-              "id": item.teams[0].toLowerCase(),
+              name: codes[item.teams[0]].code,
+              logo: "flag-icon-" + countryCodeToFlagCode(item.teams[0]),
+              id: item.teams[0].toLowerCase(),
               favorite: item.teams[0] === item.home_team
             },
             teamB: {
-              "name": codes[item.teams[1]].code,
-              "logo": codes[item.teams[1]].emoji,
-              "id": "italy",
+              name: codes[item.teams[1]].code,
+              logo: "flag-icon-" + countryCodeToFlagCode(item.teams[1]),
+              id: item.teams[1].toLowerCase(),
               favorite: item.teams[1] === item.home_team
             },
             draw: true,
@@ -106,14 +75,14 @@ export const BetsView = () => {
           })
         }
       })
-      axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=ed81b7346a8fccf13100261227562940&sport=soccer_uefa_european_championship&region=us&market=spreads").then((data) => {
+      axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=1c1cef445a730e7dd8d5f98395977688&sport=soccer_uefa_european_championship&region=us&market=spreads").then((data) => {
         data.data.data.map((item: any) => {
           console.log(item)
           game[item.id].teamAodds.spread = item.sites[0].odds.spreads.odds[0]
           game[item.id].teamBodds.spread = item.sites[0].odds.spreads.odds[1]
           game[item.id].spread = Math.abs(item.sites[0].odds.spreads.points[1])
         })
-        axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=ed81b7346a8fccf13100261227562940&sport=soccer_uefa_european_championship&region=us&market=totals").then((data) => {
+        axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=1c1cef445a730e7dd8d5f98395977688&sport=soccer_uefa_european_championship&region=us&market=totals").then((data) => {
           data.data.data.map((item: any) => {
             game[item.id].teamAodds.total = item.sites[0].odds.totals.odds[0]
             game[item.id].teamBodds.total = item.sites[0].odds.totals.odds[1]
@@ -134,11 +103,9 @@ export const BetsView = () => {
     setBetSlips([...betSlips, betSlip])
   }
   const removebetSlip = (betId: string) => {
-    var bets = betSlips;
-    var bet: BetSlip;
     var bets: Array<BetSlip> = [];
     betSlips.map((value: BetSlip) => {
-      if (value.id == betId) {
+      if (value.id === betId) {
         //do nothing
       }
       else {
