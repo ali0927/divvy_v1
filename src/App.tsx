@@ -1,4 +1,5 @@
 import "./App.css";
+import "flag-icon-css/css/flag-icon.css"
 import { WalletProvider } from "./contexts/wallet";
 import { ConnectionProvider } from "./contexts/connection";
 import { AccountsProvider } from "./contexts/accounts";
