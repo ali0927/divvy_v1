@@ -86,7 +86,7 @@ body {
     flex-direction: row;
 }
 
-.app {
+.main {
     align-items: center;
     width: 100%;
     padding: 3em;

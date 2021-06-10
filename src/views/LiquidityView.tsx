@@ -21,7 +21,7 @@ export const LiquidityView = () => {
             <Button>Return To Betting</Button>
           </Link>
         </div>
-        <div className="app">
+        <div className="main">
           <div className="left">
             <video autoPlay={true} loop={true} width={200} height={200} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />
           </div>
