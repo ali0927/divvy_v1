@@ -64,7 +64,7 @@ export const BetsView = () => {
   }
   useEffect(() => {
     var game: any = {};
-    axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=ed81b7346a8fccf13100261227562940&sport=soccer_uefa_european_championship&region=us").then((data) => {
+    axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=1c1cef445a730e7dd8d5f98395977688&sport=soccer_uefa_european_championship&region=us").then((data) => {
       data.data.data.map((item: any) => {
         if (item.sites.length) {
           const teamA: string = item.teams[0];
@@ -106,14 +106,14 @@ export const BetsView = () => {
           })
         }
       })
-      axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=ed81b7346a8fccf13100261227562940&sport=soccer_uefa_european_championship&region=us&market=spreads").then((data) => {
+      axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=1c1cef445a730e7dd8d5f98395977688&sport=soccer_uefa_european_championship&region=us&market=spreads").then((data) => {
         data.data.data.map((item: any) => {
           console.log(item)
           game[item.id].teamAodds.spread = item.sites[0].odds.spreads.odds[0]
           game[item.id].teamBodds.spread = item.sites[0].odds.spreads.odds[1]
           game[item.id].spread = Math.abs(item.sites[0].odds.spreads.points[1])
         })
-        axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=ed81b7346a8fccf13100261227562940&sport=soccer_uefa_european_championship&region=us&market=totals").then((data) => {
+        axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=1c1cef445a730e7dd8d5f98395977688&sport=soccer_uefa_european_championship&region=us&market=totals").then((data) => {
           data.data.data.map((item: any) => {
             game[item.id].teamAodds.total = item.sites[0].odds.totals.odds[0]
             game[item.id].teamBodds.total = item.sites[0].odds.totals.odds[1]
