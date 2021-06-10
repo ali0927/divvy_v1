@@ -11,7 +11,7 @@ import { Button } from "antd";
 import { Link } from "react-router-dom";
 export const LiquidityView = () => {
   return (
-    <div className="App ">
+    <div className="root">
       <LeftSideBar>
         <NavBar />
       </LeftSideBar>
@@ -21,7 +21,7 @@ export const LiquidityView = () => {
             <Button>Return To Betting</Button>
           </Link>
         </div>
-        <div className="liquidity-header">
+        <div className="app">
           <div className="left">
             <video autoPlay={true} loop={true} width={200} height={200} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />
           </div>
