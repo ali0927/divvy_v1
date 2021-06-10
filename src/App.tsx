@@ -4,7 +4,6 @@ import { WalletProvider } from "./contexts/wallet";
 import { ConnectionProvider } from "./contexts/connection";
 import { AccountsProvider } from "./contexts/accounts";
 import { MarketProvider } from "./contexts/market";
-import { EscrowProvider } from "./contexts/escrow";
 import { HousePoolLiquidityContextProvider } from "./contexts/hpliquidity";
 import { BetsView } from "./views/BetsView";
 import { LiquidityView } from "./views/LiquidityView";
