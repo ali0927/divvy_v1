@@ -5,9 +5,9 @@ export const About = () => {
       <section className="landing-page__about">
             <div className="content">
               <h1 className="heading-sm">Divvy is bringing DeFi to the gambling world to redefine the way people bet. Together, we'll create a completely decentralized protocol.</h1>
-              <div className="cta">
+              {/* <div className="cta">
                 <a className="btn" href="/app">Try it out today</a>
-              </div>
+              </div> */}
             </div>
             <div className="divvy-logo">
               <video poster={divvyLogo} autoPlay muted loop>
