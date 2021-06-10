@@ -150,7 +150,7 @@ export const BetsView = () => {
       <LeftSideBar>
         <NavBar />
       </LeftSideBar>
-      <header className="main">
+      <header className="root-content">
         <HomeCarousel />
         <SingleMarketHeader />
         <SingleMarketMatches games={games} setbetSlips={setbetSlips} />
