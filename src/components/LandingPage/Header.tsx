@@ -18,9 +18,9 @@ export const Header = () => {
           <div className="cta">
               <Download />
           </div>
-          <div className="cta">
+          {/* <div className="cta">
             <a className="btn btn-sm" href="/app">Try it out today</a>
-          </div>   
+          </div>    */}
       </header>
     );
   };
