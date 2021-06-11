@@ -10,6 +10,7 @@ import { BetSlips } from "../components/Home/BetSlips";
 import { BetSlip } from "../constants"
 import { codes } from "../constants/processed"
 import axios from "axios";
+import { SelectChain } from "../components/SelectChain";
 export const BetsView = () => {
   const [betSlips, setBetSlips] = useState(Array<BetSlip>());
   const [games, setGames] = useState(Array<Game>());
@@ -151,6 +152,7 @@ export const BetsView = () => {
         <NavBar />
       </LeftSideBar>
       <header className="App-header">
+        <SelectChain />
         <HomeCarousel />
         <SingleMarketHeader />
         <SingleMarketMatches games={games} setbetSlips={setbetSlips} />
