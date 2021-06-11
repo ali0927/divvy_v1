@@ -6,15 +6,16 @@ import {
   useConnection,
   useConnectionConfig,
   sendTransaction,
-} from "../../contexts/connection";
-import { useWallet } from "../../contexts/wallet";
+} from "../../contexts/solana/connection";
+import { useWallet } from "../../contexts/solana/wallet";
 import { DIVVY_PROGRAM_ID } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
 import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useAccountByMint, useUserBalance } from "../../hooks";
 import * as IDS from "../../utils/ids";
+import { UserHPTContext } from "../../contexts/solana/userhpt";
 
 export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();
@@ -23,7 +24,7 @@ export const WithdrawLiquidity = (props: {}) => {
   const hpTokenAccount = useAccountByMint(IDS.HP_MINT)
   const usdtTokenAccount = useAccountByMint(IDS.USDT_MINT)
   let [usdtAmount, setUsdtAmount] = useState("");
-
+  const { userHPT } = useContext(UserHPTContext);
   const onFinish = async (values: any) => {
     if (wallet.wallet?.publicKey == null) {
       notify({
@@ -35,7 +36,7 @@ export const WithdrawLiquidity = (props: {}) => {
     }
 
     let usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
-    if(isNaN(usdtLamports)) {
+    if (isNaN(usdtLamports)) {
       notify({
         message: "Transaction failed...",
         description: "Invalid USDT amount.",
@@ -44,7 +45,7 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
-    if(hpTokenAccount?.info == null) {
+    if (hpTokenAccount?.info == null) {
       notify({
         message: "Transaction failed...",
         description: "User does not have a HP token account.",
@@ -53,7 +54,7 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
-    if(usdtTokenAccount?.info == null) {
+    if (usdtTokenAccount?.info == null) {
       notify({
         message: "Transaction failed...",
         description: "User does not have a USDT token account.",
@@ -63,7 +64,7 @@ export const WithdrawLiquidity = (props: {}) => {
     }
 
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("escrow")], IDS.DIVVY_PROGRAM_ID);
-    
+
     const instruction = depositLiquidityInstruction(
       wallet.wallet.publicKey,
       hpTokenAccount.pubkey,
@@ -97,27 +98,27 @@ export const WithdrawLiquidity = (props: {}) => {
 
   return (
     <div className="sidebar-section form-grey">
-        <h3>Divvy House Withdrawal</h3>
+      <h3>Divvy House Withdrawal</h3>
 
-        <div className="balance-container">
-          <p>
-            <small className="text-secondary">Withdrawable balance</small>
-          </p>
-          <p className="balance">12 USDT</p>
-        </div>
-        <Form.Item
-          // label="USDT amount to withdraw:"
-          name="usdtAmount"
-        >
-          <Input.Group compact>
-            <Input placeholder={"USDT"} value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{width:"75%"}}/>
-            <Button style={{border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
-          </Input.Group>
-        </Form.Item>
+      <div className="balance-container">
+        <p>
+          <small className="text-secondary">Withdrawable balance</small>
+        </p>
+        <p className="balance">{userHPT} USDT</p>
+      </div>
+      <Form.Item
+        // label="USDT amount to withdraw:"
+        name="usdtAmount"
+      >
+        <Input.Group compact>
+          <Input placeholder={"USDT"} value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
+          <Button style={{ border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+        </Input.Group>
+      </Form.Item>
 
-        <Button onClick={onFinish}>
-          Withdraw
-        </Button>
+      <Button onClick={onFinish}>
+        Withdraw
+      </Button>
     </div>
   );
 };

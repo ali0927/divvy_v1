@@ -8,8 +8,8 @@ import {
   Context,
   PublicKey,
 } from "@solana/web3.js";
-import * as IDS from "../utils/ids";
-import { EscrowState, EscrowStateParser } from "../models/escrowState";
+import * as IDS from "../../utils/ids";
+import { EscrowState, EscrowStateParser } from "../../models/escrowState";
 import React, { useContext, useEffect, useState } from "react";
 
 export interface EscrowContextState {

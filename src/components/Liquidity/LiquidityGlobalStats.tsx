@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { HousePoolLiquidityContext } from "../../contexts/hpliquidity";
+import { HousePoolLiquidityContext } from "../../contexts/solana/hpliquidity";
 export const LiquidityGlobalStats = () => {
   const { hpBalance } = useContext(HousePoolLiquidityContext);
   return (

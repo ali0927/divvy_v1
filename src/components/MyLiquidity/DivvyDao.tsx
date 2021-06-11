@@ -11,8 +11,8 @@ import {
     useConnection,
     useConnectionConfig,
     sendTransaction,
-} from "../../contexts/connection";
-import { useWallet } from "../../contexts/wallet";
+} from "../../contexts/solana/connection";
+import { useWallet } from "../../contexts/solana/wallet";
 import { DIVVY_PROGRAM_ID } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
@@ -109,14 +109,14 @@ export const DivvyDao = (props: {}) => {
                     <p>
                         <small className="text-secondary">Staked Balance</small>
                     </p>
-                    <p className="balance">12 HT</p>
+                    <p className="balance">0 HT</p>
                 </div>
     
                 <div className="balance-container">
                     <p>
                         <small className="text-secondary">DVY Reward</small>
                     </p>
-                    <p className="balance">12 DVY</p>
+                    <p className="balance">0 DVY</p>
                 </div>
                 
                 <div style={{ display: "flex" }}>

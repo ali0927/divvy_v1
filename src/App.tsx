@@ -1,10 +1,10 @@
 import "./App.css";
 import "flag-icon-css/css/flag-icon.css"
-import { WalletProvider } from "./contexts/wallet";
-import { ConnectionProvider } from "./contexts/connection";
-import { AccountsProvider } from "./contexts/accounts";
-import { MarketProvider } from "./contexts/market";
-import { HousePoolLiquidityContextProvider } from "./contexts/hpliquidity";
+import { WalletProvider } from "./contexts/solana/wallet";
+import { ConnectionProvider } from "./contexts/solana/connection";
+import { AccountsProvider } from "./contexts/solana/accounts";
+import { MarketProvider } from "./contexts/solana/market";
+import { SolanaProvider } from "./contexts/solana";
 import { ChainProvider } from "./contexts/chainselect";
 import { BetsView } from "./views/BetsView";
 import { LiquidityView } from "./views/LiquidityView";
@@ -19,7 +19,7 @@ function App() {
           <WalletProvider>
             <AccountsProvider>
               <MarketProvider>
-                <HousePoolLiquidityContextProvider>
+                <SolanaProvider>
                   {/* Routes are ordered specific to general. the '/' route must be placed last */}
                   <Switch>
                     <Route path="/liquidity">
@@ -32,7 +32,7 @@ function App() {
                       <LandingPageView />
                     </Route>
                   </Switch>
-                </HousePoolLiquidityContextProvider>
+                </SolanaProvider>
               </MarketProvider>
             </AccountsProvider>
           </WalletProvider>

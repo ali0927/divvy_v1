@@ -9,8 +9,8 @@ import {
     Context,
     PublicKey,
 } from "@solana/web3.js";
-import * as IDS from "../utils/ids";
-import { EscrowState, EscrowStateParser } from "../models/escrowState";
+import * as IDS from "../../utils/ids";
+import { EscrowState, EscrowStateParser } from "../../models/escrowState";
 export const HousePoolLiquidityContext = createContext<any>(null);
 
 export const HousePoolLiquidityContextProvider = (props: { children: any }) => {

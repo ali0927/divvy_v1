@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Select } from "antd";
-import { ENDPOINTS, useConnectionConfig } from "../../contexts/connection";
-import { useWallet } from "../../contexts/wallet";
+import { ENDPOINTS, useConnectionConfig } from "../../contexts/solana/connection";
+import { useWallet } from "../../contexts/solana/wallet";
 
 export const Settings = () => {
   const { connected, disconnect } = useWallet();

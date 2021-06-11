@@ -11,12 +11,12 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { notify } from "./../utils/notifications";
+import { notify } from "../../utils/notifications";
 import { useConnectionConfig } from "./connection";
-import { useLocalStorageState } from "./../utils/utils";
-import { LedgerWalletAdapter } from "../wallet-adapters/ledger";
-import { SolongWalletAdapter } from "../wallet-adapters/solong";
-import { PhantomWalletAdapter } from "../wallet-adapters/phantom";
+import { useLocalStorageState } from "../../utils/utils";
+import { LedgerWalletAdapter } from "../../wallet-adapters/ledger";
+import { SolongWalletAdapter } from "../../wallet-adapters/solong";
+import { PhantomWalletAdapter } from "../../wallet-adapters/phantom";
 
 const ASSETS_URL =
   "https://raw.githubusercontent.com/solana-labs/oyster/main/assets/wallets/";
@@ -63,7 +63,7 @@ export interface WalletAdapter extends EventEmitter {
   disconnect: () => any;
 }
 
-const WalletContext = React.createContext<{
+export const WalletContext = React.createContext<{
   wallet: WalletAdapter | undefined;
   connected: boolean;
   select: () => void;

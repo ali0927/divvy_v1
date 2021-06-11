@@ -4,15 +4,16 @@ import {
   useConnection,
   useConnectionConfig,
   sendTransaction,
-} from "../../contexts/connection";
-import { useWallet } from "../../contexts/wallet";
+} from "../../contexts/solana/connection";
+import { useWallet } from "../../contexts/solana/wallet";
 import { useAccountByMint, useUserBalance } from "../../hooks";
 import * as IDS from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
 import { LAMPORTS_PER_USDT } from "../../constants";
 import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserUSDTContext } from "../../contexts/solana/userusdt";
 
 export const DepositLiquidity = (props: {}) => {
   const wallet = useWallet();
@@ -21,6 +22,7 @@ export const DepositLiquidity = (props: {}) => {
   const usdtBalance = useUserBalance(IDS.USDT_MINT);
   const hpTokenAccount = useAccountByMint(IDS.HP_MINT)
   const usdtTokenAccount = useAccountByMint(IDS.USDT_MINT)
+  const { userUSDT } = useContext(UserUSDTContext)
   // const [form] = Form.useForm();
   // const [valuesForm, setValuesForm] = useState({});
   let [usdtAmount, setUsdtAmount] = useState("");
@@ -36,10 +38,9 @@ export const DepositLiquidity = (props: {}) => {
       });
       return;
     }
-    
+
     const usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
-    if(isNaN(usdtLamports))
-    {
+    if (isNaN(usdtLamports)) {
       notify({
         message: "Transaction failed...",
         description: "Invalid USDT amount.",
@@ -48,7 +49,7 @@ export const DepositLiquidity = (props: {}) => {
       return;
     }
 
-    if(hpTokenAccount == null){
+    if (hpTokenAccount == null) {
       notify({
         message: "Transaction failed...",
         description: "User does not have a HP token account.",
@@ -57,7 +58,7 @@ export const DepositLiquidity = (props: {}) => {
       return;
     }
 
-    if(usdtTokenAccount == null){
+    if (usdtTokenAccount == null) {
       notify({
         message: "Transaction failed...",
         description: "User does not have a USDT token account.",
@@ -67,7 +68,7 @@ export const DepositLiquidity = (props: {}) => {
     }
 
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("escrow")], IDS.DIVVY_PROGRAM_ID);
-    
+
     console.log(usdtLamports + " bump seed " + bumpSeed);
 
     console.log(usdtTokenAccount.pubkey.toBase58());
@@ -109,13 +110,13 @@ export const DepositLiquidity = (props: {}) => {
           <p>
             <small className="text-secondary">Wallet balance</small>
           </p>
-          <p className="balance">12 USDT</p>
+          <p className="balance">{userUSDT} USDT</p>
         </div>
 
         <Form.Item name="usdtAmount">
           <Input.Group compact>
-            <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => {setUsdtAmount(event.currentTarget.value)}} style={{width:"75%"}}  />
-            <Button style={{border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+            <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => { setUsdtAmount(event.currentTarget.value) }} style={{ width: "75%" }} />
+            <Button style={{ border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
           </Input.Group>
         </Form.Item>
 

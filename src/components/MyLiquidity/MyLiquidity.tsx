@@ -2,11 +2,11 @@ import { DepositLiquidity } from "./DepositLiquidity";
 import { WithdrawLiquidity } from "./WithdrawLiquidity";
 import { DivvyDao } from "./DivvyDao";
 import { StakeHT } from "./StakeHT";
-import { HousePoolLiquidityContext } from "../../contexts/hpliquidity";
 import { useContext } from "react";
+import { UserHPTContext } from "../../contexts/solana/userhpt";
 
 export const MyLiquidity = (props: {}) => {
-  const { hpBalance } = useContext(HousePoolLiquidityContext);
+  const { userHPT } = useContext(UserHPTContext);
   return (
     <div>
       <div className="sidebar-section">
@@ -15,7 +15,19 @@ export const MyLiquidity = (props: {}) => {
           <p>
             <small className="text-secondary">House balance</small>
           </p>
-          <p className="balance">{hpBalance} USDT</p>
+          <p className="balance">{userHPT} HPT</p>
+        </div>
+        <div className="balance-container">
+          <p>
+            <small className="text-secondary">Exchange Rate</small>
+          </p>
+          <p className="balance">{1}</p>
+        </div>
+        <div className="balance-container">
+          <p>
+            <small className="text-secondary">Total balance</small>
+          </p>
+          <p className="balance">{userHPT} USDT</p>
         </div>
       </div>
       <DepositLiquidity />
