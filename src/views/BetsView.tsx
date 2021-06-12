@@ -147,11 +147,11 @@ export const BetsView = () => {
   }
 
   return (
-    <div className="App " >
+    <div className="root" >
       <LeftSideBar>
         <NavBar />
       </LeftSideBar>
-      <header className="App-header">
+      <header className="root-content">
         <SelectChain />
         <HomeCarousel />
         <SingleMarketHeader />
