@@ -38,7 +38,7 @@ export const MyBets = (props: { betSlips: Array<BetSlip>, setbetSlips: any, remo
               return <MyBetSlip betSlips={props.betSlips} setbetSlips={props.setbetSlips} index={index} betSlip={value} removebetSlip={props.removebetSlip} editBetSlip={props.editBetSlip} />
             }
           })}</div>
-        {bets != 0 ? <div style={{ marginTop: 10, height:"25vh" }}>
+        {bets != 0 ? <div style={{ marginTop: 10 }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
             <p>
               Total Wager
