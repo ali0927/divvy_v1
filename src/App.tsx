@@ -1,9 +1,9 @@
 import "./App.css";
 import "flag-icon-css/css/flag-icon.css"
-import { WalletProvider } from "./contexts/solana/wallet";
-import { ConnectionProvider } from "./contexts/solana/connection";
-import { AccountsProvider } from "./contexts/solana/accounts";
-import { MarketProvider } from "./contexts/solana/market";
+import { WalletProvider } from "./contexts/sol/wallet";
+import { ConnectionProvider } from "./contexts/sol/connection";
+import { AccountsProvider } from "./contexts/sol/accounts";
+import { MarketProvider } from "./contexts/sol/market";
 import { SolanaProvider } from "./contexts/solana";
 import { ChainProvider } from "./contexts/chainselect";
 import { BetsView } from "./views/BetsView";

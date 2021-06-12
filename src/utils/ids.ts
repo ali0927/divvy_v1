@@ -1,5 +1,5 @@
 import { PublicKey } from "@solana/web3.js";
-import { ENV } from "../contexts/solana/connection";
+import { ENV } from "../contexts/sol/connection";
 import { TOKEN_PROGRAM_ID as TOKEN_PROGRAM_ID_IMPORT } from "@solana/spl-token";
 
 export const WRAPPED_SOL_MINT = new PublicKey("So11111111111111111111111111111111111111112");

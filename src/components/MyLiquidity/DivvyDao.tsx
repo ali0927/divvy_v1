@@ -11,8 +11,8 @@ import {
     useConnection,
     useConnectionConfig,
     sendTransaction,
-} from "../../contexts/solana/connection";
-import { useWallet } from "../../contexts/solana/wallet";
+} from "../../contexts/sol/connection";
+import { useWallet } from "../../contexts/sol/wallet";
 import { DIVVY_PROGRAM_ID } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";

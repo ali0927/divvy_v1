@@ -3,7 +3,7 @@ import { WithdrawLiquidity } from "./WithdrawLiquidity";
 import { DivvyDao } from "./DivvyDao";
 import { StakeHT } from "./StakeHT";
 import { useContext } from "react";
-import { UserHPTContext } from "../../contexts/solana/userhpt";
+import { UserHPTContext } from "../../contexts/sol/userhpt";
 import { Tooltip } from "antd";
 import { LABELS } from "../../constants/labels"
 import { InfoCircleOutlined } from "@ant-design/icons"

@@ -4,8 +4,8 @@ import {
   useConnection,
   useConnectionConfig,
   sendTransaction,
-} from "../../contexts/solana/connection";
-import { useWallet } from "../../contexts/solana/wallet";
+} from "../../contexts/sol/connection";
+import { useWallet } from "../../contexts/sol/wallet";
 import { useAccountByMint, useUserBalance } from "../../hooks";
 import * as IDS from "../../utils/ids";
 import { notify } from "../../utils/notifications";
@@ -13,7 +13,7 @@ import { ExplorerLink } from "../ExplorerLink";
 import { LAMPORTS_PER_USDT } from "../../constants";
 import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
 import { useContext, useState } from "react";
-import { UserUSDTContext } from "../../contexts/solana/userusdt";
+import { UserUSDTContext } from "../../contexts/sol/userusdt";
 
 export const DepositLiquidity = (props: {}) => {
   const wallet = useWallet();

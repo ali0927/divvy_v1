@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { HousePoolLiquidityContext } from "../../contexts/solana/hpliquidity";
+import { HousePoolLiquidityContext } from "../../contexts/sol/hpliquidity";
 export const LiquidityViewLink = () => {
   const { hpBalance } = useContext(HousePoolLiquidityContext);
   return (

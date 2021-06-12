@@ -6,8 +6,8 @@ import {
   useConnection,
   useConnectionConfig,
   sendTransaction,
-} from "../../contexts/solana/connection";
-import { useWallet } from "../../contexts/solana/wallet";
+} from "../../contexts/sol/connection";
+import { useWallet } from "../../contexts/sol/wallet";
 import { DIVVY_PROGRAM_ID } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
@@ -15,7 +15,7 @@ import { depositLiquidityInstruction } from "../../models/depositLiquidityInstru
 import { useContext, useState } from "react";
 import { useAccountByMint, useUserBalance } from "../../hooks";
 import * as IDS from "../../utils/ids";
-import { UserHPTContext } from "../../contexts/solana/userhpt";
+import { UserHPTContext } from "../../contexts/sol/userhpt";
 
 export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();

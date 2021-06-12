@@ -1,8 +1,8 @@
 import React from "react";
-import { useWallet } from "../../contexts/solana/wallet";
+import { useWallet } from "../../contexts/sol/wallet";
 import { formatNumber, shortenAddress } from "../../utils/utils";
 import { Identicon } from "../Identicon";
-import { useNativeAccount } from "../../contexts/solana/accounts";
+import { useNativeAccount } from "../../contexts/sol/accounts";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 export const CurrentUserBadge = (props: {}) => {
