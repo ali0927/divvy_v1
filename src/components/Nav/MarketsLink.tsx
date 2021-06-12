@@ -44,11 +44,8 @@ export const MarketsLink = () => {
         return market;
     }
     return (
-        <div>
-            <Input value={search} onChange={(event) => setSearch(event.currentTarget.value)} style={{ border: "0px", marginLeft: "1px", outline: "1px solid #1f1f1f", height: "40px", width: "20em" }} placeholder={"Search for bets"} prefix={<SearchOutlined />} />
-            <div className="sidebar-section">
+            <div className="sidebar-section sidebar-section-markets">
                 {MarketsUI()}
             </div>
-        </div>
     );
 };
