@@ -4,31 +4,33 @@ import { DivvyDao } from "./DivvyDao";
 import { StakeHT } from "./StakeHT";
 import { useContext } from "react";
 import { UserHPTContext } from "../../contexts/solana/userhpt";
-
+import { Tooltip } from "antd";
+import { LABELS } from "../../constants/labels"
+import { InfoCircleOutlined } from "@ant-design/icons"
 export const MyLiquidity = (props: {}) => {
   const { userHPT } = useContext(UserHPTContext);
   return (
     <div>
       <div className="sidebar-section">
         <h3>My House Pool Stats</h3>
-        <div className="balance-container">
-          <p>
-            <small className="text-secondary">House balance</small>
-          </p>
-          <p className="balance">{userHPT} HPT</p>
-        </div>
-        <div className="balance-container">
-          <p>
-            <small className="text-secondary">Exchange Rate</small>
-          </p>
-          <p className="balance">{1}</p>
-        </div>
-        <div className="balance-container">
-          <p>
-            <small className="text-secondary">Total balance</small>
-          </p>
-          <p className="balance">{userHPT} USDT</p>
-        </div>
+        <small>
+          <div className="balance-container">
+            <span>House Pool tokens</span>
+            <span className="balance">
+              {userHPT} HPT
+            </span>
+          </div>
+          <div className="balance-container">
+            <span>Balance in USDT</span>
+            <span className="balance">{userHPT} USDT</span>
+          </div>
+          <div className="balance-container">
+            <Tooltip title={LABELS.CONVERSION_RATIO}>
+              <span>Conversion Ratio <InfoCircleOutlined /></span>
+            </Tooltip>
+            <span className="balance">1.00</span>
+          </div>
+        </small>
       </div>
       <DepositLiquidity />
       <WithdrawLiquidity />

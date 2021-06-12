@@ -7,7 +7,7 @@ import { Settings } from "../Settings";
 import { LABELS } from "../../constants";
 import { ConnectButton } from "../ConnectButton";
 
-export const Wallet = (props: { left?: JSX.Element; right?: JSX.Element }) => {
+export const SolWallet = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const { connected } = useWallet();
 
   const TopBar = (

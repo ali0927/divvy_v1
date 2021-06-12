@@ -1,9 +1,9 @@
-import { Wallet } from "../Wallet/Wallet";
+import { SolWallet } from "../Wallet/SolWallet";
 
 export const ConnectLink = () => {
   return (
     <div className="sidebar-section">
-      <Wallet />
+      <SolWallet />
     </div>
   );
 };
