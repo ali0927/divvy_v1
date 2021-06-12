@@ -4,7 +4,7 @@ import { WalletProvider } from "./contexts/sol/wallet";
 import { ConnectionProvider } from "./contexts/sol/connection";
 import { AccountsProvider } from "./contexts/sol/accounts";
 import { MarketProvider } from "./contexts/sol/market";
-import { SolanaProvider } from "./contexts/solana";
+import { SolanaProvider } from "./contexts/sol";
 import { ChainProvider } from "./contexts/chainselect";
 import { BetsView } from "./views/BetsView";
 import { LiquidityView } from "./views/LiquidityView";
