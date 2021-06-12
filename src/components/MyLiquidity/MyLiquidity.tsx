@@ -26,7 +26,7 @@ export const MyLiquidity = (props: {}) => {
           </div>
           <div className="balance-container">
             <Tooltip title={LABELS.CONVERSION_RATIO}>
-              <span>Conversion Ratio <InfoCircleOutlined /></span>
+              <span style={{ display: 'flex' }}>Conversion Ratio <InfoCircleOutlined style={{ fontSize: 9, marginTop:3.4, marginLeft:2 }} /></span>
             </Tooltip>
             <span className="balance">1.00</span>
           </div>
