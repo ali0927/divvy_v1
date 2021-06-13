@@ -1,7 +1,7 @@
-import { WalletAdapter } from "../../contexts/sol/wallet";
+import { WalletAdapter } from "../../../contexts/sol/wallet";
 import EventEmitter from 'eventemitter3'
 import { PublicKey, Transaction } from '@solana/web3.js'
-import { notify } from "../../utils/notifications";
+import { notify } from "../../../utils/notifications";
 
 type PhantomEvent = 'disconnect' | 'connect'
 type PhantomRequestMethod = 'connect' | 'disconnect' | 'signTransaction' | 'signAllTransactions'

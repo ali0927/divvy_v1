@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect, useContext } from "react"
 import * as Accounts from "./accounts";
-import { useConnection } from "./connection";
+import { getAccountInfoAndSubscribe, useConnection } from "./connection";
 import {
     AccountChangeCallback,
     AccountInfo,
@@ -34,7 +34,6 @@ export const UserUSDTContextProvider = (props: { children: any }) => {
                 async function parseAccount(acc: AccountInfo<Buffer>) {
                     const parsed = EscrowStateParser(UserUSDTPubKey, acc);
                     const data = await connection.getTokenAccountBalance(UserUSDTPubKey);
-                    console.log(data.value.uiAmount)
                     setUserUSDT(data.value.uiAmount)
                     setAccountData(parsed)
                 }
@@ -51,36 +50,3 @@ export const UserUSDTContextProvider = (props: { children: any }) => {
         </UserUSDTContext.Provider>
     )
 }
-
-export const getAccountInfoAndSubscribe = function (
-    connection: Connection,
-    publicKey: PublicKey,
-    callback: AccountChangeCallback,
-    commitment?: Commitment | undefined
-): number {
-    let latestSlot: number = -1;
-
-    let subscriptionId = connection.onAccountChange(
-        publicKey,
-        (acc: AccountInfo<Buffer>, context: Context) => {
-            if (context.slot >= latestSlot) {
-                latestSlot = context.slot;
-                callback(acc, context);
-            }
-        },
-        commitment
-    );
-
-    connection
-        .getAccountInfoAndContext(publicKey, commitment)
-        .then((response) => {
-            if (response.context.slot >= latestSlot) {
-                latestSlot = response.context.slot;
-                if (response.value) {
-                    callback(response.value, response.context);
-                }
-            }
-        });
-
-    return subscriptionId;
-};

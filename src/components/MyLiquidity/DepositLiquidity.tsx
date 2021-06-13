@@ -14,6 +14,7 @@ import { LAMPORTS_PER_USDT } from "../../constants";
 import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
+import { HouseDeposit } from "../../models/eth/HPtransactions";
 
 export const DepositLiquidity = (props: {}) => {
   const wallet = useWallet();
@@ -30,76 +31,77 @@ export const DepositLiquidity = (props: {}) => {
   // let formValues: any;
 
   const onFinish = async () => {
-    if (wallet?.wallet?.publicKey == null) {
-      notify({
-        message: "Transaction failed...",
-        description: "Please connect a wallet.",
-        type: "error",
-      });
-      return;
-    }
+    // if (wallet?.wallet?.publicKey == null) {
+    //   notify({
+    //     message: "Transaction failed...",
+    //     description: "Please connect a wallet.",
+    //     type: "error",
+    //   });
+    //   return;
+    // }
 
-    const usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
-    if (isNaN(usdtLamports)) {
-      notify({
-        message: "Transaction failed...",
-        description: "Invalid USDT amount.",
-        type: "error",
-      });
-      return;
-    }
+    // const usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
+    // if (isNaN(usdtLamports)) {
+    //   notify({
+    //     message: "Transaction failed...",
+    //     description: "Invalid USDT amount.",
+    //     type: "error",
+    //   });
+    //   return;
+    // }
 
-    if (hpTokenAccount == null) {
-      notify({
-        message: "Transaction failed...",
-        description: "User does not have a HP token account.",
-        type: "error",
-      });
-      return;
-    }
+    // if (hpTokenAccount == null) {
+    //   notify({
+    //     message: "Transaction failed...",
+    //     description: "User does not have a HP token account.",
+    //     type: "error",
+    //   });
+    //   return;
+    // }
 
-    if (usdtTokenAccount == null) {
-      notify({
-        message: "Transaction failed...",
-        description: "User does not have a USDT token account.",
-        type: "error",
-      });
-      return;
-    }
+    // if (usdtTokenAccount == null) {
+    //   notify({
+    //     message: "Transaction failed...",
+    //     description: "User does not have a USDT token account.",
+    //     type: "error",
+    //   });
+    //   return;
+    // }
 
-    const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("escrow")], IDS.DIVVY_PROGRAM_ID);
+    // const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("escrow")], IDS.DIVVY_PROGRAM_ID);
 
-    console.log(usdtLamports + " bump seed " + bumpSeed);
+    // console.log(usdtLamports + " bump seed " + bumpSeed);
 
-    console.log(usdtTokenAccount.pubkey.toBase58());
-    const instruction = depositLiquidityInstruction(
-      wallet.wallet.publicKey,
-      hpTokenAccount.pubkey,
-      usdtTokenAccount.pubkey,
-      "deposit",
-      usdtLamports,
-      bumpSeed
-    );
-    const [ok, txid] = await sendTransaction(
-      connection,
-      connectionConfig.env,
-      wallet.wallet!,
-      [instruction],
-      true
-    );
+    // console.log(usdtTokenAccount.pubkey.toBase58());
+    // const instruction = depositLiquidityInstruction(
+    //   wallet.wallet.publicKey,
+    //   hpTokenAccount.pubkey,
+    //   usdtTokenAccount.pubkey,
+    //   "deposit",
+    //   usdtLamports,
+    //   bumpSeed
+    // );
+    // const [ok, txid] = await sendTransaction(
+    //   connection,
+    //   connectionConfig.env,
+    //   wallet.wallet!,
+    //   [instruction],
+    //   true
+    // );
 
-    if (ok) {
-      notify({
-        message: "Transaction success...",
-        description: (
-          <ExplorerLink
-            address={txid}
-            cluster={connectionConfig.env}
-            type="transaction"
-          />
-        ),
-      });
-    }
+    // if (ok) {
+    //   notify({
+    //     message: "Transaction success...",
+    //     description: (
+    //       <ExplorerLink
+    //         address={txid}
+    //         cluster={connectionConfig.env}
+    //         type="transaction"
+    //       />
+    //     ),
+    //   });
+    // }
+    HouseDeposit(parseInt(usdtAmount))
   };
 
   return (

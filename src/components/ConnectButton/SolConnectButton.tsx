@@ -10,7 +10,7 @@ export interface ConnectButtonProps
   allowWalletChange?: boolean;
 }
 
-export const ConnectButton = (props: ConnectButtonProps) => {
+export const SolConnectButton = (props: ConnectButtonProps) => {
   const { connected, connect, select, provider } = useWallet();
   const { onClick, children, disabled, allowWalletChange, ...rest } = props;
 

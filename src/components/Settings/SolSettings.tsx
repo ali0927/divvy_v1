@@ -3,7 +3,7 @@ import { Button, Select } from "antd";
 import { ENDPOINTS, useConnectionConfig } from "../../contexts/sol/connection";
 import { useWallet } from "../../contexts/sol/wallet";
 
-export const Settings = () => {
+export const SolSettings = () => {
   const { connected, disconnect } = useWallet();
   const { endpoint, setEndpoint } = useConnectionConfig();
 

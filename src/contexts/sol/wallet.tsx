@@ -14,47 +14,10 @@ import React, {
 import { notify } from "../../utils/notifications";
 import { useConnectionConfig } from "./connection";
 import { useLocalStorageState } from "../../utils/utils";
-import { LedgerWalletAdapter } from "../../wallet-adapters/ledger";
-import { SolongWalletAdapter } from "../../wallet-adapters/solong";
-import { PhantomWalletAdapter } from "../../wallet-adapters/phantom";
-
-const ASSETS_URL =
-  "https://raw.githubusercontent.com/solana-labs/oyster/main/assets/wallets/";
-export const WALLET_PROVIDERS = [
-  {
-    name: "Sollet",
-    url: "https://www.sollet.io",
-    icon: `${ASSETS_URL}sollet.svg`,
-  },
-  {
-    name: "Solong",
-    url: "https://solongwallet.com",
-    icon: `${ASSETS_URL}solong.png`,
-    adapter: SolongWalletAdapter,
-  },
-  {
-    name: "Solflare",
-    url: "https://solflare.com/access-wallet",
-    icon: `${ASSETS_URL}solflare.svg`,
-  },
-  {
-    name: "MathWallet",
-    url: "https://mathwallet.org",
-    icon: `${ASSETS_URL}mathwallet.svg`,
-  },
-  {
-    name: "Ledger",
-    url: "https://www.ledger.com",
-    icon: `${ASSETS_URL}ledger.svg`,
-    adapter: LedgerWalletAdapter,
-  },
-  {
-    name: "Phantom",
-    url: "https://phantom.app/",
-    icon: `https://raydium.io/_nuxt/img/phantom.d9e3c61.png`,
-    adapter: PhantomWalletAdapter,
-  },
-];
+import { LedgerWalletAdapter } from "../../wallet-adapters/sol/ledger";
+import { SolongWalletAdapter } from "../../wallet-adapters/sol/solong";
+import { PhantomWalletAdapter } from "../../wallet-adapters/sol/phantom";
+import { WALLET_PROVIDERS } from "../../constants/sol/walletproviders";
 
 export interface WalletAdapter extends EventEmitter {
   publicKey: PublicKey | null;
@@ -71,7 +34,7 @@ export const WalletContext = React.createContext<{
 }>({
   wallet: undefined,
   connected: false,
-  select() {},
+  select() { },
   provider: undefined,
 });
 
@@ -109,12 +72,12 @@ export function WalletProvider({ children = null as any }) {
           const keyToDisplay =
             walletPublicKey.length > 20
               ? `${walletPublicKey.substring(
-                  0,
-                  7
-                )}.....${walletPublicKey.substring(
-                  walletPublicKey.length - 7,
-                  walletPublicKey.length
-                )}`
+                0,
+                7
+              )}.....${walletPublicKey.substring(
+                walletPublicKey.length - 7,
+                walletPublicKey.length
+              )}`
               : walletPublicKey;
 
           notify({
@@ -147,7 +110,7 @@ export function WalletProvider({ children = null as any }) {
       setAutoConnect(false);
     }
 
-    return () => {};
+    return () => { };
   }, [wallet, autoConnect]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);

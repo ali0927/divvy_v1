@@ -3,9 +3,9 @@ import { Button, Popover } from "antd";
 import { useWallet } from "../../contexts/sol/wallet";
 import { CurrentUserBadge } from "../CurrentUserBadge";
 import { SettingOutlined } from "@ant-design/icons";
-import { Settings } from "../Settings";
+import { SolSettings } from "../Settings/SolSettings";
 import { LABELS } from "../../constants";
-import { ConnectButton } from "../ConnectButton";
+import { SolConnectButton } from "../ConnectButton/SolConnectButton";
 
 export const SolWallet = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const { connected } = useWallet();
@@ -15,7 +15,7 @@ export const SolWallet = (props: { left?: JSX.Element; right?: JSX.Element }) =>
       {connected ? (
         <CurrentUserBadge />
       ) : (
-        <ConnectButton
+        <SolConnectButton
           type="text"
           size="large"
           allowWalletChange={true}
@@ -25,7 +25,7 @@ export const SolWallet = (props: { left?: JSX.Element; right?: JSX.Element }) =>
       <Popover
         placement="topRight"
         title={LABELS.SETTINGS_TOOLTIP}
-        content={<Settings />}
+        content={<SolSettings />}
         trigger="click"
       >
         <Button

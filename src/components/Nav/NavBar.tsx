@@ -6,7 +6,7 @@ import { MarketsLink } from "./MarketsLink";
 
 export const NavBar = () => {
   return (
-    <div style={{maxHeight: "100vh", display: "flex", flexDirection: "column"}}>
+    <div style={{ maxHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <BetsViewLink />
       <LiquidityViewLink />
       <ConnectLink />

@@ -106,5 +106,4 @@ export const LABELS = {
   SAFER: "Safer",
   RISKIER: "Riskier",
   CONVERSION_RATIO: "HPT derives it's value from the performance of the House Pool. In the event the House turns a profit, HPT token holders are rewarded with a higher conversion ratio. Deposits and withdrawals do not affect the conversion ratio.",
-  CHAIN_STRING: "chain"
 };

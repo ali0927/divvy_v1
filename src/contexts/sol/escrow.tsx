@@ -1,5 +1,5 @@
 import * as Accounts from "./accounts";
-import { useConnection } from "./connection";
+import { getAccountInfoAndSubscribe, useConnection } from "./connection";
 import {
   AccountChangeCallback,
   AccountInfo,
@@ -55,47 +55,4 @@ export const EscrowProvider = ({ children = null as any }) => {
 
 export const useEscrow = () => {
   return useContext(EscrowContext) as EscrowContextState;
-};
-
-/**
- * Fetch an account for the specified public key and subscribe a callback
- * to be invoked whenever the specified account changes.
- *
- * @param connection Connection to use
- * @param publicKey Public key of the account to monitor
- * @param callback Function to invoke whenever the account is changed
- * @param commitment Specify the commitment level account changes must reach before notification
- * @return subscription id
- */
-export const getAccountInfoAndSubscribe = function (
-  connection: Connection,
-  publicKey: PublicKey,
-  callback: AccountChangeCallback,
-  commitment?: Commitment | undefined
-): number {
-  let latestSlot: number = -1;
-
-  let subscriptionId = connection.onAccountChange(
-    publicKey,
-    (acc: AccountInfo<Buffer>, context: Context) => {
-      if (context.slot >= latestSlot) {
-        latestSlot = context.slot;
-        callback(acc, context);
-      }
-    },
-    commitment
-  );
-
-  connection
-    .getAccountInfoAndContext(publicKey, commitment)
-    .then((response) => {
-      if (response.context.slot >= latestSlot) {
-        latestSlot = response.context.slot;
-        if (response.value) {
-          callback(response.value, response.context);
-        }
-      }
-    });
-
-  return subscriptionId;
 };

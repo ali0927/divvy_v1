@@ -6,6 +6,7 @@ export const SelectChain = () => {
     const { chain, changeChain } = useContext(ChainSelectContext);
     const setChain = (value: ChainType) => {
         changeChain(value)
+        window.location.reload()
     }
     return (
         <>
