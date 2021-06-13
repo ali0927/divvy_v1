@@ -2,11 +2,11 @@ import { DepositLiquidity } from "./DepositLiquidity";
 import { WithdrawLiquidity } from "./WithdrawLiquidity";
 import { DivvyDao } from "./DivvyDao";
 import { StakeHT } from "./StakeHT";
-import { HousePoolLiquidityContext } from "../../contexts/hpliquidity";
+import { HousePoolContext } from "../../contexts/hpliquidity";
 import { useContext } from "react";
 
 export const MyLiquidity = (props: {}) => {
-  const { hpBalance } = useContext(HousePoolLiquidityContext);
+  const { hpBalance } = useContext(HousePoolContext);
   return (
     <div>
       <div className="sidebar-section">

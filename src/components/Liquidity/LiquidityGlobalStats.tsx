@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { HousePoolLiquidityContext } from "../../contexts/hpliquidity";
+import { HousePoolContext } from "../../contexts/hpliquidity";
 export const LiquidityGlobalStats = () => {
-  const { hpBalance } = useContext(HousePoolLiquidityContext);
+  const { hpBalance } = useContext(HousePoolContext);
   return (
     <div>
       <div className="horizontal-outline" />

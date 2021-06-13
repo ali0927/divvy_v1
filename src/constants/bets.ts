@@ -1,3 +1,5 @@
+import { PublicKey } from "@solana/web3.js";
+
 export enum BetType {
     Pending = "PENDING",
     Current = "CURRENT"
@@ -31,7 +33,7 @@ export interface Game {
     date: string,
     time: string,
 }
-export interface BetSlip {
+export interface Bet {
     publicAddress: string,
     gameId: string,
     hash: string,
@@ -41,8 +43,9 @@ export interface BetSlip {
     odds: number,
     oddsType: OddsType
     type: BetType,
-    betAmount: number,
+    risk: number,
     id: string,
     spread: number,
-    total: number
+    total: number,
+    betTokenAccount?: PublicKey
 }

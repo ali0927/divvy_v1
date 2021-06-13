@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Divider } from "antd";
-import { Odds, BetSlip, BetType, Game, OddsType, Team } from "../../constants";
+import { useState } from "react";
+import { Button, Divider } from "antd";
+import { Odds, Bet, BetType, Game, OddsType, Team } from "../../constants";
 export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game, selection: Team, otherteam: Team }) => {
     const [selection, setSelection] = useState("")
     function makeid(length: number) {
@@ -15,7 +15,7 @@ export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game,
     }
     const setSlip = (betType: string, odds: number, Oddtype: OddsType) => {
         setSelection(betType)
-        let bet: BetSlip;
+        let bet: Bet;
         bet = {
             publicAddress: "weukrfguiwf",
             gameId: "12",
@@ -26,7 +26,7 @@ export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game,
             odds: odds,
             oddsType: Oddtype,
             type: BetType.Current,
-            betAmount: 0,
+            risk: 0,
             id: makeid(10),
             total: props.game.total,
             spread: props.game.spread,
@@ -35,17 +35,17 @@ export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game,
     }
     return (
         <div style={{ display: "flex", alignItems: "center", width: "60%", height: 36, marginLeft: 20, marginTop: 10 }}>
-            <div onClick={() => setSlip("win", props.odds.moneyline, OddsType.moneyline)} className={selection === 'win' ? "odds odds-active" : "odds"}>
+            <Button onClick={() => setSlip("win", props.odds.moneyline, OddsType.moneyline)} className={selection === 'win' ? "odds odds-active" : "odds"}>
                 <b>{props.odds.moneyline}</b>
-            </div>
+            </Button>
             <Divider style={{ height: 32, border: "0px" }} type="vertical" />
-            <div onClick={() => setSlip("spread", props.odds.spread, OddsType.spread)} className={selection === 'spread' ? "odds odds-active" : "odds"}>
+            <Button onClick={() => setSlip("spread", props.odds.spread, OddsType.spread)} className={selection === 'spread' ? "odds odds-active" : "odds"}>
                 <b>{(props.selection.favorite ? "(-" : "(+") + String(props.game.spread) + ") " + String(props.odds.spread) }</b>
-            </div>
+            </Button>
             <Divider style={{ height: 32, border: "0px" }} type="vertical" />
-            <div onClick={() => setSlip("total", props.odds.total, OddsType.total)} className={selection === 'total' ? "odds odds-active" : "odds"}>
+            <Button onClick={() => setSlip("total", props.odds.total, OddsType.total)} className={selection === 'total' ? "odds odds-active" : "odds"}>
                 <b>{(props.otherteam.favorite ? "(U " : "(O ") + String(props.game.total) + ") " + String(props.odds.total)}</b>
-            </div>
+            </Button>
         </div>
     )
 };

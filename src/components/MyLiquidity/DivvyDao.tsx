@@ -68,25 +68,12 @@ export const DivvyDao = (props: {}) => {
         });
         const transaction = new Transaction();
         transaction.add(instruction);
-        const [ok, txid] = await sendTransaction(
+        await sendTransaction(
             connection,
             connectionConfig.env,
             wallet.wallet,
-            [instruction],
-            true
+            [instruction]
         );
-
-        if (ok) {
-            notify({
-                message: "Transaction success...",
-                description: (
-                    <>
-                        <ExplorerLink address={txid} type="transaction" cluster={connectionConfig.env} />
-                    </>
-                ),
-                type: "error",
-            });
-        }
     };
 
     const onFinishFailed = (errorInfo: any) => {

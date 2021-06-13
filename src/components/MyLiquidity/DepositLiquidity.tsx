@@ -79,26 +79,12 @@ export const DepositLiquidity = (props: {}) => {
       usdtLamports,
       bumpSeed
     );
-    const [ok, txid] = await sendTransaction(
+    await sendTransaction(
       connection,
       connectionConfig.env,
       wallet.wallet!,
-      [instruction],
-      true
+      [instruction]
     );
-
-    if (ok) {
-      notify({
-        message: "Transaction success...",
-        description: (
-          <ExplorerLink
-            address={txid}
-            cluster={connectionConfig.env}
-            type="transaction"
-          />
-        ),
-      });
-    }
   };
 
   return (

@@ -12,7 +12,7 @@ export const publicKey = (property: string = 'publicKey'): Object => {
 /**
  * Layout for a 64bit unsigned value
  */
-export const uint64 = (property: string = 'uint64'): Object => {
+export const u64 = (property: string = 'uint64'): Object => {
   return BufferLayout.blob(8, property);
 };
 
@@ -43,7 +43,7 @@ export const rustString = (property: string = 'string') => {
     return _encode(data, buffer, offset);
   };
 
-  (rsl as any).alloc = (str: string)  => {
+  (rsl as any).alloc = (str: string) => {
     return (
       BufferLayout.u32().span +
       BufferLayout.u32().span +

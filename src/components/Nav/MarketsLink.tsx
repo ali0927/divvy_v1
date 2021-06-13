@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { Input, Button } from 'antd'
-import { SearchOutlined } from "@ant-design/icons"
-export const MarketsLink = () => {
+import { Button } from 'antd'
+export const MarketsLink = ({search = "" as any}) => {
     const marketseg = [{ value: "football", name: "Football", }, { value: "basketball", name: "Basketball" }, { value: "mma", name: "MMA" },
     { value: "americanfootball", name: "American Football" },
     { value: "basketball", name: "Basketball" },
@@ -19,11 +17,9 @@ export const MarketsLink = () => {
     { value: "snooker", name: "Snooker" },
     { value: "volleyball", name: "Volleyball" },
     { value: "cycling", name: "Cycling" },];
-    const [markets, setMarkets] = useState(marketseg)
-    const [search, setSearch] = useState("")
     const MarketsUI = () => {
-        let market = new Array();
-        markets.map((data, index) => {
+        let market: JSX.Element[] = [];
+        marketseg.forEach((data, index) => {
             if (data.name.toLowerCase().includes(search.toLowerCase())) {
                 market.push(
                     <div className="search-item">
