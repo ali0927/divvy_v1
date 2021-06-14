@@ -11,9 +11,15 @@ import { BetSlip } from "../constants"
 import { codes } from "../constants/processed"
 import axios from "axios";
 import { SelectChain } from "../components/SelectChain";
+import { MobileHeader } from "../components/Nav/Mobile/MobileHeader"
+import { Layout, Row, Col } from "antd";
+import { HeaderTypes } from "../constants/HeaderTypes";
+const { Header, Content, Footer, Sider } = Layout;
 export const BetsView = () => {
   const [betSlips, setBetSlips] = useState(Array<BetSlip>());
   const [games, setGames] = useState(Array<Game>());
+  const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   const getDate = (timestamp: number) => {
     var d = new Date(timestamp * 1000);
@@ -27,9 +33,9 @@ export const BetsView = () => {
   const countryCodeToFlagCode = (countryCode: string) => {
     let code = codes[countryCode].code.toLowerCase();
 
-    if(code ==="wl") { // This is a hack for wales smh
+    if (code === "wl") { // This is a hack for wales smh
       return "gb-wls";
-    }    
+    }
     return code;
   }
 
@@ -38,16 +44,17 @@ export const BetsView = () => {
     axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=1c1cef445a730e7dd8d5f98395977688&sport=soccer_uefa_european_championship&region=us").then((data) => {
       data.data.data.forEach((item: any) => {
         if (item.sites.length) {
+          console.log(item)
           const id: string = item.id
           game[id] = ({
             teamA: {
-              name: codes[item.teams[0]].code,
+              name: item.teams[0],
               logo: "flag-icon-" + countryCodeToFlagCode(item.teams[0]),
               id: item.teams[0].toLowerCase(),
               favorite: item.teams[0] === item.home_team
             },
             teamB: {
-              name: codes[item.teams[1]].code,
+              name: item.teams[1],
               logo: "flag-icon-" + countryCodeToFlagCode(item.teams[1]),
               id: item.teams[1].toLowerCase(),
               favorite: item.teams[1] === item.home_team
@@ -78,16 +85,19 @@ export const BetsView = () => {
       })
       axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=1c1cef445a730e7dd8d5f98395977688&sport=soccer_uefa_european_championship&region=us&market=spreads").then((data) => {
         data.data.data.map((item: any) => {
-          console.log(item)
-          game[item.id].teamAodds.spread = item.sites[0].odds.spreads.odds[0]
-          game[item.id].teamBodds.spread = item.sites[0].odds.spreads.odds[1]
-          game[item.id].spread = Math.abs(item.sites[0].odds.spreads.points[1])
+          if (item.sites.length) {
+            game[item.id].teamAodds.spread = item.sites[0].odds.spreads.odds[0]
+            game[item.id].teamBodds.spread = item.sites[0].odds.spreads.odds[1]
+            game[item.id].spread = Math.abs(item.sites[0].odds.spreads.points[1])
+          }
         })
         axios.get("https://api.the-odds-api.com/v3/odds/?apiKey=1c1cef445a730e7dd8d5f98395977688&sport=soccer_uefa_european_championship&region=us&market=totals").then((data) => {
           data.data.data.map((item: any) => {
-            game[item.id].teamAodds.total = item.sites[0].odds.totals.odds[0]
-            game[item.id].teamBodds.total = item.sites[0].odds.totals.odds[1]
-            game[item.id].total = Math.abs(item.sites[0].odds.totals.points[1])
+            if (item.sites.length) {
+              game[item.id].teamAodds.total = item.sites[0].odds.totals.odds[0]
+              game[item.id].teamBodds.total = item.sites[0].odds.totals.odds[1]
+              game[item.id].total = Math.abs(item.sites[0].odds.totals.points[1])
+            }
           })
           setGames(Object.values(game))
         }).catch((error) => {
@@ -147,21 +157,32 @@ export const BetsView = () => {
   }
 
   return (
-    <div className="root" >
-      <LeftSideBar>
-        <NavBar />
-      </LeftSideBar>
-      <header className="root-content">
-        <SelectChain />
-        <HomeCarousel />
-        <SingleMarketHeader />
-        <SingleMarketMatches games={games} setbetSlips={setbetSlips} />
-      </header>
-      <div style={{ position: "fixed", right: 0, background: "black" }}>
-        <RightSideBar>
-          <BetSlips editBetSlip={editBetSlip} betSlips={betSlips} setbetSlips={setbetSlips} removebetSlip={removebetSlip} placeBets={placeBets} />
-        </RightSideBar>
-      </div>
-    </div>
+    <Layout>
+      <Row>
+        <Col xs={24} sm={24} md={0}>
+          <MobileHeader headerType={HeaderTypes.Bets} betSlips={betSlips} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
+        </Col>
+        <Col span={5} xs={isMobileMenuVisible ? 24 : 0} sm={isMobileMenuVisible ? 24 : 0} md={5}>
+          <LeftSideBar>
+            <NavBar />
+          </LeftSideBar>
+        </Col>
+        {!isMobileMenuVisible && !isBetSlipsVisible &&
+          <Col span={14} xs={24} sm={24} md={14}>
+            <header className="root-content">
+              <SelectChain />
+              <HomeCarousel />
+              <SingleMarketHeader />
+              <SingleMarketMatches games={games} setbetSlips={setbetSlips} />
+            </header>
+          </Col>
+        }
+        <Col span={5} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={5}>
+          <RightSideBar>
+            <BetSlips editBetSlip={editBetSlip} betSlips={betSlips} setbetSlips={setbetSlips} removebetSlip={removebetSlip} placeBets={placeBets} />
+          </RightSideBar>
+        </Col>
+      </Row>
+    </Layout>
   );
 };
