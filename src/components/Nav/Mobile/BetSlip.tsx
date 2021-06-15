@@ -5,7 +5,7 @@ export const MobileBetSlip = (props: { isBetSlipsVisible: boolean, setBetSlipsVi
     return (
         <Button style={{ backgroundColor: "transparent", borderColor: "transparent", borderWidth: 0, padding: 0, width: "100%", height: "100%" }} onClick={() => props.setBetSlipsVisible(!props.isBetSlipsVisible)}>
             {props.isBetSlipsVisible ? <CloseOutlined /> :
-                <Badge size="default" count={props.betSlips.length}>
+                <Badge style={{ backgroundColor: "#7c01ff" }} size="default" count={props.betSlips.length}>
                     <PicRightOutlined />
                 </Badge>
             }

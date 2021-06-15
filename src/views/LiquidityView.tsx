@@ -14,7 +14,7 @@ export const LiquidityView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
   return (
-    <Layout>
+    <Layout style={{ backgroundColor: "#0D0D0D" }}>
       <Row>
         <Col xs={24} sm={24} md={0}>
           <MobileHeader headerType={HeaderTypes.Liquidity} betSlips={Array<BetSlip>()} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />

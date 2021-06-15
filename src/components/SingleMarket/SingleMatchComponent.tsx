@@ -17,7 +17,7 @@ export const SingleMatchComponent = (props: { game: Game, setbetSlips: any }) =>
                         <Col span={4}>
                             <TeamDetails name={props.game.teamA.name} logo={props.game.teamA.logo} />
                         </Col>
-                        <Col span={20} md={17}>
+                        <Col span={20} md={10}>
                             <OddsSelection odds={props.game.teamAodds} setbetSlips={props.setbetSlips} game={props.game} selection={props.game.teamA} otherteam={props.game.teamB} />
                         </Col>
                         <Col span={0} md={3}>
@@ -34,7 +34,7 @@ export const SingleMatchComponent = (props: { game: Game, setbetSlips: any }) =>
                         <Col span={4}>
                             <TeamDetails name={props.game.teamB.name} logo={props.game.teamB.logo} />
                         </Col>
-                        <Col span={20} md={17}>
+                        <Col span={20} md={10}>
                             <OddsSelection odds={props.game.teamBodds} setbetSlips={props.setbetSlips} game={props.game} selection={props.game.teamB} otherteam={props.game.teamA} />
                         </Col>
                         <Col span={0} md={3}>

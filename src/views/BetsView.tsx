@@ -157,7 +157,7 @@ export const BetsView = () => {
   }
 
   return (
-    <Layout>
+    <Layout style={{ backgroundColor: "#0D0D0D" }}>
       <Row>
         <Col xs={24} sm={24} md={0}>
           <MobileHeader headerType={HeaderTypes.Bets} betSlips={betSlips} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
@@ -168,7 +168,7 @@ export const BetsView = () => {
           </LeftSideBar>
         </Col>
         {!isMobileMenuVisible && !isBetSlipsVisible &&
-          <Col span={14} xs={24} sm={24} md={14}>
+          <Col span={24} xs={24} sm={24} md={19}>
             <header className="root-content">
               <SelectChain />
               <HomeCarousel />
@@ -177,7 +177,7 @@ export const BetsView = () => {
             </header>
           </Col>
         }
-        <Col span={5} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={5}>
+        <Col span={24} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={24}>
           <RightSideBar>
             <BetSlips editBetSlip={editBetSlip} betSlips={betSlips} setbetSlips={setbetSlips} removebetSlip={removebetSlip} placeBets={placeBets} />
           </RightSideBar>
