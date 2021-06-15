@@ -1,6 +1,5 @@
-import React from 'react';
-import { BetSlip, BetType, OddsType } from '../../constants';
-export const ConfirmedOdds = (props: { oddsType: String, odds: BetSlip }) => {
+import { Bet, OddsType } from '../../constants';
+export const ConfirmedOdds = (props: { oddsType: String, odds: Bet }) => {
     return (
         <div style={{ width: "17em" }}>
             <div className="wins-left">

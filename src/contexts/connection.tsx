@@ -8,6 +8,8 @@ import {
   Transaction,
   TransactionInstruction,
   SendOptions,
+  SignaturePubkeyPair,
+  Signer,
 } from "@solana/web3.js";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { notify } from "./../utils/notifications";
@@ -48,7 +50,7 @@ export const ENDPOINTS = [
 
 const DEFAULT = ENDPOINTS[0].endpoint;
 const DEFAULT_SLIPPAGE = 0.25;
-const DEFAULT_COMMITMENT = "confirmed";
+const DEFAULT_COMMITMENT = "singleGossip";
 
 interface ConnectionConfig {
   connection: Connection;
@@ -244,19 +246,32 @@ export const sendTransaction = async (
   env: ENV,
   wallet: WalletAdapter,
   instructions: TransactionInstruction[],
-  awaitConfirmation = true
-): Promise<[ok: boolean, txid: string]> => {
+  signers?: Signer[],
+  skipConfirmation?: boolean
+): Promise<[ok: boolean, txid: string | undefined]> => {
   if (!wallet?.publicKey) {
     throw new Error("Wallet is not connected");
   }
 
+  // Building phase
   let transaction = new Transaction();
   instructions.forEach((instruction) => transaction.add(instruction));
   transaction.recentBlockhash = (
     await connection.getRecentBlockhash()
   ).blockhash;
   transaction.feePayer = wallet.publicKey;
-  transaction = await wallet.signTransaction(transaction);
+ 
+  // Signing phase
+  if(signers) {
+      transaction.partialSign(...signers)
+  }
+  try{
+    transaction = await wallet.signTransaction(transaction);
+  }
+  catch(ex) {
+    // wallet refused to sign
+    return [false, undefined];
+  }
   notify({
     message: "Sending transaction...",
     type: "info",
@@ -269,10 +284,10 @@ export const sendTransaction = async (
     transaction.serialize(),
     options
   );
-
+  
   let ok = true;
 
-  if (awaitConfirmation) {
+  if (!skipConfirmation) {
     const status = (
       await connection.confirmTransaction(
         txid,
@@ -282,18 +297,23 @@ export const sendTransaction = async (
 
     if (status?.err) {
       ok = false;
-      const errors = await getErrorForTransaction(connection, txid);
       notify({
         message: "Transaction failed...",
         description: (
-          <>
-            {errors.map((err) => (
-              <div>{err}</div>
-            ))}
             <ExplorerLink address={txid} cluster={env} type="transaction" />
-          </>
         ),
         type: "error",
+      });
+    } else {
+      notify({
+        message: "Transaction success...",
+        description: (
+          <ExplorerLink
+            address={txid}
+            cluster={env}
+            type="transaction"
+          />
+        ),
       });
     }
   }

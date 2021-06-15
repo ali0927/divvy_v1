@@ -346,6 +346,11 @@ body {
     color: white;
 }
 
+.ant-btn-active {
+    background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+    border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+}
+
 .ant-btn:hover {
     background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
     border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);

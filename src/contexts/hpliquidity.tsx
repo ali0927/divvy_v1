@@ -11,9 +11,9 @@ import {
 } from "@solana/web3.js";
 import * as IDS from "../utils/ids";
 import { EscrowState, EscrowStateParser } from "../models/escrowState";
-export const HousePoolLiquidityContext = createContext<any>(null);
+export const HousePoolContext = createContext<any>(null);
 
-export const HousePoolLiquidityContextProvider = (props: { children: any }) => {
+export const HousePoolProvider = (props: { children: any }) => {
     const connection = useConnection();
     let [accountData, setAccountData] =
         useState<Accounts.ParsedAccount<EscrowState>>();
@@ -39,9 +39,9 @@ export const HousePoolLiquidityContextProvider = (props: { children: any }) => {
         };
     }, [connection]);
     return (
-        <HousePoolLiquidityContext.Provider value={{ accountData, hpBalance }}>
+        <HousePoolContext.Provider value={{ accountData, hpBalance }}>
             {props.children}
-        </HousePoolLiquidityContext.Provider>
+        </HousePoolContext.Provider>
     )
 }
 

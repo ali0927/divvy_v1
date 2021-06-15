@@ -1,10 +1,10 @@
 import { GameTeams } from "./GameTeams";
 import { Form, Input, Divider } from "antd";
 import { ConfirmedOdds } from "./ConfirmedOdds";
-import { BetSlip } from "../../constants/bets";
+import { Bet } from "../../constants/bets";
 import { useState } from "react";
 import { CloseOutlined } from "@ant-design/icons"
-export const MyBetSlip = (props: { betSlips: Array<BetSlip>, setbetSlips: any, index: number, betSlip: BetSlip, removebetSlip: any, editBetSlip: any }) => {
+export const MyBetSlip = (props: { betSlips: Array<Bet>, setbetSlips: any, index: number, betSlip: Bet, removebetSlip: any, editBetSlip: any }) => {
     const [stake, setStake] = useState(0)
     return (
         <div style={{ margin: 20 }}>

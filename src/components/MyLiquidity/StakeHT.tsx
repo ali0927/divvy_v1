@@ -67,23 +67,12 @@ export const StakeHT = (props: {}) => {
         });
         const transaction = new Transaction();
         transaction.add(instruction);
-        const [ok, txid] = await sendTransaction(
+        await sendTransaction(
             connection,
             connectionConfig.env,
             wallet.wallet,
-            [instruction],
-            true
+            [instruction]
         );
-        if (ok) {
-            notify({
-                message: "Transaction success...",
-                description: (
-                    <>
-                        <ExplorerLink address={txid} type="transaction" cluster={connectionConfig.env} />
-                    </>
-                ),
-            });
-        }
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -109,36 +98,13 @@ export const StakeHT = (props: {}) => {
                 </div>
                 <Form.Item
                     name="usdtAmount"
-                    rules={[{ required: true, message: "Please input the USDT amount." }]}
-                >
+                    rules={[{ required: true, message: "Please input the USDT amount." }]}>
                     <Input.Group compact>
                       <Input placeholder={"House Token"} min="0" style={{width:"75%"}} disabled={true}/>
                       <Button style={{border: "1px solid rgb(67, 67, 67)" }} disabled={true}>MAX</Button>
                     </Input.Group>
                 </Form.Item>
 
-                {/* <Form.Item
-            label="USDT Address:"
-            name="usdtAddress"
-            rules={[
-              { required: true, message: "Please enter your USDT address." },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-  
-          <Form.Item
-            label="House Pool Address"
-            name="hpAddress"
-            rules={[
-              {
-                required: true,
-                message: "Please enter your house pool address.",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item> */}
                 <Button type="primary" htmlType="submit">
                     Stake
                 </Button>
