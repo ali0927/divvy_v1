@@ -1,25 +1,29 @@
 import { useEffect, useState } from "react";
 import * as IDS from "../utils/ids";
-import { BetType, Game } from "../constants";
+import { Bet, BetType, Game, LAMPORTS_PER_USDT } from "../constants";
 import { RightSideBar } from "../components/RightSideBar";
 import { LeftSideBar } from "../components/LeftSideBar";
 import { NavBar } from "../components/Nav/NavBar";
 import { HomeCarousel } from "../components/Home/HomeCarousel";
 import { SingleMarketHeader } from "../components/SingleMarket/SingleMarketHeader";
 import { SingleMarketMatches } from "../components/SingleMarket/SingleMarketMatches";
-import { BetSidebar } from "../components/Home/BetSidebar";
-import { Bet } from "../constants"
-import { useWallet } from "../contexts/wallet";
-import { useConnection, useConnectionConfig } from "../contexts/connection";
-import { useAccountByMint } from "../hooks";
-import { LAMPORTS_PER_USDT } from "../constants/math";
+import { BetSlips } from "../components/Home/BetSlips";
+import { SelectChain } from "../components/SelectChain";
+import { MobileHeader } from "../components/Nav/Mobile/MobileHeader"
+import { Layout, Row, Col } from "antd";
+import { HeaderTypes } from "../constants/HeaderTypes";
 import { getOdds } from "../api/odds";
+import { useWallet } from "../contexts/sol/wallet";
+import { useConnection, useConnectionConfig } from "../contexts/sol/connection";
+import { useAccountByMint } from "../hooks/useAccountByMint";
+import { settleBet } from "../models/sol/settleBet";
 import { initBet } from "../models/sol/initBet";
-import { settleBet }  from "../models/sol/settleBet";
 
 export const BetsView = () => {
   const [betSlips, setBetSlips] = useState(Array<Bet>());
   const [games, setGames] = useState(Array<Game>());
+  const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
 
   useEffect(() => {
     getOdds(games => {
@@ -109,20 +113,32 @@ export const BetsView = () => {
 
 
   return (
-    <div className="root" >
-      <LeftSideBar>
-        <NavBar />
-      </LeftSideBar>
-      <header className="root-content">
-        <HomeCarousel />
-        <SingleMarketHeader />
-        <SingleMarketMatches games={games} setbetSlips={setbetSlips} />
-      </header>
-      <div style={{ position: "fixed", right: 0, background: "black" }}>
-        <RightSideBar>
-          <BetSidebar editBetSlip={editBetSlip} bets={betSlips} setbetSlips={setbetSlips} removebetSlip={removebetSlip} placeBets={placeBets} settleBets={settleBets} />
-        </RightSideBar>
-      </div>
-    </div>
+    <Layout style={{ backgroundColor: "#0D0D0D" }}>
+      <Row>
+        <Col xs={24} sm={24} md={0}>
+          <MobileHeader headerType={HeaderTypes.Bets} betSlips={betSlips} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
+        </Col>
+        <Col span={5} xs={isMobileMenuVisible ? 24 : 0} sm={isMobileMenuVisible ? 24 : 0} md={5}>
+          <LeftSideBar>
+            <NavBar />
+          </LeftSideBar>
+        </Col>
+        {!isMobileMenuVisible && !isBetSlipsVisible &&
+          <Col span={24} xs={24} sm={24} md={19}>
+            <header className="root-content">
+              <SelectChain />
+              <HomeCarousel />
+              <SingleMarketHeader />
+              <SingleMarketMatches games={games} setbetSlips={setbetSlips} />
+            </header>
+          </Col>
+        }
+        <Col span={24} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={24}>
+          <RightSideBar>
+            <BetSlips editBetSlip={editBetSlip} betSlips={betSlips} setbetSlips={setbetSlips} removebetSlip={removebetSlip} placeBets={placeBets} />
+          </RightSideBar>
+        </Col>
+      </Row>
+    </Layout>
   );
 };

@@ -1,10 +1,9 @@
-import { AccountLayout, Token, u64 } from "@solana/spl-token";
+import { AccountLayout, Token } from "@solana/spl-token";
 import { Connection, Keypair, PublicKey, SystemProgram, TransactionInstruction } from "@solana/web3.js";
 import * as BufferLayout from "buffer-layout";
-import { ENV, sendTransaction } from "../../contexts/connection";
-import { WalletAdapter } from "../../contexts/wallet";
+import { ENV, sendTransaction } from "../../contexts/sol/connection";
+import { WalletAdapter } from "../../contexts/sol/wallet";
 import * as IDS from "../../utils/ids"
-import * as Layout from "../../utils/layout";
 import { notify } from "../../utils/notifications";
 
 const INIT_BET_LAYOUT: BufferLayout.Layout = BufferLayout.struct([

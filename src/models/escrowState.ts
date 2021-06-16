@@ -1,7 +1,7 @@
 import { AccountInfo, PublicKey } from "@solana/web3.js";
 import * as Layout from "../utils/layout";
 import * as BufferLayout from "buffer-layout";
-import { ParsedAccount } from "../contexts/accounts";
+import { ParsedAccount } from "../contexts/sol/accounts";
 
 const LAYOUT = BufferLayout.struct([
   BufferLayout.u8('isInitialized'),

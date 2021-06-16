@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { cache } from "../contexts/accounts";
-import { useMarkets } from "../contexts/market";
+import { cache } from "../contexts/sol/accounts";
+import { useMarkets } from "../contexts/sol/market";
 import { fromLamports } from "../utils/utils";
 import { useUserAccounts } from "./useUserAccounts";
 

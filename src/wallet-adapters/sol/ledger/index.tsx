@@ -4,8 +4,8 @@ import type { Transaction } from "@solana/web3.js";
 import EventEmitter from "eventemitter3";
 import { PublicKey } from "@solana/web3.js";
 import TransportWebUSB from "@ledgerhq/hw-transport-webusb";
-import { WalletAdapter } from "../../contexts/wallet";
-import { notify } from "../../utils/notifications";
+import { WalletAdapter } from "../../../contexts/sol/wallet";
+import { notify } from "../../../utils/notifications";
 import { getPublicKey, signTransaction } from "./core";
 
 export class LedgerWalletAdapter extends EventEmitter implements WalletAdapter {
@@ -50,7 +50,7 @@ export class LedgerWalletAdapter extends EventEmitter implements WalletAdapter {
       // @TODO: account selection
       this._publicKey = await getPublicKey(this._transport);
       this.emit("connect", this._publicKey);
-    } catch (error) {
+    } catch (error: any) {
       notify({
         message: "Ledger Error",
         description: error.message,

@@ -4,7 +4,7 @@ import { PotentialWins } from "./PotentialWins";
 import { ConfirmedOdds } from "./ConfirmedOdds";
 import { Bet, BetType } from "../../constants";
 import LinkLabel from "../Nav/LinkLabel";
-export const PendingBets = (props: { betSlips: Array<Bet>, setbetSlips: any, removebetSlip: any, settleBetSlips: any }) => {
+export const PendingBets = (props: { betSlips: Array<Bet>, setbetSlips: any, removebetSlip: any, settleBetSlips?: any }) => {
     var bets = 0
     props.betSlips.forEach((value: Bet) => {
       if (value.type === BetType.Pending)

@@ -1,10 +1,27 @@
+import { Col, Row } from 'antd';
 import React, { useState } from 'react';
 export const OddsType = () => {
     return (
-        <div style={{ display: "flex", alignItems: "center", marginLeft: "15%", justifyContent: "space-around", width: "59%", textAlign: "center" }}>
-            <div style={{ width: 80 }}>Win</div>
-            <div style={{ width: 80 }}>Spread</div>
-            <div style={{ width: 80 }}>Total</div>
-        </div>
+        <Row>
+            <Col span={5} md={4}>
+            </Col>
+            <Col className="odds-type" span={5} md={5}>
+                <div style={{ textAlign: "center", marginLeft: "-6%" }}>
+                    Win
+                </div>
+            </Col>
+            <Col className="odds-type" span={7} md={5}>
+                <div style={{ textAlign: "center", marginLeft: "11%" }}>
+                    Spread
+                </div>
+            </Col>
+            <Col className="odds-type" span={6} md={5}>
+                <div style={{ textAlign: "center", marginLeft: "25%" }}>
+                    Total
+                </div>
+            </Col>
+            <Col span={1} md={4}>
+            </Col>
+        </Row >
     );
 };

@@ -77,6 +77,11 @@ html {
     background-color: #1f1f1f;
 }
 
+:root {
+    --royal_purple: #7c01ff;
+    --win_green: #00d77d;
+}
+
 body {
     background-color: #0d0d0d;
 }
@@ -84,14 +89,14 @@ body {
 .root {
     display: flex;
     flex-direction: row;
+    background-color: #0d0d0d;
 }
 
 .root-content {
     align-items: center;
     width: 100%;
-    padding: 3em;
+    padding: 0.8em;
     max-width: 100em;
-    max-height: 100vh;
     overflow-y: auto;
 }
 
@@ -115,7 +120,7 @@ body {
     justify-content: flex-start;
     flex-direction: column;
     max-height: 100vh;
-    min-width: 20em;
+    width: 100%;
 }
 
 .RightSideBar {
@@ -192,10 +197,15 @@ body {
     height: 36px;
     width: 60%;
     padding-top: 9px;
-    font-size: 13px;
+    font-size: 15px;
+    font-size: 0.7em;
     text-align: center;
     cursor: pointer;
     background-color: #1f1f1f;
+}
+
+.odds-type {
+    font-size: 0.7em;
 }
 
 .odds-active {
@@ -268,6 +278,17 @@ body {
     cursor: pointer;
 }
 
+.bets-icon {
+    width: 10%;
+    text-align: center;
+    height: 55px;
+    padding: 14px 0 17px;
+    border: solid 1px #1f1f1f;
+    background-color: #0d0d0d;
+    cursor: pointer;
+    display: none;
+}
+
 .secondary-team {
     width: 179px;
     height: 12px;
@@ -301,16 +322,58 @@ body {
 }
 
 .sidebar-section {
-    width: 20em;
+    /* width: 20em; */
     outline: 1px solid #1f1f1f;
     margin-top: 1px;
     padding: 1em;
 }
 
-.sidebar-section-bets {
-    width: 20em;
+.sidebar-section-bets-active {
     outline: 1px solid #1f1f1f;
-    height: 100vh;
+    background-color: #242424;
+}
+
+.sidebar-section-bets {
+    outline: 1px solid #1f1f1f;
+    background-color: #242424;
+}
+
+@media (min-width: 768px) {
+    .sidebar-section-bets-active {
+        width: 20em;
+        position: fixed;
+        bottom: 0;
+        right: 31px;
+        height: 80vh;
+    }
+    .sidebar-section-bets {
+        width: 20em;
+        position: fixed;
+        bottom: 0;
+        right: 31px;
+        height: 10vh;
+    }
+    .sidebar-section-bets-button {
+        width: 20em;
+        height: 16vh;
+        bottom: 0;
+        position: fixed;
+        right: 31px;
+    }
+    .mybets-scroll-mobile {
+        display: none;
+    }
+    .bets-icon {
+        display: flex;
+    }
+    .mybets-scroll {
+        display: "flex";
+    }
+}
+
+.sidebar-section-bets-button {
+    outline: 1px solid #1f1f1f;
+    background-color: #0d0d0d;
 }
 
 .sidebar-section-markets {
@@ -325,6 +388,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    color: gray;
 }
 
 .horizontal-outline {
@@ -333,6 +397,13 @@ body {
 
 .balance {
     white-space: nowrap;
+}
+
+.mobile-header {
+    text-align: center;
+    border: solid 1px #242424;
+    margin-bottom: 1px;
+    height: 60px;
 }
 
 .search-item {
@@ -387,9 +458,9 @@ a:hover {
 }
 
 .single-market {
-    padding: 1em;
-    padding-left: 2em;
-    padding-top: 1em;
+    /* padding: 1em;
+  padding-left: 2em;
+  padding-top: 1em; */
 }
 
 .ExplorerLink {

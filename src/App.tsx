@@ -1,40 +1,35 @@
 import "./App.css";
 import "flag-icon-css/css/flag-icon.css"
-import { WalletProvider } from "./contexts/wallet";
-import { ConnectionProvider } from "./contexts/connection";
-import { AccountsProvider } from "./contexts/accounts";
-import { MarketProvider } from "./contexts/market";
-import { HousePoolProvider } from "./contexts/hpliquidity";
+import { WalletProvider } from "./contexts/sol/wallet";
+import { ConnectionProvider } from "./contexts/sol/connection";
+import { AccountsProvider } from "./contexts/sol/accounts";
+import { MarketProvider } from "./contexts/sol/market";
+import { SolanaProvider } from "./contexts/sol";
+import { ChainProvider } from "./contexts/chainselect";
 import { BetsView } from "./views/BetsView";
 import { LiquidityView } from "./views/LiquidityView";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { LandingPageView } from "./views/LandingPageView";
-
+import { RootContextProvider } from "./contexts";
 function App() {
   return (
     <BrowserRouter>
-      <ConnectionProvider>
-        <WalletProvider>
-          <AccountsProvider>
-            <MarketProvider>
-              <HousePoolProvider>
-                {/* Routes are ordered specific to general. the '/' route must be placed last */}
-                <Switch>
-                  <Route path="/liquidity">
-                    <LiquidityView />
-                  </Route>
-                  <Route path="/app">
-                    <BetsView />
-                  </Route>
-                  <Route path="/">
-                    <LandingPageView />
-                  </Route>
-                </Switch>
-              </HousePoolProvider>
-            </MarketProvider>
-          </AccountsProvider>
-        </WalletProvider>
-      </ConnectionProvider>
+      <ChainProvider>
+        <RootContextProvider>
+          {/* Routes are ordered specific to general. the '/' route must be placed last */}
+          <Switch>
+            <Route path="/liquidity">
+              <LiquidityView />
+            </Route>
+            <Route path="/app">
+              <BetsView />
+            </Route>
+            <Route path="/">
+              <LandingPageView />
+            </Route>
+          </Switch>
+        </RootContextProvider>
+      </ChainProvider>
     </BrowserRouter>
   );
 }

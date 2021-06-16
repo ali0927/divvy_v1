@@ -1,7 +1,7 @@
 import EventEmitter from "eventemitter3";
 import { PublicKey, Transaction } from "@solana/web3.js";
-import { WalletAdapter } from "../../contexts/wallet";
-import { notify } from "../../utils/notifications";
+import { WalletAdapter } from "../../../contexts/sol/wallet";
+import { notify } from "../../../utils/notifications";
 
 export class SolongWalletAdapter extends EventEmitter implements WalletAdapter {
   _publicKey: PublicKey | null;

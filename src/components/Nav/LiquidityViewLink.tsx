@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { HousePoolContext } from "../../contexts/hpliquidity";
-import LinkLabel from "./LinkLabel"
+import { UserHPTContext } from "../../contexts/sol/userhpt";
+import LinkLabel from "../Nav/LinkLabel";
 export const LiquidityViewLink = () => {
-  const { hpBalance } = useContext(HousePoolContext);
+  const { hpBalance } = useContext(UserHPTContext);
   return (
     <Link to="/liquidity">
       <div className="sidebar-section text-secondary">

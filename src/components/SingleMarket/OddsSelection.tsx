@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button, Divider } from "antd";
-import { Odds, Bet, BetType, Game, OddsType, Team } from "../../constants";
+import { Col, Row } from "antd";
+import { Odds, BetType, Game, OddsType, Team, Bet } from "../../constants";
 export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game, selection: Team, otherteam: Team }) => {
     const [selection, setSelection] = useState("")
     function makeid(length: number) {
@@ -34,18 +34,16 @@ export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game,
         props.setbetSlips(bet)
     }
     return (
-        <div style={{ display: "flex", alignItems: "center", width: "60%", height: 36, marginLeft: 20, marginTop: 10 }}>
-            <Button onClick={() => setSlip("win", props.odds.moneyline, OddsType.moneyline)} className={selection === 'win' ? "odds odds-active" : "odds"}>
+        <Row style={{ display: "flex", alignItems: "center", height: 36, marginLeft: 20, marginTop: 10 }}>
+            <Col span={8} onClick={() => setSlip("win", props.odds.moneyline, OddsType.moneyline)} className={selection === 'win' ? "odds odds-active" : "odds"}>
                 <b>{props.odds.moneyline}</b>
-            </Button>
-            <Divider style={{ height: 32, border: "0px" }} type="vertical" />
-            <Button onClick={() => setSlip("spread", props.odds.spread, OddsType.spread)} className={selection === 'spread' ? "odds odds-active" : "odds"}>
-                <b>{(props.selection.favorite ? "(-" : "(+") + String(props.game.spread) + ") " + String(props.odds.spread) }</b>
-            </Button>
-            <Divider style={{ height: 32, border: "0px" }} type="vertical" />
-            <Button onClick={() => setSlip("total", props.odds.total, OddsType.total)} className={selection === 'total' ? "odds odds-active" : "odds"}>
+            </Col>
+            <Col span={8} onClick={() => setSlip("spread", props.odds.spread, OddsType.spread)} className={selection === 'spread' ? "odds odds-active" : "odds"}>
+                <b>{(props.selection.favorite ? "(-" : "(+") + String(props.game.spread) + ") " + String(props.odds.spread)}</b>
+            </Col>
+            <Col span={8} onClick={() => setSlip("total", props.odds.total, OddsType.total)} className={selection === 'total' ? "odds odds-active" : "odds"}>
                 <b>{(props.otherteam.favorite ? "(U " : "(O ") + String(props.game.total) + ") " + String(props.odds.total)}</b>
-            </Button>
-        </div>
+            </Col>
+        </Row>
     )
 };

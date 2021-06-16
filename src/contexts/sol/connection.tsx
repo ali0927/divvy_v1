@@ -1,20 +1,23 @@
-import { useLocalStorageState } from "./../utils/utils";
+import { useLocalStorageState } from "../../utils/utils";
 import {
   Account,
   Keypair,
+  Signer,
   clusterApiUrl,
   Connection,
   PublicKey,
   Transaction,
   TransactionInstruction,
   SendOptions,
-  SignaturePubkeyPair,
-  Signer,
+  AccountChangeCallback,
+  Context,
+  AccountInfo,
+  Commitment,
 } from "@solana/web3.js";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { notify } from "./../utils/notifications";
-import { ExplorerLink } from "../components/ExplorerLink";
-import { setProgramIds } from "../utils/ids";
+import { notify } from "../../utils/notifications";
+import { ExplorerLink } from "../../components/ExplorerLink";
+import { setProgramIds } from "../../utils/ids";
 import { WalletAdapter } from "./wallet";
 import { cache, getMultipleAccounts, MintParser } from "./accounts";
 import {
@@ -66,9 +69,9 @@ interface ConnectionConfig {
 
 const ConnectionContext = React.createContext<ConnectionConfig>({
   endpoint: DEFAULT,
-  setEndpoint: () => {},
+  setEndpoint: () => { },
   slippage: DEFAULT_SLIPPAGE,
-  setSlippage: (val: number) => {},
+  setSlippage: (val: number) => { },
   connection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
   sendConnection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
   env: ENDPOINTS[0].name,
@@ -141,7 +144,7 @@ export function ConnectionProvider({ children = undefined as any }) {
   // is empty after opening its first time, preventing subsequent subscriptions from receiving responses.
   // This is a hack to prevent the list from every getting empty
   useEffect(() => {
-    const id = connection.onAccountChange(new Account().publicKey, () => {});
+    const id = connection.onAccountChange(new Account().publicKey, () => { });
     return () => {
       connection.removeAccountChangeListener(id);
     };
@@ -157,7 +160,7 @@ export function ConnectionProvider({ children = undefined as any }) {
   useEffect(() => {
     const id = sendConnection.onAccountChange(
       new Account().publicKey,
-      () => {}
+      () => { }
     );
     return () => {
       sendConnection.removeAccountChangeListener(id);
@@ -319,4 +322,48 @@ export const sendTransaction = async (
   }
 
   return [ok, txid];
+};
+
+/**
+ * Fetch an account for the specified public key and subscribe a callback
+ * to be invoked whenever the specified account changes.
+ *
+ * @param connection Connection to use
+ * @param publicKey Public key of the account to monitor
+ * @param callback Function to invoke whenever the account is changed
+ * @param commitment Specify the commitment level account changes must reach before notification
+ * @return subscription id
+ */
+
+export const getAccountInfoAndSubscribe = function (
+  connection: Connection,
+  publicKey: PublicKey,
+  callback: AccountChangeCallback,
+  commitment?: Commitment | undefined
+): number {
+  let latestSlot: number = -1;
+
+  let subscriptionId = connection.onAccountChange(
+    publicKey,
+    (acc: AccountInfo<Buffer>, context: Context) => {
+      if (context.slot >= latestSlot) {
+        latestSlot = context.slot;
+        callback(acc, context);
+      }
+    },
+    commitment
+  );
+
+  connection
+    .getAccountInfoAndContext(publicKey, commitment)
+    .then((response) => {
+      if (response.context.slot >= latestSlot) {
+        latestSlot = response.context.slot;
+        if (response.value) {
+          callback(response.value, response.context);
+        }
+      }
+    });
+
+  return subscriptionId;
 };

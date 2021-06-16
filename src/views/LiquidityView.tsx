@@ -4,38 +4,40 @@ import { NavBar } from "../components/Nav/NavBar";
 // import Logo from '../img/divvy.mp4';
 import { MyLiquidity } from "../components/MyLiquidity/MyLiquidity";
 import { LiquidityGlobalStats } from "../components/Liquidity/LiquidityGlobalStats";
-import { LiquidityDistribution } from "../components/Liquidity/LiquidityDistribution";
-import { LiquidityAvailabilityBar } from "../components/Liquidity/LiquidityAvailabilityBar";
-import { LiquidityAvailability } from "../components/Liquidity/LiquidityAvailability";
-import { Button } from "antd";
+import { Button, Col, Layout, Row } from "antd";
 import { Link } from "react-router-dom";
+import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
+import { Bet } from "../constants";
+import { useState } from "react";
+import { HeaderTypes } from "../constants/HeaderTypes"
 export const LiquidityView = () => {
+  const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
   return (
-    <div className="root">
-      <LeftSideBar>
-        <NavBar />
-      </LeftSideBar>
-      <div style={{ width: "100%" }}>
-        <div style={{margin: "1.5em", marginBottom: "5em"}}>
-          <Link to="/app">
-            <Button>Return To Betting</Button>
-          </Link>
-        </div>
-        <div className="root-content">
-          <div className="left">
-            <video autoPlay={true} loop={true} width={200} height={200} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />
-          </div>
-          <div className="right">
-            <LiquidityGlobalStats />
-            <LiquidityAvailabilityBar />
-            <LiquidityAvailability />
-            <LiquidityDistribution />
-          </div>
-        </div>
-      </div>
-      <RightSideBar>
-        <MyLiquidity />
-      </RightSideBar>
-    </div>
+    <Layout style={{ backgroundColor: "#0D0D0D" }}>
+      <Row>
+        <Col xs={24} sm={24} md={0}>
+          <MobileHeader headerType={HeaderTypes.Liquidity} betSlips={Array<Bet>()} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
+        </Col>
+        <Col span={5} xs={isMobileMenuVisible ? 24 : 0} sm={isMobileMenuVisible ? 24 : 0} md={5}>
+          <LeftSideBar>
+            <NavBar />
+          </LeftSideBar>
+        </Col>
+        {!isMobileMenuVisible && !isBetSlipsVisible &&
+          <Col span={14} xs={24} sm={24} md={14}>
+            <header className="root-content" style={{ maxHeight: "100vh" }}>
+              <LiquidityGlobalStats />
+            </header>
+          </Col>
+        }
+        <Col span={5} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={5}>
+          <RightSideBar>
+            <MyLiquidity />
+
+          </RightSideBar>
+        </Col>
+      </Row>
+    </Layout>
   );
 };
