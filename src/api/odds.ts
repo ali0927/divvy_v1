@@ -21,13 +21,13 @@ export const getOdds = (callback: OddsCallback) => {
         const id: string = item.id
         game[id] = ({
           teamA: {
-            name: codes[item.teams[0]].code,
+            name: item.teams[0],
             logo: "flag-icon-" + countryCodeToFlagCode(item.teams[0]),
             id: item.teams[0].toLowerCase(),
             favorite: item.teams[0] === item.home_team
           },
           teamB: {
-            name: codes[item.teams[1]].code,
+            name: item.teams[1],
             logo: "flag-icon-" + countryCodeToFlagCode(item.teams[1]),
             id: item.teams[1].toLowerCase(),
             favorite: item.teams[1] === item.home_team
@@ -51,8 +51,8 @@ export const getOdds = (callback: OddsCallback) => {
           spread: 1,
           total: 2,
           id: item.id,
-          date: getDate(parseInt(item.commence_time)),
-          time: getTime(parseInt(item.commence_time))
+          date: getDate(parseInt(item.commence_time)*1000),
+          time: getTime(parseInt(item.commence_time)*1000)
         })
       }
     })

@@ -77,7 +77,7 @@ export const BetsView = () => {
           usdtTokenAccount?.pubkey,
           bet.risk * LAMPORTS_PER_USDT,
           bet.odds);
-        if(betTokenAccount) { 
+        if (betTokenAccount) {
           bet.betTokenAccount = betTokenAccount;
           bet.type = BetType.Pending
         }
@@ -99,7 +99,7 @@ export const BetsView = () => {
           bet.betTokenAccount,
           usdtTokenAccount?.pubkey,
           outcome);
-        if(ok) {
+        if (ok) {
           const index = bets.indexOf(bet);
           if (index > -1) {
             bets.splice(index, 1);
@@ -126,7 +126,7 @@ export const BetsView = () => {
         {!isMobileMenuVisible && !isBetSlipsVisible &&
           <Col span={24} xs={24} sm={24} md={19}>
             <header className="root-content">
-              <SelectChain />
+              {/* <SelectChain /> */}
               <HomeCarousel />
               <SingleMarketHeader />
               <SingleMarketMatches games={games} setbetSlips={setbetSlips} />
