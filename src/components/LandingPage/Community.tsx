@@ -13,7 +13,7 @@ export const Community = () => {
             </p>
           </div>
           <div className="social">
-              <a className="justify-start align-start" href="https://discord.gg/QbWgYfYB" target="_blank" rel="noreferrer"><img src={discord} alt="Discord" /></a>
+              <a className="justify-start align-start" href="https://discord.gg/ksKA3nEgCk" target="_blank" rel="noreferrer"><img src={discord} alt="Discord" /></a>
               <a className="justify-end align-start" href="https://twitter.com/DivvyBet" target="_blank" rel="noreferrer"><img src={twitter} alt="Twitter" /></a>
               <a className="justify-start align-end" href="https://github.com/DivvyBet" target="_blank" rel="noreferrer"><img src={github} alt="Github" /></a>
               <a className="justify-end align-end" href="https://t.me/Divvy_bet" target="_blank" rel="noreferrer"><img src={telegram} alt="Telegram" /></a>
