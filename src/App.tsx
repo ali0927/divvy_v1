@@ -21,7 +21,7 @@ function App() {
             <Route path="/liquidity">
               <LiquidityView />
             </Route>
-            <Route path="/app">
+            <Route path="/fhe839g">
               <BetsView />
             </Route>
             <Route path="/">
