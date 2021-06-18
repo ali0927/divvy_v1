@@ -18,10 +18,10 @@ function App() {
         <RootContextProvider>
           {/* Routes are ordered specific to general. the '/' route must be placed last */}
           <Switch>
-            <Route path="/liquidity">
+            <Route path="/fhe83az">
               <LiquidityView />
             </Route>
-            <Route path="/app">
+            <Route path="/fhe839g">
               <BetsView />
             </Route>
             <Route path="/">
