@@ -1,14 +1,16 @@
 import React, { useState, createContext, useEffect } from "react"
 import { ChainType } from "../constants/chains";
-const CHAIN_STRING: string = "chain"
-export const ChainSelectContext = createContext<any>(null);
+const CHAIN_KEY: string = "chain"
+export const ChainSelectContext = createContext<{
+  chain: ChainType,
+  changeChain: (chain:ChainType) => void
+}>(null as any);
 
 export const ChainProvider = (props: { children: any }) => {
-    let [chain, setChain] =
-        useState<ChainType>();
+    let [chain, setChain] = useState<ChainType>(localStorage.getItem(CHAIN_KEY) as ChainType ?? ChainType.Sol);
     useEffect(() => {
         const getChain = async () => {
-            const chain: any = await localStorage.getItem(CHAIN_STRING)
+            const chain: any = localStorage.getItem(CHAIN_KEY)
             if (chain) {
                 setChain(chain)
             } else {
@@ -18,7 +20,7 @@ export const ChainProvider = (props: { children: any }) => {
         getChain()
     }, [])
     function changeChain(chain: ChainType) {
-        localStorage.setItem(CHAIN_STRING, chain)
+        localStorage.setItem(CHAIN_KEY, chain)
         setChain(chain);
     };
     return (

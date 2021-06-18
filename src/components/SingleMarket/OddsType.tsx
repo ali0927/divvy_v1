@@ -1,5 +1,4 @@
 import { Col, Row } from 'antd';
-import React, { useState } from 'react';
 export const OddsType = () => {
     return (
         <Row>

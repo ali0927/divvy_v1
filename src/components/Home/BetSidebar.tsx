@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Bet, BetType } from "../../constants";
+import { BetsContext } from "../../contexts/bets";
 import { MyBets as BetSlip } from "../Bets/BetSlip";
 import { PendingBets } from "../Bets/PendingBets";
-export const BetSidebar = (props: { bets: Array<Bet>, setbetSlips: any, removebetSlip: any, editBetSlip: any, placeBets: any, settleBets: any }) => {
+export const BetSidebar = () => {
+  const bets = useContext(BetsContext);
   const [active, setActive] = useState("slips")
   var slips = 0
   var pending = 0
-  props.bets.forEach((value: Bet) => {
+  bets?.bets.forEach((value: Bet) => {
     if (value.type === BetType.Current) {
       slips++;
     }
@@ -26,8 +28,8 @@ export const BetSidebar = (props: { bets: Array<Bet>, setbetSlips: any, removebe
       </div>
       {
         active === "slips" 
-        ? <BetSlip betSlips={props.bets} setbetSlips={props.setbetSlips} removebetSlip={props.removebetSlip} editBetSlip={props.editBetSlip} placeBets={props.placeBets} /> 
-        : <PendingBets betSlips={props.bets} setbetSlips={props.setbetSlips} removebetSlip={props.removebetSlip} settleBetSlips={props.settleBets} />
+        ? <BetSlip/> 
+        : <PendingBets/>
       }
     </div>
   );

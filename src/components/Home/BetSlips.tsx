@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Bet, BetType } from "../../constants";
 import { MyBets } from "../Bets/MyBets";
 import { PendingBets } from "../Bets/PendingBets";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
-export const BetSlips = (props: { betSlips: Array<Bet>, setbetSlips: any, removebetSlip: any, editBetSlip: any, placeBets: any }) => {
+import { BetsContext } from "../../contexts/bets";
+export const BetSlips = () => {
   const [active, setActive] = useState("slips")
   const [isCollapsed, setIsCollapsed] = useState(true)
+  const bets = useContext(BetsContext);
   var slips = 0
   var pending = 0
-  props.betSlips.map((value: Bet) => {
-    if (value.type == BetType.Current) {
+  bets?.bets.forEach((value: Bet) => {
+    if (value.type === BetType.Current) {
       slips = slips + 1
     }
     else {
@@ -34,11 +36,11 @@ export const BetSlips = (props: { betSlips: Array<Bet>, setbetSlips: any, remove
       </div>
       {!isCollapsed &&
         <div className="mybets-scroll">
-          {active === "slips" ? <MyBets betSlips={props.betSlips} setbetSlips={props.setbetSlips} removebetSlip={props.removebetSlip} editBetSlip={props.editBetSlip} placeBets={props.placeBets} /> : <PendingBets betSlips={props.betSlips} setbetSlips={props.setbetSlips} removebetSlip={props.removebetSlip} />}
+          {active === "slips" ? <MyBets/> : <PendingBets/>}
         </div>
       }
       <div className="mybets-scroll-mobile">
-        {active === "slips" ? <MyBets betSlips={props.betSlips} setbetSlips={props.setbetSlips} removebetSlip={props.removebetSlip} editBetSlip={props.editBetSlip} placeBets={props.placeBets} /> : <PendingBets betSlips={props.betSlips} setbetSlips={props.setbetSlips} removebetSlip={props.removebetSlip} />}
+        {active === "slips" ? <MyBets/> : <PendingBets/>}
       </div>
     </div>
   );

@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
 import { Row, Col } from 'antd'
-import { SearchOutlined } from "@ant-design/icons"
 export const TeamDetails = (props: { name: string, logo: string }) => {
     return (
         <div style={{ alignItems: "center", paddingTop: 18 }}>

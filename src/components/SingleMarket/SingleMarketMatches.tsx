@@ -1,10 +1,9 @@
-import React from "react";
 import { SingleMatchComponent } from "./SingleMatchComponent"
 import { Collapse, Divider, Col, Row } from "antd";
 import { GameName } from "./GameName";
 import { Game } from "../../constants";
 const { Panel } = Collapse;
-export const SingleMarketMatches = (props: { games: Array<Game>, setbetSlips: any }) => {
+export const SingleMarketMatches = (props: { games: Array<Game> }) => {
     return (
         <div className="single-market">
             <Row>
@@ -14,7 +13,7 @@ export const SingleMarketMatches = (props: { games: Array<Game>, setbetSlips: an
                             {props.games.map((value: Game, index: number) => {
                                 return (
                                     <>
-                                        <SingleMatchComponent game={value} setbetSlips={props.setbetSlips} />
+                                        <SingleMatchComponent game={value} />
                                         <Divider style={{ color: "gray" }} />
                                     </>
                                 )

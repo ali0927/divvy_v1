@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
-import { Layout, Row, Col } from "antd";
+import { Row, Col } from "antd";
 import { WalletBalance } from "./WalletBalance";
 import { MobileBetSlip } from "./BetSlip";
 import { MobileMenu } from "./Menu";
 import { HeaderLogo } from "./HeaderLogo";
-import { Bet } from "../../../constants";
 import { HeaderTypes } from "../../../constants/HeaderTypes";
 import { HousePoolHeader } from "./HousePoolHeader";
-const { Header, Content, Footer, Sider } = Layout;
-export const MobileHeader = (props: { isMobileMenuVisible: boolean, setMobileMenuVisible: any, isBetSlipsVisible: boolean, setBetSlipsVisible: any, betSlips: Array<Bet>, headerType: string }) => {
-    return (
+export const MobileHeader = (props: { isMobileMenuVisible: boolean, setMobileMenuVisible: any, isBetSlipsVisible: boolean, setBetSlipsVisible: any, headerType: string }) => {
+  return (
         <Row>
             <Col className="mobile-header" span={4}>
                 <HeaderLogo />
@@ -19,7 +16,7 @@ export const MobileHeader = (props: { isMobileMenuVisible: boolean, setMobileMen
             </Col>
             <Col className="mobile-header" span={5}>
                 {props.headerType == HeaderTypes.Bets ?
-                    <MobileBetSlip betSlips={props.betSlips} isBetSlipsVisible={props.isBetSlipsVisible} setBetSlipsVisible={props.setBetSlipsVisible} setMobileMenuVisible={props.setMobileMenuVisible} /> :
+                    <MobileBetSlip isBetSlipsVisible={props.isBetSlipsVisible} setBetSlipsVisible={props.setBetSlipsVisible} setMobileMenuVisible={props.setMobileMenuVisible} /> :
                     <HousePoolHeader isBetSlipsVisible={props.isBetSlipsVisible} setBetSlipsVisible={props.setBetSlipsVisible} setMobileMenuVisible={props.setMobileMenuVisible} />
                 }
             </Col>

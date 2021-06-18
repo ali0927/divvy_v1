@@ -1,4 +1,3 @@
-import React from "react";
 export const SingleMarketHeader = () => {
     return (
         <div className="single-market">

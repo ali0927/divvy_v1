@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Col, Row } from "antd";
 import { Odds, BetType, Game, OddsType, Team, Bet } from "../../constants";
-export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game, selection: Team, otherteam: Team }) => {
+import { BetsContext } from "../../contexts/bets";
+export const OddsSelection = (props: { odds: Odds, game: Game, selection: Team, otherteam: Team }) => {
     const [selection, setSelection] = useState("")
-    function makeid(length: number) {
+    const bets = useContext(BetsContext);
+    
+    function makeId(length: number) {
         var result = [];
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         var charactersLength = characters.length;
@@ -13,6 +16,7 @@ export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game,
         }
         return result.join('');
     }
+
     const setSlip = (betType: string, odds: number, Oddtype: OddsType) => {
         setSelection(betType)
         let bet: Bet;
@@ -27,11 +31,11 @@ export const OddsSelection = (props: { odds: Odds, setbetSlips: any, game: Game,
             oddsType: Oddtype,
             type: BetType.Current,
             risk: 0,
-            id: makeid(10),
+            id: makeId(10),
             total: props.game.total,
             spread: props.game.spread,
         }
-        props.setbetSlips(bet)
+        bets?.addBet(bet)
     }
     return (
         <Row style={{ display: "flex", alignItems: "center", height: 36, marginLeft: 20, marginTop: 10 }}>
