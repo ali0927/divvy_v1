@@ -7,7 +7,7 @@ import { Col, Layout, Row } from "antd";
 import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
 import { useState } from "react";
 import { HeaderTypes } from "../constants/HeaderTypes"
-export const LiquidityView = () => {
+const LiquidityView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
   return (
@@ -37,3 +37,4 @@ export const LiquidityView = () => {
     </Layout>
   );
 };
+export default LiquidityView

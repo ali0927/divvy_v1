@@ -6,7 +6,7 @@ export const ChainSelectContext = createContext<{
   changeChain: (chain:ChainType) => void
 }>(null as any);
 
-export const ChainProvider = (props: { children: any }) => {
+const ChainProvider = (props: { children: any }) => {
     let [chain, setChain] = useState<ChainType>(localStorage.getItem(CHAIN_KEY) as ChainType ?? ChainType.Sol);
     useEffect(() => {
         const getChain = async () => {
@@ -29,3 +29,4 @@ export const ChainProvider = (props: { children: any }) => {
         </ChainSelectContext.Provider>
     )
 }
+export default ChainProvider

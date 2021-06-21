@@ -1,7 +1,8 @@
 import { LandingPage } from "../components/LandingPage";
 
-export const LandingPageView = () => {
+const LandingPageView = () => {
     return (
         <LandingPage />
     );
 };
+export default LandingPageView

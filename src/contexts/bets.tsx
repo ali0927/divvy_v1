@@ -18,7 +18,7 @@ export const BetsContext = createContext<{
 } | null>(null);
 
 
-export const BetsProvider = (props: { children: any }) => {
+const BetsProvider = (props: { children: any }) => {
   const [bets, setBets] = useState(Array<Bet>());
   const wallet = useWallet();
   const connection = useConnection();
@@ -108,3 +108,4 @@ export const BetsProvider = (props: { children: any }) => {
       </BetsContext.Provider>
   )
 }
+export default BetsProvider

@@ -8,7 +8,7 @@ import { MarketProvider } from "./sol/market";
 import { WalletProvider } from "./sol/wallet";
 import { ETHWalletProvider } from "./eth/wallet";
 import { MetaMaskProvider } from "./eth/Metamask/MetaMaskProvider";
-export const RootContextProvider = (props: { children: any }) => {
+const RootContextProvider = (props: { children: any }) => {
     const { chain } = useContext(ChainSelectContext);
     console.log(chain)
     if (chain === ChainType.Sol) {
@@ -44,3 +44,4 @@ export const RootContextProvider = (props: { children: any }) => {
         )
     }
 }
+export default RootContextProvider

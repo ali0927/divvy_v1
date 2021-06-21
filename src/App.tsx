@@ -1,12 +1,18 @@
 import "./App.css";
 import "flag-icon-css/css/flag-icon.css"
-import { ChainProvider } from "./contexts/chainselect";
-import { BetsView } from "./views/BetsView";
-import { LiquidityView } from "./views/LiquidityView";
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { LandingPageView } from "./views/LandingPageView";
-import { RootContextProvider } from "./contexts";
-import { BetsProvider } from "./contexts/bets";
+const load = (Component: any) => (props: any) => (
+  <Suspense fallback={<div></div>}>
+    <Component {...props} />
+  </Suspense>
+)
+const ChainProvider = load(lazy(() => import("./contexts/chainselect")));
+const BetsView = load(lazy(() => import("./views/BetsView")));
+const LiquidityView = load(lazy(() => import("./views/LiquidityView")));
+const LandingPageView = load(lazy(() => import("./views/LandingPageView")));
+const RootContextProvider = load(lazy(() => import("./contexts")));
+const BetsProvider = load(lazy(() => import("./contexts/bets")));
 function App() {
   return (
     <BrowserRouter>

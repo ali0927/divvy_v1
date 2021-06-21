@@ -12,7 +12,7 @@ import { Layout, Row, Col } from "antd";
 import { HeaderTypes } from "../constants/HeaderTypes";
 import { getOdds } from "../api/odds";
 
-export const BetsView = () => {
+const BetsView = () => {
   const [games, setGames] = useState(Array<Game>());
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
@@ -52,3 +52,4 @@ export const BetsView = () => {
     </Layout>
   );
 };
+export default BetsView
