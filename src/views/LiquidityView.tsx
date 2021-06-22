@@ -23,7 +23,7 @@ const LiquidityView = () => {
         </Col>
         {!isMobileMenuVisible && !isBetSlipsVisible &&
           <Col span={14} xs={24} sm={24} md={14}>
-            <header className="root-content" style={{ maxHeight: "100vh" }}>
+            <header className="root-content">
               <LiquidityGlobalStats />
             </header>
           </Col>
