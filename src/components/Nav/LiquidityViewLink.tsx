@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserHPTContext } from "../../contexts/sol/userhpt";
 import LinkLabel from "../Nav/LinkLabel";
+import { LIQUIDITY_VIEW_PATH } from "../../constants";
 export const LiquidityViewLink = () => {
   const { hpBalance } = useContext(UserHPTContext);
   return (
-    <Link to="/liquidity">
+    <Link to={LIQUIDITY_VIEW_PATH}>
       <div className="sidebar-section text-secondary">
         <LinkLabel style={{marginBottom: "0.83em"}}>
           <h2 style={{marginBottom: 0}}>House Pool</h2>

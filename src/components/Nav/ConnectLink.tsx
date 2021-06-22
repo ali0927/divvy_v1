@@ -5,7 +5,7 @@ import { ChainSelectContext } from "../../contexts/chainselect";
 import { ChainType } from "../../constants/chains";
 export const ConnectLink = () => {
   const { chain } = useContext(ChainSelectContext)
-  if (chain == ChainType.Eth) {
+  if (chain === ChainType.Eth) {
     return (
       <div className="sidebar-section">
         <EthWallet />

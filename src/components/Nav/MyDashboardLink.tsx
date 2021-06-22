@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { LANDING_PAGE_VIEW_PATH } from "../../constants";
 import LinkLabel from "./LinkLabel";
 export const MyDashboardLink = () => {
   const abort = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -7,7 +8,9 @@ export const MyDashboardLink = () => {
   };
 
   return (
-    <Link to="/" onClick={abort}>
+    <Link 
+     to={LANDING_PAGE_VIEW_PATH} // Todo replace with my dashboard
+     onClick={abort}>
       <div className="sidebar-section text-secondary">
         {/* Link to the real MyDashboard when it is complete */}
         <LinkLabel style={{marginBottom: "0.83em"}}>
