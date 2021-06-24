@@ -1,12 +1,8 @@
 import * as Accounts from "./accounts";
 import { getAccountInfoAndSubscribe, useConnection } from "./connection";
 import {
-  AccountChangeCallback,
   AccountInfo,
-  Commitment,
-  Connection,
-  Context,
-  PublicKey,
+  RpcResponseAndContext,
 } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
 import { EscrowState, EscrowStateParser } from "../../models/escrowState";
@@ -32,9 +28,12 @@ export const EscrowProvider = ({ children = null as any }) => {
       parseAccount
     );
 
-    function parseAccount(acc: AccountInfo<Buffer>) {
-      const parsed = EscrowStateParser(IDS.ESCROW_STATE_ID, acc);
-      setAccountData(parsed);
+    function parseAccount(response: RpcResponseAndContext<AccountInfo<Buffer> | null>) {
+      if(response.value) {
+        setAccountData(EscrowStateParser(IDS.ESCROW_STATE_ID, response.value));
+      } else {
+        setAccountData(undefined);
+      }
     }
 
     return () => {

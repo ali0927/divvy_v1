@@ -6,23 +6,21 @@ import {
   sendTransaction,
 } from "../../contexts/sol/connection";
 import { useWallet } from "../../contexts/sol/wallet";
-import { useAccountByMint, useUserBalance } from "../../hooks";
-import * as IDS from "../../utils/ids";
+import { useAccountByMint } from "../../hooks";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
-import { LAMPORTS_PER_USDT } from "../../constants";
 import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
-import { HouseDeposit } from "../../models/eth/HPtransactions";
+import { LAMPORTS_PER_USDT } from "../../constants";
+import * as IDS from "../../utils/ids"
 
 export const DepositLiquidity = (props: {}) => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
-  const usdtBalance = useUserBalance(IDS.USDT_MINT);
   const hpTokenAccount = useAccountByMint(IDS.HP_MINT)
-  const usdtTokenAccount = useAccountByMint(IDS.USDT_MINT)
+  const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   const { userUSDT } = useContext(UserUSDTContext)
   let [usdtAmount, setUsdtAmount] = useState("");
 
@@ -75,8 +73,7 @@ export const DepositLiquidity = (props: {}) => {
       usdtTokenAccount.pubkey,
       "deposit",
       usdtLamports,
-      bumpSeed
-    );
+      bumpSeed);
     const [ok, txid] = await sendTransaction(
       connection,
       connectionConfig.env,

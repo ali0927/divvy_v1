@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Select } from "antd";
-import { ENDPOINTS, useConnectionConfig } from "../../contexts/sol/connection";
+import { useConnectionConfig } from "../../contexts/sol/connection";
 import { useWallet } from "../../contexts/sol/wallet";
+import { ENDPOINTS } from "../../constants/sol/env";
 
 export const SolSettings = () => {
   const { connected, disconnect } = useWallet();

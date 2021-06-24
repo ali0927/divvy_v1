@@ -12,8 +12,8 @@ import { AccountLayout, u64, MintInfo, MintLayout } from "@solana/spl-token";
 import { TokenAccount } from "../../models";
 import { chunks } from "../../utils/utils";
 import { EventEmitter } from "../../utils/eventEmitter";
-import { useUserAccounts } from "../../hooks/useUserAccounts";
 import { WRAPPED_SOL_MINT, programIds } from "../../utils/ids";
+import * as IDS from "../../utils/ids"
 
 const AccountsContext = React.createContext<any>(null);
 
@@ -50,6 +50,9 @@ export interface ParsedAccount<T> extends ParsedAccountBase {
 export const MintParser = (pubKey: PublicKey, info: AccountInfo<Buffer>) => {
   const buffer = Buffer.from(info.data);
 
+  if (info.owner !== IDS.TOKEN_PROGRAM_ID || info.data.length !== MintLayout.span) {
+    return null;
+  }
   const data = deserializeMint(buffer);
 
   const details = {
@@ -306,7 +309,9 @@ const UseNativeAccount = () => {
     connection.onAccountChange(publicKey, (acc) => {
       if (acc) {
         updateCache(acc);
-        setNativeAccount(acc);
+        if(acc.value) {
+          setNativeAccount(acc.value);
+        }
       }
     });
   }, [setNativeAccount, wallet, publicKey, connection, updateCache]);
@@ -370,7 +375,9 @@ export function AccountsProvider({ children = null as any }) {
         let id = args.id;
         let deserialize = args.parser;
         connection.onAccountChange(new PublicKey(id), (info) => {
-          cache.add(id, info, deserialize);
+          if(info.value) {
+            cache.add(id, info.value, deserialize);
+          }
         });
       }
     });
@@ -489,77 +496,6 @@ const getMultipleAccountsCore = async (
   // TODO: fix
   throw new Error();
 };
-
-export function useMint(key?: string | PublicKey) {
-  const connection = useConnection();
-  const [mint, setMint] = useState<MintInfo>();
-
-  const id = typeof key === "string" ? key : key?.toBase58();
-
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-
-    cache
-      .query(connection, id, MintParser)
-      .then((acc) => setMint(acc.info as any))
-      .catch((err) => console.log(err));
-
-    const dispose = cache.emitter.onCache((e) => {
-      const event = e;
-      if (event.id === id) {
-        cache
-          .query(connection, id, MintParser)
-          .then((mint) => setMint(mint.info as any));
-      }
-    });
-    return () => {
-      dispose();
-    };
-  }, [connection, id]);
-
-  return mint;
-}
-
-export function useAccount(pubKey?: PublicKey) {
-  const connection = useConnection();
-  const [account, setAccount] = useState<TokenAccount>();
-
-  const key = pubKey?.toBase58();
-  useEffect(() => {
-    const query = async () => {
-      try {
-        if (!key) {
-          return;
-        }
-
-        const acc = await cache
-          .query(connection, key, TokenAccountParser)
-          .catch((err) => console.log(err));
-        if (acc) {
-          setAccount(acc);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    query();
-
-    const dispose = cache.emitter.onCache((e) => {
-      const event = e;
-      if (event.id === key) {
-        query();
-      }
-    });
-    return () => {
-      dispose();
-    };
-  }, [connection, key]);
-
-  return account;
-}
 
 // TODO: expose in spl package
 const deserializeAccount = (data: Buffer) => {

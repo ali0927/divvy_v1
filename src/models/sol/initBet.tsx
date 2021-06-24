@@ -1,7 +1,8 @@
 import { AccountLayout, Token } from "@solana/spl-token";
 import { Connection, Keypair, PublicKey, SystemProgram, TransactionInstruction } from "@solana/web3.js";
 import * as BufferLayout from "buffer-layout";
-import { ENV, sendTransaction } from "../../contexts/sol/connection";
+import { ENV } from "../../constants/sol/env";
+import { sendTransaction } from "../../contexts/sol/connection";
 import { WalletAdapter } from "../../contexts/sol/wallet";
 import * as IDS from "../../utils/ids"
 import { notify } from "../../utils/notifications";
@@ -50,7 +51,8 @@ export const initBetTransaction = async (
   userUsdtAccount: PublicKey,
   riskedUsdt: number,
   odds: number,
-  connection: Connection): Promise<[tx: TransactionInstruction[], betTokenAccount: Keypair]> => {
+  connection: Connection,
+  env: ENV): Promise<[tx: TransactionInstruction[], betTokenAccount: Keypair]> => {
 
   const betTokenAccount = Keypair.generate();
   const lamports = await connection.getMinimumBalanceForRentExemption(AccountLayout.span, 'singleGossip');
@@ -61,10 +63,10 @@ export const initBetTransaction = async (
       fromPubkey: userAccount,
       newAccountPubkey: betTokenAccount.publicKey
   });
-
+  
   const initTempAccountIx = Token.createInitAccountInstruction(
     IDS.TOKEN_PROGRAM_ID,
-    IDS.USDT_MINT,
+    IDS.getUsdtMint(env),
     betTokenAccount.publicKey,
     userAccount);
 
@@ -119,7 +121,8 @@ export const initBet = async (
     userUsdtTokenAccount,
     riskedUsdt,
     odds,
-    connection);
+    connection,
+    env);
   let [ok,] = await sendTransaction(connection, env, wallet, ix, [betTokenAccount]);
   
   return ok ? betTokenAccount.publicKey : undefined;

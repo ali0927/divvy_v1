@@ -4,7 +4,6 @@ import { ChainSelectContext } from "./chainselect"
 import { SolanaProvider } from "./sol";
 import { AccountsProvider } from "./sol/accounts";
 import { ConnectionProvider } from "./sol/connection";
-import { MarketProvider } from "./sol/market";
 import { WalletProvider } from "./sol/wallet";
 import { ETHWalletProvider } from "./eth/wallet";
 import { MetaMaskProvider } from "./eth/Metamask/MetaMaskProvider";
@@ -16,11 +15,9 @@ const RootContextProvider = (props: { children: any }) => {
             <ConnectionProvider>
                 <WalletProvider>
                     <AccountsProvider>
-                        <MarketProvider>
-                            <SolanaProvider>
-                                {props.children}
-                            </SolanaProvider>
-                        </MarketProvider>
+                        <SolanaProvider>
+                            {props.children}
+                        </SolanaProvider>
                     </AccountsProvider>
                 </WalletProvider>
             </ConnectionProvider>
@@ -32,11 +29,9 @@ const RootContextProvider = (props: { children: any }) => {
                 <MetaMaskProvider>
                     <ETHWalletProvider>
                         <AccountsProvider>
-                            <MarketProvider>
-                                <SolanaProvider>
-                                    {props.children}
-                                </SolanaProvider>
-                            </MarketProvider>
+                            <SolanaProvider>
+                                {props.children}
+                            </SolanaProvider>
                         </AccountsProvider>
                     </ETHWalletProvider>
                 </MetaMaskProvider>

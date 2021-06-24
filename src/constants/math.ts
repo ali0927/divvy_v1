@@ -6,4 +6,5 @@ export const WAD = TEN.pow(new BN(18));
 export const RAY = TEN.pow(new BN(27));
 export const ZERO = new BN(0);
 export const LAMPORTS_PER_SOL = 1000000000;
-export const LAMPORTS_PER_USDT = 100;
+export const LAMPORTS_PER_USDT = 1000000;
+export const LAMPORTS_PER_HP = 1000000;

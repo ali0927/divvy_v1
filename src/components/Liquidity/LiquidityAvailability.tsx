@@ -1,8 +1,8 @@
 
 import { useContext } from "react";
-import { UserHPTContext } from "../../contexts/sol/userhpt";
+import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 export const LiquidityAvailability = () => {
-  const { hpBalance } = useContext(UserHPTContext);
+  const { hpBalance } = useContext(HousePoolContext);
   return (
     <div>
       <div className="liquidity-left">

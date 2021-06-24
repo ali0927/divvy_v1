@@ -8,12 +8,10 @@ import {
   sendTransaction,
 } from "../../contexts/sol/connection";
 import { useWallet } from "../../contexts/sol/wallet";
-import { DIVVY_PROGRAM_ID } from "../../utils/ids";
 import { notify } from "../../utils/notifications";
-import { ExplorerLink } from "../ExplorerLink";
 import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
 import { useContext, useState } from "react";
-import { useAccountByMint, useUserBalance } from "../../hooks";
+import { useAccountByMint } from "../../hooks";
 import * as IDS from "../../utils/ids";
 import { UserHPTContext } from "../../contexts/sol/userhpt";
 
@@ -22,7 +20,7 @@ export const WithdrawLiquidity = (props: {}) => {
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
   const hpTokenAccount = useAccountByMint(IDS.HP_MINT)
-  const usdtTokenAccount = useAccountByMint(IDS.USDT_MINT)
+  const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   let [usdtAmount, setUsdtAmount] = useState("");
   const { userHPT } = useContext(UserHPTContext);
   const onFinish = async (values: any) => {

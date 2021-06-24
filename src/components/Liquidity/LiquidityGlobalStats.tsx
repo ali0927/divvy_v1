@@ -1,11 +1,11 @@
 import { Col, Row } from "antd";
 import { useContext } from "react";
-import { UserHPTContext } from "../../contexts/sol/userhpt";
+import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 import { LiquidityAvailability } from "./LiquidityAvailability";
 import { LiquidityAvailabilityBar } from "./LiquidityAvailabilityBar";
 import { LiquidityDistribution } from "./LiquidityDistribution";
 export const LiquidityGlobalStats = () => {
-  const { hpBalance } = useContext(UserHPTContext);
+  const { hpBalance } = useContext(HousePoolContext);
   return (
     <Row style={{ marginTop: 5, padding: 5 }}>
       <Col style={{ textAlign: "center" }} span={23} md={9} offset={1}>
