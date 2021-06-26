@@ -309,8 +309,8 @@ const UseNativeAccount = () => {
     connection.onAccountChange(publicKey, (acc) => {
       if (acc) {
         updateCache(acc);
-        if(acc.value) {
-          setNativeAccount(acc.value);
+        if(acc) {
+          setNativeAccount(acc);
         }
       }
     });
@@ -375,8 +375,8 @@ export function AccountsProvider({ children = null as any }) {
         let id = args.id;
         let deserialize = args.parser;
         connection.onAccountChange(new PublicKey(id), (info) => {
-          if(info.value) {
-            cache.add(id, info.value, deserialize);
+          if(info) {
+            cache.add(id, info, deserialize);
           }
         });
       }

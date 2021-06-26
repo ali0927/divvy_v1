@@ -265,10 +265,10 @@ export const getAccountInfoAndSubscribe = function (
 
   let subscriptionId = connection.onAccountChange(
     publicKey,
-    (response: RpcResponseAndContext<AccountInfo<Buffer> | null>) => {
-      if (response.context.slot >= latestSlot) {
-        latestSlot = response.context.slot;
-        callback(response.value, response.context);
+    (account: AccountInfo<Buffer>, context: Context) => {
+      if (context.slot >= latestSlot) {
+        latestSlot = context.slot;
+        callback(account, context);
       }
     },
     commitment
