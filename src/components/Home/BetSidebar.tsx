@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Bet, BetType } from "../../constants";
 import { BetsContext } from "../../contexts/bets";
-import { MyBets as BetSlip } from "../Bets/BetSlip";
+import { BetSlip } from "../Bets/BetSlip";
 import { PendingBets } from "../Bets/PendingBets";
 export const BetSidebar = () => {
   const bets = useContext(BetsContext);
