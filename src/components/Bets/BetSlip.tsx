@@ -4,7 +4,7 @@ import { MyBet } from "./MyBet";
 import LinkLabel from "../Nav/LinkLabel";
 import { useContext } from "react";
 import { BetsContext } from "../../contexts/bets";
-export const MyBets = () => {
+export const BetSlip = () => {
   const bets = useContext(BetsContext)
 
   var totalRisk = 0

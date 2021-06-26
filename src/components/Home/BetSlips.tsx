@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Bet, BetType } from "../../constants";
-import { MyBets } from "../Bets/MyBets";
+import { BetSlip } from "../Bets/BetSlip";
 import { PendingBets } from "../Bets/PendingBets";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
@@ -36,11 +36,11 @@ export const BetSlips = () => {
       </div>
       {!isCollapsed &&
         <div className="mybets-scroll">
-          {active === "slips" ? <MyBets/> : <PendingBets/>}
+          {active === "slips" ? <BetSlip/> : <PendingBets/>}
         </div>
       }
       <div className="mybets-scroll-mobile">
-        {active === "slips" ? <MyBets/> : <PendingBets/>}
+        {active === "slips" ? <BetSlip/> : <PendingBets/>}
       </div>
     </div>
   );

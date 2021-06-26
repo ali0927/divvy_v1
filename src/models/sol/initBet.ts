@@ -1,7 +1,6 @@
-import { Token } from "@solana/spl-token";
 import { Connection, Keypair, PublicKey, SystemProgram, TransactionInstruction } from "@solana/web3.js";
 import * as BufferLayout from "buffer-layout";
-import { Bet, Game, MarketSide } from "../../constants";
+import { Bet, MarketSide } from "../../constants";
 import { ENV } from "../../constants/sol/env";
 import { sendTransaction } from "../../contexts/sol/connection";
 import { WalletAdapter } from "../../contexts/sol/wallet";
