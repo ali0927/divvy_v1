@@ -12,15 +12,15 @@ export const MyBet = (props: { bet: Bet }) => {
     return (
         <div style={{ margin: 20 }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <GameTeams selectionTeam={props.bet.selectionTeam.name} otherTeam={props.bet.otherTeam.name} betSlip={props.bet} />
-                <CloseOutlined onClick={() => bets?.removeBet(props.bet.id)} style={{ marginTop: 5 }} />
+                <GameTeams selectionTeam={props.bet.selectionTeam} otherTeam={props.bet.otherTeam} betSlip={props.bet} />
+                <CloseOutlined onClick={() => bets?.removeBet(props.bet.betId)} style={{ marginTop: 5 }} />
             </div>
-            <ConfirmedOdds oddsType={props.bet.oddsType} bet={props.bet} />
+            <ConfirmedOdds oddsType={props.bet.betType} bet={props.bet} />
             <div style={{ display: "inline-flex" }}>
                 <Form.Item
                     style={{ width: "50%", marginRight: 4 }}
                     label="Wager"
-                    name={"stake " + props.bet.id}
+                    name={"stake " + props.bet.betType}
                     rules={[
                         {
                             required: true,
@@ -28,12 +28,12 @@ export const MyBet = (props: { bet: Bet }) => {
                         },
                     ]}
                 >
-                    <Input value={risk / LAMPORTS_PER_USDT} onChange={(event) => { setRisk(parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT); bets?.editBetRisk(props.bet.id, parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT) }} />
+                    <Input value={risk / LAMPORTS_PER_USDT} onChange={(event) => { setRisk(parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT); bets?.editBetRisk(props.bet.betId, parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT) }} />
                 </Form.Item>
                 <Form.Item
                     style={{ width: "50%", marginLeft: 4 }}
                     label="Payout"
-                    name={"win" + props.bet.id}
+                    name={"win" + props.bet.betId}
                     rules={[
                         {
                             required: true,

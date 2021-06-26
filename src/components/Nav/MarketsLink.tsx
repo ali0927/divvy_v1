@@ -1,47 +1,39 @@
 import { Button } from 'antd'
-export const MarketsLink = ({search = "" as any}) => {
-    const marketseg = [{ value: "football", name: "Football", }, { value: "basketball", name: "Basketball" }, { value: "mma", name: "MMA" },
-    { value: "americanfootball", name: "American Football" },
-    { value: "basketball", name: "Basketball" },
-    { value: "hockey", name: "Hockey" },
-    { value: "esports", name: "E-Sports" },
-    { value: "hoor", name: "Horse Racing" },
-    { value: "fighting", name: "Fighting" },
-    { value: "motorracing", name: "Motor Racing" },
-    { value: "tennis", name: "Tennis" },
-    { value: "golf", name: "Golf" },
-    { value: "darts", name: "Darts" },
-    { value: "rugby", name: "Rugby" },
-    { value: "tabletennis", name: "Table Tennis" },
-    { value: "cricket", name: "Cricket" },
-    { value: "snooker", name: "Snooker" },
-    { value: "volleyball", name: "Volleyball" },
-    { value: "cycling", name: "Cycling" },];
+import { useContext } from 'react';
+import { LABELS } from '../../constants';
+import { SportContext } from '../../contexts/sport';
+import { useGetSportsQuery } from '../../store/sports';
+import { Loader } from '../Loader';
+export const MarketsLink = ({ search = "" as any }) => {
+    const { data, error, isLoading } = useGetSportsQuery(null)
+    const { sport, changeSport } = useContext(SportContext)
     const MarketsUI = () => {
         let market: JSX.Element[] = [];
-        marketseg.forEach((data, index) => {
-            if (data.name.toLowerCase().includes(search.toLowerCase())) {
+        data?.forEach((sportData, index) => {
+            if (sportData.sportName.toLowerCase().includes(search.toLowerCase())) {
                 market.push(
-                    <div className="search-item">
+                    <div onClick={() => { changeSport(sportData) }} className={sport?.sportId === sportData.sportId ? "selected-search-item" : "search-item selected"}>
                         <Button className="search-button" ghost type="default">
                             <div className="search-button-data">
                                 <div className="search-left">
-                                    {data.name}
+                                    {sportData.sportName}
                                 </div>
                                 <div className="search-right text-secondary">
-                                    {parseInt(String((Math.random() + 1) * 10))}
+                                    {sportData.count}
                                 </div>
                             </div>
                         </Button>
-                    </div>
+                    </div >
                 )
             }
         })
         return market;
     }
     return (
-            <div className="sidebar-section sidebar-section-markets">
-                {MarketsUI()}
-            </div>
+        <div className="sidebar-section sidebar-section-markets">
+            {error ? LABELS.SERVER_ERROR : null}
+            {isLoading ? <Loader /> : null}
+            {MarketsUI()}
+        </div>
     );
 };

@@ -2,9 +2,9 @@ import { Col, Row } from 'antd'
 import { TeamDetails } from "./TeamDetails"
 import { OddsSelection } from './OddsSelection';
 import { OddsType } from './OddsType';
-import { Game } from '../../constants';
+import { Market, MarketSide } from '../../constants';
 import { getShortTimezone } from '../../utils/date';
-export const SingleMatchComponent = (props: { game: Game }) => {
+export const SingleMatchComponent = (props: { market: Market }) => {
     return (
         <div className="single-match">
             <Row>
@@ -14,10 +14,22 @@ export const SingleMatchComponent = (props: { game: Game }) => {
                 <Col span={24}>
                     <Row>
                         <Col span={4}>
-                            <TeamDetails name={props.game.teamA.name} logo={props.game.teamA.logo} />
+                            {/* TO DO: logo */}
+                            <TeamDetails name={props.market.teamA} logo={props.market.teamA} />
                         </Col>
                         <Col span={20} md={10}>
-                            <OddsSelection odds={props.game.teamAodds} game={props.game} selection={props.game.teamA} otherteam={props.game.teamB} />
+                            <OddsSelection marketSide={MarketSide.teamA} market={props.market} selectionTeam={props.market.teamA} otherTeam={props.market.teamB} selection={"teamA"} odds={{
+                                moneyline: props.market.teamAOddsMoneyline,
+                                spread: props.market.teamAOddsSpread,
+                                spreadPoints: props.market.teamASpreadPoints,
+                                total: props.market.teamAOddsTotal,
+                                totalPoints: props.market.teamATotalPoints,
+                                moneylineFeedPubkey: props.market.teamAOddsMoneylineFeedPubkey,
+                                spreadPointsFeedPubkey: props.market.teamASpreadPointsFeedPubkey,
+                                spreadFeedPubkey: props.market.teamAOddsSpreadFeedPubkey,
+                                totalFeedPubkey: props.market.teamAOddsTotalFeedPubkey,
+                                totalPointsFeedPubkey: props.market.teamATotalPointsFeedPubkey,
+                            }} />
                         </Col>
                         <Col span={0} md={3}>
                         </Col>
@@ -31,14 +43,26 @@ export const SingleMatchComponent = (props: { game: Game }) => {
                 <Col span={24}>
                     <Row>
                         <Col span={4}>
-                            <TeamDetails name={props.game.teamB.name} logo={props.game.teamB.logo} />
+                            {/* TO DO: logo */}
+                            <TeamDetails name={props.market.teamB} logo={props.market.teamB} />
                         </Col>
                         <Col span={20} md={10}>
-                            <OddsSelection odds={props.game.teamBodds} game={props.game} selection={props.game.teamB} otherteam={props.game.teamA} />
+                            <OddsSelection marketSide={MarketSide.teamB} market={props.market} selectionTeam={props.market.teamB} otherTeam={props.market.teamA} selection={"teamB"} odds={{
+                                moneyline: props.market.teamBOddsMoneyline,
+                                spread: props.market.teamBOddsSpread,
+                                spreadPoints: props.market.teamBSpreadPoints,
+                                total: props.market.teamBOddsTotal,
+                                totalPoints: props.market.teamBTotalPoints,
+                                moneylineFeedPubkey: props.market.teamBOddsMoneylineFeedPubkey,
+                                spreadPointsFeedPubkey: props.market.teamBSpreadPointsFeedPubkey,
+                                spreadFeedPubkey: props.market.teamBOddsSpreadFeedPubkey,
+                                totalFeedPubkey: props.market.teamBOddsTotalFeedPubkey,
+                                totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
+                            }} />
                         </Col>
                         <Col span={0} md={3}>
                             <div style={{ marginLeft: "5%", marginTop: "-20%", textAlign: "center", fontSize: "1em" }}>
-                                {props.game.commenceDate}<br />{props.game.commenceTime}
+                                {/* {props.market.commenceDate}<br />{props.market.commenceTime} */}
                             </div>
                         </Col>
                     </Row>

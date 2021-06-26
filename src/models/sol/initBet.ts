@@ -53,7 +53,7 @@ export const initBet = async (
     bet.marketSide,
     bet.risk,
     bet.odds,
-    bet.sol.oddsFeed,
+    new PublicKey(bet.oddsPubKey),
     connection);
   let [ok,] = await sendTransaction(connection, env, wallet, ix, [betTokenAccount]);
 

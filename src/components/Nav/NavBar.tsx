@@ -10,7 +10,7 @@ import { useState } from "react";
 export const NavBar = () => {
   const [search, setSearch] = useState("")
   return (
-    <div style={{ maxHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
       <BetsViewLink />
       <LiquidityViewLink />
       <ConnectLink />

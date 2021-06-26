@@ -22,9 +22,9 @@ export const PendingBets = () => {
                 {bets?.bets.map((value: Bet) => {
                     if (value.type === BetType.Pending) {
                         return (
-                            <Collapse.Panel header={<GameTeams selectionTeam={value.selectionTeam.name} otherTeam={value.otherTeam.name} betSlip={value} />} key={value.id}>
+                            <Collapse.Panel header={<GameTeams selectionTeam={value.selectionTeam} otherTeam={value.otherTeam} betSlip={value} />} key={value.betId}>
                                 <PotentialWins betSlip={value} />
-                                <ConfirmedOdds oddsType={value.oddsType} bet={value} />
+                                <ConfirmedOdds oddsType={value.betType} bet={value} />
                             </Collapse.Panel>
                         )
                     }

@@ -17,6 +17,7 @@ export const LABELS = {
   FOOTER:
     'This page was produced by the Solana Foundation ("SF") for internal educational and inspiration purposes only. SF does not encourage, induce or sanction the deployment, integration or use of Oyster or any similar application (including its code) in violation of applicable laws or regulations and hereby prohibits any such deployment, integration or use. Anyone using this code or a derivation thereof must comply with applicable laws and regulations when releasing related software.',
   MENU_HOME: "Home",
+  SERVER_ERROR: "There was an error fetching your data, please try again later",
   MENU_DASHBOARD: "Dashboard",
   DASHBOARD_INFO: "Connect to a wallet to view your deposits/loans.",
   TRANSACTIONS_INFO: "Connect to a wallet to view your transactions.",

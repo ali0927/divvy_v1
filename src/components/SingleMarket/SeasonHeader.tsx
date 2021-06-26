@@ -1,5 +1,5 @@
-export const SeasonHeader = () => {
+export const SeasonHeader = (props: { seasonName: string | undefined }) => {
     return (
-        <h1>Football</h1>
+        <h1>{props.seasonName}</h1>
     )
 };

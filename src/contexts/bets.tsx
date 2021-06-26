@@ -11,8 +11,8 @@ import * as IDS from "../utils/ids"
 export const BetsContext = createContext<{
   bets: Bet[],
   addBet: (bet: Bet) => void,
-  removeBet: (betId: string) => void,
-  editBetRisk: (betId: string, risk: number) => void,
+  removeBet: (betId: number) => void,
+  editBetRisk: (betId: number, risk: number) => void,
   placeBetSlip: () => Promise<void>,
   settleBets: (outcome: "win" | "lose") => Promise<void>,
 } | null>(null);
@@ -28,20 +28,20 @@ const BetsProvider = (props: { children: any }) => {
   const addBet = (betSlip: Bet) => {
     setBets([...bets, betSlip])
   }
-  const removeBet = (betId: string) => {
+  const removeBet = (betId: number) => {
     var newBets: Array<Bet> = [];
     bets.forEach((value: Bet) => {
-      if (value.id !== betId) {
+      if (value.betId !== betId) {
         newBets.push(value)
       }
     })
     setBets(newBets)
   }
-  const editBetRisk = (betId: string, amount: number) => {
+  const editBetRisk = (betId: number, amount: number) => {
     var bet: Bet;
     var newBets: Array<Bet> = [];
     bets.forEach((value: Bet) => {
-      if (value.id === betId) {
+      if (value.betId === betId) {
         bet = value
         bet.risk = amount;
         newBets.push(bet)
