@@ -28,9 +28,9 @@ export const UserHPTContextProvider = (props: { children: any }) => {
                     userHPTPubKey,
                     parseAccount
                 );
-                async function parseAccount(response: RpcResponseAndContext<AccountInfo<Buffer> | null>) {
-                    if(response.value) {
-                        const parsed = EscrowStateParser(userHPTPubKey, response.value);
+                async function parseAccount(acc: AccountInfo<Buffer>|null) {
+                    if(acc) {
+                        const parsed = EscrowStateParser(userHPTPubKey, acc);
                         const data = await connection.getTokenAccountBalance(userHPTPubKey);
                         setUserHPT(data.value.uiAmount || 0);
                         setAccountData(parsed);

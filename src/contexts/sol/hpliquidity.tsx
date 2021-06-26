@@ -22,9 +22,9 @@ export const HousePoolProvider = (props: { children: any }) => {
             parseAccount
         );
         
-        async function parseAccount(response: RpcResponseAndContext<AccountInfo<Buffer> | null>) {
-            if(response.value) {
-                const parsed = EscrowStateParser(IDS.DIVVY_USDT_ACCOUNT, response.value);
+        async function parseAccount(acc: AccountInfo<Buffer> | null) {
+            if(acc) {
+                const parsed = EscrowStateParser(IDS.DIVVY_USDT_ACCOUNT, acc);
                 const data = await connection.getTokenAccountBalance(IDS.DIVVY_USDT_ACCOUNT);
                 sethpBalance(data.value.uiAmount || 0);
                 setAccountData(parsed);

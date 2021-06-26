@@ -28,9 +28,9 @@ export const UserUSDTContextProvider = (props: { children: any }) => {
                     UserUSDTPubKey,
                     parseAccount
                 );
-                async function parseAccount(response: RpcResponseAndContext<AccountInfo<Buffer> | null>) {
-                    if(response.value){
-                        const parsed = EscrowStateParser(UserUSDTPubKey, response.value);
+                async function parseAccount(acc: AccountInfo<Buffer>|null) {
+                    if(acc){
+                        const parsed = EscrowStateParser(UserUSDTPubKey, acc);
                         const data = await connection.getTokenAccountBalance(UserUSDTPubKey);
                         setUserUSDT(data.value.uiAmount || 0)
                         setAccountData(parsed)

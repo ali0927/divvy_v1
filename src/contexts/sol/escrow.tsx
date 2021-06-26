@@ -28,9 +28,9 @@ export const EscrowProvider = ({ children = null as any }) => {
       parseAccount
     );
 
-    function parseAccount(response: RpcResponseAndContext<AccountInfo<Buffer> | null>) {
-      if(response.value) {
-        setAccountData(EscrowStateParser(IDS.DIVVY_STATE_ACCOUNT, response.value));
+    function parseAccount(acc: AccountInfo<Buffer>|null) {
+      if(acc) {
+        setAccountData(EscrowStateParser(IDS.DIVVY_STATE_ACCOUNT, acc));
       } else {
         setAccountData(undefined);
       }

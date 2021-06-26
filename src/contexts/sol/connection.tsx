@@ -9,6 +9,9 @@ import {
   SendOptions,
   AccountChangeCallback,
   Commitment,
+  RpcResponseAndContext,
+  AccountInfo,
+  Context,
 } from "@solana/web3.js";
 import React, { useContext, useEffect, useMemo } from "react";
 import { notify } from "../../utils/notifications";
@@ -242,6 +245,7 @@ export const sendTransaction = async (
   return [ok, txid];
 };
 
+export type AccountCallback = (acc: AccountInfo<Buffer> | null, context: Context) => void;
 /**
  * Fetch an account for the specified public key and subscribe a callback
  * to be invoked whenever the specified account changes.
@@ -252,21 +256,20 @@ export const sendTransaction = async (
  * @param commitment Specify the commitment level account changes must reach before notification
  * @return subscription id
  */
-
 export const getAccountInfoAndSubscribe = function (
   connection: Connection,
   publicKey: PublicKey,
-  callback: AccountChangeCallback,
+  callback: AccountCallback,
   commitment?: Commitment | undefined
 ): number {
   let latestSlot: number = -1;
 
   let subscriptionId = connection.onAccountChange(
     publicKey,
-    (response) => {
+    (response: RpcResponseAndContext<AccountInfo<Buffer> | null>) => {
       if (response.context.slot >= latestSlot) {
         latestSlot = response.context.slot;
-        callback(response);
+        callback(response.value, response.context);
       }
     },
     commitment
@@ -277,7 +280,7 @@ export const getAccountInfoAndSubscribe = function (
     .then((response) => {
       if (response.context.slot >= latestSlot) {
         latestSlot = response.context.slot;
-        callback(response);
+        callback(response.value, response.context);
       }
     });
 
