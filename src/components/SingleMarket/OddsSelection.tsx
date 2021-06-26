@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { Col, Row } from "antd";
-import { Odds, BetType, Game, OddsType, Team, Bet } from "../../constants";
+import { Odds, BetType, Game, OddsType, Team, Bet, MarketSide } from "../../constants";
 import { BetsContext } from "../../contexts/bets";
+import * as IDS from "../../utils/ids"
 export const OddsSelection = (props: { odds: Odds, game: Game, selection: Team, otherteam: Team }) => {
     const [selection, setSelection] = useState("")
     const bets = useContext(BetsContext);
@@ -24,16 +25,23 @@ export const OddsSelection = (props: { odds: Odds, game: Game, selection: Team, 
             publicAddress: "weukrfguiwf",
             gameId: "12",
             hash: "12312313rwrgnuierb",
-            teams: props.game,
+            game: props.game,
             selectionTeam: props.selection,
             otherTeam: props.otherteam,
             odds: odds,
             oddsType: Oddtype,
+            oddsSide:
+                props.selection === props.game.teamA ? MarketSide.teamA :
+                props.selection === props.game.teamB ? MarketSide.teamB :
+                MarketSide.draw,
             type: BetType.Current,
             risk: 0,
             id: makeId(10),
-            total: props.game.total,
-            spread: props.game.spread,
+            totalPoints: props.odds.totalPoints,
+            spreadPoints: props.odds.spreadPoints,
+            sol: {
+                oddsFeed: IDS.FEED_PLACEHOLDER
+            }
         }
         bets?.addBet(bet)
     }
@@ -43,10 +51,10 @@ export const OddsSelection = (props: { odds: Odds, game: Game, selection: Team, 
                 <b>{props.odds.moneyline}</b>
             </Col>
             <Col span={8} onClick={() => setSlip("spread", props.odds.spread, OddsType.spread)} className={selection === 'spread' ? "odds odds-active" : "odds"}>
-                <b>{(props.selection.favorite ? "(-" : "(+") + String(props.game.spread) + ") " + String(props.odds.spread)}</b>
+                <b>{`(${props.odds.spreadPoints>=0 ? "+" : ""}${String(props.odds.spreadPoints)}) ${String(props.odds.spread)}`}</b>
             </Col>
             <Col span={8} onClick={() => setSlip("total", props.odds.total, OddsType.total)} className={selection === 'total' ? "odds odds-active" : "odds"}>
-                <b>{(props.otherteam.favorite ? "(U " : "(O ") + String(props.game.total) + ") " + String(props.odds.total)}</b>
+                <b>{`(${props.odds.totalPoints >= 0 ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total}`}</b>
             </Col>
         </Row>
     )

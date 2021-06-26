@@ -23,7 +23,7 @@ const BetsProvider = (props: { children: any }) => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
-  const usdtTokenAccount = useAccountByMint(IDS.USDT_MINT);
+  const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env));
 
   const addBet = (betSlip: Bet) => {
     setBets([...bets, betSlip])

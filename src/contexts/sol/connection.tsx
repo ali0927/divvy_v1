@@ -1,55 +1,21 @@
 import { useLocalStorageState } from "../../utils/utils";
 import {
   Account,
-  Keypair,
   Signer,
-  clusterApiUrl,
   Connection,
   PublicKey,
   Transaction,
   TransactionInstruction,
   SendOptions,
   AccountChangeCallback,
-  Context,
-  AccountInfo,
   Commitment,
 } from "@solana/web3.js";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../../components/ExplorerLink";
 import { setProgramIds } from "../../utils/ids";
 import { WalletAdapter } from "./wallet";
-import { cache, getMultipleAccounts, MintParser } from "./accounts";
-import {
-  TokenListProvider,
-  ENV as ChainID,
-  TokenInfo,
-} from "@solana/spl-token-registry";
-
-export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
-
-export const ENDPOINTS = [
-  {
-    name: "mainnet-beta" as ENV,
-    endpoint: "https://solana-api.projectserum.com/",
-    chainID: ChainID.MainnetBeta,
-  },
-  {
-    name: "testnet" as ENV,
-    endpoint: clusterApiUrl("testnet"),
-    chainID: ChainID.Testnet,
-  },
-  {
-    name: "devnet" as ENV,
-    endpoint: clusterApiUrl("devnet"),
-    chainID: ChainID.Devnet,
-  },
-  {
-    name: "localnet" as ENV,
-    endpoint: "http://127.0.0.1:8899",
-    chainID: ChainID.Devnet,
-  },
-];
+import { ENDPOINTS, ENV } from "../../constants/sol/env";
 
 const DEFAULT = ENDPOINTS[0].endpoint;
 const DEFAULT_SLIPPAGE = 0.25;
@@ -63,8 +29,6 @@ interface ConnectionConfig {
   setSlippage: (val: number) => void;
   env: ENV;
   setEndpoint: (val: string) => void;
-  tokens: TokenInfo[];
-  tokenMap: Map<string, TokenInfo>;
 }
 
 const ConnectionContext = React.createContext<ConnectionConfig>({
@@ -75,8 +39,6 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
   connection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
   sendConnection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
   env: ENDPOINTS[0].name,
-  tokens: [],
-  tokenMap: new Map<string, TokenInfo>(),
 });
 
 export function ConnectionProvider({ children = undefined as any }) {
@@ -102,41 +64,6 @@ export function ConnectionProvider({ children = undefined as any }) {
   const chain =
     ENDPOINTS.find((end) => end.endpoint === endpoint) || ENDPOINTS[0];
   const env = chain.name;
-
-  const [tokens, setTokens] = useState<TokenInfo[]>([]);
-  const [tokenMap, setTokenMap] = useState<Map<string, TokenInfo>>(new Map());
-  useEffect(() => {
-    cache.clear();
-    // fetch token files
-    (async () => {
-      const res = await new TokenListProvider().resolve();
-      const list = res
-        .filterByChainId(chain.chainID)
-        .excludeByTag("nft")
-        .getList();
-      const knownMints = list.reduce((map, item) => {
-        map.set(item.address, item);
-        return map;
-      }, new Map<string, TokenInfo>());
-
-      const accounts = await getMultipleAccounts(
-        connection,
-        [...knownMints.keys()],
-        "single"
-      );
-      accounts.keys.forEach((key, index) => {
-        const account = accounts.array[index];
-        if (!account) {
-          return;
-        }
-
-        cache.add(new PublicKey(key), account, MintParser);
-      });
-
-      setTokenMap(knownMints);
-      setTokens(list);
-    })();
-  }, [connection, chain]);
 
   setProgramIds(env);
 
@@ -183,8 +110,6 @@ export function ConnectionProvider({ children = undefined as any }) {
         setSlippage: (val) => setSlippage(val.toString()),
         connection,
         sendConnection,
-        tokens,
-        tokenMap,
         env,
       }}
     >
@@ -202,14 +127,7 @@ export function useSendConnection() {
 }
 
 export function useConnectionConfig() {
-  const context = useContext(ConnectionContext);
-  return {
-    endpoint: context.endpoint,
-    setEndpoint: context.setEndpoint,
-    env: context.env,
-    tokens: context.tokens,
-    tokenMap: context.tokenMap,
-  };
+  return useContext(ConnectionContext);
 }
 
 export function useSlippageConfig() {
@@ -345,10 +263,10 @@ export const getAccountInfoAndSubscribe = function (
 
   let subscriptionId = connection.onAccountChange(
     publicKey,
-    (acc: AccountInfo<Buffer>, context: Context) => {
-      if (context.slot >= latestSlot) {
-        latestSlot = context.slot;
-        callback(acc, context);
+    (response) => {
+      if (response.context.slot >= latestSlot) {
+        latestSlot = response.context.slot;
+        callback(response);
       }
     },
     commitment
@@ -359,9 +277,7 @@ export const getAccountInfoAndSubscribe = function (
     .then((response) => {
       if (response.context.slot >= latestSlot) {
         latestSlot = response.context.slot;
-        if (response.value) {
-          callback(response.value, response.context);
-        }
+        callback(response);
       }
     });
 

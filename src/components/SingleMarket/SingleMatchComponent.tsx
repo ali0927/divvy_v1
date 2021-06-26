@@ -3,6 +3,7 @@ import { TeamDetails } from "./TeamDetails"
 import { OddsSelection } from './OddsSelection';
 import { OddsType } from './OddsType';
 import { Game } from '../../constants';
+import { getShortTimezone } from '../../utils/date';
 export const SingleMatchComponent = (props: { game: Game }) => {
     return (
         <div className="single-match">
@@ -37,7 +38,7 @@ export const SingleMatchComponent = (props: { game: Game }) => {
                         </Col>
                         <Col span={0} md={3}>
                             <div style={{ marginLeft: "5%", marginTop: "-20%", textAlign: "center", fontSize: "1em" }}>
-                                {props.game.date}<br />{props.game.time + " EDT"}
+                                {props.game.commenceDate}<br />{props.game.commenceTime}
                             </div>
                         </Col>
                     </Row>

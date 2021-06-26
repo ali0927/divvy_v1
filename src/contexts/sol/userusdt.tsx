@@ -1,41 +1,43 @@
 import React, { useState, createContext, useEffect, useContext } from "react"
 import * as Accounts from "./accounts";
-import { getAccountInfoAndSubscribe, useConnection } from "./connection";
+import { getAccountInfoAndSubscribe, useConnection, useConnectionConfig } from "./connection";
 import {
-    AccountChangeCallback,
     AccountInfo,
-    Commitment,
-    Connection,
-    Context,
     PublicKey,
-    TokenAccountsFilter
+    RpcResponseAndContext,
 } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
-import { EscrowState, EscrowStateParser } from "../../models/escrowState";
+import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 import { WalletContext } from "./wallet"
 export const UserUSDTContext = createContext<any>(null);
 export const UserUSDTContextProvider = (props: { children: any }) => {
-    const { wallet, connected, provider, select } = useContext(WalletContext);
+    const { wallet } = useContext(WalletContext);
     const connection = useConnection();
+    const connectionConfig = useConnectionConfig();
     let [accountData, setAccountData] =
         useState<Accounts.ParsedAccount<EscrowState>>();
-    const [userUSDT, setUserUSDT] = useState<number | null>(0);
+    const [userUSDT, setUserUSDT] = useState<number>(0);
     useEffect(() => {
         if (wallet?.publicKey) {
             const check = async () => {
-                const UserUSDT: TokenAccountsFilter = { mint: IDS.USDT_MINT }
-                const UserUSDTData = await connection.getTokenAccountsByOwner(new PublicKey(String(wallet?.publicKey)), UserUSDT)
+                const USDTMint = IDS.getUsdtMint(connectionConfig.env);
+                const UserUSDTData = await connection.getTokenAccountsByOwner(new PublicKey(String(wallet?.publicKey)), { mint: USDTMint })
                 const UserUSDTPubKey = UserUSDTData.value[0].pubkey;
                 let subscriptionId = getAccountInfoAndSubscribe(
                     connection,
                     UserUSDTPubKey,
                     parseAccount
                 );
-                async function parseAccount(acc: AccountInfo<Buffer>) {
-                    const parsed = EscrowStateParser(UserUSDTPubKey, acc);
-                    const data = await connection.getTokenAccountBalance(UserUSDTPubKey);
-                    setUserUSDT(data.value.uiAmount)
-                    setAccountData(parsed)
+                async function parseAccount(response: RpcResponseAndContext<AccountInfo<Buffer> | null>) {
+                    if(response.value){
+                        const parsed = EscrowStateParser(UserUSDTPubKey, response.value);
+                        const data = await connection.getTokenAccountBalance(UserUSDTPubKey);
+                        setUserUSDT(data.value.uiAmount || 0)
+                        setAccountData(parsed)
+                    } else {
+                        setUserUSDT(0);
+                        setAccountData(undefined);
+                    }
                 }
                 return () => {
                     connection.removeAccountChangeListener(subscriptionId);
@@ -43,7 +45,7 @@ export const UserUSDTContextProvider = (props: { children: any }) => {
             }
             check()
         }
-    }, [connection]);
+    }, [connection, connectionConfig, wallet]);
     return (
         <UserUSDTContext.Provider value={{ userUSDT, setUserUSDT }}>
             {props.children}

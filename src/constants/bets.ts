@@ -7,45 +7,95 @@ export enum BetType {
 export interface Team {
     name: string,
     logo: string,
-    id: string,
-    favorite: boolean
+    homeTeam: boolean
 }
 export interface Odds {
     moneyline: number,
     spread: number,
+    spreadPoints: number,
     total: number,
+    totalPoints: number,
 }
 export enum OddsType {
     moneyline = "Money Line",
     spread = "Points Spread",
     total = "Total Score",
 }
+export enum MarketSide {
+    teamA = "Team A",
+    teamB = "Team B",
+    draw = "Draw"
+}
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export namespace MarketSide {
+    export function toIndex(marketSide: MarketSide): number {
+        return marketSide === MarketSide.teamA ? 0 :
+            marketSide === MarketSide.teamB ? 1 :
+                marketSide === MarketSide.draw ? 2 :
+                    -1;
+        ;
+    }
+    export function fromIndex(index: number): MarketSide {
+        return index === 0 ? MarketSide.teamA :
+            index === 1 ? MarketSide.teamB :
+                index === 2 ? MarketSide.draw :
+                    MarketSide.teamA;
+    }
+}
+export interface Seasons {
+
+}
+export interface Season {
+    season: {
+        seasonId: number,
+        sportId: number,
+        seasonName: string,
+        seasonActive: number
+    },
+    games: Game[],
+}
 export interface Game {
     teamA: Team,
     teamB: Team,
-    draw: boolean,
     teamAodds: Odds,
     teamBodds: Odds,
-    drawodds: Odds,
-    spread: number,
-    total: number,
-    id: string,
-    date: string,
-    time: string,
+    drawOddsMoneyLine: number,
+    marketId: string,
+    commenceTimestamp: number,
+    commenceDate: string,
+    commenceTime: string,
+    sol?: {
+        winnerFeedPubkey: PublicKey,
+        teamAOddsMoneylineFeedPubkey: PublicKey,
+        teamBOddsMoneylineFeedPubkey: PublicKey,
+        drawOddsMoneylineFeedPubkey: PublicKey,
+        teamATotalPointsFeedPubkey: PublicKey,
+        teamBTotalPointsFeedPubkey: PublicKey,
+        teamAOddsTotalFeedPubkey: PublicKey,
+        teamBOddsTotalFeedPubkey: PublicKey,
+        teamASpreadPointsFeedPubkey: PublicKey,
+        teamBSpreadPointsFeedPubkey: PublicKey,
+        teamAScoreFeedPubkey: PublicKey,
+        teamBScoreFeedPubkey: PublicKey,
+    }
 }
 export interface Bet {
     publicAddress: string,
     gameId: string,
     hash: string,
-    teams: Game,
+    game: Game,
     selectionTeam: Team,
     otherTeam: Team,
     odds: number,
-    oddsType: OddsType
+    oddsType: OddsType,
+    oddsSide: MarketSide,
     type: BetType,
     risk: number,
     id: string,
-    spread: number,
-    total: number,
+    spreadPoints: number,
+    totalPoints: number,
     betTokenAccount?: PublicKey
+    sol: {
+        oddsFeed?: PublicKey
+    }
 }

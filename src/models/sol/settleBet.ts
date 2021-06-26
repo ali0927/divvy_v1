@@ -1,6 +1,7 @@
 import { Connection, PublicKey, TransactionInstruction } from "@solana/web3.js";
 import * as BufferLayout from "buffer-layout";
-import { ENV, sendTransaction } from "../../contexts/sol/connection";
+import { ENV } from "../../constants/sol/env";
+import { sendTransaction } from "../../contexts/sol/connection";
 import { WalletAdapter } from "../../contexts/sol/wallet";
 import * as IDS from "../../utils/ids";
 import { notify } from "../../utils/notifications";

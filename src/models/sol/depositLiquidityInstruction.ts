@@ -1,6 +1,6 @@
 import { PublicKey, TransactionInstruction } from "@solana/web3.js";
 import { struct, nu64, u8 } from "buffer-layout";
-import * as IDS from "../utils/ids";
+import * as IDS from "../../utils/ids";
 
 const LAYOUT = struct<DepositLiquidityData>([
     u8("action"),
