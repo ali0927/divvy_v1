@@ -5,7 +5,7 @@ import {
   RpcResponseAndContext,
 } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
-import { EscrowState, EscrowStateParser } from "../../models/escrowState";
+import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 import React, { useContext, useEffect, useState } from "react";
 
 export interface EscrowContextState {
@@ -24,13 +24,13 @@ export const EscrowProvider = ({ children = null as any }) => {
   useEffect(() => {
     let subscriptionId = getAccountInfoAndSubscribe(
       connection,
-      IDS.ESCROW_STATE_ID,
+      IDS.DIVVY_STATE_ACCOUNT,
       parseAccount
     );
 
     function parseAccount(response: RpcResponseAndContext<AccountInfo<Buffer> | null>) {
       if(response.value) {
-        setAccountData(EscrowStateParser(IDS.ESCROW_STATE_ID, response.value));
+        setAccountData(EscrowStateParser(IDS.DIVVY_STATE_ACCOUNT, response.value));
       } else {
         setAccountData(undefined);
       }

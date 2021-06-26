@@ -7,7 +7,7 @@ import {
     RpcResponseAndContext,
 } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
-import { EscrowState, EscrowStateParser } from "../../models/escrowState";
+import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 import { WalletContext } from "./wallet"
 export const UserUSDTContext = createContext<any>(null);
 export const UserUSDTContextProvider = (props: { children: any }) => {

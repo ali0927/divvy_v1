@@ -9,7 +9,7 @@ import {
 } from "../../contexts/sol/connection";
 import { useWallet } from "../../contexts/sol/wallet";
 import { notify } from "../../utils/notifications";
-import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
+import { depositLiquidityInstruction } from "../../models/sol/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { useAccountByMint } from "../../hooks";
 import * as IDS from "../../utils/ids";

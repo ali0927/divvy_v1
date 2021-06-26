@@ -1,7 +1,7 @@
 import { AccountInfo, PublicKey } from "@solana/web3.js";
-import * as Layout from "../utils/layout";
+import * as Layout from "../../../utils/layout";
 import * as BufferLayout from "buffer-layout";
-import { ParsedAccount } from "../contexts/sol/accounts";
+import { ParsedAccount } from "../../../contexts/sol/accounts";
 
 const LAYOUT = BufferLayout.struct([
   BufferLayout.u8('isInitialized'),
@@ -33,20 +33,4 @@ export const EscrowStateParser = (id: PublicKey, acc: AccountInfo<Buffer>): Pars
     }
   };
   return escrow;
-}
-
-export const ESCROW_ACCOUNT_DATA_LAYOUT = BufferLayout.struct([
-  BufferLayout.u8("isInitialized"),
-  Layout.publicKey("initializerPubkey"),
-  Layout.publicKey("initializerTempTokenAccountPubkey"),
-  Layout.publicKey("initializerReceivingTokenAccountPubkey"),
-  Layout.u64("expectedAmount"),
-]);
-
-export interface EscrowLayout {
-  isInitialized: number,
-  initializerPubkey: Uint8Array,
-  initializerReceivingTokenAccountPubkey: Uint8Array,
-  initializerTempTokenAccountPubkey: Uint8Array,
-  expectedAmount: Uint8Array
 }

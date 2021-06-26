@@ -3,7 +3,7 @@ import * as Accounts from "./accounts";
 import { getAccountInfoAndSubscribe, useConnection } from "./connection";
 import { AccountInfo, RpcResponseAndContext } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
-import { EscrowState, EscrowStateParser } from "../../models/escrowState";
+import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 export const HousePoolContext = createContext({
     accountData: undefined as Accounts.ParsedAccount<EscrowState> | undefined,
     hpBalance: 0

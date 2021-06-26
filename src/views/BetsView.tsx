@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
-import { Game } from "../constants";
+import { Season } from "../constants";
 import { RightSideBar } from "../components/RightSideBar";
 import { LeftSideBar } from "../components/LeftSideBar";
 import { NavBar } from "../components/Nav/NavBar";
 import { HomeCarousel } from "../components/Home/HomeCarousel";
-import { SingleMarketHeader } from "../components/SingleMarket/SingleMarketHeader";
-import { SingleMarketMatches } from "../components/SingleMarket/SingleMarketMatches";
+import { SeasonHeader } from "../components/SingleMarket/SeasonHeader";
+import { SeasonGames } from "../components/SingleMarket/SeasonGames";
 import { BetSlips } from "../components/Home/BetSlips";
 import { MobileHeader } from "../components/Nav/Mobile/MobileHeader"
 import { Layout, Row, Col } from "antd";
 import { HeaderTypes } from "../constants/HeaderTypes";
-import { getOdds } from "../api/odds";
+import { getSeasons } from "../api/divvy/seasons";
 
 const BetsView = () => {
-  const [games, setGames] = useState(Array<Game>());
+  const [seasons, setSeasons] = useState<Season[]>([]);
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
 
   useEffect(() => {
-    getOdds(games => {
-      setGames(games);
-    });
+    const fetchData = async () => {
+      setSeasons(await getSeasons(1));
+    }
+    fetchData();
   }, [])
 
   return (
@@ -38,8 +39,12 @@ const BetsView = () => {
           <Col span={24} xs={24} sm={24} md={19}>
             <header className="root-content">
               <HomeCarousel />
-              <SingleMarketHeader />
-              <SingleMarketMatches games={games} />
+              <SeasonHeader />
+              {seasons.map(season => (
+                <>
+                  <SeasonGames season={season} />
+                </>
+              ))}
             </header>
           </Col>
         }

@@ -9,7 +9,7 @@ import { useWallet } from "../../contexts/sol/wallet";
 import { useAccountByMint } from "../../hooks";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
-import { depositLiquidityInstruction } from "../../models/depositLiquidityInstruction";
+import { depositLiquidityInstruction } from "../../models/sol/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
 import { LAMPORTS_PER_USDT } from "../../constants";

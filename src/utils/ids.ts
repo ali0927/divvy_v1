@@ -25,10 +25,11 @@ export const PROGRAM_IDS = [
 export const DIVVY_PROGRAM_ID = new PublicKey("B14sFsX8NXEV4ujSYsYTkXBeV8mLh89QmTqzbRFFLY1f")
 export const DIVVY_PDA_ACCOUNT = new PublicKey("6cdK5Kgtj7aeqJs3qSefSn25SCXrPfZsqjHsUqwJf7nM");
 export const DIVVY_USDT_ACCOUNT = new PublicKey("9kZBknDMoTGTpAy6GRFMrfwXz7HeNqtLoyqJdXA3uV1e");
+export const DIVVY_STATE_ACCOUNT = new PublicKey("2theHfNiJdVSiz8BT39ASgnXNzEkVSDtfU1zyap1KWog");
 export const HP_MINT = new PublicKey("8KXUbMzoKVropDw4sFo1Z4RQRjdWoDBcueiC6qXQLS1U");
-export const ESCROW_STATE_ID = new PublicKey("2theHfNiJdVSiz8BT39ASgnXNzEkVSDtfU1zyap1KWog");
 const USDT_MINT_MAINNET = new PublicKey("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
 const USDT_MINT_DEVNET = new PublicKey("5pNyrzGwHLP5cUPXxSuEXLsu6USZWEmtVhXSFFQSVGdp");
+export const FEED_PLACEHOLDER = new PublicKey("Dc6YtAgaLJEin86SikGaaM3JHFjv2bSpsUzYVW2nrnhp");
 
 export const getUsdtMint = (env: ENV) => {
   if (env === ENV.Mainnet) {

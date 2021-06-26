@@ -8,7 +8,7 @@ import {
     TokenAccountsFilter
 } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
-import { EscrowState, EscrowStateParser } from "../../models/escrowState";
+import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 import { WalletContext } from "./wallet"
 export const UserHPTContext = createContext<any>(null);
 export const UserHPTContextProvider = (props: { children: any }) => {
