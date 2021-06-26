@@ -1,12 +1,13 @@
-import { AccountLayout, Token } from "@solana/spl-token";
+import { Token } from "@solana/spl-token";
 import { Connection, Keypair, PublicKey, SystemProgram, TransactionInstruction } from "@solana/web3.js";
 import * as BufferLayout from "buffer-layout";
-import { Game, MarketSide } from "../../constants";
+import { Bet, Game, MarketSide } from "../../constants";
 import { ENV } from "../../constants/sol/env";
 import { sendTransaction } from "../../contexts/sol/connection";
 import { WalletAdapter } from "../../contexts/sol/wallet";
 import * as IDS from "../../utils/ids"
 import { notify } from "../../utils/notifications";
+import { MONEY_LINE_BET_LAYOUT } from "./state/moneyLineBet";
 
 const INIT_BET_LAYOUT: BufferLayout.Layout = BufferLayout.struct([
   BufferLayout.u8("action"),
@@ -22,8 +23,83 @@ interface INIT_BET_DATA {
   marketSide: number;
 };
 
-const createBetAccountInstruction = () => {
+export const initBet = async (
+  connection: Connection,
+  env: ENV,
+  wallet: WalletAdapter | undefined,
+  userUsdtAccount: PublicKey | undefined,
+  bet: Bet) => {
 
+  if (wallet?.publicKey == null) {
+    notify({
+      message: "Transaction failed...",
+      description: "Please connect a wallet.",
+      type: "error",
+    });
+    return;
+  }
+
+  if (userUsdtAccount == null) {
+    notify({
+      message: "Transaction failed...",
+      description: "User does not have a USDT token account.",
+      type: "error",
+    });
+    return;
+  }
+
+  const [ix, betTokenAccount] = await initBetTransaction(
+    wallet.publicKey,
+    userUsdtAccount,
+    bet.marketSide,
+    bet.risk,
+    bet.odds,
+    bet.sol.oddsFeed,
+    connection);
+  let [ok,] = await sendTransaction(connection, env, wallet, ix, [betTokenAccount]);
+
+  return ok ? betTokenAccount.publicKey : undefined;
+}
+
+export const initBetTransaction = async (
+  userAccount: PublicKey,
+  userUsdtAccount: PublicKey,
+  marketSide: MarketSide,
+  riskedUsdt: number,
+  odds: number,
+  oddsFeed: PublicKey,
+  connection: Connection): Promise<[tx: TransactionInstruction[], betTokenAccount: Keypair]> => {
+
+  const betAccount = Keypair.generate();
+  const createTempTokenAccountIx = await createBetAccountInstruction(
+    connection,
+    userAccount,
+    betAccount.publicKey);
+  const initBetIx = initBetInstruction(
+    userAccount,
+    userUsdtAccount,
+    oddsFeed,
+    betAccount.publicKey,
+    oddsFeed,
+    riskedUsdt,
+    odds,
+    marketSide);
+
+  const ix = [createTempTokenAccountIx, initBetIx];
+
+  return [ix, betAccount];
+}
+
+const createBetAccountInstruction = async (connection: Connection, fromPubkey: PublicKey, betAccountPubkey: PublicKey) => {
+  const lamports = await connection.getMinimumBalanceForRentExemption(MONEY_LINE_BET_LAYOUT.span, 'singleGossip');
+  const createTempTokenAccountIx = SystemProgram.createAccount({
+    programId: IDS.DIVVY_PROGRAM_ID,
+    space: MONEY_LINE_BET_LAYOUT.span,
+    lamports: lamports,
+    fromPubkey: fromPubkey,
+    newAccountPubkey: betAccountPubkey
+  });
+  return createTempTokenAccountIx;
 }
 
 const initBetInstruction = (
@@ -60,94 +136,4 @@ const initBetInstruction = (
   });
 
   return initBetIx;
-}
-
-export const initBetTransaction = async (
-  userAccount: PublicKey,
-  userUsdtAccount: PublicKey,
-  game: Game,
-  oddsFeed: PublicKey,
-  riskedUsdt: number,
-  odds: number,
-  connection: Connection,
-  env: ENV): Promise<[tx: TransactionInstruction[], betTokenAccount: Keypair]> => {
-
-  const betAccount = Keypair.generate();
-  const lamports = await connection.getMinimumBalanceForRentExemption(AccountLayout.span, 'singleGossip');
-  const createTempTokenAccountIx = SystemProgram.createAccount({
-    programId: IDS.TOKEN_PROGRAM_ID,
-    space: AccountLayout.span,
-    lamports: lamports,
-    fromPubkey: userAccount,
-    newAccountPubkey: betAccount.publicKey
-  });
-
-  const initTempAccountIx = Token.createInitAccountInstruction(
-    IDS.TOKEN_PROGRAM_ID,
-    IDS.getUsdtMint(env),
-    betAccount.publicKey,
-    userAccount);
-
-  const transferXTokensToTempAccIx = Token.createTransferInstruction(
-    IDS.TOKEN_PROGRAM_ID,
-    userUsdtAccount,
-    betAccount.publicKey,
-    userAccount,
-    [],
-    riskedUsdt);
-
-  const initBetIx = initBetInstruction(
-    userAccount,
-    userUsdtAccount,
-    oddsFeed,
-    betAccount.publicKey,
-    IDS.FEED_PLACEHOLDER,
-    riskedUsdt,
-    odds,
-    IDS.FEED_PLACEHOLDER as unknown as MarketSide);
-
-  const ix = [createTempTokenAccountIx, initTempAccountIx, transferXTokensToTempAccIx, initBetIx];
-
-  return [ix, betAccount];
-}
-
-export const initBet = async (
-  connection: Connection,
-  env: ENV,
-  wallet: WalletAdapter | undefined,
-  userUsdtTokenAccount: PublicKey | undefined,
-  riskedUsdt: number,
-  odds: number,
-) => {
-
-  if (wallet?.publicKey == null) {
-    notify({
-      message: "Transaction failed...",
-      description: "Please connect a wallet.",
-      type: "error",
-    });
-    return;
-  }
-
-  if (userUsdtTokenAccount == null) {
-    notify({
-      message: "Transaction failed...",
-      description: "User does not have a USDT token account.",
-      type: "error",
-    });
-    return;
-  }
-
-  const [ix, betTokenAccount] = await initBetTransaction(
-    wallet.publicKey,
-    userUsdtTokenAccount,
-    IDS.FEED_PLACEHOLDER as unknown as Game,
-    IDS.FEED_PLACEHOLDER,
-    riskedUsdt,
-    odds,
-    connection,
-    env);
-  let [ok,] = await sendTransaction(connection, env, wallet, ix, [betTokenAccount]);
-
-  return ok ? betTokenAccount.publicKey : undefined;
 }

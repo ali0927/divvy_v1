@@ -29,7 +29,6 @@ export const DIVVY_STATE_ACCOUNT = new PublicKey("2theHfNiJdVSiz8BT39ASgnXNzEkVS
 export const HP_MINT = new PublicKey("8KXUbMzoKVropDw4sFo1Z4RQRjdWoDBcueiC6qXQLS1U");
 const USDT_MINT_MAINNET = new PublicKey("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
 const USDT_MINT_DEVNET = new PublicKey("5pNyrzGwHLP5cUPXxSuEXLsu6USZWEmtVhXSFFQSVGdp");
-export const FEED_PLACEHOLDER = new PublicKey("Dc6YtAgaLJEin86SikGaaM3JHFjv2bSpsUzYVW2nrnhp");
 
 export const getUsdtMint = (env: ENV) => {
   if (env === ENV.Mainnet) {

@@ -15,6 +15,13 @@ export interface Odds {
     spreadPoints: number,
     total: number,
     totalPoints: number,
+    sol: {
+        moneylineFeedPubkey: PublicKey,
+        spreadPointsFeedPubkey: PublicKey,
+        spreadFeedPubkey: PublicKey
+        totalFeedPubkey: PublicKey,
+        totalPointsFeedPubkey: PublicKey,
+    }
 }
 export enum OddsType {
     moneyline = "Money Line",
@@ -64,17 +71,9 @@ export interface Game {
     commenceTimestamp: number,
     commenceDate: string,
     commenceTime: string,
-    sol?: {
-        winnerFeedPubkey: PublicKey,
-        teamAOddsMoneylineFeedPubkey: PublicKey,
-        teamBOddsMoneylineFeedPubkey: PublicKey,
+    sol: {
         drawOddsMoneylineFeedPubkey: PublicKey,
-        teamATotalPointsFeedPubkey: PublicKey,
-        teamBTotalPointsFeedPubkey: PublicKey,
-        teamAOddsTotalFeedPubkey: PublicKey,
-        teamBOddsTotalFeedPubkey: PublicKey,
-        teamASpreadPointsFeedPubkey: PublicKey,
-        teamBSpreadPointsFeedPubkey: PublicKey,
+        winnerFeedPubkey: PublicKey,
         teamAScoreFeedPubkey: PublicKey,
         teamBScoreFeedPubkey: PublicKey,
     }
@@ -88,7 +87,7 @@ export interface Bet {
     otherTeam: Team,
     odds: number,
     oddsType: OddsType,
-    oddsSide: MarketSide,
+    marketSide: MarketSide,
     type: BetType,
     risk: number,
     id: string,
@@ -96,6 +95,6 @@ export interface Bet {
     totalPoints: number,
     betTokenAccount?: PublicKey
     sol: {
-        oddsFeed?: PublicKey
+        oddsFeed: PublicKey
     }
 }

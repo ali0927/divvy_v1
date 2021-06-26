@@ -5,6 +5,7 @@ import { Bet } from "../../constants/bets";
 import { useState, useContext } from "react";
 import { CloseOutlined } from "@ant-design/icons"
 import { BetsContext } from "../../contexts/bets";
+import { LAMPORTS_PER_USDT } from "../../constants";
 export const MyBet = (props: { bet: Bet }) => {
     const [risk, setRisk] = useState(0)
     const bets = useContext(BetsContext);
@@ -27,7 +28,7 @@ export const MyBet = (props: { bet: Bet }) => {
                         },
                     ]}
                 >
-                    <Input value={risk} onChange={(value) => { setRisk(parseInt(value.currentTarget.value)); bets?.editBetRisk(props.bet.id, parseInt(value.currentTarget.value)) }} />
+                    <Input value={risk / LAMPORTS_PER_USDT} onChange={(event) => { setRisk(parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT); bets?.editBetRisk(props.bet.id, parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT) }} />
                 </Form.Item>
                 <Form.Item
                     style={{ width: "50%", marginLeft: 4 }}
@@ -38,9 +39,8 @@ export const MyBet = (props: { bet: Bet }) => {
                             required: true,
                             message: "Please enter your house pool address.",
                         },
-                    ]}
-                >
-                    <Input color={"white"} style={{ color: "white" }} placeholder={String(risk * props.bet.odds)} disabled={true} />
+                    ]}>
+                    <Input color={"white"} style={{ color: "white" }} placeholder={String(risk / LAMPORTS_PER_USDT * props.bet.odds)} disabled={true} />
                 </Form.Item>
             </div>
             <Divider style={{ marginTop: 0 }} />

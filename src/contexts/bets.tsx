@@ -61,8 +61,7 @@ const BetsProvider = (props: { children: any }) => {
           connectionConfig.env,
           wallet.wallet,
           usdtTokenAccount?.pubkey,
-          bet.risk * LAMPORTS_PER_USDT,
-          bet.odds);
+          bet);
         if (betTokenAccount) {
           bet.betTokenAccount = betTokenAccount;
           bet.type = BetType.Pending

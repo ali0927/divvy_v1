@@ -4,7 +4,7 @@ import * as BufferLayout from "buffer-layout";
 import { ParsedAccount } from "../../../contexts/sol/accounts";
 import { MarketSide } from "../../../constants";
 
-const LAYOUT = BufferLayout.struct([
+export const MONEY_LINE_BET_LAYOUT = BufferLayout.struct([
   BufferLayout.u8('isInitialized'),
   Layout.publicKey('market'),
   Layout.publicKey('userUsdtAccount'),
@@ -27,7 +27,7 @@ export interface MoneyLineBet {
 }
 
 export const MoneyLineBetParser = (id: PublicKey, acc: AccountInfo<Buffer>): ParsedAccount<MoneyLineBet> => {
-  const decoded = LAYOUT.decode(acc.data) as any;
+  const decoded = MONEY_LINE_BET_LAYOUT.decode(acc.data) as any;
   const moneyLineBet: ParsedAccount<MoneyLineBet> = {
     pubkey: id,
     account: { ...acc },
