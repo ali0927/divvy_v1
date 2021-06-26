@@ -7,7 +7,6 @@ import {
   Transaction,
   TransactionInstruction,
   SendOptions,
-  AccountChangeCallback,
   Commitment,
   RpcResponseAndContext,
   AccountInfo,
