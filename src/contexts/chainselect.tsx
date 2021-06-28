@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react"
+import { useState, createContext, useEffect } from "react"
 import { ChainType } from "../constants/chains";
 const CHAIN_KEY: string = "chain"
 export const ChainSelectContext = createContext<{

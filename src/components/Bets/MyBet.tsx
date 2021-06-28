@@ -20,7 +20,6 @@ export const MyBet = (props: { bet: Bet }) => {
                 <Form.Item
                     style={{ width: "50%", marginRight: 4 }}
                     label="Wager"
-                    name={"stake " + props.bet.betType}
                     rules={[
                         {
                             required: true,
@@ -33,7 +32,6 @@ export const MyBet = (props: { bet: Bet }) => {
                 <Form.Item
                     style={{ width: "50%", marginLeft: 4 }}
                     label="Payout"
-                    name={"win" + props.bet.betId}
                     rules={[
                         {
                             required: true,
