@@ -22,13 +22,13 @@ export const PROGRAM_IDS = [
   },
 ];
 
-export const DIVVY_PROGRAM_ID = new PublicKey("B14sFsX8NXEV4ujSYsYTkXBeV8mLh89QmTqzbRFFLY1f")
-export const DIVVY_PDA_ACCOUNT = new PublicKey("6cdK5Kgtj7aeqJs3qSefSn25SCXrPfZsqjHsUqwJf7nM");
-export const DIVVY_USDT_ACCOUNT = new PublicKey("9kZBknDMoTGTpAy6GRFMrfwXz7HeNqtLoyqJdXA3uV1e");
-export const DIVVY_STATE_ACCOUNT = new PublicKey("2theHfNiJdVSiz8BT39ASgnXNzEkVSDtfU1zyap1KWog");
-export const HP_MINT = new PublicKey("8KXUbMzoKVropDw4sFo1Z4RQRjdWoDBcueiC6qXQLS1U");
+export const DIVVY_PROGRAM_ID = new PublicKey("96qPDQTvLTQsNE9aQ73Xh3dRFj9UmX3Hpp48vpWuuTKj")
+export const DIVVY_PDA_ACCOUNT = new PublicKey("7F2gxFmypW1wdwyQBioXPEoLteEczZB2is7YVUSj7KQb");
+export const DIVVY_USDT_ACCOUNT = new PublicKey("2KaLTsgSTAyCoAN4Wai457qUc6sphGbnv8DWZ9ocre8S");
+export const DIVVY_STATE_ACCOUNT = new PublicKey("FbTPknWrLLn9sp4aCKga2iCQ1kxptDh3JdZ4UBfDYoEb");
+export const HP_MINT = new PublicKey("Fbd4Yw4UkyjEy1VhDHWNAtwhqUHimSZPb6RKQwZ2BAFF");
 const USDT_MINT_MAINNET = new PublicKey("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
-const USDT_MINT_DEVNET = new PublicKey("5pNyrzGwHLP5cUPXxSuEXLsu6USZWEmtVhXSFFQSVGdp");
+const USDT_MINT_DEVNET = new PublicKey("DC1mLtpCgcFWKuBFhEx6RS4awkzkCv3Ai3RmBDcdjMJh");
 
 export const getUsdtMint = (env: ENV) => {
   if (env === ENV.Mainnet) {

@@ -1,6 +1,5 @@
 import { useState, createContext } from "react"
-import { Bet, BetType, LAMPORTS_PER_USDT } from "../constants";
-import { ChainType } from "../constants/chains";
+import { Bet, BetType } from "../constants";
 import { useAccountByMint } from "../hooks";
 import { useConnection, useConnectionConfig } from "./sol/connection";
 import { useWallet } from "./sol/wallet";
