@@ -7,11 +7,11 @@ export const LiquidityAvailability = () => {
     <div>
       <div className="liquidity-left">
         <h6>100% Available Liquidity</h6>
-        <p className="text-primary">{hpBalance} USDT</p>
+        <p className="text-primary">{(hpBalance?.uiAmount || 0).toFixed(2)} USDT</p>
       </div>
       <div className="liquidity-right">
         <h6 className="text-secondary">0% Locked Liquidity</h6>
-        <p className="text-secondary">0 USDT</p>
+        <p className="text-secondary">0.00 USDT</p>
       </div>
     </div>
   );

@@ -15,13 +15,7 @@ export const SeasonsView = () => {
             <SeasonHeader seasonName={sport?.sportName} />
             {error ? LABELS.SERVER_ERROR : null}
             {isLoading ? <Loader /> : null}
-            {
-                data?.map(season => (
-                    <>
-                        <SeasonGames season={season} />
-                    </>
-                ))
-            }
+            {data?.map(season => <SeasonGames season={season} key={season.season.seasonId} />)}
         </>
     )
 }

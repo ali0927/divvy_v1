@@ -94,7 +94,7 @@ export const StakeHT = (props: {}) => {
                     <p>
                         <small className="text-secondary">House Token Balance</small>
                     </p>
-                    <p className="balance">0 HT</p>
+                    <p className="balance">0.00 HT</p>
                 </div>
                 <Form.Item
                     name="usdtAmount"

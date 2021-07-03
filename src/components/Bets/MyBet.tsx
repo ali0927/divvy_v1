@@ -5,10 +5,20 @@ import { Bet } from "../../constants/bets";
 import { useState, useContext } from "react";
 import { CloseOutlined } from "@ant-design/icons"
 import { BetsContext } from "../../contexts/bets";
-import { LAMPORTS_PER_USDT } from "../../constants";
+import { americanToDecimal, LAMPORTS_PER_USDT } from "../../constants";
 export const MyBet = (props: { bet: Bet }) => {
     const [risk, setRisk] = useState(0)
     const bets = useContext(BetsContext);
+
+    const doSetRisk = (risk: number) => {
+        if(isNaN(risk)){
+            risk = 0;
+        }
+
+        setRisk(risk);
+        bets?.editBetRisk(props.bet.betId, risk)
+    }
+
     return (
         <div style={{ margin: 20 }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -27,7 +37,7 @@ export const MyBet = (props: { bet: Bet }) => {
                         },
                     ]}
                 >
-                    <Input value={risk / LAMPORTS_PER_USDT} onChange={(event) => { setRisk(parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT); bets?.editBetRisk(props.bet.betId, parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT) }} />
+                    <Input value={risk / LAMPORTS_PER_USDT} onChange={(event) => { doSetRisk(parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT) }} />
                 </Form.Item>
                 <Form.Item
                     style={{ width: "50%", marginLeft: 4 }}
@@ -38,7 +48,7 @@ export const MyBet = (props: { bet: Bet }) => {
                             message: "Please enter your house pool address.",
                         },
                     ]}>
-                    <Input color={"white"} style={{ color: "white" }} placeholder={String(risk / LAMPORTS_PER_USDT * props.bet.odds)} disabled={true} />
+                    <Input color={"white"} style={{ color: "white" }} placeholder={(risk / LAMPORTS_PER_USDT * americanToDecimal(props.bet.odds)).toFixed(2)} disabled={true} />
                 </Form.Item>
             </div>
             <Divider style={{ marginTop: 0 }} />

@@ -15,7 +15,7 @@ import { UserUSDTContext } from "../../contexts/sol/userusdt";
 import { LAMPORTS_PER_USDT } from "../../constants";
 import * as IDS from "../../utils/ids"
 
-export const DepositLiquidity = (props: {}) => {
+export const DepositLiquidity = () => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
@@ -104,7 +104,7 @@ export const DepositLiquidity = (props: {}) => {
           <p>
             <small className="text-secondary">Wallet balance</small>
           </p>
-          <p className="balance">{userUSDT} USDT</p>
+          <p className="balance">{(userUSDT?.uiAmount || 0).toFixed(2)} USDT</p>
         </div>
 
         <Form.Item name="usdtAmount">

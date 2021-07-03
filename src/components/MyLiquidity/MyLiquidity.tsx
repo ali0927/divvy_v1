@@ -3,12 +3,12 @@ import { WithdrawLiquidity } from "./WithdrawLiquidity";
 import { DivvyDao } from "./DivvyDao";
 import { StakeHT } from "./StakeHT";
 import { useContext } from "react";
-import { UserHPTContext } from "../../contexts/sol/userhpt";
+import { UserHTContext } from "../../contexts/sol/userht";
 import { Tooltip } from "antd";
 import { LABELS } from "../../constants/labels"
 import { InfoCircleOutlined } from "@ant-design/icons"
 export const MyLiquidity = (props: {}) => {
-  const { userHPT } = useContext(UserHPTContext);
+  const { userHT } = useContext(UserHTContext);
   return (
     <div>
       <div className="sidebar-section">
@@ -17,12 +17,12 @@ export const MyLiquidity = (props: {}) => {
           <div className="balance-container">
             <span>House Pool tokens</span>
             <span className="balance">
-              {userHPT} HPT
+              {(userHT?.uiAmount || 0).toFixed(2)} HT
             </span>
           </div>
           <div className="balance-container">
             <span>Balance in USDT</span>
-            <span className="balance">{userHPT} USDT</span>
+            <span className="balance">{(userHT?.uiAmount || 0).toFixed(2)} USDT</span>
           </div>
           <div className="balance-container">
             <Tooltip title={LABELS.CONVERSION_RATIO}>

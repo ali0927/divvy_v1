@@ -13,7 +13,7 @@ export const LiquidityGlobalStats = () => {
       </Col>
       <div className="horizontal-outline" />
       <Col span={24} md={14} style={{ marginTop: 4, }}>
-        <h1 style={{ fontSize: "1.5em" }}>{hpBalance} USDT</h1>
+        <h1 style={{ fontSize: "1.5em" }}>{(hpBalance?.uiAmount || 0).toFixed(2)} USDT</h1>
         <div style={{ fontSize: "1em", marginTop: 5 }} className="text-secondary liquidity-total">Total in the Liquidity Pool</div>
         <LiquidityAvailabilityBar />
         <LiquidityAvailability />

@@ -15,16 +15,16 @@ export const LiquidityViewLink = () => {
           <div className="balance-container">
             <span>House Pool balance</span>
             <span className="balance">
-              {hpBalance} USDT
+              {(hpBalance?.uiAmount || 0).toFixed(2)} USDT
             </span>
           </div>
           <div className="balance-container">
             <span>Locked liquidity</span>
-            <span className="balance">0 USDT</span>
+            <span className="balance">0.00 USDT</span>
           </div>
           <div className="balance-container">
             <span>Available liquidity</span>
-            <span className="balance">{hpBalance} USDT</span>
+            <span className="balance">{(hpBalance?.uiAmount || 0).toFixed(2)} USDT</span>
           </div>
         </small>
       </div>

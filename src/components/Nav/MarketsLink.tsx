@@ -12,7 +12,7 @@ export const MarketsLink = ({ search = "" as any }) => {
         data?.forEach((sportData, index) => {
             if (sportData.sportName.toLowerCase().includes(search.toLowerCase())) {
                 market.push(
-                    <div onClick={() => { changeSport(sportData) }} className={sport?.sportId === sportData.sportId ? "selected-search-item" : "search-item selected"}>
+                    <div onClick={() => { changeSport(sportData) }} className={sport?.sportId === sportData.sportId ? "selected-search-item" : "search-item selected"} key={sportData.sportId}>
                         <Button className="search-button" ghost type="default">
                             <div className="search-button-data">
                                 <div className="search-left">

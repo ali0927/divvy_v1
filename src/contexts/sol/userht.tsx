@@ -4,38 +4,40 @@ import { getAccountInfoAndSubscribe, useConnection } from "./connection";
 import {
     AccountInfo,
     PublicKey,
-    RpcResponseAndContext,
-    TokenAccountsFilter
+    TokenAccountsFilter,
+    TokenAmount
 } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
 import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 import { WalletContext } from "./wallet"
-export const UserHPTContext = createContext<any>(null);
-export const UserHPTContextProvider = (props: { children: any }) => {
+export const UserHTContext = createContext({
+    userHT: undefined as TokenAmount | undefined
+});
+export const UserHTContextProvider = (props: { children: any }) => {
     const { wallet } = useContext(WalletContext);
     const connection = useConnection();
     let [accountData, setAccountData] =
         useState<Accounts.ParsedAccount<EscrowState>>();
-    const [userHPT, setUserHPT] = useState<number>(0);
+    const [userHT, setUserHT] = useState<TokenAmount>();
     useEffect(() => {
         if (wallet?.publicKey) {
             const check = async () => {
-                const userHPT: TokenAccountsFilter = { mint: IDS.HP_MINT }
-                const userHPTData = await connection.getTokenAccountsByOwner(new PublicKey(String(wallet?.publicKey)), userHPT)
-                const userHPTPubKey = userHPTData.value[0].pubkey;
+                const userHT: TokenAccountsFilter = { mint: IDS.HP_MINT }
+                const userHTData = await connection.getTokenAccountsByOwner(new PublicKey(String(wallet?.publicKey)), userHT)
+                const userHTPubKey = userHTData.value[0].pubkey;
                 let subscriptionId = getAccountInfoAndSubscribe(
                     connection,
-                    userHPTPubKey,
+                    userHTPubKey,
                     parseAccount
                 );
                 async function parseAccount(acc: AccountInfo<Buffer>|null) {
                     if(acc) {
-                        const parsed = EscrowStateParser(userHPTPubKey, acc);
-                        const data = await connection.getTokenAccountBalance(userHPTPubKey);
-                        setUserHPT(data.value.uiAmount || 0);
+                        const parsed = EscrowStateParser(userHTPubKey, acc);
+                        const data = await connection.getTokenAccountBalance(userHTPubKey);
+                        setUserHT(data.value);
                         setAccountData(parsed);
                     } else {
-                        setUserHPT(0);
+                        setUserHT(undefined);
                         setAccountData(undefined);
                     }
                 }
@@ -47,8 +49,8 @@ export const UserHPTContextProvider = (props: { children: any }) => {
         }
     }, [connection, wallet]);
     return (
-        <UserHPTContext.Provider value={{ userHPT, setUserHPT }}>
+        <UserHTContext.Provider value={{ userHT: userHT }}>
             {props.children}
-        </UserHPTContext.Provider>
+        </UserHTContext.Provider>
     )
 }

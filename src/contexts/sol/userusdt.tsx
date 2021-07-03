@@ -1,22 +1,20 @@
-import React, { useState, createContext, useEffect, useContext } from "react"
+import { useState, createContext, useEffect, useContext } from "react"
 import * as Accounts from "./accounts";
 import { getAccountInfoAndSubscribe, useConnection, useConnectionConfig } from "./connection";
-import {
-    AccountInfo,
-    PublicKey,
-    RpcResponseAndContext,
-} from "@solana/web3.js";
+import { AccountInfo, PublicKey, TokenAmount } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
 import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 import { WalletContext } from "./wallet"
-export const UserUSDTContext = createContext<any>(null);
+export const UserUSDTContext = createContext({
+    userUSDT: undefined as TokenAmount|undefined,
+});
 export const UserUSDTContextProvider = (props: { children: any }) => {
     const { wallet } = useContext(WalletContext);
     const connection = useConnection();
     const connectionConfig = useConnectionConfig();
     let [accountData, setAccountData] =
         useState<Accounts.ParsedAccount<EscrowState>>();
-    const [userUSDT, setUserUSDT] = useState<number>(0);
+    const [userUSDT, setUserUSDT] = useState<TokenAmount>();
     useEffect(() => {
         if (wallet?.publicKey) {
             const check = async () => {
@@ -29,13 +27,13 @@ export const UserUSDTContextProvider = (props: { children: any }) => {
                     parseAccount
                 );
                 async function parseAccount(acc: AccountInfo<Buffer>|null) {
-                    if(acc){
+                    if (acc) {
                         const parsed = EscrowStateParser(UserUSDTPubKey, acc);
                         const data = await connection.getTokenAccountBalance(UserUSDTPubKey);
-                        setUserUSDT(data.value.uiAmount || 0)
+                        setUserUSDT(data.value)
                         setAccountData(parsed)
                     } else {
-                        setUserUSDT(0);
+                        setUserUSDT(undefined);
                         setAccountData(undefined);
                     }
                 }
@@ -47,7 +45,7 @@ export const UserUSDTContextProvider = (props: { children: any }) => {
         }
     }, [connection, connectionConfig, wallet]);
     return (
-        <UserUSDTContext.Provider value={{ userUSDT, setUserUSDT }}>
+        <UserUSDTContext.Provider value={{ userUSDT }}>
             {props.children}
         </UserUSDTContext.Provider>
     )
