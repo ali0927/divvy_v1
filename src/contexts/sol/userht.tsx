@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useContext } from "react"
+import { useState, createContext, useEffect, useContext } from "react"
 import * as Accounts from "./accounts";
 import { getAccountInfoAndSubscribe, useConnection } from "./connection";
 import {
@@ -11,14 +11,14 @@ import * as IDS from "../../utils/ids";
 import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 import { WalletContext } from "./wallet"
 export const UserHTContext = createContext({
-    userHT: undefined as TokenAmount | undefined
+    userHT: 0
 });
 export const UserHTContextProvider = (props: { children: any }) => {
     const { wallet } = useContext(WalletContext);
     const connection = useConnection();
     let [accountData, setAccountData] =
         useState<Accounts.ParsedAccount<EscrowState>>();
-    const [userHT, setUserHT] = useState<TokenAmount>();
+    const [userHT, setUserHT] = useState(0);
     useEffect(() => {
         if (wallet?.publicKey) {
             const check = async () => {
@@ -34,10 +34,10 @@ export const UserHTContextProvider = (props: { children: any }) => {
                     if(acc) {
                         const parsed = EscrowStateParser(userHTPubKey, acc);
                         const data = await connection.getTokenAccountBalance(userHTPubKey);
-                        setUserHT(data.value);
+                        setUserHT(parseInt(data.value.amount) || 0);
                         setAccountData(parsed);
                     } else {
-                        setUserHT(undefined);
+                        setUserHT(0);
                         setAccountData(undefined);
                     }
                 }
@@ -49,7 +49,7 @@ export const UserHTContextProvider = (props: { children: any }) => {
         }
     }, [connection, wallet]);
     return (
-        <UserHTContext.Provider value={{ userHT: userHT }}>
+        <UserHTContext.Provider value={{ userHT }}>
             {props.children}
         </UserHTContext.Provider>
     )

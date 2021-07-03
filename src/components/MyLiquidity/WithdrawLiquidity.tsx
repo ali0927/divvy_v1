@@ -1,7 +1,7 @@
 import { PublicKey } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
-import { LAMPORTS_PER_USDT } from "../../constants";
+import { LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
 import {
   useConnection,
   useConnectionConfig,
@@ -88,7 +88,7 @@ export const WithdrawLiquidity = (props: {}) => {
         <p>
           <small className="text-secondary">Withdrawable balance</small>
         </p>
-        <p className="balance">{(userHT?.uiAmount || 0).toFixed(2)} HT</p>
+        <p className="balance">{tokenAmountToString(userHT)} HT</p>
       </div>
       <Form.Item
         // label="USDT amount to withdraw:"

@@ -26,3 +26,7 @@ export const decimalToAmerican = (decimalOdds: number): number => {
   }
   return NaN;
 }
+
+export const tokenAmountToString = (tokenAmount: number, decimals: number = 6, fractionDigits = 6): string => {
+  return (tokenAmount / Math.pow(10, decimals)).toLocaleString(undefined, { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits })
+}

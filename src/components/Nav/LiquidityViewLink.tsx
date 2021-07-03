@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 import LinkLabel from "../Nav/LinkLabel";
-import { LIQUIDITY_VIEW_PATH } from "../../constants";
+import { LIQUIDITY_VIEW_PATH, tokenAmountToString } from "../../constants";
 export const LiquidityViewLink = () => {
-  const { hpBalance } = useContext(HousePoolContext);
+  const { htBalance } = useContext(HousePoolContext);
   return (
     <Link to={LIQUIDITY_VIEW_PATH}>
       <div className="sidebar-section text-secondary">
@@ -15,16 +15,16 @@ export const LiquidityViewLink = () => {
           <div className="balance-container">
             <span>House Pool balance</span>
             <span className="balance">
-              {(hpBalance?.uiAmount || 0).toFixed(2)} USDT
+              {tokenAmountToString(htBalance, 6, 0)} USDT
             </span>
           </div>
           <div className="balance-container">
             <span>Locked liquidity</span>
-            <span className="balance">0.00 USDT</span>
+            <span className="balance">0 USDT</span>
           </div>
           <div className="balance-container">
             <span>Available liquidity</span>
-            <span className="balance">{(hpBalance?.uiAmount || 0).toFixed(2)} USDT</span>
+            <span className="balance">{tokenAmountToString(htBalance, 6, 0)} USDT</span>
           </div>
         </small>
       </div>

@@ -6,7 +6,7 @@ import * as IDS from "../../utils/ids";
 import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 import { WalletContext } from "./wallet"
 export const UserUSDTContext = createContext({
-    userUSDT: undefined as TokenAmount|undefined,
+    userUSDT: 0,
 });
 export const UserUSDTContextProvider = (props: { children: any }) => {
     const { wallet } = useContext(WalletContext);
@@ -14,7 +14,7 @@ export const UserUSDTContextProvider = (props: { children: any }) => {
     const connectionConfig = useConnectionConfig();
     let [accountData, setAccountData] =
         useState<Accounts.ParsedAccount<EscrowState>>();
-    const [userUSDT, setUserUSDT] = useState<TokenAmount>();
+    const [userUSDT, setUserUSDT] = useState(0);
     useEffect(() => {
         if (wallet?.publicKey) {
             const check = async () => {
@@ -27,13 +27,15 @@ export const UserUSDTContextProvider = (props: { children: any }) => {
                     parseAccount
                 );
                 async function parseAccount(acc: AccountInfo<Buffer>|null) {
+                    console.log(UserUSDTPubKey.toBase58());
+                    console.log(acc)
                     if (acc) {
                         const parsed = EscrowStateParser(UserUSDTPubKey, acc);
                         const data = await connection.getTokenAccountBalance(UserUSDTPubKey);
-                        setUserUSDT(data.value)
+                        setUserUSDT(parseInt(data.value.amount) || 0)
                         setAccountData(parsed)
                     } else {
-                        setUserUSDT(undefined);
+                        setUserUSDT(0);
                         setAccountData(undefined);
                     }
                 }

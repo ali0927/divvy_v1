@@ -5,7 +5,7 @@ import { Bet } from "../../constants/bets";
 import { useState, useContext } from "react";
 import { CloseOutlined } from "@ant-design/icons"
 import { BetsContext } from "../../contexts/bets";
-import { americanToDecimal, LAMPORTS_PER_USDT } from "../../constants";
+import { americanToDecimal, LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
 export const MyBet = (props: { bet: Bet }) => {
     const [risk, setRisk] = useState(0)
     const bets = useContext(BetsContext);
@@ -48,7 +48,7 @@ export const MyBet = (props: { bet: Bet }) => {
                             message: "Please enter your house pool address.",
                         },
                     ]}>
-                    <Input color={"white"} style={{ color: "white" }} placeholder={(risk / LAMPORTS_PER_USDT * americanToDecimal(props.bet.odds)).toFixed(2)} disabled={true} />
+                    <Input color={"white"} style={{ color: "white" }} placeholder={tokenAmountToString(risk * americanToDecimal(props.bet.odds))} disabled={true} />
                 </Form.Item>
             </div>
             <Divider style={{ marginTop: 0 }} />

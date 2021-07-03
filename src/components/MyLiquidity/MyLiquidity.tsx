@@ -7,6 +7,7 @@ import { UserHTContext } from "../../contexts/sol/userht";
 import { Tooltip } from "antd";
 import { LABELS } from "../../constants/labels"
 import { InfoCircleOutlined } from "@ant-design/icons"
+import { tokenAmountToString } from "../../constants";
 export const MyLiquidity = (props: {}) => {
   const { userHT } = useContext(UserHTContext);
   return (
@@ -17,12 +18,12 @@ export const MyLiquidity = (props: {}) => {
           <div className="balance-container">
             <span>House Pool tokens</span>
             <span className="balance">
-              {(userHT?.uiAmount || 0).toFixed(2)} HT
+              {tokenAmountToString(userHT)} HT
             </span>
           </div>
           <div className="balance-container">
             <span>Balance in USDT</span>
-            <span className="balance">{(userHT?.uiAmount || 0).toFixed(2)} USDT</span>
+            <span className="balance">{tokenAmountToString(userHT)} USDT</span>
           </div>
           <div className="balance-container">
             <Tooltip title={LABELS.CONVERSION_RATIO}>

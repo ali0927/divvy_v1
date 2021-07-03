@@ -12,7 +12,7 @@ import { ExplorerLink } from "../ExplorerLink";
 import { depositLiquidityInstruction } from "../../models/sol/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
-import { LAMPORTS_PER_USDT } from "../../constants";
+import { LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
 import * as IDS from "../../utils/ids"
 
 export const DepositLiquidity = () => {
@@ -95,7 +95,6 @@ export const DepositLiquidity = () => {
     }
     //HouseDeposit(parseInt(usdtAmount))
   };
-
   return (
     <div className="sidebar-section form-grey">
       <div>
@@ -104,7 +103,7 @@ export const DepositLiquidity = () => {
           <p>
             <small className="text-secondary">Wallet balance</small>
           </p>
-          <p className="balance">{(userUSDT?.uiAmount || 0).toFixed(2)} USDT</p>
+          <p className="balance">{tokenAmountToString(userUSDT)} USDT</p>
         </div>
 
         <Form.Item name="usdtAmount">

@@ -4,7 +4,7 @@ import { MyBet } from "./MyBet";
 import LinkLabel from "../Nav/LinkLabel";
 import { useContext } from "react";
 import { BetsContext } from "../../contexts/bets";
-import { americanToDecimal, LAMPORTS_PER_USDT } from "../../constants/math";
+import { americanToDecimal, tokenAmountToString } from "../../constants/math";
 export const BetSlip = () => {
   const bets = useContext(BetsContext)
 
@@ -33,7 +33,7 @@ export const BetSlip = () => {
               Total Wager
             </p>
             <p>
-              {(totalRisk / LAMPORTS_PER_USDT).toFixed(2)} USDT
+              {tokenAmountToString(totalRisk)} USDT
             </p>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
@@ -41,7 +41,7 @@ export const BetSlip = () => {
               Total Payout
             </p>
             <p>
-              {(totalPayout / LAMPORTS_PER_USDT).toFixed(2)} USDT
+              {tokenAmountToString(totalPayout)} USDT
             </p>
           </div>
           <Button className="ant-btn-active" style={{ width: "100%", height: 40 }} type="primary" onClick={() => bets?.placeBetSlip()}>
