@@ -26,7 +26,7 @@ export const DashboardView = () => {
                 betId: item.betId,
                 sport: item.sportName,
                 season: item.seasonName,
-                risk: item.risk,
+                risk: item.risk/10**6,
                 odds: item.odds,
                 payout: item.payout,
                 selection: item.selection,
