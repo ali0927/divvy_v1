@@ -1,19 +1,19 @@
 import { useState, createContext, useEffect } from "react"
 import * as Accounts from "./accounts";
 import { getAccountInfoAndSubscribe, useConnection } from "./connection";
-import { AccountInfo, RpcResponseAndContext } from "@solana/web3.js";
+import { AccountInfo, TokenAmount } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
 import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 export const HousePoolContext = createContext({
     accountData: undefined as Accounts.ParsedAccount<EscrowState> | undefined,
-    hpBalance: 0
+    htBalance: 0
 });
 
 export const HousePoolProvider = (props: { children: any }) => {
     const connection = useConnection();
     let [accountData, setAccountData] =
         useState<Accounts.ParsedAccount<EscrowState>>();
-    const [hpBalance, sethpBalance] = useState<number>(0);
+    const [htBalance, setHTBalance] = useState(0);
 
     useEffect(() => {
         let subscriptionId = getAccountInfoAndSubscribe(
@@ -23,13 +23,14 @@ export const HousePoolProvider = (props: { children: any }) => {
         );
         
         async function parseAccount(acc: AccountInfo<Buffer> | null) {
-            if(acc) {
+            if (acc) {
                 const parsed = EscrowStateParser(IDS.DIVVY_USDT_ACCOUNT, acc);
                 const data = await connection.getTokenAccountBalance(IDS.DIVVY_USDT_ACCOUNT);
-                sethpBalance(data.value.uiAmount || 0);
+                
+                setHTBalance(parseInt(data.value.amount) || 0);
                 setAccountData(parsed);
             } else {
-                sethpBalance(0);
+                setHTBalance(0);
                 setAccountData(undefined);
             }
         }
@@ -39,7 +40,7 @@ export const HousePoolProvider = (props: { children: any }) => {
         };
     }, [connection]);
     return (
-        <HousePoolContext.Provider value={{ accountData, hpBalance }}>
+        <HousePoolContext.Provider value={{ accountData, htBalance }}>
             {props.children}
         </HousePoolContext.Provider>
     )

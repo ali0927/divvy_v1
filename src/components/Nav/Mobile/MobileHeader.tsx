@@ -15,7 +15,7 @@ export const MobileHeader = (props: { isMobileMenuVisible: boolean, setMobileMen
                 <WalletBalance />
             </Col>
             <Col className="mobile-header" span={5}>
-                {props.headerType == HeaderTypes.Bets ?
+                {props.headerType === HeaderTypes.Bets ?
                     <MobileBetSlip isBetSlipsVisible={props.isBetSlipsVisible} setBetSlipsVisible={props.setBetSlipsVisible} setMobileMenuVisible={props.setMobileMenuVisible} /> :
                     <HousePoolHeader isBetSlipsVisible={props.isBetSlipsVisible} setBetSlipsVisible={props.setBetSlipsVisible} setMobileMenuVisible={props.setMobileMenuVisible} />
                 }

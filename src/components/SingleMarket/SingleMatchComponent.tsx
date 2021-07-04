@@ -3,8 +3,17 @@ import { TeamDetails } from "./TeamDetails"
 import { OddsSelection } from './OddsSelection';
 import { OddsType } from './OddsType';
 import { Market, MarketSide } from '../../constants';
-import { getShortTimezone } from '../../utils/date';
+import { getDate, getShortTimezone, getTime } from '../../utils/date';
+import { codes } from "../../constants/processed"
 export const SingleMatchComponent = (props: { market: Market }) => {
+    const countryCodeToFlagCode = (countryCode: string) => {
+        let code = codes[countryCode]?.code?.toLowerCase();
+      
+        if (code === "wl") { // This is a hack for wales smh
+          return "gb-wls";
+        }
+        return code;
+      }
     return (
         <div className="single-match">
             <Row>
@@ -15,7 +24,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                     <Row>
                         <Col span={4}>
                             {/* TO DO: logo */}
-                            <TeamDetails name={props.market.teamA} logo={props.market.teamA} />
+                            <TeamDetails name={props.market.teamA} logo={"flag-icon-" + countryCodeToFlagCode(props.market.teamA)} />
                         </Col>
                         <Col span={20} md={10}>
                             <OddsSelection marketSide={MarketSide.teamA} market={props.market} selectionTeam={props.market.teamA} otherTeam={props.market.teamB} selection={"teamA"} odds={{
@@ -44,7 +53,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                     <Row>
                         <Col span={4}>
                             {/* TO DO: logo */}
-                            <TeamDetails name={props.market.teamB} logo={props.market.teamB} />
+                            <TeamDetails name={props.market.teamB} logo={"flag-icon-" + countryCodeToFlagCode(props.market.teamB)} />
                         </Col>
                         <Col span={20} md={10}>
                             <OddsSelection marketSide={MarketSide.teamB} market={props.market} selectionTeam={props.market.teamB} otherTeam={props.market.teamA} selection={"teamB"} odds={{
@@ -62,7 +71,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                         </Col>
                         <Col span={0} md={3}>
                             <div style={{ marginLeft: "5%", marginTop: "-20%", textAlign: "center", fontSize: "1em" }}>
-                                {/* {props.market.commenceDate}<br />{props.market.commenceTime} */}
+                                {getDate(props.market.commenceTime)}<br />{getTime(props.market.commenceTime)}
                             </div>
                         </Col>
                     </Row>

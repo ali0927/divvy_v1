@@ -1,5 +1,5 @@
 import { PicRightOutlined, CloseOutlined } from "@ant-design/icons";
-import { Badge, Button, Menu, Modal } from 'antd';
+import { Badge, Button } from 'antd';
 import { useContext } from "react";
 import { BetsContext } from "../../../contexts/bets";
 export const MobileBetSlip = (props: { isBetSlipsVisible: boolean, setBetSlipsVisible: any, setMobileMenuVisible: any }) => {

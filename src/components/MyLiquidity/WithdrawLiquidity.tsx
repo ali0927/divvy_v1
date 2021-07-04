@@ -1,7 +1,7 @@
 import { PublicKey } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
-import { LAMPORTS_PER_USDT } from "../../constants";
+import { LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
 import {
   useConnection,
   useConnectionConfig,
@@ -13,7 +13,7 @@ import { depositLiquidityInstruction } from "../../models/sol/depositLiquidityIn
 import { useContext, useState } from "react";
 import { useAccountByMint } from "../../hooks";
 import * as IDS from "../../utils/ids";
-import { UserHPTContext } from "../../contexts/sol/userhpt";
+import { UserHTContext } from "../../contexts/sol/userht";
 
 export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();
@@ -22,7 +22,7 @@ export const WithdrawLiquidity = (props: {}) => {
   const hpTokenAccount = useAccountByMint(IDS.HP_MINT)
   const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   let [usdtAmount, setUsdtAmount] = useState("");
-  const { userHPT } = useContext(UserHPTContext);
+  const { userHT } = useContext(UserHTContext);
   const onFinish = async (values: any) => {
     if (wallet.wallet?.publicKey == null) {
       notify({
@@ -88,7 +88,7 @@ export const WithdrawLiquidity = (props: {}) => {
         <p>
           <small className="text-secondary">Withdrawable balance</small>
         </p>
-        <p className="balance">{userHPT} USDT</p>
+        <p className="balance">{tokenAmountToString(userHT)} HT</p>
       </div>
       <Form.Item
         // label="USDT amount to withdraw:"
