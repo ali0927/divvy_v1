@@ -9,7 +9,6 @@ import { ETHWalletProvider } from "./eth/wallet";
 import { MetaMaskProvider } from "./eth/Metamask/MetaMaskProvider";
 const RootContextProvider = (props: { children: any }) => {
     const { chain } = useContext(ChainSelectContext);
-    console.log(chain)
     if (chain === ChainType.Sol) {
         return (
             <ConnectionProvider>

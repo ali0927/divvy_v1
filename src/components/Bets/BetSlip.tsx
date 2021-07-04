@@ -4,17 +4,17 @@ import { MyBet } from "./MyBet";
 import LinkLabel from "../Nav/LinkLabel";
 import { useContext } from "react";
 import { BetsContext } from "../../contexts/bets";
-import { LAMPORTS_PER_USDT } from "../../constants/math";
+import { americanToDecimal, tokenAmountToString } from "../../constants/math";
 export const BetSlip = () => {
   const bets = useContext(BetsContext)
 
   var totalRisk = 0
-  var wins = 0
+  var totalPayout = 0
   var betsCount = 0
   bets?.bets.forEach((bet: Bet) => {
     if (bet.status === BetStatus.Current) {
       totalRisk += bet.risk
-      wins += bet.risk * bet.odds
+      totalPayout += bet.risk * americanToDecimal(bet.odds)
       betsCount++;
     }
   })
@@ -23,26 +23,25 @@ export const BetSlip = () => {
     <div className="form-grey" >
       <div style={{ height: "75vh", overflowX: "hidden", overflowY: "auto" }}>
         {bets?.bets.map((value: Bet) => {
-          if (value.status === BetStatus.Current) {
-            return <MyBet bet={value} />
-          }
+          return value.status === BetStatus.Current
+            ? <MyBet bet={value} />
+            : undefined;
         })}
-        {/* </div> */}
         {betsCount !== 0 ? <div style={{ marginTop: 10 }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
             <p>
               Total Wager
             </p>
             <p>
-              {totalRisk / LAMPORTS_PER_USDT} USDT
+              {tokenAmountToString(totalRisk)} USDT
             </p>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
             <p>
-              To Win
+              Total Payout
             </p>
             <p>
-              {wins / LAMPORTS_PER_USDT} USDT
+              {tokenAmountToString(totalPayout)} USDT
             </p>
           </div>
           <Button className="ant-btn-active" style={{ width: "100%", height: 40 }} type="primary" onClick={() => bets?.placeBetSlip()}>

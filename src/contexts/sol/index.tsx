@@ -1,14 +1,14 @@
 import { HousePoolProvider } from "./hpliquidity"
-import { UserHPTContextProvider } from "./userhpt"
+import { UserHTContextProvider } from "./userht"
 import { UserUSDTContextProvider } from "./userusdt"
 export const SolanaProvider = (props: { children: any }) => {
     return (
         <HousePoolProvider>
-            <UserHPTContextProvider>
+            <UserHTContextProvider>
                 <UserUSDTContextProvider>
                     {props.children}
                 </UserUSDTContextProvider>
-            </UserHPTContextProvider>
+            </UserHTContextProvider>
         </HousePoolProvider>
     )
 }

@@ -12,10 +12,10 @@ import { ExplorerLink } from "../ExplorerLink";
 import { depositLiquidityInstruction } from "../../models/sol/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
-import { LAMPORTS_PER_USDT } from "../../constants";
+import { LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
 import * as IDS from "../../utils/ids"
 
-export const DepositLiquidity = (props: {}) => {
+export const DepositLiquidity = () => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
@@ -63,7 +63,7 @@ export const DepositLiquidity = (props: {}) => {
     }
 
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyexchange")], IDS.DIVVY_PROGRAM_ID);
-
+    
     console.log(usdtLamports + " bump seed " + bumpSeed);
 
     console.log(usdtTokenAccount.pubkey.toBase58());
@@ -95,7 +95,6 @@ export const DepositLiquidity = (props: {}) => {
     }
     //HouseDeposit(parseInt(usdtAmount))
   };
-
   return (
     <div className="sidebar-section form-grey">
       <div>
@@ -104,7 +103,7 @@ export const DepositLiquidity = (props: {}) => {
           <p>
             <small className="text-secondary">Wallet balance</small>
           </p>
-          <p className="balance">{userUSDT} USDT</p>
+          <p className="balance">{tokenAmountToString(userUSDT)} USDT</p>
         </div>
 
         <Form.Item name="usdtAmount">

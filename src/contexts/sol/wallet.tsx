@@ -14,9 +14,6 @@ import React, {
 import { notify } from "../../utils/notifications";
 import { useConnectionConfig } from "./connection";
 import { useLocalStorageState } from "../../utils/utils";
-import { LedgerWalletAdapter } from "../../wallet-adapters/sol/ledger";
-import { SolongWalletAdapter } from "../../wallet-adapters/sol/solong";
-import { PhantomWalletAdapter } from "../../wallet-adapters/sol/phantom";
 import { WALLET_PROVIDERS } from "../../constants/sol/walletproviders";
 
 export interface WalletAdapter extends EventEmitter {
@@ -163,6 +160,7 @@ export function WalletProvider({ children = null as any }) {
                 textAlign: "left",
                 marginBottom: 8,
               }}
+              key={provider.name}
             >
               {provider.name}
             </Button>
