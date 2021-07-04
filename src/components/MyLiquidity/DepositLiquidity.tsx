@@ -62,7 +62,7 @@ export const DepositLiquidity = (props: {}) => {
       return;
     }
 
-    const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("escrow")], IDS.DIVVY_PROGRAM_ID);
+    const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyexchange")], IDS.DIVVY_PROGRAM_ID);
 
     console.log(usdtLamports + " bump seed " + bumpSeed);
 

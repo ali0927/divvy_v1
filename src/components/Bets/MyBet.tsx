@@ -15,7 +15,7 @@ export const MyBet = (props: { bet: Bet }) => {
                 <GameTeams selectionTeam={props.bet.selectionTeam} otherTeam={props.bet.otherTeam} betSlip={props.bet} />
                 <CloseOutlined onClick={() => bets?.removeBet(props.bet.betId)} style={{ marginTop: 5 }} />
             </div>
-            <ConfirmedOdds oddsType={props.bet.betType} bet={props.bet} />
+            <ConfirmedOdds betType={props.bet.betType} bet={props.bet} />
             <div style={{ display: "inline-flex" }}>
                 <Form.Item
                     style={{ width: "50%", marginRight: 4 }}

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Season } from "../constants";
+import { useContext, useEffect, useState } from "react";
+import { Bet, BetStatus, Season } from "../constants";
 import { RightSideBar } from "../components/RightSideBar";
 import { LeftSideBar } from "../components/LeftSideBar";
 import { NavBar } from "../components/Nav/NavBar";
@@ -9,10 +9,44 @@ import { Layout, Row, Col } from "antd";
 import { HeaderTypes } from "../constants/HeaderTypes";
 import SportProvider from "../contexts/sport";
 import { SeasonsView } from "../components/Home/SeasonsView";
+import { useWallet } from "../contexts/sol/wallet";
+import { useGetBetsQuery } from "../store/getBets";
+import { BetsContext } from "../contexts/bets";
 
 const BetsView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
+  const wallet = useWallet();
+  const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString())
+  const bets = useContext(BetsContext);
+
+  useEffect(() => {
+    if (!isLoading && !error) {
+      let bet: Array<Bet> = [];
+      var b: Bet;
+      data?.map((value: Bet) => {
+        console.log(value)
+
+        b = value
+        switch (b.status) {
+          case 1:
+            // bet.push(b)
+            console.log(b)
+
+        }
+      })
+      bets?.bets.map((b) => {
+        if (b["status"] == BetStatus.Current) {
+          bet.push(b)
+        }
+      })
+      console.log(bet)
+      bets?.addBets(bet);
+    }
+    else {
+      console.log(isLoading, error)
+    }
+  }, [])
   return (
     <SportProvider>
       <Layout style={{ backgroundColor: "#0D0D0D" }}>

@@ -2,7 +2,7 @@ import { Button, Collapse } from "antd";
 import { GameTeams } from "./GameTeams";
 import { PotentialWins } from "./PotentialWins";
 import { ConfirmedOdds } from "./ConfirmedOdds";
-import { Bet, BetType } from "../../constants";
+import { Bet, BetStatus, BetType } from "../../constants";
 import LinkLabel from "../Nav/LinkLabel";
 import { useContext } from "react";
 import { BetsContext } from "../../contexts/bets";
@@ -11,7 +11,7 @@ export const PendingBets = () => {
 
     var pendingBets = 0
     bets?.bets.forEach((value: Bet) => {
-      if (value.type === BetType.Pending)
+      if (value.status === BetStatus.Pending)
       {
         pendingBets++;
       }
@@ -20,11 +20,11 @@ export const PendingBets = () => {
         <div style={{display: "flex", flexDirection: "column"}}>
             <Collapse accordion={true} style={{ display: "grid" }} ghost={true} expandIconPosition="right">
                 {bets?.bets.map((value: Bet) => {
-                    if (value.type === BetType.Pending) {
+                    if (value.status === BetStatus.Pending) {
                         return (
                             <Collapse.Panel header={<GameTeams selectionTeam={value.selectionTeam} otherTeam={value.otherTeam} betSlip={value} />} key={value.betId}>
                                 <PotentialWins betSlip={value} />
-                                <ConfirmedOdds oddsType={value.betType} bet={value} />
+                                <ConfirmedOdds betType={value.betType} bet={value} />
                             </Collapse.Panel>
                         )
                     }

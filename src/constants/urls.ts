@@ -1,3 +1,6 @@
-export const DIVVY_API = "https://api.divvy.bet/"
+export const DIVVY_API = "http://localhost/"
+// "https://api.divvy.bet/"
 export const DIVVY_API_GET_SPORTS = "sports"
 export const DIVVY_API_GET_SEASONS = "seasons/"
+export const DIVVY_API_GET_BETS = "bets/"
+export const DIVVY_API_STORE_BETS = "add_bet"

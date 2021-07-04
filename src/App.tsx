@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Provider } from 'react-redux'
 import * as PATHS from "./constants/paths";
 import { store } from './store'
+import { DashboardView } from "./views/DashboardView";
 const load = (Component: any) => (props: any) => (
   <Suspense fallback={<div></div>}>
     <Component {...props} />
@@ -25,6 +26,9 @@ function App() {
             <BetsProvider>
               {/* Routes are ordered specific to general. the '/' route must be placed last */}
               <Switch>
+                <Route path={PATHS.DASHBOARD_VIEW_PATH}>
+                  <DashboardView />
+                </Route>
                 <Route path={PATHS.LIQUIDITY_VIEW_PATH}>
                   <LiquidityView />
                 </Route>

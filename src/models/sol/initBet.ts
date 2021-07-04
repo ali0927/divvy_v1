@@ -52,6 +52,8 @@ export const initBet = async (
     userUsdtAccount,
     bet.marketSide,
     bet.risk,
+    bet.odds,
+    new PublicKey(bet.marketPubkey),
     new PublicKey(bet.oddsPubKey),
     connection);
   let [ok,] = await sendTransaction(connection, env, wallet, ix, [betTokenAccount]);
@@ -64,6 +66,8 @@ export const initBetTransaction = async (
   userUsdtAccount: PublicKey,
   marketSide: MarketSide,
   riskedUsdt: number,
+  odds: number,
+  marketPubkey: PublicKey,
   oddsFeed: PublicKey,
   connection: Connection): Promise<[tx: TransactionInstruction[], betTokenAccount: Keypair]> => {
 
@@ -77,10 +81,10 @@ export const initBetTransaction = async (
     userUsdtAccount,
     oddsFeed,
     betAccount.publicKey,
-    oddsFeed,
+    marketPubkey,
     riskedUsdt,
+    odds,
     marketSide);
-
   const ix = [createTempTokenAccountIx, initBetIx];
 
   return [ix, betAccount];
@@ -105,11 +109,13 @@ const initBetInstruction = (
   betAccount: PublicKey,
   marketAccount: PublicKey,
   riskedUsdt: number,
+  odds: number,
   marketSide: MarketSide) => {
+    console.log(marketAccount.toString())
   const initBetData: INIT_BET_DATA = {
     action: 2,
     amount: riskedUsdt,
-    odds: 0, // american odds can be negative, yet odds is a uint
+    odds: odds,
     marketSide: MarketSide.toIndex(marketSide)
   };
 

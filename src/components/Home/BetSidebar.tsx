@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Bet, BetType } from "../../constants";
+import { Bet, BetStatus } from "../../constants";
 import { BetsContext } from "../../contexts/bets";
 import { BetSlip } from "../Bets/BetSlip";
 import { PendingBets } from "../Bets/PendingBets";
@@ -9,7 +9,7 @@ export const BetSidebar = () => {
   var slips = 0
   var pending = 0
   bets?.bets.forEach((value: Bet) => {
-    if (value.type === BetType.Current) {
+    if (value.status === BetStatus.Current) {
       slips++;
     }
     else {

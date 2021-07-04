@@ -1,4 +1,4 @@
-import { Bet, OddsType } from '../../constants';
+import { Bet, BetType } from '../../constants';
 export const GameTeams = (props: { selectionTeam: String, otherTeam: String, betSlip: Bet }) => {
     return (
         <div style={{ width: "15em" }}>
@@ -6,7 +6,7 @@ export const GameTeams = (props: { selectionTeam: String, otherTeam: String, bet
                 {props.betSlip.market.teamA + " vs " + props.betSlip.market.teamB}
             </p>
             <p className="primary-team">
-                {props.betSlip.betType === OddsType.total ? props.otherTeam + " vs " : null}
+                {props.betSlip.betType === BetType.total ? props.otherTeam + " vs " : null}
                 {props.selectionTeam}
             </p>
         </div>

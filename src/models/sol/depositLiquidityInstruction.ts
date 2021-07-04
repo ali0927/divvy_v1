@@ -38,7 +38,8 @@ export const depositLiquidityInstruction = (
             { pubkey: userHpTokenAccount, isSigner: false, isWritable: true },
             { pubkey: IDS.DIVVY_PDA_ACCOUNT, isSigner: false, isWritable: true },
             { pubkey: userUsdtTokenAccount, isSigner: false, isWritable: true },
-            { pubkey: IDS.DIVVY_USDT_ACCOUNT, isSigner: false, isWritable: true }
+            { pubkey: IDS.DIVVY_USDT_ACCOUNT, isSigner: false, isWritable: true },
+            { pubkey: IDS.DIVVY_STATE_ACCOUNT, isSigner: false, isWritable: true }
         ],
         programId: IDS.DIVVY_PROGRAM_ID,
         data: dataBuffer,

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Bet, BetType } from "../../constants";
+import { Bet, BetStatus, BetType } from "../../constants";
 import { BetSlip } from "../Bets/BetSlip";
 import { PendingBets } from "../Bets/PendingBets";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
@@ -12,7 +12,7 @@ export const BetSlips = () => {
   var slips = 0
   var pending = 0
   bets?.bets.forEach((value: Bet) => {
-    if (value.type === BetType.Current) {
+    if (value.status === BetStatus.Current) {
       slips = slips + 1
     }
     else {

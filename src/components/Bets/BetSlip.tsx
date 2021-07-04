@@ -1,4 +1,4 @@
-import { Bet, BetType } from "../../constants/bets";
+import { Bet, BetStatus, BetType } from "../../constants/bets";
 import { Button } from "antd";
 import { MyBet } from "./MyBet";
 import LinkLabel from "../Nav/LinkLabel";
@@ -12,7 +12,7 @@ export const BetSlip = () => {
   var wins = 0
   var betsCount = 0
   bets?.bets.forEach((bet: Bet) => {
-    if (bet.type === BetType.Current) {
+    if (bet.status === BetStatus.Current) {
       totalRisk += bet.risk
       wins += bet.risk * bet.odds
       betsCount++;
@@ -23,7 +23,7 @@ export const BetSlip = () => {
     <div className="form-grey" >
       <div style={{ height: "75vh", overflowX: "hidden", overflowY: "auto" }}>
         {bets?.bets.map((value: Bet) => {
-          if (value.type === BetType.Current) {
+          if (value.status === BetStatus.Current) {
             return <MyBet bet={value} />
           }
         })}

@@ -1,8 +1,8 @@
 import { PublicKey } from "@solana/web3.js";
 
-export enum BetType {
-    Pending = "PENDING",
-    Current = "CURRENT"
+export enum BetStatus {
+    Current = 0,
+    Pending = 1,
 }
 export interface Team {
     name: string,
@@ -21,7 +21,7 @@ export interface Odds {
     totalFeedPubkey: string,
     totalPointsFeedPubkey: string,
 }
-export enum OddsType {
+export enum BetType {
     moneyline = "Money Line",
     spread = "Points Spread",
     total = "Total Score",
@@ -63,10 +63,12 @@ export interface Market {
     marketId: number,
     seasonId: number,
     sportId: number,
+    seasonName: string,
+    sportName: string,
+    marketName: string,
     oddsApiId: string,
     lastUpdated: number,
     active: number,
-    marketPubkey: string,
     teamA: string,
     teamB: string,
     homeTeam: string,
@@ -100,7 +102,10 @@ export interface Market {
     teamAScore: number,
     teamAScoreFeedPubkey: string,
     teamBScore: number,
-    teamBScoreFeedPubkey: string
+    teamBScoreFeedPubkey: string,
+    moneylineMarketPubkey: string,
+    totalMarketPubkey: string,
+    spreadMarketPubKey: string
 }
 export interface Bet {
     betId: number,
@@ -112,14 +117,15 @@ export interface Bet {
     payout: number,
     userPubkey: string,
     selection: string,
-    betType: OddsType,
     odds: number
-    status: number,
+    status: BetStatus,
     market: Market,
     oddsPubKey: string
-    type: BetType
-    betTokenAccount?: PublicKey
+    betPubkey?: string
     selectionTeam: string,
     otherTeam: string,
-    marketSide: MarketSide
+    marketSide: MarketSide,
+    betType: BetType,
+    seasonName?: string,
+    sportName?: string
 }
