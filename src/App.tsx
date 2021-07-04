@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import * as PATHS from "./constants/paths";
 import { store } from './store'
 import { DashboardView } from "./views/DashboardView";
+import { FaucetView } from "./views/FaucetView";
 const load = (Component: any) => (props: any) => (
   <Suspense fallback={<div></div>}>
     <Component {...props} />
@@ -26,6 +27,9 @@ function App() {
             <BetsProvider>
               {/* Routes are ordered specific to general. the '/' route must be placed last */}
               <Switch>
+                <Route path={PATHS.FAUCET_VIEW_PATH}>
+                  <FaucetView />
+                </Route>
                 <Route path={PATHS.DASHBOARD_VIEW_PATH}>
                   <DashboardView />
                 </Route>

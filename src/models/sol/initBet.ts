@@ -111,11 +111,12 @@ const initBetInstruction = (
   riskedUsdt: number,
   odds: number,
   marketSide: MarketSide) => {
-    console.log(marketAccount.toString())
+  console.log(marketAccount.toString())
   const initBetData: INIT_BET_DATA = {
     action: 2,
     amount: riskedUsdt,
-    odds: odds,
+    // sending mod of odds since we are just using switchboard odds. Should check later.
+    odds: odds > 0 ? odds : -odds,
     marketSide: MarketSide.toIndex(marketSide)
   };
 

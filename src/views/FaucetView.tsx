@@ -11,7 +11,7 @@ import { BetsContext } from "../contexts/bets";
 import { useWallet } from "../contexts/sol/wallet";
 import { useGetBetsQuery } from "../store/getBets";
 
-export const DashboardView = () => {
+export const FaucetView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
     const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
     let dataSource: any = [];
