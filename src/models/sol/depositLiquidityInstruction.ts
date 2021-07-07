@@ -33,7 +33,7 @@ export const depositLiquidityInstruction = (
     const instruction = new TransactionInstruction({
         keys: [
             { pubkey: userAccount, isSigner: true, isWritable: true },
-            { pubkey: IDS.HP_MINT, isSigner: false, isWritable: true },
+            { pubkey: IDS.HT_MINT, isSigner: false, isWritable: true },
             { pubkey: IDS.TOKEN_PROGRAM_ID, isSigner: false, isWritable: true },
             { pubkey: userHpTokenAccount, isSigner: false, isWritable: true },
             { pubkey: IDS.DIVVY_PDA_ACCOUNT, isSigner: false, isWritable: true },

@@ -26,7 +26,7 @@ export const DIVVY_PROGRAM_ID = new PublicKey("96qPDQTvLTQsNE9aQ73Xh3dRFj9UmX3Hp
 export const DIVVY_PDA_ACCOUNT = new PublicKey("9tjYfuyjzs2ehSZvXAKa5wPYe2SCYpy9Q3nE57jry98Q");
 export const DIVVY_USDT_ACCOUNT = new PublicKey("F3hvLnCdPvmwjgEZ5LpYAZRaGB7GLU5DvM9wARkUNbjL");
 export const DIVVY_STATE_ACCOUNT = new PublicKey("2MQN7xAk371xTZYz56cXLjsWHRgexkfFNnZWK4W9Tn8a");
-export const HP_MINT = new PublicKey("FS3qbd4PQ4cvGWSMX9VSaQT7LwgEZwZcgiQpiRy3jkvV");
+export const HT_MINT = new PublicKey("FS3qbd4PQ4cvGWSMX9VSaQT7LwgEZwZcgiQpiRy3jkvV");
 const USDT_MINT_MAINNET = new PublicKey("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
 const USDT_MINT_DEVNET = new PublicKey("E16kadnTttuUgxjtvznAfGqSBQMcmwXQoVbkxNrPh9Gf");
 

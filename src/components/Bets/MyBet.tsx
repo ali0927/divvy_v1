@@ -7,16 +7,19 @@ import { CloseOutlined } from "@ant-design/icons"
 import { BetsContext } from "../../contexts/bets";
 import { americanToDecimal, LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
 export const MyBet = (props: { bet: Bet }) => {
+    const [riskStr, setRiskStr] = useState("0")
     const [risk, setRisk] = useState(0)
     const bets = useContext(BetsContext);
 
-    const doSetRisk = (risk: number) => {
-        if(isNaN(risk)){
-            risk = 0;
+    const doSetRisk = (risk: string) => {
+        let parsedRisk = parseInt(risk) * LAMPORTS_PER_USDT; 
+        if(isNaN(parsedRisk)){
+            parsedRisk = 0;
         }
 
-        setRisk(risk);
-        bets?.editBetRisk(props.bet.betId, risk)
+        setRiskStr(risk);
+        setRisk(parsedRisk);
+        bets?.editBetRisk(props.bet.betId, parsedRisk)
     }
 
     return (
@@ -37,7 +40,7 @@ export const MyBet = (props: { bet: Bet }) => {
                         },
                     ]}
                 >
-                    <Input value={risk / LAMPORTS_PER_USDT} onChange={(event) => { doSetRisk(parseInt(event.currentTarget.value) * LAMPORTS_PER_USDT) }} />
+                    <Input value={riskStr} onChange={(event) => { doSetRisk(event.currentTarget.value) }} />
                 </Form.Item>
                 <Form.Item
                     style={{ width: "50%", marginLeft: 4 }}

@@ -1,14 +1,12 @@
-import { useState, createContext, useEffect } from "react"
-import { Bet, BetStatus, BetType } from "../constants";
+import { useState, createContext } from "react"
+import { Bet, BetStatus } from "../constants";
 import { useAccountByMint } from "../hooks";
 import { useConnection, useConnectionConfig } from "./sol/connection";
 import { useWallet } from "./sol/wallet";
-import { settleBet } from "../models/sol/settleBet";
 import { initBet } from "../models/sol/initBet";
 import * as IDS from "../utils/ids"
 import { useGetBetsQuery } from "../store/getBets";
 import { useStoreBetsMutation } from "../store/storeBets";
-import { PublicKey } from "@solana/web3.js";
 
 export const BetsContext = createContext<{
   bets: Bet[],
@@ -37,16 +35,15 @@ const BetsProvider = (props: { children: any }) => {
   const addBet = (betSlip: Bet) => {
     let bet: Array<Bet> = [];
     var b: Bet;
-    console.log(data)
-    data?.map((value: Bet) => {
+    data?.forEach((value: Bet) => {
       b = value
       switch (b.status) {
         case BetStatus.Pending:
           bet.push(b)
       }
     })
-    bets?.map((b) => {
-      if (b["status"] == BetStatus.Current) {
+    bets?.forEach((b) => {
+      if (b["status"] === BetStatus.Current) {
         bet.push(b)
       }
     })
@@ -83,29 +80,43 @@ const BetsProvider = (props: { children: any }) => {
     setBets(newBets)
   }
   const placeBetSlip = async () => {
-    var newBets: Array<Bet> = [];
-    bets.forEach(async betData => {
-      let bet: Bet = betData
-      if (bet.status === BetStatus.Current) {
-        const betPubkey = await initBet(
+    const currentBets = bets.filter(bet=> bet.status === BetStatus.Current);
+    
+    if(currentBets.length > 0){
+
+      // Chunk bets into 3s
+      // Transactions have a limit of 1232 bytes
+      // We hit the limit above 3 bets
+      // https://github.com/solana-labs/solana/issues/17102 tracks the transaction limit
+      const perChunk = 3;
+      var betChunks = currentBets.reduce((resultArray: any, item, index) => { 
+        const chunkIndex = Math.floor(index/perChunk)
+      
+        if(!resultArray[chunkIndex]) {
+          resultArray[chunkIndex] = [] // start a new chunk
+        }
+      
+        resultArray[chunkIndex].push(item)
+      
+        return resultArray
+      }, []) as Bet[][];
+
+      for(const betChunk of betChunks) {
+        const [ok,] = await initBet(
           connection,
           connectionConfig.env,
           wallet.wallet,
           usdtTokenAccount?.pubkey,
-          bet);
-        //  TODO Send all in one transaction?
-        if (betPubkey && wallet.publicKey) {
-          bet.betPubkey = betPubkey.toString();
-          bet.status = BetStatus.Pending
-          bet.userPubkey = wallet?.publicKey?.toString()
-          //  call function to store  bets
-          console.log(bet)
-          storeBet(bet)
+          betChunk);
+
+        if (ok && wallet.publicKey) {
+          for(const bet of betChunk) {
+            storeBet(bet)
+          }
         }
       }
-      newBets.push(bet)
-      setBets(newBets)
-    })
+    }
+    setBets([...bets])
   }
   const settleBets = async (outcome: "win" | "lose") => {
     // var newBets: Array<Bet> = [...bets];

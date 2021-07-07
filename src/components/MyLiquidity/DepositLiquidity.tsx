@@ -19,7 +19,7 @@ export const DepositLiquidity = () => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
-  const hpTokenAccount = useAccountByMint(IDS.HP_MINT)
+  const hpTokenAccount = useAccountByMint(IDS.HT_MINT)
   const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   const { userUSDT } = useContext(UserUSDTContext)
   let [usdtAmount, setUsdtAmount] = useState("");

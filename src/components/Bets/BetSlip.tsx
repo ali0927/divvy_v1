@@ -1,12 +1,15 @@
-import { Bet, BetStatus, BetType } from "../../constants/bets";
+import { Bet, BetStatus } from "../../constants/bets";
 import { Button } from "antd";
 import { MyBet } from "./MyBet";
 import LinkLabel from "../Nav/LinkLabel";
 import { useContext } from "react";
 import { BetsContext } from "../../contexts/bets";
 import { americanToDecimal, tokenAmountToString } from "../../constants/math";
+import { ChainSelectContext } from "../../contexts/chainselect";
+import { ChainType } from "../../constants/chains";
 export const BetSlip = () => {
   const bets = useContext(BetsContext)
+  const chain = useContext(ChainSelectContext);
 
   var totalRisk = 0
   var totalPayout = 0
@@ -18,6 +21,8 @@ export const BetSlip = () => {
       betsCount++;
     }
   })
+  
+  const solTxnCount = Math.ceil(betsCount / 3);
 
   return (
     <div className="form-grey" >
@@ -45,7 +50,9 @@ export const BetSlip = () => {
             </p>
           </div>
           <Button className="ant-btn-active" style={{ width: "100%", height: 40 }} type="primary" onClick={() => bets?.placeBetSlip()}>
-            <LinkLabel style={{ marginRight: 20, marginLeft: 20 }}>Place {betsCount} Single bets</LinkLabel>
+            <LinkLabel style={{ marginRight: 20, marginLeft: 20 }}>
+              Place {betsCount} Single bets {chain.chain === ChainType.Sol && solTxnCount > 1 ? ` in ${solTxnCount} transactions.` : ""}
+            </LinkLabel>
           </Button>
         </div> : <></>
         }
