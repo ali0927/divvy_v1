@@ -12,7 +12,7 @@ const INIT_BET_LAYOUT: BufferLayout.Layout = BufferLayout.struct([
   BufferLayout.u8("action"),
   BufferLayout.nu64("amount"),
   BufferLayout.nu64("odds"),
-  BufferLayout.nu64("marketSide"),
+  BufferLayout.u8("marketSide"),
 ]);
 
 interface INIT_BET_DATA {
