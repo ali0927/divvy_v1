@@ -1,19 +1,18 @@
 /*@primary-light: white;
 @primary-dark: #1f1f1f;*/
 
+
 /* Will need to link more font weights, maybe using a sass mixin. */
 
 @font-face {
   font-family: "Nunito Sans";
   src: url("font/NunitoSans-SemiBold.eot");
   /* IE9+ Compat Modes */
-  src: url("font/NunitoSans-SemiBold.eot?#iefix") format("embedded-opentype"),
-    /* IE6-IE8 */ url("font/NunitoSans-SemiBold.woff2") format("woff2"),
-    /* Super modern browsers */ url("font/NunitoSans-SemiBold.woff")
-      format("woff"),
-    /* Modern browsers */ url("font/NunitoSans-SemiBold.ttf") format("truetype"),
-    /* Safari, Android, iOS */ url("font/NunitoSans-SemiBold.svg#FontName")
-      format("svg");
+  src: url("font/NunitoSans-SemiBold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("font/NunitoSans-SemiBold.woff2") format("woff2"), /* Super modern browsers */
+  url("font/NunitoSans-SemiBold.woff") format("woff"), /* Modern browsers */
+  url("font/NunitoSans-SemiBold.ttf") format("truetype"), /* Safari, Android, iOS */
+  url("font/NunitoSans-SemiBold.svg#FontName") format("svg");
   font-weight: 600;
   /* Legacy iOS */
 }
@@ -22,14 +21,11 @@
   font-family: "Nunito Sans";
   src: url("font/NunitoSans-ExtraBold.eot");
   /* IE9+ Compat Modes */
-  src: url("font/NunitoSans-ExtraBold.eot?#iefix") format("embedded-opentype"),
-    /* IE6-IE8 */ url("font/NunitoSans-ExtraBold.woff2") format("woff2"),
-    /* Super modern browsers */ url("font/NunitoSans-ExtraBold.woff")
-      format("woff"),
-    /* Modern browsers */ url("font/NunitoSans-ExtraBold.ttf")
-      format("truetype"),
-    /* Safari, Android, iOS */ url("font/NunitoSans-ExtraBold.svg#FontName")
-      format("svg");
+  src: url("font/NunitoSans-ExtraBold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("font/NunitoSans-ExtraBold.woff2") format("woff2"), /* Super modern browsers */
+  url("font/NunitoSans-ExtraBold.woff") format("woff"), /* Modern browsers */
+  url("font/NunitoSans-ExtraBold.ttf") format("truetype"), /* Safari, Android, iOS */
+  url("font/NunitoSans-ExtraBold.svg#FontName") format("svg");
   font-weight: 800;
   /* Legacy iOS */
 }
@@ -204,7 +200,7 @@ body {
 .odds {
   border-radius: 22.5px;
   height: 36px;
-  width: 60%;
+  width: 100%;
   padding-top: 9px;
   font-size: 15px;
   font-size: 0.7em;
@@ -213,12 +209,16 @@ body {
   background-color: #1f1f1f;
 }
 
-.odds-type {
-  font-size: 0.7em;
+.odds:hover {
+  background-color: #4d4d4d;
 }
 
 .odds-active {
   background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+}
+
+.odds-type {
+  font-size: 0.7em;
 }
 
 .single-match {
@@ -494,8 +494,7 @@ h1 {
   color: #242424;
 }
 
-.ant-form-item-label
-  > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
   /* Remove the red '*' for required inputs */
   margin-right: 0;
   content: "";

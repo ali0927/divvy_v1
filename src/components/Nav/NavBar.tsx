@@ -16,7 +16,6 @@ export const NavBar = () => {
       <LiquidityViewLink />
       <ConnectLink />
       <MyDashboardLink />
-      {/* TO DO  show only when in  Devnet */}
       <USDTFaucetLink />
       <Input value={search} onChange={(event) => setSearch(event.currentTarget.value)} style={{ border: "0px", padding: "1em", marginTop: "1px",  outline: "1px solid #1f1f1f", height: "40px", width: "100%" }} placeholder={"Search for bets"} prefix={<SearchOutlined />} />
       <MarketsLink search={search} />

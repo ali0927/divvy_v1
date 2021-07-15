@@ -1,5 +1,5 @@
 import { useState, createContext } from "react"
-import { Bet, BetStatus } from "../constants";
+import { Bet, BetStatus, BetType, MarketSide } from "../constants";
 import { useAccountByMint } from "../hooks";
 import { useConnection, useConnectionConfig } from "./sol/connection";
 import { useWallet } from "./sol/wallet";
@@ -13,6 +13,8 @@ export const BetsContext = createContext<{
   addBet: (bet: Bet) => void,
   addBets: (bets: Array<Bet>) => void,
   removeBet: (betId: number) => void,
+  findBets: (marketId: number, marketSide: MarketSide, betType: BetType, betStatus: BetStatus) => Bet[],
+  containsBet: (marketId: number, marketSide: MarketSide, betType: BetType, betStatus: BetStatus) => boolean,
   editBetRisk: (betId: number, risk: number) => void,
   placeBetSlip: () => Promise<void>,
   settleBets: (outcome: "win" | "lose") => Promise<void>,
@@ -63,6 +65,12 @@ const BetsProvider = (props: { children: any }) => {
       }
     })
     setBets(newBets)
+  }
+  const findBets = (marketId: number, marketSide: MarketSide, betType: BetType, betStatus: BetStatus) => {
+    return bets.filter(bet => bet.marketId === marketId && bet.marketSide === marketSide && bet.betType === betType && bet.status === betStatus);
+  }
+  const containsBet = (marketId: number, marketSide: MarketSide, betType: BetType, betStatus: BetStatus) => {
+    return findBets(marketId,marketSide,betType,betStatus).length > 0;
   }
   const editBetRisk = (betId: number, amount: number) => {
     var bet: Bet;
@@ -147,6 +155,8 @@ const BetsProvider = (props: { children: any }) => {
       addBet: addBet,
       addBets: addBets,
       removeBet: removeBet,
+      findBets: findBets,
+      containsBet: containsBet,
       editBetRisk: editBetRisk,
       placeBetSlip: placeBetSlip,
       settleBets: settleBets
