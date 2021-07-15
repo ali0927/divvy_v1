@@ -12,6 +12,7 @@ import { SeasonsView } from "../components/Home/SeasonsView";
 import { useWallet } from "../contexts/sol/wallet";
 import { useGetBetsQuery } from "../store/getBets";
 import { BetsContext } from "../contexts/bets";
+import { SelectChain } from "../components/SelectChain";
 
 const BetsView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -50,6 +51,7 @@ const BetsView = () => {
   return (
     <SportProvider>
       <Layout style={{ backgroundColor: "#0D0D0D" }}>
+        <SelectChain />
         <Row>
           <Col xs={24} sm={24} md={0}>
             <MobileHeader headerType={HeaderTypes.Bets} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />

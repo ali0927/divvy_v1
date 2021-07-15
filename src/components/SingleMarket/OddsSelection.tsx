@@ -38,10 +38,13 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
             <Col span={8} onClick={() => setSlip(BetType.moneyline, props.odds.moneyline, props.odds.moneylineFeedPubkey, props.market.moneylineMarketPubkey)} className={selection === 'moneyline' ? "odds odds-active" : "odds"}>
                 <b>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline}`}</b>
             </Col>
-            <Col span={8} onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)} className={selection === 'spread' ? "odds odds-active" : "odds"}>
+            {/* Remove disabled in classname and  put onclick back once spreads and totals are supported*/}
+            {/* onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)}  */}
+            <Col span={8} className={selection === 'spread' ? "odds odds-active" : "odds  disabled"}>
                 <b>{`(${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints)}) ${props.odds.spread >= 0 ? "+" : ""}${String(props.odds.spread)}`}</b>
             </Col>
-            <Col span={8} onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.totalMarketPubkey)} className={selection === 'total' ? "odds odds-active" : "odds"}>
+            {/* onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.totalMarketPubkey)} */}
+            <Col span={8} className={selection === 'total' ? "odds odds-active" : "odds disabled"}>
                 <b>{`(${props.odds.totalPoints >= 0 ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>
             </Col>
         </Row>
