@@ -3,15 +3,20 @@ import { Typography } from "antd";
 import { shortenAddress } from "../../utils/utils";
 import { PublicKey } from "@solana/web3.js";
 
+export const explorerUrl = (type: "transaction", address: string, cluster?: string) => {
+  const clusterParam = cluster !== undefined ? `?cluster=${cluster}` : "";
+  return `https://explorer.solana.com/${type}/${address}${clusterParam}`
+}
+
 export const ExplorerLink = (props: {
   address: string | PublicKey;
   cluster: string | undefined;
-  type: string;
+  type:  "transaction";
   code?: boolean;
   style?: React.CSSProperties;
   length?: number;
 }) => {
-  const { type, code } = props;
+  const { type, code, cluster } = props;
 
   const address =
     typeof props.address === "string"
@@ -24,12 +29,9 @@ export const ExplorerLink = (props: {
 
   const length = props.length ?? 9;
 
-  const clusterParam =
-    props.cluster !== undefined ? "?cluster=" + props.cluster : "";
-
   return (
     <a
-      href={`https://explorer.solana.com/${type}/${address}${clusterParam}`}
+      href={explorerUrl(type, address, cluster)}
       // eslint-disable-next-line react/jsx-no-target-blank
       target="_blank"
       rel="noreferrer"

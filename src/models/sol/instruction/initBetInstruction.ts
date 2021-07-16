@@ -1,12 +1,12 @@
 import { Connection, Keypair, PublicKey, SystemProgram, TransactionInstruction } from "@solana/web3.js";
 import * as BufferLayout from "buffer-layout";
-import { Bet, BetStatus, MarketSide } from "../../constants";
-import { ENV } from "../../constants/sol/env";
-import { sendTransaction } from "../../contexts/sol/connection";
-import { WalletAdapter } from "../../contexts/sol/wallet";
-import * as IDS from "../../utils/ids"
-import { notify } from "../../utils/notifications";
-import { MONEY_LINE_BET_LAYOUT } from "./state/moneyLineBet";
+import { Bet, BetStatus, MarketSide } from "../../../constants";
+import { ENV } from "../../../constants/sol/env";
+import { sendTransaction } from "../../../contexts/sol/connection";
+import { WalletAdapter } from "../../../contexts/sol/wallet";
+import * as IDS from "../../../utils/ids"
+import { notify } from "../../../utils/notifications";
+import { MONEY_LINE_BET_LAYOUT } from "../state/moneyLineBet";
 
 const INIT_BET_LAYOUT: BufferLayout.Layout = BufferLayout.struct([
   BufferLayout.u8("action"),
@@ -67,7 +67,7 @@ export const initBet = async (
     ixs.push(...ix);
     betAccounts.push(betAccount);
   }
-  console.log(ixs);
+
   let txn = await sendTransaction(connection, env, wallet, ixs, betAccounts);
   let [ok,] = txn;
 
@@ -131,7 +131,7 @@ const initBetInstruction = (
   riskedUsdt: number,
   odds: number,
   marketSide: MarketSide) => {
-  console.log(marketAccount.toString())
+  
   const initBetData: INIT_BET_DATA = {
     action: 2,
     amount: riskedUsdt,
