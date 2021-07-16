@@ -1,7 +1,7 @@
 import { PublicKey } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
-import { LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
+import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
 import {
   useConnection,
   useConnectionConfig,
@@ -21,7 +21,7 @@ export const WithdrawLiquidity = (props: {}) => {
   const connectionConfig = useConnectionConfig();
   const htTokenAccount = useAccountByMint(IDS.HT_MINT)
   const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
-  let [usdtAmount, setUsdtAmount] = useState("");
+  let [htAmount, setHtAmount] = useState("");
   const { userHT } = useContext(UserHTContext);
   const onFinish = async (values: any) => {
     if (wallet.wallet?.publicKey == null) {
@@ -33,11 +33,11 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
-    let usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
-    if (isNaN(usdtLamports)) {
+    let htLamports = Number(htAmount) * LAMPORTS_PER_HT;
+    if (isNaN(htLamports)) {
       notify({
         message: "Transaction failed...",
-        description: "Invalid USDT amount.",
+        description: "Invalid HT amount.",
         type: "error",
       });
       return;
@@ -61,7 +61,7 @@ export const WithdrawLiquidity = (props: {}) => {
       usdtTokenAccount?.pubkey,
       IDS.getUsdtMint(connectionConfig.env),
       "withdraw",
-      usdtLamports,
+      htLamports,
       bumpSeed);
 
     await sendTransaction(
@@ -83,12 +83,9 @@ export const WithdrawLiquidity = (props: {}) => {
         </p>
         <p className="balance">{tokenAmountToString(userHT)} HT</p>
       </div>
-      <Form.Item
-        // label="USDT amount to withdraw:"
-        name="usdtAmount"
-      >
+      <Form.Item name="htAmount">
         <Input.Group compact>
-          <Input placeholder={"USDT"} value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
+          <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
           <Button style={{ border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
         </Input.Group>
       </Form.Item>
