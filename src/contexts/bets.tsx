@@ -23,6 +23,7 @@ export const BetsContext = createContext<{
 
 const BetsProvider = (props: { children: any }) => {
   const [bets, setBets] = useState(Array<Bet>());
+  const { connected, connect, select, provider } = useWallet();
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
@@ -89,7 +90,11 @@ const BetsProvider = (props: { children: any }) => {
   }
   const placeBetSlip = async () => {
     const currentBets = bets.filter(bet=> bet.status === BetStatus.Current);
-    
+    // TODO: Check behaviour for first time users 
+    if(!connected){
+      connect();
+    }
+    console.log(currentBets)
     if(currentBets.length > 0){
 
       // Chunk bets into 3s
@@ -99,7 +104,6 @@ const BetsProvider = (props: { children: any }) => {
       const perChunk = 3;
       var betChunks = currentBets.reduce((resultArray: any, item, index) => { 
         const chunkIndex = Math.floor(index/perChunk)
-      
         if(!resultArray[chunkIndex]) {
           resultArray[chunkIndex] = [] // start a new chunk
         }

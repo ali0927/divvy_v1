@@ -49,14 +49,15 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
                     className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"}>
                     <b>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline}`}</b>
             </Col>
-            {/* Remove disabled in classname and  put onclick back once spreads and totals are supported*/}
-            {/* onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)}  */}
-            <Col span={8} className={selection === 'spread' ? "odds odds-active" : "odds  disabled"}>
-                <b>{`(${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints)}) ${props.odds.spread >= 0 ? "+" : ""}${String(props.odds.spread)}`}</b>
+            {/* TODO: add after we enable spreads: onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)} */}
+            <Col span={8}
+                    className={containsBet(BetType.spread) ? "odds odds-active" : "odds disabled"}>
+                    <b>{`(${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints)}) ${props.odds.spread >= 0 ? "+" : ""}${String(props.odds.spread)}`}</b>
             </Col>
-            {/* onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.totalMarketPubkey)} */}
-            <Col span={8} className={selection === 'total' ? "odds odds-active" : "odds disabled"}>
-                <b>{`(${props.odds.totalPoints >= 0 ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>
+            {/* TODO: add after we enable totals: onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.totalMarketPubkey)} */}
+            <Col span={8}
+                    className={containsBet(BetType.total) ? "odds odds-active" : "odds disabled"}>
+                    <b>{`(${props.odds.totalPoints >= 0 ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>
             </Col>
         </Row>
     )
