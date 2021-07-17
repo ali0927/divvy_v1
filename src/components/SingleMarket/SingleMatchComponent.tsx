@@ -3,7 +3,7 @@ import { TeamDetails } from "./TeamDetails"
 import { OddsSelection } from './OddsSelection';
 import { OddsType } from './OddsType';
 import { Market, MarketSide } from '../../constants';
-import { getDate, getShortTimezone, getTime } from '../../utils/date';
+import { getDate, getTime } from '../../utils/date';
 import { codes } from "../../constants/processed"
 export const SingleMatchComponent = (props: { market: Market }) => {
     const countryCodeToFlagCode = (countryCode: string) => {

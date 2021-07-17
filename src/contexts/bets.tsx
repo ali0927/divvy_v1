@@ -3,7 +3,7 @@ import { Bet, BetStatus, BetType, MarketSide } from "../constants";
 import { useAccountByMint } from "../hooks";
 import { useConnection, useConnectionConfig } from "./sol/connection";
 import { useWallet } from "./sol/wallet";
-import { initBet } from "../models/sol/initBet";
+import { initBet } from "../models/sol/instruction/initBetInstruction";
 import * as IDS from "../utils/ids"
 import { useGetBetsQuery } from "../store/getBets";
 import { useStoreBetsMutation } from "../store/storeBets";
@@ -17,7 +17,6 @@ export const BetsContext = createContext<{
   containsBet: (marketId: number, marketSide: MarketSide, betType: BetType, betStatus: BetStatus) => boolean,
   editBetRisk: (betId: number, risk: number) => void,
   placeBetSlip: () => Promise<void>,
-  settleBets: (outcome: "win" | "lose") => Promise<void>,
 } | null>(null);
 
 
@@ -130,28 +129,6 @@ const BetsProvider = (props: { children: any }) => {
     }
     setBets([...bets])
   }
-  const settleBets = async (outcome: "win" | "lose") => {
-    // var newBets: Array<Bet> = [...bets];
-    // //for (const bet of betSlips){
-    // bets.forEach(async bet => {
-    //   if (bet.status === BetStatus.Pending) {
-    //     const ok = await settleBet(
-    //       connection,
-    //       connectionConfig.env,
-    //       wallet.wallet,
-    //       new PublicKey(bet.betTokenAccount?),
-    //       usdtTokenAccount?.pubkey,
-    //       outcome);
-    //     if (ok) {
-    //       const index = newBets.indexOf(bet);
-    //       if (index > -1) {
-    //         newBets.splice(index, 1);
-    //         setBets(newBets)
-    //       }
-    //     }
-    //   }
-    // })
-  }
 
   return (
     <BetsContext.Provider value={{
@@ -163,7 +140,6 @@ const BetsProvider = (props: { children: any }) => {
       containsBet: containsBet,
       editBetRisk: editBetRisk,
       placeBetSlip: placeBetSlip,
-      settleBets: settleBets
     }}>
       {props.children}
     </BetsContext.Provider>

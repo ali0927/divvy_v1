@@ -9,7 +9,7 @@ import { useWallet } from "../../contexts/sol/wallet";
 import { useAccountByMint } from "../../hooks";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
-import { depositLiquidityInstruction } from "../../models/sol/depositLiquidityInstruction";
+import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
 import { LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
@@ -19,7 +19,7 @@ export const DepositLiquidity = () => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
-  const hpTokenAccount = useAccountByMint(IDS.HT_MINT)
+  const htTokenAccount = useAccountByMint(IDS.HT_MINT)
   const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   const { userUSDT } = useContext(UserUSDTContext)
   let [usdtAmount, setUsdtAmount] = useState("");
@@ -33,7 +33,7 @@ export const DepositLiquidity = () => {
       });
       return;
     }
-
+    
     const usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
     if (isNaN(usdtLamports)) {
       notify({
@@ -44,56 +44,35 @@ export const DepositLiquidity = () => {
       return;
     }
 
-    if (hpTokenAccount == null) {
-      notify({
-        message: "Transaction failed...",
-        description: "User does not have a HP token account.",
-        type: "error",
-      });
-      return;
-    }
-
     if (usdtTokenAccount == null) {
-      notify({
-        message: "Transaction failed...",
-        description: "User does not have a USDT token account.",
-        type: "error",
-      });
-      return;
-    }
+        notify({
+          message: "Transaction failed...",
+          description: "User does not have a USDT token account.",
+          type: "error",
+        });
+        return;
+      }
+
 
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyexchange")], IDS.DIVVY_PROGRAM_ID);
-    
-    console.log(usdtLamports + " bump seed " + bumpSeed);
 
-    console.log(usdtTokenAccount.pubkey.toBase58());
-    const instruction = depositLiquidityInstruction(
-      wallet.wallet.publicKey,
-      hpTokenAccount.pubkey,
-      usdtTokenAccount.pubkey,
-      "deposit",
-      usdtLamports,
-      bumpSeed);
-    const [ok, txid] = await sendTransaction(
+    const [ix, signers] = await depositLiquidityTransaction(
+        connection,
+        wallet.wallet.publicKey,
+        htTokenAccount?.pubkey,
+        usdtTokenAccount.pubkey,
+        IDS.getUsdtMint(connectionConfig.env),
+        "deposit",
+        usdtLamports,
+        bumpSeed);
+
+    await sendTransaction(
       connection,
       connectionConfig.env,
       wallet.wallet!,
-      [instruction]
+      ix,
+      signers
     );
-
-    if (ok && txid) {
-      notify({
-        message: "Transaction success...",
-        description: (
-          <ExplorerLink
-            address={txid}
-            cluster={connectionConfig.env}
-            type="transaction"
-          />
-        ),
-      });
-    }
-    //HouseDeposit(parseInt(usdtAmount))
   };
   return (
     <div className="sidebar-section form-grey">
