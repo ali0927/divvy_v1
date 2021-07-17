@@ -3,7 +3,7 @@ import { Bet, BetStatus, BetType, MarketSide } from "../constants";
 import { useAccountByMint } from "../hooks";
 import { useConnection, useConnectionConfig } from "./sol/connection";
 import { useWallet } from "./sol/wallet";
-import { initBet } from "../models/sol/initBet";
+import { initBet } from "../models/sol/instruction/initBetInstruction";
 import * as IDS from "../utils/ids"
 import { useGetBetsQuery } from "../store/getBets";
 import { useStoreBetsMutation } from "../store/storeBets";

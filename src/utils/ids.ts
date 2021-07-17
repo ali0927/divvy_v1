@@ -1,11 +1,12 @@
 import { PublicKey } from "@solana/web3.js";
-import { TOKEN_PROGRAM_ID as TOKEN_PROGRAM_ID_IMPORT } from "@solana/spl-token";
+import { TOKEN_PROGRAM_ID as TOKEN_PROGRAM_ID_IMPORT, ASSOCIATED_TOKEN_PROGRAM_ID as ASSOCIATED_TOKEN_PROGRAM_ID_IMPORT } from "@solana/spl-token";
 import { ENV } from "../constants/sol/env";
 
 export const WRAPPED_SOL_MINT = new PublicKey("So11111111111111111111111111111111111111112");
-export let TOKEN_PROGRAM_ID = TOKEN_PROGRAM_ID_IMPORT;
-export let LENDING_PROGRAM_ID = new PublicKey("TokenLending1111111111111111111111111111111");
-export let SWAP_PROGRAM_ID = new PublicKey("SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8");
+export const TOKEN_PROGRAM_ID = TOKEN_PROGRAM_ID_IMPORT;
+export const ASSOCIATED_TOKEN_PROGRAM_ID = ASSOCIATED_TOKEN_PROGRAM_ID_IMPORT;
+export const LENDING_PROGRAM_ID = new PublicKey("TokenLending1111111111111111111111111111111");
+export const SWAP_PROGRAM_ID = new PublicKey("SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8");
 
 export const PROGRAM_IDS = [
   {

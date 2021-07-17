@@ -14,7 +14,7 @@ import {
 } from "@solana/web3.js";
 import React, { useContext, useEffect, useMemo } from "react";
 import { notify } from "../../utils/notifications";
-import { ExplorerLink } from "../../components/ExplorerLink";
+import { ExplorerLink, explorerUrl } from "../../components/ExplorerLink";
 import { setProgramIds } from "../../utils/ids";
 import { WalletAdapter } from "./wallet";
 import { ENDPOINTS, ENV } from "../../constants/sol/env";
@@ -185,7 +185,7 @@ export const sendTransaction = async (
   transaction.feePayer = wallet.publicKey;
  
   // Signing phase
-  if(signers) {
+  if(signers && signers.length > 0) {
       transaction.partialSign(...signers)
   }
   try{
@@ -207,7 +207,7 @@ export const sendTransaction = async (
     transaction.serialize(),
     options
   );
-  
+  console.log(explorerUrl("transaction", txid, env));
   let ok = true;
 
   if (!skipConfirmation) {
