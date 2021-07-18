@@ -11,7 +11,7 @@ export const FaucetView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
     const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
     const wallet = useWallet();
-  const { connected } = useWallet();
+    const { connected } = useWallet();
 
     return (
         <Layout style={{ backgroundColor: "#0D0D0D" }}>

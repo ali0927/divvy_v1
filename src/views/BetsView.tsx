@@ -21,33 +21,33 @@ const BetsView = () => {
   const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString())
   const bets = useContext(BetsContext);
 
-  useEffect(() => {
-    if (!isLoading && !error) {
-      let bet: Array<Bet> = [];
-      var b: Bet;
-      data?.map((value: Bet) => {
-        console.log(value)
+  // useEffect(() => {
+  if (!isLoading && !error && !bets?.bets.length && data?.length) {
+    let bet: Array<Bet> = [];
+    var b: Bet;
+    data?.map((value: Bet) => {
+      console.log(value)
 
-        b = value
-        switch (b.status) {
-          case 1:
-            // bet.push(b)
-            console.log(b)
-
-        }
-      })
-      bets?.bets.map((b) => {
-        if (b["status"] == BetStatus.Current) {
+      b = value
+      switch (b.status) {
+        case 1:
           bet.push(b)
-        }
-      })
-      console.log(bet)
-      bets?.addBets(bet);
-    }
-    else {
-      console.log(isLoading, error)
-    }
-  }, [])
+          console.log(b)
+
+      }
+    })
+    // bets?.bets.map((b) => {
+    //   if (b["status"] == BetStatus.Current) {
+    //     bet.push(b)
+    //   }
+    // })
+    // console.log(bet)
+    bets?.addBets(bet);
+  }
+  else {
+    console.log(isLoading, error)
+  }
+  // }, [])
   return (
     <SportProvider>
       <Layout style={{ backgroundColor: "#0D0D0D" }}>

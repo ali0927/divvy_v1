@@ -20,7 +20,6 @@ export const DashboardView = () => {
     const bets = useContext(BetsContext);
     if (!isLoading && !error && data) {
         data.map((item) => {
-            console.log(item)
             dataSource.push({
                 key: item.betId.toString(),
                 betId: item.betId,
