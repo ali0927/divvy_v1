@@ -12,7 +12,7 @@ export const MyBet = (props: { bet: Bet }) => {
     const bets = useContext(BetsContext);
 
     const doSetRisk = (risk: string) => {
-        let parsedRisk = parseInt(risk) * LAMPORTS_PER_USDT; 
+        let parsedRisk = parseFloat(risk) * LAMPORTS_PER_USDT; 
         if(isNaN(parsedRisk)){
             parsedRisk = 0;
         }
