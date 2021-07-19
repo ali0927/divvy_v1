@@ -3,7 +3,7 @@ export const GameTeams = (props: { selectionTeam: String, otherTeam: String, bet
     return (
         <div style={{ width: "15em" }}>
             <p className="secondary-team">
-                {props.betSlip.market.teamA + " vs " + props.betSlip.market.teamB}
+                {props.betSlip.selectionTeam + " vs " + props.betSlip.otherTeam}
             </p>
             <p className="primary-team">
                 {props.betSlip.betType === BetType.total ? props.otherTeam + " vs " : null}
