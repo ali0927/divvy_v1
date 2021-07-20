@@ -1,21 +1,16 @@
 import { u64, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import {
     PublicKey,
-    sendAndConfirmTransaction,
-    Transaction,
     TransactionInstruction
 } from "@solana/web3.js";
 import { ENV } from "../../../constants/sol/env";
-import { sendTransaction, useConnection } from "../../../contexts/sol/connection";
-import { useWallet, WalletAdapter } from "../../../contexts/sol/wallet";
-import { useAccountByMint } from "../../../hooks";
+import { sendTransaction } from "../../../contexts/sol/connection";
+import { WalletAdapter } from "../../../contexts/sol/wallet";
 import { USDT_MINT_DEVNET } from "../../../utils/ids";
 import { createTokenAccount } from "./createTokenAccount";
 const FAUCET_PROGRAM_ID = new PublicKey(
     "4bXpkKSV8swHSnwqtzuboGPaPDeEgAn4Vt8GfarV5rZt"
 );
-
-const FAUCET_SIZE = 77;
 
 const getPDA = () =>
     PublicKey.findProgramAddress([Buffer.from("faucet")], FAUCET_PROGRAM_ID)
