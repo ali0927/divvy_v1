@@ -1,3 +1,4 @@
+import { u64 } from "@solana/spl-token";
 import { Col, Input, Layout, Row, Button } from "antd";
 import { useContext, useEffect, useState } from "react";
 import { LeftSideBar } from "../components/LeftSideBar";
@@ -5,13 +6,24 @@ import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
 import { NavBar } from "../components/Nav/NavBar";
 import { RightSideBar } from "../components/RightSideBar";
 import { HeaderTypes } from "../constants/HeaderTypes";
+import { useConnection } from "../contexts/sol/connection";
 import { useWallet } from "../contexts/sol/wallet";
+import { airdropTokens } from "../models/sol/instruction/usdtFaucet";
+import { useAccountByMint } from "../hooks";
+import * as IDS from "../utils/ids";
+import { USDT_MINT_DEVNET } from "../utils/ids";
 
 export const FaucetView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
     const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
     const wallet = useWallet();
     const { connected } = useWallet();
+    const connection = useConnection();
+    const usdtAddress = useAccountByMint(USDT_MINT_DEVNET);
+    const FAUCET_ADDRESS = "4tCrsQbAckpLkX8cK2VN2vcbbjbEEgwZMrDhXGtGf33S"
+    const callUSDTFaucet = async () => {
+        airdropTokens(usdtAddress?.pubkey, FAUCET_ADDRESS, new u64(100, 10), connection, wallet.wallet)
+    }
 
     return (
         <Layout style={{ backgroundColor: "#0D0D0D" }}>
@@ -27,10 +39,10 @@ export const FaucetView = () => {
                 {!isMobileMenuVisible && !isBetSlipsVisible &&
                     <Col span={24} xs={24} sm={24} md={19}>
                         <header className="root-content">
-                            <Input disabled={true} value={connected ? wallet.publicKey?.toString(): "Please connect your wallet"} style={{ width: "40%" }} />
-                            <br  />
-                            <br  />
-                            <Button>
+                            <Input disabled={true} value={connected ? wallet.publicKey?.toString() : "Please connect your wallet"} style={{ width: "40%" }} />
+                            <br />
+                            <br />
+                            <Button onClick={() => callUSDTFaucet()}>
                                 Get 10 USDT
                             </Button>
                         </header>

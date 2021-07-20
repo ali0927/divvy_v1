@@ -28,6 +28,6 @@ export const USDTFaucetLink = () => {
                     </small>
                 </div>
             </Link>
-            : <></>
+            : <div style={{ margin: 20 }}>Connect Wallet to Get  Devnet USDT</div>
     );
 };
