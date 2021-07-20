@@ -184,6 +184,7 @@ body {
 
 .progress-bar {
   width: 100%;
+  height: 500px;
 }
 
 .team-logo {
@@ -223,20 +224,78 @@ body {
 }
 
 .liquidity-left {
-  float: left;
-  width: 50%;
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: left;
 }
 
 .liquidity-right {
-  float: right;
-  width: 50%;
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: right;
+}
+
+.liquidity-glance {
+  height: 100px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.liquidity-align h2 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.liquidity-align {
+  margin: 0 1.7vw 0 1.7vw;
 }
 
 .liquidity-total {
   margin-top: -10px;
   margin-bottom: 20px;
+}
+
+.liquidity-content {
+  margin-top: 30px;
+  /* max-width: 150px; */
+}
+
+.liquidity-content .liquidity-heavy {
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 0em;
+}
+
+.liquidity-content p {
+  margin-bottom: 20px;
+}
+
+.liquidity-pool h1 {
+  color: #fff;
+  font-weight: 800;
+}
+
+.pool-header {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.direction-icon {
+  margin-top: 5px;
+  font-size: 10px;
 }
 
 .left {
@@ -341,6 +400,62 @@ body {
 .sidebar-section-bets {
   outline: 1px solid #1f1f1f;
   background-color: #242424;
+}
+
+.pool-performance-tabs {
+  min-height: 43px;
+  border: solid 1px gray;
+  border-radius: 21.5px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.pool-performance-tab {
+  flex: 1;
+  min-height: 43px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.pool-performance-tab-active {
+  flex: 1;
+  min-height: 43px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #fff;
+  border-radius: 21.5px;
+}
+
+.ant-select {
+  width: 140px;
+  margin-left: 22px;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  text-align: center;
+  color: #fff;
+  border-radius: 21.5px;
+}
+
+.pool-activity-table .ant-table-thead > tr > th {
+  background-color: #0d0d0d;
+  font-size: 12px;
+  color: gray;
+  line-height: 12px;
+}
+
+.pool-activity-table .ant-table-tbody > tr > td {
+  background-color: #0d0d0d;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 @media (min-width: 768px) {
