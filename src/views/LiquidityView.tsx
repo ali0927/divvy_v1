@@ -3,6 +3,9 @@ import { RightSideBar } from "../components/RightSideBar";
 import { NavBar } from "../components/Nav/NavBar";
 import { MyLiquidity } from "../components/MyLiquidity/MyLiquidity";
 import { LiquidityGlobalStats } from "../components/Liquidity/LiquidityGlobalStats";
+import { LiquidityGlance } from "../components/Liquidity/LiquidityGlance";
+import { LiquidityPoolPerformance } from "../components/Liquidity/LiquidityPoolPerformance";
+import { LiquidityPoolActivity } from "../components/Liquidity/LiquidityPoolActivity";
 import { Col, Layout, Row } from "antd";
 import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
 import { useState } from "react";
@@ -25,6 +28,9 @@ const LiquidityView = () => {
           <Col span={14} xs={24} sm={24} md={14}>
             <header className="root-content">
               <LiquidityGlobalStats />
+              <LiquidityGlance />
+              <LiquidityPoolPerformance />
+              <LiquidityPoolActivity />
             </header>
           </Col>
         }
