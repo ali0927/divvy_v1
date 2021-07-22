@@ -1,4 +1,5 @@
 export const DIVVY_API = "https://api.divvy.bet/"
+// "https://api.divvy.bet/"
 // "http://localhost/"
 export const DIVVY_API_GET_SPORTS = "sports"
 export const DIVVY_API_GET_SEASONS = "seasons/"

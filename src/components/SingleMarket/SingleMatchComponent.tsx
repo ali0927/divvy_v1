@@ -3,17 +3,17 @@ import { TeamDetails } from "./TeamDetails"
 import { OddsSelection } from './OddsSelection';
 import { OddsType } from './OddsType';
 import { Market, MarketSide } from '../../constants';
-import { getDate, getTime } from '../../utils/date';
+import { getDate, getShortTimezone, getTime } from '../../utils/date';
 import { codes } from "../../constants/processed"
 export const SingleMatchComponent = (props: { market: Market }) => {
     const countryCodeToFlagCode = (countryCode: string) => {
         let code = codes[countryCode]?.code?.toLowerCase();
-      
+
         if (code === "wl") { // This is a hack for wales smh
-          return "gb-wls";
+            return "gb-wls";
         }
         return code;
-      }
+    }
     return (
         <div className="single-match">
             <Row>
@@ -71,7 +71,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                         </Col>
                         <Col span={0} md={3}>
                             <div style={{ marginLeft: "5%", marginTop: "-20%", textAlign: "center", fontSize: "1em" }}>
-                                {getDate(props.market.commenceTime)}<br />{getTime(props.market.commenceTime)}
+                                {getDate(props.market.commenceTime)}<br />{getTime(props.market.commenceTime)}<br />{getShortTimezone()}
                             </div>
                         </Col>
                     </Row>

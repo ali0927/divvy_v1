@@ -1,41 +1,30 @@
-import { Col, Layout, Row, Table } from "antd";
+import { u64 } from "@solana/spl-token";
+import { Col, Input, Layout, Row, Button } from "antd";
 import { useContext, useEffect, useState } from "react";
 import { LeftSideBar } from "../components/LeftSideBar";
-import { Loader } from "../components/Loader";
 import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
 import { NavBar } from "../components/Nav/NavBar";
 import { RightSideBar } from "../components/RightSideBar";
-import { DASHBOARD_COLUMNS } from "../constants/DashboardColumns";
 import { HeaderTypes } from "../constants/HeaderTypes";
-import { BetsContext } from "../contexts/bets";
+import { useConnection } from "../contexts/sol/connection";
 import { useWallet } from "../contexts/sol/wallet";
-import { useGetBetsQuery } from "../store/getBets";
+import { airdropTokens } from "../models/sol/instruction/usdtFaucet";
+import { useAccountByMint } from "../hooks";
+import * as IDS from "../utils/ids";
+import { USDT_MINT_DEVNET } from "../utils/ids";
 
 export const FaucetView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
     const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
-    let dataSource: any = [];
     const wallet = useWallet();
-    const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString())
-    const bets = useContext(BetsContext);
-    if (!isLoading && !error && data) {
-        data.map((item) => {
-            console.log(item)
-            dataSource.push({
-                key: item.betId.toString(),
-                betId: item.betId,
-                sport: item.sportName,
-                season: item.seasonName,
-                risk: item.risk,
-                odds: item.odds,
-                payout: item.payout,
-                selection: item.selection,
-                betType: item.betType,
-                // TO DO: use a function to get other types later
-                status: item.status == 1 ? "Pending" : "Graded",
-            })
-        })
+    const { connected } = useWallet();
+    const connection = useConnection();
+    const usdtAddress = useAccountByMint(USDT_MINT_DEVNET);
+    const FAUCET_ADDRESS = "4tCrsQbAckpLkX8cK2VN2vcbbjbEEgwZMrDhXGtGf33S"
+    const callUSDTFaucet = async () => {
+        airdropTokens(usdtAddress?.pubkey, FAUCET_ADDRESS, new u64(100, 10), connection, wallet.wallet)
     }
+
     return (
         <Layout style={{ backgroundColor: "#0D0D0D" }}>
             <Row>
@@ -50,8 +39,12 @@ export const FaucetView = () => {
                 {!isMobileMenuVisible && !isBetSlipsVisible &&
                     <Col span={24} xs={24} sm={24} md={19}>
                         <header className="root-content">
-                            {isLoading ? <Loader /> : null}
-                            <Table dataSource={dataSource} columns={DASHBOARD_COLUMNS} />
+                            <Input disabled={true} value={connected ? wallet.publicKey?.toString() : "Please connect your wallet"} style={{ width: "40%" }} />
+                            <br />
+                            <br />
+                            <Button onClick={() => callUSDTFaucet()}>
+                                Get 10 USDT
+                            </Button>
                         </header>
                     </Col>
                 }

@@ -35,14 +35,14 @@
 }
 
 html {
-  scrollbar-face-color: #1f1f1f;
-  scrollbar-base-color: #1f1f1f;
-  scrollbar-3dlight-color: #1f1f1f;
-  scrollbar-highlight-color: #1f1f1f;
+  scrollbar-face-color: var(--shade-black);
+  scrollbar-base-color: var(--shade-black);
+  scrollbar-3dlight-color: var(--shade-black);
+  scrollbar-highlight-color: var(--shade-black);
   scrollbar-track-color: transparent;
   scrollbar-arrow-color: transparent;
-  scrollbar-shadow-color: #1f1f1f;
-  scrollbar-dark-shadow-color: #1f1f1f;
+  scrollbar-shadow-color: var(--shade-black);
+  scrollbar-dark-shadow-color: var(--shade-black);
 }
 
 ::-webkit-scrollbar {
@@ -52,7 +52,7 @@ html {
 
 ::-webkit-scrollbar-button {
   visibility: collapse;
-  background-color: #1f1f1f;
+  background-color: var(--shade-black);
 }
 
 ::-webkit-scrollbar-track {
@@ -65,31 +65,46 @@ html {
 
 ::-webkit-scrollbar-thumb {
   height: 1px;
-  background-color: #1f1f1f;
+  background-color: var(--shade-black);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-corner {
-  background-color: #1f1f1f;
+  background-color: var(--shade-black);
 }
 
 ::-webkit-resizer {
-  background-color: #1f1f1f;
+  background-color: var(--shade-black);
 }
 
 :root {
-  --royal_purple: #7c01ff;
-  --win_green: #00d77d;
+  --off-black: #0d0d0d;
+  --gray: #4d4d4d;
+  --warm-gray: #717171;
+  --white: #ffffff;
+  --royal-purple: #7c01ff;
+  --win-green: #00d77d;
+  --alert-red: #d75752;
+  --alert-red-text: #e7554f;
+  --success-green: #16c57c;
+  --shade-black: #1f1f1f;
+  --dark-gray: #242424;
+  --light-blue: #61dafb;
 }
 
 body {
-  background-color: #0d0d0d;
+  background-color: var(--off-black);
 }
 
 .root {
   display: flex;
   flex-direction: row;
-  background-color: #0d0d0d;
+  background-color: var(--off-black);
+}
+
+.disabled {
+  cursor: not-allowed !important;
+  background-color: rgb(0, 0, 0, .2) !important;
 }
 
 .root-content {
@@ -114,7 +129,7 @@ body {
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--light-blue);
 }
 
 .LeftSideBar {
@@ -203,15 +218,15 @@ body {
   font-size: 0.7em;
   text-align: center;
   cursor: pointer;
-  background-color: #1f1f1f;
+  background-color: var(--shade-black);
 }
 
 .odds:hover {
-  background-color: #4d4d4d;
+  background-color: var(--gray);
 }
 
 .odds-active {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+  background-image: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
 }
 
 .odds-type {
@@ -219,7 +234,7 @@ body {
 }
 
 .single-match {
-  background: "#0d0d0d";
+  background: var(--off-black);
   justify-content: space-around;
 }
 
@@ -326,8 +341,8 @@ body {
   text-align: center;
   height: 55px;
   padding: 14px 0 17px;
-  border: solid 1px #1f1f1f;
-  background-color: #0d0d0d;
+  border: solid 1px var(--shade-black);
+  background-color: var(--off-black);
   cursor: pointer;
 }
 
@@ -337,8 +352,8 @@ body {
   text-align: center;
   height: 55px;
   padding: 14px 0 17px;
-  border: solid 1px #1f1f1f;
-  background-color: #0d0d0d;
+  border: solid 1px var(--shade-black);
+  background-color: var(--off-black);
   cursor: pointer;
 }
 
@@ -347,8 +362,8 @@ body {
   text-align: center;
   height: 55px;
   padding: 14px 0 17px;
-  border: solid 1px #1f1f1f;
-  background-color: #0d0d0d;
+  border: solid 1px var(--shade-black);
+  background-color: var(--off-black);
   cursor: pointer;
   display: none;
 }
@@ -363,7 +378,7 @@ body {
   font-style: normal;
   line-height: 1;
   letter-spacing: normal;
-  color: #4d4d4d;
+  color: var(--gray);
 }
 
 .primary-team {
@@ -382,24 +397,24 @@ body {
 .bets-active {
   border-width: 0.1px;
   border-color: white;
-  background-color: #242424;
+  background-color: var(--dark-gray);
 }
 
 .sidebar-section {
   /* width: 20em; */
-  outline: 1px solid #1f1f1f;
+  outline: 1px solid var(--shade-black);
   margin-top: 1px;
   padding: 1em;
 }
 
 .sidebar-section-bets-active {
-  outline: 1px solid #1f1f1f;
-  background-color: #242424;
+  outline: 1px solid var(--shade-black);
+  background-color: var(--dark-gray);
 }
 
 .sidebar-section-bets {
-  outline: 1px solid #1f1f1f;
-  background-color: #242424;
+  outline: 1px solid var(--shade-black);
+  background-color: var(--dark-gray);
 }
 
 .pool-performance-tabs {
@@ -445,14 +460,14 @@ body {
   border-radius: 21.5px;
 }
 
-.pool-activity-table .ant-table-thead > tr > th {
+.pool-activity-table .ant-table-thead>tr>th {
   background-color: #0d0d0d;
   font-size: 12px;
   color: gray;
   line-height: 12px;
 }
 
-.pool-activity-table .ant-table-tbody > tr > td {
+.pool-activity-table .ant-table-tbody>tr>td {
   background-color: #0d0d0d;
   font-size: 16px;
   line-height: 24px;
@@ -492,8 +507,8 @@ body {
 }
 
 .sidebar-section-bets-button {
-  outline: 1px solid #1f1f1f;
-  background-color: #0d0d0d;
+  outline: 1px solid var(--shade-black);
+  background-color: var(--off-black);
 }
 
 .sidebar-section-markets {
@@ -512,7 +527,7 @@ body {
 }
 
 .horizontal-outline {
-  border-bottom: 1px solid #1f1f1f;
+  border-bottom: 1px solid var(--shade-black);
 }
 
 .balance {
@@ -521,7 +536,7 @@ body {
 
 .mobile-header {
   text-align: center;
-  border: solid 1px #242424;
+  border: solid 1px var(--dark-gray);
   margin-bottom: 1px;
   height: 60px;
 }
@@ -537,37 +552,37 @@ body {
   height: 39px;
   margin: 0px 0px 15px 10px;
   border-radius: 19.5px;
-  background-color: #242424;
+  background-color: var(--dark-gray);
   margin: 0px 0px 5px 5px;
   padding: 7px 17px 8px;
 }
 
 .ant-btn {
-  background-color: #242424;
-  border-color: #242424;
+  background-color: var(--dark-gray);
+  border-color: var(--dark-gray);
   color: white;
 }
 
 .ant-btn-active {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+  background-image: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
+  border-color: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
 }
 
 .ant-btn:hover {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+  background-image: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
+  border-color: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
   color: white;
 }
 
 .ant-btn:active {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+  background-image: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
+  border-color: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
   color: white;
 }
 
 .ant-btn:focus {
-  background-image: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
-  border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
+  background-image: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
+  border-color: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
   color: white;
 }
 
@@ -602,11 +617,11 @@ h1 {
 }
 
 .form-grey .ant-input {
-  background-color: #242424;
+  background-color: var(--dark-gray);
 }
 
 .ant-form-item {
-  color: #242424;
+  color: var(--dark-gray);
 }
 
 .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
