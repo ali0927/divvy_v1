@@ -6,6 +6,7 @@ import { LiquidityGlobalStats } from "../components/Liquidity/LiquidityGlobalSta
 import { LiquidityGlance } from "../components/Liquidity/LiquidityGlance";
 import { LiquidityPoolPerformance } from "../components/Liquidity/LiquidityPoolPerformance";
 import { LiquidityPoolActivity } from "../components/Liquidity/LiquidityPoolActivity";
+import { GoBack } from "../components/Common/GoBack";
 import { Col, Layout, Row } from "antd";
 import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
 import { useState } from "react";
@@ -27,6 +28,7 @@ const LiquidityView = () => {
         {!isMobileMenuVisible && !isBetSlipsVisible &&
           <Col span={14} xs={24} sm={24} md={14}>
             <header className="root-content">
+              <GoBack />
               <LiquidityGlobalStats />
               <LiquidityGlance />
               <LiquidityPoolPerformance />

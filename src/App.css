@@ -243,7 +243,7 @@ body {
   text-align: right;
 }
 
-.liquidity-glance {
+.heading-align-container {
   height: 100px;
   padding: 0;
   margin: 0;
@@ -253,12 +253,12 @@ body {
   text-align: left;
 }
 
-.liquidity-align h2 {
-  font-size: 2rem;
+.header-align h2 {
+  font-size: 1.8rem;
   font-weight: 800;
 }
 
-.liquidity-align {
+.header-align {
   margin: 0 1.7vw 0 1.7vw;
 }
 
@@ -289,7 +289,7 @@ body {
 }
 
 .pool-header {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
 }
 
@@ -570,6 +570,10 @@ body {
   border-color: radial-gradient(circle at 0% 105%, #7c01ff, #00d77d);
   color: white;
 }
+
+.transparent-button {
+  cursor: pointer;
+} 
 
 .search-button {
   border-width: 0px;

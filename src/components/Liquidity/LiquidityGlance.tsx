@@ -9,8 +9,8 @@ export const LiquidityGlance = () => {
         <>
             <Row>
                 <Col span={36} md={24}>
-                    <div className="liquidity-glance">
-                        <div className="liquidity-align" style={{flexDirection: 'column'}}>
+                    <div className="heading-align-container">
+                        <div className="header-align" style={{flexDirection: 'column'}}>
                             <span className="pool-header">At a glance</span>
                             <Select defaultValue="24 hours" onChange={() => console.log("")}>
                                 <Option value="24 hours">24 hours</Option>
@@ -26,10 +26,10 @@ export const LiquidityGlance = () => {
                     <LiquidityData textContext={"Volume"} percentage={"+114.76%"} data={"9,739.73 USDT"} />
                 </Col>
                 <Col span={24} md={8}>
-                    <LiquidityData textContext={"Volume"} percentage={"+114.76%"} data={"9,739.73 USDT"} />
+                    <LiquidityData textContext={"Total Liquidity"} percentage={"+114.76%"} data={"9,739.73 USDT"} />
                 </Col>
                 <Col span={24} md={8}>
-                    <LiquidityData textContext={"Volume"} percentage={"-19.76%"} data={"49"} />
+                    <LiquidityData textContext={"Number of transactions"} percentage={"-19.76%"} data={"49"} />
                 </Col>
             </Row>
         </>

@@ -1,7 +1,7 @@
 export const LiquidityDistribution = () => {
   return (
     <div className="liquidity-right">
-      <div className="liquidity-align">
+      <div className="header-align">
       <div className="horizontal-outline" />
         <div className="liquidity-content">
           <h3><span className="liquidity-heavy">340,860.37</span> USDT</h3>
@@ -9,7 +9,7 @@ export const LiquidityDistribution = () => {
         </div>
         <div className="horizontal-outline" />
         <div className="liquidity-content">
-          <h6 className="text-secondary">Reserved for</h6>
+          <h6 className="text-secondary">Reserved For</h6>
           <h3>3620 Pending <br />Bets</h3>
         </div>
         <div className="horizontal-outline" />
