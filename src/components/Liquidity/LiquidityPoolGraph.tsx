@@ -56,9 +56,13 @@ export const LiquidityPoolGraph = () => {
     data,
     xField: 'month',
     yField: 'performance',
-    columnStyle: {
-        fill: "l(270) 0:#7c01ff 1:#00d77d",
-        lineOpacity: 0.2
+    seriesField: '',
+    color: function color(_ref : any) {
+      var type = _ref.month;
+      if(type === "November" || type === "August" || type === "June") {
+        return "l(270) 0:#f20600 1:#7c01ff"; 
+      }
+      return "l(270) 0:#7c01ff 1:#00d77d";
     },
     meta: {
       month: { alias: 'Month' },
