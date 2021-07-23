@@ -9,7 +9,7 @@ export const LiquidityPoolPerformance = () => {
         <div style={{marginTop: 40, padding: 5}}>
             <Row>
                 <Col span={36} md={10}>
-                    <CommonHeader heading={"Pool Performance"} />
+                    <CommonHeader side={false} heading={"Pool Performance"} />
                 </Col>
                 <Col span={36} md={14}>
                     <div className="heading-align-container">

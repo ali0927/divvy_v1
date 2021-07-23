@@ -1,5 +1,5 @@
 import { UpOutlined, DownOutlined } from "@ant-design/icons";
-export const LiquidityData = (props: { textContext: string, percentage: string, data: string }) => {
+export const TransactionData = (props: { textContext: string, percentage: string, data: string }) => {
     return (
         <div className="header-align">
             {
