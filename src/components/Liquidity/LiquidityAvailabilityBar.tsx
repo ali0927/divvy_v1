@@ -1,7 +1,12 @@
 import { Progress } from "antd";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { HousePoolContext } from "../../contexts/sol/hpliquidity";
+import { HousePoolStateContext } from "../../contexts/sol/hpstate";
+
 export const LiquidityAvailabilityBar = () => {
   const [width, setWindowWidth] = useState(0);
+  const { htBalance } = useContext(HousePoolContext);
+  const { bettorBalance, liveLiquidity, lockedLiquidity } = useContext(HousePoolStateContext)
   const updateDimensions = () => {
     const width = window.innerWidth
     setWindowWidth(width/4.5)
@@ -21,7 +26,7 @@ export const LiquidityAvailabilityBar = () => {
           "100%": "#4b54cd",
         }}
         strokeWidth={15}
-        percent={60}
+        percent={(htBalance * 100) / (bettorBalance + liveLiquidity + lockedLiquidity + htBalance)}
         strokeLinecap={"square"}
         width={width}
         format={() => {
