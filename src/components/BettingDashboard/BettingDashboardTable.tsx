@@ -1,7 +1,33 @@
+import { useState, useEffect } from 'react';
 import { Table} from 'antd';
-import { DASHBOARD_DATA, DATE_STRING_TO_NUMBER } from "../../constants/DashboardColumns";
+import { DATE_STRING_TO_NUMBER } from "../../constants/DashboardColumns";
+import { BetStatus, BetsTable } from "../../constants/bets";
+import { useGetBetsQuery } from "../../store/getBets";
+import { useWallet } from "../../contexts/sol/wallet";
+import { LAMPORTS_PER_USDT } from "../../constants/math";
 
 export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, filteredInfo: any, setSortedInfo: any, setFilteredInfo: any }) => {
+    const wallet = useWallet();  
+    const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString());
+    const [betData, setBetData] = useState<BetsTable[]>([]);
+    console.log(data)
+    useEffect(() => {
+      let tmpArr: BetsTable[] = [];
+      data?.map((bet: any, i: number) => {
+        tmpArr.push({
+          key: i,
+          type: 'Single',
+          match: bet["match"],
+          sport: bet["sport"],
+          placed: bet["placedOn"],
+          settled: BetStatus[bet["status"]].toLowerCase(),
+          odds: bet["betType"]+'<br />'+(bet["odds"] < 0 ? "" : "+")+bet["odds"],
+          original: '<b>'+bet["risk"]/LAMPORTS_PER_USDT+' USDT</b>',
+          potential: bet["payout"]/LAMPORTS_PER_USDT+' USDT'
+        })
+      })
+      setBetData(tmpArr);
+    }, [data])
     const handleChange = (pagination: any, filters: any, sorter: any) => {
         console.log(filters);
         props.setSortedInfo(sorter);
@@ -9,7 +35,6 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
     }
     const convertToDate = (date : string) : any=> {
         let dateArr = date.replace("<br />at", '').split(' ');
-        console.log(new Date(JSON.parse(dateArr[2]), (DATE_STRING_TO_NUMBER as any)[dateArr[0]], JSON.parse(dateArr[1].replace('th', '')), JSON.parse(dateArr[3].split(':')[0]), JSON.parse(dateArr[3].split(':')[1]), 0));
         return new Date(JSON.parse(dateArr[2]), (DATE_STRING_TO_NUMBER as any)[dateArr[0]], JSON.parse(dateArr[1].replace('th', '')), JSON.parse(dateArr[3].split(':')[0]), JSON.parse(dateArr[3].split(':')[1]), 0);
     }
 
@@ -79,7 +104,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
     return (
         <Table 
             columns={DASHBOARD_COLUMNS} 
-            dataSource={DASHBOARD_DATA} 
+            dataSource={betData} 
             className={"pool-activity-table"} 
             onChange={handleChange}
         />

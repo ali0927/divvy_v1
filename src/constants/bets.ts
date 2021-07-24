@@ -129,3 +129,15 @@ export interface Bet {
     seasonName?: string,
     sportName?: string
 }
+
+export interface BetsTable {
+    key: number,
+    type: string,
+    match: string,
+    sport: string,
+    placed: string,
+    settled: string,
+    odds: string,
+    original: string,
+    potential: string
+}
