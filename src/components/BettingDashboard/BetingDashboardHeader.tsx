@@ -1,7 +1,14 @@
+import { useContext } from "react";
 import { Col, Row } from "antd";
 import { CommonHeader } from "../Common/CommonHeader";
 import { Button } from 'antd';
-export const BettingDashboardHeader = () => {
+import { useWallet } from "../../contexts/sol/wallet";
+import { UserUSDTContext } from "../../contexts/sol/userusdt";
+import { LAMPORTS_PER_USDT } from "../../constants/math";
+export const BettingDashboardHeader = (props: { data: any , error: any}) => {
+    console.log(props.data)
+    const wallet = useWallet();
+    const { userUSDT } = useContext(UserUSDTContext)
     return (
         <div>
             <Row>
@@ -14,13 +21,13 @@ export const BettingDashboardHeader = () => {
                 <Col md={6}>
                     <div className="liquidity-content">
                         <span className="text-primary">Wallet Balance:</span>
-                        <h3 className="text-heavy">340,860.37 USDT</h3>
+                        <h3 className="text-heavy">{userUSDT/LAMPORTS_PER_USDT} USDT</h3>
                     </div>
                 </Col>
                 <Col md={14}>
                     <div className="liquidity-content">
-                        <span className="text-primary">Wallet ID (Metamask):</span>
-                        <h3 className="text-heavy">0x000aabbee60667e9ba7935b841131a6945572c7b</h3>
+                        <span className="text-primary">Wallet ID:</span>
+                        <h3 className="text-heavy">{wallet?.publicKey?.toString()}</h3>
                     </div>
                 </Col>
                 <Col md={4}>

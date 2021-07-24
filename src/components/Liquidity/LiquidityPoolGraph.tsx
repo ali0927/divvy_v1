@@ -1,6 +1,6 @@
-import { Column } from '@ant-design/charts';
-
-export const LiquidityPoolGraph = () => {
+import { Line } from '@ant-design/charts';
+import { LineConfig } from "@ant-design/charts/es/plots/line";
+export const LiquidityPoolGraph: React.FC = () => {
   const data = [
     {
         month: 'January',
@@ -32,7 +32,7 @@ export const LiquidityPoolGraph = () => {
     },
     {
         month: 'August',
-        performance: -6,
+        performance: -69,
     },
     {
         month: 'September',
@@ -52,34 +52,38 @@ export const LiquidityPoolGraph = () => {
     },
   ];
 
-  const config = {
-    data,
-    xField: 'month',
-    yField: 'performance',
-    seriesField: '',
-    color: function color(_ref : any) {
-      var type = _ref.month;
-      if(type === "November" || type === "August" || type === "June") {
-        return "l(270) 0:#f20600 1:#7c01ff"; 
-      }
-      return "l(270) 0:#7c01ff 1:#00d77d";
+  var config: LineConfig = {
+    data: data,
+    xField: "month",
+    yField: "performance",
+    // annotations: [
+    //   {
+    //     type: 'regionFilter',
+    //     start: ['max', 0],
+    //     end: [0, 'min'],
+    //     color: "l(270) 0:#f20600 1:#7c01ff",
+    //   },
+    // ],
+    lineStyle: {
+      stroke: 'l(270) 0:#7c01ff 1:#00d77d',
+      fillOpacity: 0.5,
+      cursor: 'pointer'
     },
-    meta: {
-      month: { alias: 'Month' },
-      performance: { alias: 'Performance' },
+    point: {
+      size: 5,
+      shape: 'circle',
+      style: {
+        fill: 'white',
+        stroke: '#2593fc',
+        lineWidth: 2,
+      },
     },
+    
   };
 
   return (
-    <Column
+    <Line
       {...config}
-      onReady={(plot) => {
-        plot.on('plot:click', (evt: any) => {
-          const { x, y } = evt;
-          const tooltipData = plot.chart.getTooltipItems({ x, y });
-          console.log(tooltipData);
-        });
-      }}
     />
   );
 };

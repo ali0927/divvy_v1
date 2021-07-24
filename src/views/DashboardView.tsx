@@ -54,9 +54,9 @@ export const DashboardView = () => {
                             <header className="root-content">
                                 {isLoading ? <Loader /> : null}
                             </header>
-                            <BettingDashboardHeader />
-                            <BettingDashboardMiddle />
-                            <BettingDashboardOverview />
+                            <BettingDashboardHeader data={data} error={error} />
+                            <BettingDashboardMiddle  />
+                            <BettingDashboardOverview  />
                         </div>
                     </Col>
                 }
