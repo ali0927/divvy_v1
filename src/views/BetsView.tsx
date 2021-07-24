@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { Bet, BetStatus, Season } from "../constants";
+import { useContext, useState } from "react";
+import { Bet } from "../constants";
 import { RightSideBar } from "../components/RightSideBar";
 import { LeftSideBar } from "../components/LeftSideBar";
 import { NavBar } from "../components/Nav/NavBar";
@@ -12,27 +12,12 @@ import { SeasonsView } from "../components/Home/SeasonsView";
 import { useWallet } from "../contexts/sol/wallet";
 import { useGetBetsQuery } from "../store/getBets";
 import { BetsContext } from "../contexts/bets";
-import { SelectChain } from "../components/SelectChain";
-import { w3cwebsocket as websocket } from "websocket";
-const client = new websocket('ws://localhost:8080/ws');
 const BetsView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
   const wallet = useWallet();
   const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString())
-  const bets = useContext(BetsContext);
-
-  useEffect(() => {
-    client.onopen = () => {
-      console.log('WebSocket Client Connected');
-    };
-    client.onmessage = (message: any) => {
-      console.log(message);
-    };
-    client.onclose = () => {
-      console.log("closed");
-    }
-  })
+  const bets = useContext(BetsContext)
 
   if (!isLoading && !error && !bets?.bets.length && data?.length) {
     let bet: Array<Bet> = [];
@@ -57,7 +42,6 @@ const BetsView = () => {
   return (
     <SportProvider>
       <Layout style={{ backgroundColor: "#0D0D0D" }}>
-        <SelectChain />
         <Row>
           <Col xs={24} sm={24} md={0}>
             <MobileHeader headerType={HeaderTypes.Bets} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />

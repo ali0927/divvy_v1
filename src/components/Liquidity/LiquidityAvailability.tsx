@@ -6,10 +6,10 @@ export const LiquidityAvailability = () => {
   const { htBalance } = useContext(HousePoolContext);
   return (
     <div className="liquidity-left">
-      <div className="liquidity-align">
+      <div className="header-align">
         <div className="horizontal-outline" />
         <div className="liquidity-content">
-          <h3><span className="liquidity-heavy">340,860.37 USDT</span></h3>
+          <h3><span className="liquidity-heavy">340,860.37</span> USDT</h3>
           <p className="text-primary">78% free</p>
         </div>
         <div className="horizontal-outline" />

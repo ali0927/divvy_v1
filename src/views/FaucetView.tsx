@@ -12,6 +12,7 @@ import { airdropTokens } from "../models/sol/instruction/usdtFaucet";
 import { useAccountByMint } from "../hooks";
 import * as IDS from "../utils/ids";
 import { USDT_MINT_DEVNET } from "../utils/ids";
+import { LAMPORTS_PER_USDT } from "../constants";
 
 export const FaucetView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -22,7 +23,7 @@ export const FaucetView = () => {
     const usdtAddress = useAccountByMint(USDT_MINT_DEVNET);
     const FAUCET_ADDRESS = "4tCrsQbAckpLkX8cK2VN2vcbbjbEEgwZMrDhXGtGf33S"
     const callUSDTFaucet = async () => {
-        airdropTokens(usdtAddress?.pubkey, FAUCET_ADDRESS, new u64(100, 10), connection, wallet.wallet)
+        airdropTokens(usdtAddress?.pubkey, FAUCET_ADDRESS, new u64(10 * LAMPORTS_PER_USDT, 10), connection, wallet.wallet)
     }
 
     return (

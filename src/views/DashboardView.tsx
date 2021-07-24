@@ -5,7 +5,9 @@ import { Loader } from "../components/Loader";
 import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
 import { NavBar } from "../components/Nav/NavBar";
 import { RightSideBar } from "../components/RightSideBar";
-import { DASHBOARD_COLUMNS } from "../constants/DashboardColumns";
+import { BettingDashboardHeader } from "../components/BettingDashboard/BetingDashboardHeader";
+import { BettingDashboardMiddle } from "../components/BettingDashboard/BettingDashboardMiddle";
+import { BettingDashboardOverview } from "../components/BettingDashboard/BettingDashboardOverview";
 import { HeaderTypes } from "../constants/HeaderTypes";
 import { BetsContext } from "../contexts/bets";
 import { useWallet } from "../contexts/sol/wallet";
@@ -48,10 +50,14 @@ export const DashboardView = () => {
                 </Col>
                 {!isMobileMenuVisible && !isBetSlipsVisible &&
                     <Col span={24} xs={24} sm={24} md={19}>
-                        <header className="root-content">
-                            {isLoading ? <Loader /> : null}
-                            <Table dataSource={dataSource} columns={DASHBOARD_COLUMNS} />
-                        </header>
+                        <div style={{margin: "40px 8vw"}}>
+                            <header className="root-content">
+                                {isLoading ? <Loader /> : null}
+                            </header>
+                            <BettingDashboardHeader data={data} error={error} />
+                            <BettingDashboardMiddle  />
+                            <BettingDashboardOverview  />
+                        </div>
                     </Col>
                 }
                 <Col span={24} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={24}>
