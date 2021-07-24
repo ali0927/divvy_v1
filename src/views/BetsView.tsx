@@ -13,7 +13,8 @@ import { useWallet } from "../contexts/sol/wallet";
 import { useGetBetsQuery } from "../store/getBets";
 import { BetsContext } from "../contexts/bets";
 import { SelectChain } from "../components/SelectChain";
-
+import { w3cwebsocket as websocket } from "websocket";
+const client = new websocket('ws://localhost:8080/ws');
 const BetsView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
@@ -21,7 +22,18 @@ const BetsView = () => {
   const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString())
   const bets = useContext(BetsContext);
 
-  // useEffect(() => {
+  useEffect(() => {
+    client.onopen = () => {
+      console.log('WebSocket Client Connected');
+    };
+    client.onmessage = (message: any) => {
+      console.log(message);
+    };
+    client.onclose = () => {
+      console.log("closed");
+    }
+  })
+
   if (!isLoading && !error && !bets?.bets.length && data?.length) {
     let bet: Array<Bet> = [];
     var b: Bet;
@@ -36,12 +48,6 @@ const BetsView = () => {
 
       }
     })
-    // bets?.bets.map((b) => {
-    //   if (b["status"] == BetStatus.Current) {
-    //     bet.push(b)
-    //   }
-    // })
-    // console.log(bet)
     bets?.addBets(bet);
   }
   else {

@@ -29,7 +29,7 @@ export const LiquidityGlance = () => {
                     <LiquidityData textContext={"Volume"} percentage={"+114.76%"} data={"9,739.73 USDT"} />
                 </Col>
                 <Col span={24} md={8}>
-                    <LiquidityData textContext={"Volume"} percentage={"-19.76%"} data={"49"} />
+                    <LiquidityData textContext={"Volume"} percentage={"-19.76%"} data={"49 Transactions"} />
                 </Col>
             </Row>
         </>

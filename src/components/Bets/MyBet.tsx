@@ -12,8 +12,8 @@ export const MyBet = (props: { bet: Bet }) => {
     const bets = useContext(BetsContext);
 
     const doSetRisk = (risk: string) => {
-        let parsedRisk = parseFloat(risk) * LAMPORTS_PER_USDT; 
-        if(isNaN(parsedRisk)){
+        let parsedRisk = parseFloat(risk) * LAMPORTS_PER_USDT;
+        if (isNaN(parsedRisk)) {
             parsedRisk = 0;
         }
 
@@ -51,7 +51,7 @@ export const MyBet = (props: { bet: Bet }) => {
                             message: "Please enter your house pool address.",
                         },
                     ]}>
-                    <Input color={"white"} style={{ color: "white" }} placeholder={tokenAmountToString(risk * americanToDecimal(props.bet.odds))} disabled={true} />
+                    <Input color={"white"} style={{ color: "white" }} placeholder={tokenAmountToString(risk * (americanToDecimal(props.bet.odds)))} disabled={true} />
                 </Form.Item>
             </div>
             <Divider style={{ marginTop: 0 }} />
