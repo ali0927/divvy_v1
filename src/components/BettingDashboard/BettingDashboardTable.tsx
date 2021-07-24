@@ -10,7 +10,6 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
     const wallet = useWallet();  
     const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString());
     const [betData, setBetData] = useState<BetsTable[]>([]);
-    console.log(data)
     useEffect(() => {
       let tmpArr: BetsTable[] = [];
       data?.map((bet: any, i: number) => {
