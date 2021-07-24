@@ -5,15 +5,18 @@ import { AccountInfo, TokenAmount } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
 import { HPState, HPStateParser } from "../../models/sol/state/hpState";
 export const HousePoolStateContext = createContext({
-    // accountData: undefined as Accounts.ParsedAccount<EscrowState> | undefined,
-    // htBalance: 0
+    bettorBalance: 0,
+    liveLiquidity: 0,
+    lockedLiquidity: 0,
+    pendingBets: 0
 });
 
 export const HousePoolStateProvider = (props: { children: any }) => {
     const connection = useConnection();
-    let [accountData, setAccountData] =
-        useState<Accounts.ParsedAccount<HPState>>();
-    const [htBalance, setHTBalance] = useState(0);
+    const [bettorBalance, setBettorBalance] = useState(0);
+    const [liveLiquidity, setLiveLiquidity] = useState(0);
+    const [lockedLiquidity, setLockedLiquidity] = useState(0);
+    const [pendingBets, setPendingBets] = useState(0);
 
     useEffect(() => {
         let subscriptionId = getAccountInfoAndSubscribe(
@@ -25,8 +28,10 @@ export const HousePoolStateProvider = (props: { children: any }) => {
         async function parseAccount(acc: AccountInfo<Buffer> | null) {
             if (acc) {
                 const parsed = HPStateParser(IDS.DIVVY_STATE_ACCOUNT, acc);
-                // const data = await connection.getTokenAccountBalance(IDS.DIVVY_STATE_ACCOUNT);
-                console.log(parsed)
+                setBettorBalance(parsed.info.bettorBalance);
+                setLiveLiquidity(parsed.info.liveLiquidity);
+                setLockedLiquidity(parsed.info.lockedLiquidity);
+                setPendingBets(parsed.info.pendingBets);
             } else {
                 // setHTBalance(0);
                 // setAccountData(undefined);
@@ -38,7 +43,7 @@ export const HousePoolStateProvider = (props: { children: any }) => {
         };
     }, [connection]);
     return (
-        <HousePoolStateContext.Provider value={{ "hello": "hello" }}>
+        <HousePoolStateContext.Provider value={{ bettorBalance, liveLiquidity, lockedLiquidity, pendingBets }}>
             {props.children}
         </HousePoolStateContext.Provider>
     )
