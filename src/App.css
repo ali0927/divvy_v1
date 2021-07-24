@@ -277,6 +277,14 @@ body {
   margin: 0 1.7vw 0 1.7vw;
 }
 
+.header-side {
+  margin: 0;
+}
+
+.text-heavy {
+  font-weight: 800;
+}
+
 .liquidity-total {
   margin-top: -10px;
   margin-bottom: 20px;
@@ -417,7 +425,7 @@ body {
   background-color: var(--dark-gray);
 }
 
-.pool-performance-tabs {
+.switch-tabs {
   min-height: 43px;
   border: solid 1px gray;
   border-radius: 21.5px;
@@ -427,7 +435,7 @@ body {
   flex-direction: row;
 }
 
-.pool-performance-tab {
+.switch-tab {
   flex: 1;
   min-height: 43px;
   font-size: 16px;
@@ -437,7 +445,7 @@ body {
   text-align: center;
 }
 
-.pool-performance-tab-active {
+.switch-tab-active {
   flex: 1;
   min-height: 43px;
   font-size: 16px;
@@ -449,6 +457,19 @@ body {
   border-radius: 21.5px;
 }
 
+.switch-tabs-small {
+  min-height: 35px;
+  flex: 1;
+}
+
+.switch-tab-small {
+  font-size: 12px;
+}
+
+.text-table {
+  font-size: 15px;
+}
+
 .ant-select {
   width: 140px;
   margin-left: 22px;
@@ -457,6 +478,7 @@ body {
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   text-align: center;
   color: #fff;
+  border: 1px solid #fff;
   border-radius: 21.5px;
 }
 
@@ -534,6 +556,7 @@ body {
   white-space: nowrap;
 }
 
+
 .mobile-header {
   text-align: center;
   border: solid 1px var(--dark-gray);
@@ -555,6 +578,11 @@ body {
   background-color: var(--dark-gray);
   margin: 0px 0px 5px 5px;
   padding: 7px 17px 8px;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  height: 45px;
+  align-items: center;
 }
 
 .ant-btn {

@@ -6,7 +6,7 @@ export const LiquidityPoolActivity = () => {
         <div style={{marginTop: 40, padding: 5}}>
             <Row>
                 <Col span={36} md={24}>
-                    <CommonHeader heading={"Pool Activity Stream"} />
+                    <CommonHeader side={false} heading={"Pool Activity Stream"} />
                 </Col>
             </Row>
             <Row>
