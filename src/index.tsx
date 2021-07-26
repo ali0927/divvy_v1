@@ -4,6 +4,10 @@ import "./index.css";
 import "antd/dist/antd.dark.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('G-4W5M5KF5JM'); // add your tracking id here.
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 ReactDOM.render(
   <React.StrictMode>
