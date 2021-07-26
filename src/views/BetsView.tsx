@@ -23,17 +23,15 @@ const BetsView = () => {
     let bet: Array<Bet> = [];
     var b: Bet;
     data?.map((value: Bet) => {
-      console.log(value)
-
       b = value
       switch (b.status) {
         case 1:
-          bet.push(b)
-          console.log(b)
-
+          bet.push(b);
       }
     })
-    bets?.addBets(bet);
+    if(bet.length){
+      bets?.addBets(bet);
+    }
   }
   else {
     console.log(isLoading, error)

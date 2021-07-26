@@ -1,8 +1,7 @@
-import { PublicKey } from "@solana/web3.js";
-
 export enum BetStatus {
     Current = 0,
     Pending = 1,
+    Graded = 2
 }
 export interface Team {
     name: string,

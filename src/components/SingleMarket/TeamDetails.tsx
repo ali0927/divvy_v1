@@ -4,7 +4,7 @@ export const TeamDetails = (props: { name: string, logo: string }) => {
         <div style={{ alignItems: "center", paddingTop: 18 }}>
             <Row>
                 <Col span={12} xs={0} sm={0} md={10}>
-                    <span className={"flag-icon " + props.logo} style={{ fontSize: 24 }}></span>
+                    <img className={"team-logo"} src={props.logo} alt="Team logo" />
                 </Col>
                 <Col span={12} xs={24} sm={24} md={14}>
                     <div style={{ fontSize: "1em", hyphens: "auto" }}>{props.name}</div>

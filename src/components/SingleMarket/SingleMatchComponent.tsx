@@ -24,7 +24,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                     <Row>
                         <Col span={4}>
                             {/* TO DO: logo */}
-                            <TeamDetails name={props.market.teamA} logo={"flag-icon-" + countryCodeToFlagCode(props.market.teamA)} />
+                            <TeamDetails name={props.market.teamA} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamA + ".svg"} />
                         </Col>
                         <Col span={20} md={10}>
                             <OddsSelection marketSide={MarketSide.teamA} market={props.market} selectionTeam={props.market.teamA} otherTeam={props.market.teamB} selection={"teamA"} odds={{
@@ -47,13 +47,13 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                 <Col span={0} md={2}>
                 </Col>
                 <Col span={24} md={22}>
-                    <p className="text-secondary" style={{ marginTop: -4, marginBottom: -5, fontSize: "0.7em" }}>Versus</p>
+                    <p className="text-secondary" style={{ marginTop: -4, marginBottom: -5, fontSize: "0.7em", marginLeft:"-1.4%" }}>VS</p>
                 </Col>
                 <Col span={24}>
                     <Row>
                         <Col span={4}>
                             {/* TO DO: logo */}
-                            <TeamDetails name={props.market.teamB} logo={"flag-icon-" + countryCodeToFlagCode(props.market.teamB)} />
+                            <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamB + ".svg"} />
                         </Col>
                         <Col span={20} md={10}>
                             <OddsSelection marketSide={MarketSide.teamB} market={props.market} selectionTeam={props.market.teamB} otherTeam={props.market.teamA} selection={"teamB"} odds={{
