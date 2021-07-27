@@ -33,7 +33,7 @@ export const DepositLiquidity = () => {
       });
       return;
     }
-    
+
     const usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
     if (isNaN(usdtLamports)) {
       notify({
@@ -45,33 +45,41 @@ export const DepositLiquidity = () => {
     }
 
     if (usdtTokenAccount == null) {
-        notify({
-          message: "Transaction failed...",
-          description: "User does not have a USDT token account.",
-          type: "error",
-        });
-        return;
-      }
+      notify({
+        message: "Transaction failed...",
+        description: "User does not have a USDT token account.",
+        type: "error",
+      });
+      return;
+    }
 
 
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyexchange")], IDS.DIVVY_PROGRAM_ID);
 
     const [ix, signers] = await depositLiquidityTransaction(
-        connection,
-        wallet.wallet.publicKey,
-        htTokenAccount?.pubkey,
-        usdtTokenAccount.pubkey,
-        IDS.getUsdtMint(connectionConfig.env),
-        "deposit",
-        usdtLamports,
-        bumpSeed);
-
+      connection,
+      wallet.wallet.publicKey,
+      htTokenAccount?.pubkey,
+      usdtTokenAccount.pubkey,
+      IDS.getUsdtMint(connectionConfig.env),
+      "deposit",
+      usdtLamports,
+      bumpSeed);
+      
+    let metaData = {
+      type: "Deposit",
+      match: "-",
+      odds: "-",
+      odds_type: "-",
+      amount: usdtAmount
+    };
     await sendTransaction(
       connection,
       connectionConfig.env,
       wallet.wallet!,
       ix,
-      signers
+      metaData,
+      signers,
     );
   };
   return (

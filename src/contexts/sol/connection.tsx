@@ -18,6 +18,8 @@ import { ExplorerLink, explorerUrl } from "../../components/ExplorerLink";
 import { setProgramIds } from "../../utils/ids";
 import { WalletAdapter } from "./wallet";
 import { ENDPOINTS, ENV } from "../../constants/sol/env";
+import axios from "axios";
+import { DIVVY_API_STORE_TXNS } from "../../constants/urls";
 
 const DEFAULT = ENDPOINTS[0].endpoint;
 const DEFAULT_SLIPPAGE = 0.25;
@@ -169,6 +171,7 @@ export const sendTransaction = async (
   env: ENV,
   wallet: WalletAdapter,
   instructions: TransactionInstruction[],
+  metaData: any,
   signers?: Signer[],
   skipConfirmation?: boolean
 ): Promise<[ok: boolean, txid: string | undefined]> => {
@@ -183,15 +186,15 @@ export const sendTransaction = async (
     await connection.getRecentBlockhash()
   ).blockhash;
   transaction.feePayer = wallet.publicKey;
- 
+
   // Signing phase
-  if(signers && signers.length > 0) {
-      transaction.partialSign(...signers)
+  if (signers && signers.length > 0) {
+    transaction.partialSign(...signers)
   }
-  try{
+  try {
     transaction = await wallet.signTransaction(transaction);
   }
-  catch(ex) {
+  catch (ex) {
     // wallet refused to sign
     return [false, undefined];
   }
@@ -223,7 +226,7 @@ export const sendTransaction = async (
       notify({
         message: "Transaction failed...",
         description: (
-            <ExplorerLink address={txid} cluster={env} type="transaction" />
+          <ExplorerLink address={txid} cluster={env} type="transaction" />
         ),
         type: "error",
       });
@@ -238,6 +241,19 @@ export const sendTransaction = async (
           />
         ),
       });
+      axios.post(DIVVY_API_STORE_TXNS, {
+        type: metaData.type,
+        pubkey: wallet?.publicKey.toString(),
+        match: metaData.type,
+        odds: metaData.odds,
+        odds_type: metaData.odds_type,
+        amount: metaData.amount,
+        time: Date.now()
+      }).then(() => {
+        // do  nothing
+      }).catch(() => {
+        //do nothing
+      })
     }
   }
 
