@@ -11,9 +11,15 @@ import { Col, Layout, Row } from "antd";
 import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
 import { useState } from "react";
 import { HeaderTypes } from "../constants/HeaderTypes"
+import { useGetPoolQuery } from "../store/getPool";
+import { MS_IN_DAY } from "../constants";
+
+const currTime = (new Date()).getTime(); 
 const LiquidityView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
+  const [interval, setInterval] = useState(MS_IN_DAY);
+  const { data, error, isLoading } = useGetPoolQuery((currTime-interval).toString());
   return (
     <Layout style={{ backgroundColor: "#0D0D0D" }}>
       <Row>
@@ -30,8 +36,8 @@ const LiquidityView = () => {
             <header className="root-content">
               <GoBack />
               <LiquidityGlobalStats />
-              <LiquidityGlance />
-              <LiquidityPoolPerformance />
+              <LiquidityGlance data={data} setInterval={setInterval} />
+              <LiquidityPoolPerformance data={data} />
               <LiquidityPoolActivity />
             </header>
           </Col>

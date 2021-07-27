@@ -30,7 +30,7 @@ export const LiquidityAvailabilityBar = () => {
       strokeLinecap={"square"}
       width={width}
       format={() => {
-        return <video autoPlay={true} loop={true} width={100} height={100} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />;
+        return <video autoPlay={true} loop={true} width={width/3} height={width/3} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />;
       }}
       showInfo={true}
     />

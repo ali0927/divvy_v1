@@ -3,7 +3,8 @@ import { Col, Row } from "antd";
 import { LiquidityPoolTabs } from './LiquidityPoolTabs';
 import { LiquidityPoolGraph } from './LiquidityPoolGraph';
 import { CommonHeader } from "../Common/CommonHeader";
-export const LiquidityPoolPerformance = () => {
+import { Pool } from '../../constants';
+export const LiquidityPoolPerformance = (props: { data : Array<Pool> | undefined }) => {
     const [poolPerformance, setPoolPerformance] = useState(1);
     return(
         <div style={{marginTop: 40, padding: 5}}>
@@ -21,7 +22,7 @@ export const LiquidityPoolPerformance = () => {
             </Row>
             <Row>
                 <Col span={72} md={24}>
-                    <LiquidityPoolGraph />
+                    <LiquidityPoolGraph data={props.data} />
                 </Col>
             </Row>
         </div>

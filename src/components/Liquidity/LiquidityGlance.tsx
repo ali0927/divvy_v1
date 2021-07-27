@@ -2,9 +2,16 @@ import { Col, Row } from "antd";
 import { TransactionData } from "../Common/TransactionData";
 import { Select } from 'antd';
 import { DownOutlined } from "@ant-design/icons";
+import { MS_IN_DAY, Pool } from "../../constants";
 const { Option } = Select;
 
-export const LiquidityGlance = () => {
+export const LiquidityGlance = (props: { setInterval : any, data : any }) => {
+    const handleChange = (e : any) => {
+        let interval = (e === "24 hours" ? MS_IN_DAY : e === "1 week" ? MS_IN_DAY*7 : MS_IN_DAY*30);         
+        props.setInterval(interval);
+    }
+    const volumePercent = (props.data ? props?.data[props?.data?.length-1]?.volume - props?.data[props?.data?.length-2]?.volume : 0)/100;
+    const liqPercent = (props.data ? props?.data[props?.data?.length-1]?.balance - props?.data[props?.data?.length-2]?.balance : 0)/100;
     return (
         <>
             <Row>
@@ -12,7 +19,7 @@ export const LiquidityGlance = () => {
                     <div className="heading-align-container">
                         <div className="header-align" style={{flexDirection: 'column'}}>
                             <span className="pool-header">At a glance</span>
-                            <Select defaultValue="24 hours" onChange={() => console.log("")} suffixIcon={<DownOutlined style={{marginTop: 0, color: "#fff"}} className="direction-icon" />}>
+                            <Select defaultValue="24 hours" onSelect={handleChange} suffixIcon={<DownOutlined style={{marginTop: 0, color: "#fff"}} className="direction-icon" />}>
                                 <Option value="24 hours">24 hours</Option>
                                 <Option value="1 week">1 week</Option>
                                 <Option value="1 month">1 month</Option>
@@ -23,13 +30,13 @@ export const LiquidityGlance = () => {
             </Row>
             <Row>
                 <Col span={24} md={8}>
-                    <TransactionData textContext={"Volume"} percentage={"+114.76%"} data={"9,739.73 USDT"} />
+                    <TransactionData textContext={"Volume"} percentage={volumePercent} data={(props.data ? props?.data[props?.data?.length-1]?.volume : "")+" USDT"} />
                 </Col>
                 <Col span={24} md={8}>
-                    <TransactionData textContext={"Total Liquidity"} percentage={"+114.76%"} data={"9,739.73 USDT"} />
+                    <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} data={(props.data ? props?.data[props?.data?.length-1]?.balance : "")+" USDT"} />
                 </Col>
                 <Col span={24} md={8}>
-                    <TransactionData textContext={"Number of transactions"} percentage={"+19.76%"} data={"49 Transactions"} />
+                    <TransactionData textContext={"Number of transactions"} percentage={19} data={"49 Transactions"} />
                 </Col>
             </Row>
         </>
