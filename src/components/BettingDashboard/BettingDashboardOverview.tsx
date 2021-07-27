@@ -12,7 +12,7 @@ export const BettingDashboardOverview = () => {
         <div style={{marginTop: 70}}>
             <Row>
                 <Col span={36} md={5}>
-                    <CommonHeader side={true} heading={"Bet overview"} />
+                    <CommonHeader side={true} heading={"Bets overview"} />
                 </Col>
                 <Col span={36} md={8}>
                     <BettingFilterOptions setFilteredInfo={setFilteredInfo} />

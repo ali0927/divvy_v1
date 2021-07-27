@@ -7,13 +7,15 @@ import { HousePoolStateContext } from "../../contexts/sol/hpstate";
 export const LiquidityAvailability = () => {
   const { htBalance } = useContext(HousePoolContext);
   const { bettorBalance, liveLiquidity, lockedLiquidity } = useContext(HousePoolStateContext)
+  console.log(htBalance, bettorBalance, liveLiquidity, lockedLiquidity)
   return (
     <div className="liquidity-left">
       <div className="header-align">
         <div className="horizontal-outline" />
         <div className="liquidity-content">
+          <h6 className="text-secondary">Available Liquidity</h6>
           <h3><span className="liquidity-heavy">{tokenAmountToString(htBalance - lockedLiquidity - liveLiquidity - bettorBalance, 6, 6)}</span> USDT</h3>
-          <p className="text-primary">{tokenAmountToString(((htBalance - bettorBalance - liveLiquidity - lockedLiquidity) * 100) / (htBalance -  bettorBalance), 0, 2)}% free</p>
+          <p className="text-primary">{tokenAmountToString(((htBalance - bettorBalance - liveLiquidity - lockedLiquidity) * 100) / (htBalance - bettorBalance), 0, 2)}% available</p>
         </div>
         <div className="horizontal-outline" />
         <div className="liquidity-content">

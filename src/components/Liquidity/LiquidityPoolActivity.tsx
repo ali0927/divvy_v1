@@ -1,6 +1,7 @@
 import { Col, Row } from "antd";
 import { LiquidityActivityTable } from "./LiquidityActivityTable";
 import { CommonHeader } from "../Common/CommonHeader";
+
 export const LiquidityPoolActivity = () => {
     return (
         <div style={{marginTop: 40, padding: 5}}>

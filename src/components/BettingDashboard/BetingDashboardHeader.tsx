@@ -5,6 +5,7 @@ import { Button } from 'antd';
 import { useWallet } from "../../contexts/sol/wallet";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
 import { LAMPORTS_PER_USDT } from "../../constants/math";
+import { ConnectLink } from "../Nav/ConnectLink";
 export const BettingDashboardHeader = (props: { data: any , error: any}) => {
     console.log(props.data)
     const wallet = useWallet();
@@ -31,9 +32,8 @@ export const BettingDashboardHeader = (props: { data: any , error: any}) => {
                     </div>
                 </Col>
                 <Col md={4}>
-                    <div className="liquidity-content">
-                        <Button type="primary" style={{marginTop: 10}}>Disconnect Wallet</Button>
-                    </div>
+                    {/* Under Discussion */}
+                    {/* <ConnectLink /> */}
                 </Col>
             </Row>
         </div>
