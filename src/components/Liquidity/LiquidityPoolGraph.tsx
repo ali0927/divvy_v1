@@ -1,69 +1,29 @@
+import { useState, useEffect } from 'react';
 import { Line } from '@ant-design/charts';
 import { LineConfig } from "@ant-design/charts/es/plots/line";
-export const LiquidityPoolGraph: React.FC = () => {
-  const data = [
-    {
-        month: 'January',
-        performance: 38,
-    },
-    {
-        month: 'February',
-        performance: 52,
-    },
-    {
-        month: 'March',
-        performance: 6,
-    },
-    {
-        month: 'April',
-        performance: 145,
-    },
-    {
-        month: 'May',
-        performance: 48,
-    },
-    {
-        month: 'June',
-        performance: -48,
-    },
-    {
-        month: 'July',
-        performance: 25,
-    },
-    {
-        month: 'August',
-        performance: -69,
-    },
-    {
-        month: 'September',
-        performance: 31,
-    },
-    {
-        month: 'October',
-        performance: 17,
-    },
-    {
-        month: 'November',
-        performance: -30,
-    },
-    {
-        month: 'December',
-        performance: 38,
-    },
-  ];
+import { Pool, PoolGraph } from '../../constants';
+import { DATE_STRING_TO_NUMBER } from '../../constants/DashboardColumns';
+export const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined }) => {
+  const [chartData, setChartData] = useState<PoolGraph[]>([])
+  useEffect(() => {
+    console.log(props.data)
+    if(props.data) {
+      let tmp : PoolGraph[] = [];
+      props.data.map(item => {
+        let d = (new Date(JSON.parse(item?.day))).toString();
+        let tmpArr = [];
+        tmpArr = d.split(" ")
+        tmp.push({ "date": tmpArr[2]+"/"+(DATE_STRING_TO_NUMBER as any)[tmpArr[1]]+"/"+tmpArr[3], "performance": item?.earning })
+      })
+      console.log(tmp)
+      setChartData([ ...tmp ]);
+    } 
+  }, [props.data])
 
   var config: LineConfig = {
-    data: data,
-    xField: "month",
+    data: chartData,
+    xField: "date",
     yField: "performance",
-    // annotations: [
-    //   {
-    //     type: 'regionFilter',
-    //     start: ['max', 0],
-    //     end: [0, 'min'],
-    //     color: "l(270) 0:#f20600 1:#7c01ff",
-    //   },
-    // ],
     lineStyle: {
       stroke: 'l(270) 0:#7c01ff 1:#00d77d',
       fillOpacity: 0.5,
