@@ -140,3 +140,16 @@ export interface BetsTable {
     original: string,
     potential: string
 }
+
+export interface Pool {
+    id: number,
+    day: string,
+    balance: number,
+    earning: number,
+    volume: number
+}
+
+export interface PoolGraph {
+    date: string,
+    performance: number
+}

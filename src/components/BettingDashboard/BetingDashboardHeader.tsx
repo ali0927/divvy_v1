@@ -6,7 +6,6 @@ import { useWallet } from "../../contexts/sol/wallet";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
 import { LAMPORTS_PER_USDT } from "../../constants/math";
 export const BettingDashboardHeader = (props: { data: any , error: any}) => {
-    console.log(props.data)
     const wallet = useWallet();
     const { userUSDT } = useContext(UserUSDTContext)
     return (

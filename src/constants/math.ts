@@ -8,6 +8,7 @@ export const ZERO = new BN(0);
 export const LAMPORTS_PER_SOL = 1000000000;
 export const LAMPORTS_PER_USDT = 1000000;
 export const LAMPORTS_PER_HP = 1000000;
+export const MS_IN_DAY = 86400000;
 
 export const americanToDecimal = (americanOdds: number): number => {
   if (americanOdds > 0) {
