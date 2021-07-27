@@ -31,3 +31,18 @@ export const decimalToAmerican = (decimalOdds: number): number => {
 export const tokenAmountToString = (tokenAmount: number, decimals: number = 6, fractionDigits = 6): string => {
   return (tokenAmount / Math.pow(10, decimals)).toLocaleString(undefined, { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits })
 }
+
+export const usdtAmountReducedLength = (amount: number) => {
+  if (amount <= 999) {
+    return amount.toString();
+  }
+  else if (amount>999 && amount<=999999) {
+    return "~" + tokenAmountToString(amount / 1000, 6, 0) + " K";
+  }
+  else if (amount > 999999 && amount <= 999999999){
+    return "~" + tokenAmountToString(amount / 1000000, 6, 0) + " Mil";
+  }
+  else {
+    return "~" + tokenAmountToString(amount / 1000000000, 6, 0) + " Bil";
+  }
+}

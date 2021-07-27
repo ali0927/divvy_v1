@@ -1,8 +1,30 @@
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+const checkDate = (date1: Date, date2: Date) => {
+  if (date1.getDate() + ' ' + (months[date1.getMonth()]) + ', ' + date1.getFullYear() === date2.getDate() + ' ' + (months[date2.getMonth()]) + ', ' + date2.getFullYear()){
+    return true
+  }
+  return false
+}
 
 export const getDate = (unixEpochMs: number) => {
   var d = new Date(unixEpochMs);
-  return (d.getDate() + ' ' + (months[d.getMonth()]) + ', ' + d.getFullYear());
+  var today = new Date();
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var yesterday = new Date();
+  yesterday.setDate(tomorrow.getDate() - 1);
+  if(checkDate(d, today)){
+    return "Today";
+  }
+  if(checkDate(d, tomorrow)){
+    return "Tomorrow";
+  }
+  if(checkDate(d, yesterday)){
+    return "Yesterday";
+  }
+  return (days[d.getDay()] + ', ' + (months[d.getMonth()]) + ' ' + d.getDate());
 }
 export const getTime = (unixEpochMs: number) => {
   var d = new Date(unixEpochMs);

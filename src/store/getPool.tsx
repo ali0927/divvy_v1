@@ -5,7 +5,7 @@ import { DIVVY_API, DIVVY_API_GET_POOL } from '../constants/urls'
 // Define a service using a base URL and expected endpoints
 export const poolApi = createApi({
     reducerPath: 'getPool',
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/" }),
+    baseQuery: fetchBaseQuery({ baseUrl: DIVVY_API }),
     endpoints: (builder) => ({
         getPool: builder.query<Array<Pool>, string | null | undefined>({
             query: (interval : string | null) => DIVVY_API_GET_POOL+interval,
