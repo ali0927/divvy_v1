@@ -18,8 +18,8 @@ export const LiquidityActivityTable = (props: { transactions : Array<Transaction
           type: item.type,
           pubkey: (item.pubkey && item.pubkey?.substr(0, item.pubkey?.length/2))+"<br />"+(item.pubkey && item.pubkey?.substr(item.pubkey?.length/2+1)),
           match: item.match,
-          odds: item.odds_type+" <br />"+(item.odds && item.odds.includes('-') ? item.odds : "+"+item.odds),
-          amount: item.amount+" D <br />Pending"
+          odds: item.odds_type+" <br />"+(item.odds && item.odds.includes('-') ? item.odds : item.odds == "0" ? item.odds_type != "-" ? "-" : "" : "+"+item.odds),
+          amount: (item.amount).toString()
         })
       })
       setData(tmpArr);

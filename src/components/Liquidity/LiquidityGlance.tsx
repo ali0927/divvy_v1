@@ -26,8 +26,8 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
         }
         return Math.round(((todayCnt/prevCnt)*100)*100)/100;
     }
-    const volumePercent = (props.data ? props?.data[props?.data?.length-1]?.volume - props?.data[props?.data?.length-2]?.volume : 0)/100;
-    const liqPercent = (props.data ? props?.data[props?.data?.length-1]?.balance - props?.data[props?.data?.length-2]?.balance : 0)/100;
+    const volumePercent = (props.data ? props?.data[props?.data?.length-1]?.volume - (props.data.length > 1 ? props?.data[props?.data?.length-2]?.volume : 0) : 0)/100;
+    const liqPercent = (props.data ? props?.data[props?.data?.length-1]?.balance - (props.data.length > 1 ? props?.data[props?.data?.length-2]?.balance : 0) : 0)/100;
     const transPercent = getTransPercent();
     return (
         <>

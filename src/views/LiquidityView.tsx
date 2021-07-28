@@ -22,7 +22,6 @@ const LiquidityView = () => {
   const [interval, setInterval] = useState(MS_IN_DAY);
   const { data, error, isLoading } = useGetPoolQuery((currTime-interval).toString());
   const { data: transData, error: transError, isLoading: transIsLoading } = useGetTransactionsQuery(null);
-  console.log(transData, transError)
   return (
     <Layout style={{ backgroundColor: "#0D0D0D" }}>
       <Row>
