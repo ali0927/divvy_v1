@@ -7,6 +7,7 @@ import { seasonsApi } from './seasons'
 import { sportsApi } from './sports'
 import { storeBetsApi } from './storeBets'
 import { poolApi } from './getPool'
+import { transactionsApi } from './getTransactions'
 
 export const store = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
         [seasonsApi.reducerPath]: seasonsApi.reducer,
         [betsApi.reducerPath]: betsApi.reducer,
         [storeBetsApi.reducerPath]: storeBetsApi.reducer,
-        [poolApi.reducerPath]: poolApi.reducer
+        [poolApi.reducerPath]: poolApi.reducer,
+        [transactionsApi.reducerPath]: transactionsApi.reducer
     },
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.

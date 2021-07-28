@@ -22,7 +22,7 @@ export const LiquidityPoolPerformance = (props: { data : Array<Pool> | undefined
             </Row>
             <Row>
                 <Col span={72} md={24}>
-                    <LiquidityPoolGraph data={props.data} />
+                    <LiquidityPoolGraph data={props.data} poolPerformance={poolPerformance}  />
                 </Col>
             </Row>
         </div>
