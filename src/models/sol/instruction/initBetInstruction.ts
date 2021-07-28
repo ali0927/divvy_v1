@@ -1,6 +1,6 @@
 import { Connection, Keypair, PublicKey, SystemProgram, TransactionInstruction } from "@solana/web3.js";
 import * as BufferLayout from "buffer-layout";
-import { Bet, BetStatus, MarketSide } from "../../../constants";
+import { Bet, BetStatus, MarketSide, Transactions } from "../../../constants";
 import { ENV } from "../../../constants/sol/env";
 import { sendTransaction } from "../../../contexts/sol/connection";
 import { WalletAdapter } from "../../../contexts/sol/wallet";
@@ -53,7 +53,7 @@ export const initBet = async (
   const betAccounts: Keypair[] = [];
 
   const betAccountRent = await connection.getMinimumBalanceForRentExemption(MONEY_LINE_BET_LAYOUT.span, 'singleGossip');
-
+  let metaData: Array<Transactions> = new Array<Transactions>();
   for (const bet of bets) {
     const [ix, betAccount] = await initBetTransaction(
       walletPubkey,
@@ -66,9 +66,15 @@ export const initBet = async (
       betAccountRent);
     ixs.push(...ix);
     betAccounts.push(betAccount);
+    metaData.push({
+      type: "Bet Placed",
+      match: bet.market.teamA+"  VS "+bet.market.teamB,
+      odds: String(bet.odds),
+      odds_type: bet.betType,
+      amount: bet.risk
+    });
   }
-
-  let txn = await sendTransaction(connection, env, wallet, ixs, betAccounts);
+  let txn = await sendTransaction(connection, env, wallet, ixs, metaData, betAccounts);
   let [ok,] = txn;
 
   if (ok) {
@@ -131,7 +137,7 @@ const initBetInstruction = (
   riskedUsdt: number,
   odds: number,
   marketSide: MarketSide) => {
-  
+
   const initBetData: INIT_BET_DATA = {
     action: 2,
     amount: riskedUsdt,

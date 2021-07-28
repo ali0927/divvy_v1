@@ -12,7 +12,7 @@ import { ExplorerLink } from "../ExplorerLink";
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
-import { LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
+import { LAMPORTS_PER_USDT, tokenAmountToString, Transactions } from "../../constants";
 import * as IDS from "../../utils/ids"
 
 export const DepositLiquidity = () => {
@@ -65,14 +65,14 @@ export const DepositLiquidity = () => {
       "deposit",
       usdtLamports,
       bumpSeed);
-      
-    let metaData = {
+
+    let metaData: Array<Transactions> = [{
       type: "Deposit",
       match: "-",
       odds: "-",
       odds_type: "-",
-      amount: usdtAmount
-    };
+      amount: Number(usdtAmount)
+    }];
     await sendTransaction(
       connection,
       connectionConfig.env,

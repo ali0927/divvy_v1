@@ -1,7 +1,7 @@
 import { PublicKey } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
-import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
+import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, LAMPORTS_PER_USDT, tokenAmountToString, Transactions } from "../../constants";
 import {
   useConnection,
   useConnectionConfig,
@@ -63,12 +63,19 @@ export const WithdrawLiquidity = (props: {}) => {
       "withdraw",
       htLamports,
       bumpSeed);
-
+    let metaData: Array<Transactions> = [{
+      type: "Withdraw",
+      match: "-",
+      odds: "-",
+      odds_type: "-",
+      amount: Number(htAmount)
+    }];
     await sendTransaction(
       connection,
       connectionConfig.env,
       wallet.wallet,
       ix,
+      metaData,
       signers
     );
   };

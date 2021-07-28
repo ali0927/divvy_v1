@@ -19,7 +19,8 @@ import { setProgramIds } from "../../utils/ids";
 import { WalletAdapter } from "./wallet";
 import { ENDPOINTS, ENV } from "../../constants/sol/env";
 import axios from "axios";
-import { DIVVY_API_STORE_TXNS } from "../../constants/urls";
+import { DIVVY_API, DIVVY_API_STORE_TXNS } from "../../constants/urls";
+import { Transactions } from "../../constants/bets";
 
 const DEFAULT = ENDPOINTS[0].endpoint;
 const DEFAULT_SLIPPAGE = 0.25;
@@ -171,7 +172,7 @@ export const sendTransaction = async (
   env: ENV,
   wallet: WalletAdapter,
   instructions: TransactionInstruction[],
-  metaData: any,
+  metaData: Array<Transactions>,
   signers?: Signer[],
   skipConfirmation?: boolean
 ): Promise<[ok: boolean, txid: string | undefined]> => {
@@ -241,18 +242,22 @@ export const sendTransaction = async (
           />
         ),
       });
-      axios.post(DIVVY_API_STORE_TXNS, {
-        type: metaData.type,
-        pubkey: wallet?.publicKey.toString(),
-        match: metaData.type,
-        odds: metaData.odds,
-        odds_type: metaData.odds_type,
-        amount: metaData.amount,
-        time: Date.now()
-      }).then(() => {
-        // do  nothing
-      }).catch(() => {
-        //do nothing
+      //TO DO process this in backend
+      metaData.map((item) => {
+        axios.post(DIVVY_API + DIVVY_API_STORE_TXNS, {
+          type: item.type,
+          pubkey: wallet?.publicKey?.toString(),
+          match: item.match,
+          odds: item.odds,
+          odds_type: item.odds_type,
+          amount: item.amount,
+          time: new Date().toUTCString()
+        }).then((response) => {
+          // do  nothing
+        }).catch((error) => {
+          //do nothing
+          console.log(error)
+        })
       })
     }
   }

@@ -12,29 +12,15 @@ export const LiquidityActivityTable = () => {
     console.log('WebSocket Client Connected');
   };
   client.onmessage = (message) => {
-    console.log(message)
+    console.log("Received transaction")
     let place = JSON.parse(message.data.toString())
     place['key'] = String(data.length);
     setData([place, ...data]);
   };
-  // const data = [
-  //   {
-  //     key: '1',
-  //     type: 'Bet Submitter',
-  //     user: "0x000aabbee60667e9ba7935b841131a6945572c7b",
-  //     match: '<b>Cashpoint SCR Altach</b> <br />WSG Swarowski',
-  //     odds: "Money Line <br /> +725",
-  //     amount: "0,000 D <br />Pending"
-  //   },
-  //   {
-  //     key: '2',
-  //     type: 'Deposit',
-  //     user: "0x000aabbee60667e9ba7935b841131a6945572c7b",
-  //     match: '',
-  //     odds: "Money Line <br /> +725",
-  //     amount: "0,000 D <br />Pending"
-  //   },
-  // ];
+  client.onclose = (message) =>  {
+    console.log("closed");
+    console.log(message)
+  }
 
   return (
     <Table

@@ -20,7 +20,7 @@ export const LIQUIDITY_ACTIVITY_COLUMNS = [
         title: 'Odds',
         dataIndex: 'odds',
         key: 'odds',
-        render: (html: any) => <div style={{ textAlign: "right" }} dangerouslySetInnerHTML={{ __html: html }
+        render: (html: any) => <div style={{ textAlign: "right" }} dangerouslySetInnerHTML={{ __html: html === 0 ? "-" : html }
         } />
     },
     {

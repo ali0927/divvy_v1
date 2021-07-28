@@ -155,12 +155,12 @@ export interface PoolGraph {
 }
 
 export interface Transactions {
-    id: number,
+    id?: number,
     type: string,
-    pubkey: string,
+    pubkey?: string,
     match: string,
-    odds: number,
+    odds: string,
     odds_type: string,
     amount: number,
-    time: string
+    time?: string
 }

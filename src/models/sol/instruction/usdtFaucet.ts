@@ -3,6 +3,7 @@ import {
     PublicKey,
     TransactionInstruction
 } from "@solana/web3.js";
+import { Transactions } from "../../../constants";
 import { ENV } from "../../../constants/sol/env";
 import { sendTransaction } from "../../../contexts/sol/connection";
 import { WalletAdapter } from "../../../contexts/sol/wallet";
@@ -70,12 +71,19 @@ export const airdropTokens = async (
             tokenDestinationPublicKey,
             faucetPubkey
         )];
-
+        let metaData: Array<Transactions> = [{
+            type: "USDT Faucet",
+            match: "-",
+            odds: "-",
+            odds_type: "-",
+            amount: 100000
+        }]
         await sendTransaction(
             connection,
             ENV.Devnet,
             wallet!,
             ix,
+            metaData,
             signers
         );
     }
