@@ -13,6 +13,7 @@ import { useState } from "react";
 import { HeaderTypes } from "../constants/HeaderTypes"
 import { useGetPoolQuery } from "../store/getPool";
 import { MS_IN_DAY } from "../constants";
+import { useGetTransactionsQuery } from "../store/getTransactions";
 
 const currTime = (new Date()).getTime(); 
 const LiquidityView = () => {
@@ -20,6 +21,8 @@ const LiquidityView = () => {
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
   const [interval, setInterval] = useState(MS_IN_DAY);
   const { data, error, isLoading } = useGetPoolQuery((currTime-interval).toString());
+  const { data: transData, error: transError, isLoading: transIsLoading } = useGetTransactionsQuery(null);
+  console.log(transData, transError)
   return (
     <Layout style={{ backgroundColor: "#0D0D0D" }}>
       <Row>
@@ -36,9 +39,9 @@ const LiquidityView = () => {
             <header className="root-content">
               <GoBack />
               <LiquidityGlobalStats />
-              <LiquidityGlance data={data} setInterval={setInterval} />
+              <LiquidityGlance data={data} setInterval={setInterval} transactions={transData} />
               <LiquidityPoolPerformance data={data} />
-              <LiquidityPoolActivity />
+              <LiquidityPoolActivity transactions={transData} />
             </header>
           </Col>
         }
