@@ -33,16 +33,17 @@ export const tokenAmountToString = (tokenAmount: number, decimals: number = 6, f
 }
 
 export const usdtAmountReducedLength = (amount: number) => {
+  amount = amount / Math.pow(10, 6)
   if (amount <= 999) {
     return amount.toString();
   }
   else if (amount>999 && amount<=999999) {
-    return "~" + tokenAmountToString(amount / 1000, 6, 0) + " K";
+    return "~" + tokenAmountToString(amount / 1000, 0, 0) + " K";
   }
   else if (amount > 999999 && amount <= 999999999){
-    return "~" + tokenAmountToString(amount / 1000000, 6, 0) + " Mil";
+    return "~" + tokenAmountToString(amount / 1000000, 0, 0) + " Mil";
   }
   else {
-    return "~" + tokenAmountToString(amount / 1000000000, 6, 0) + " Bil";
+    return "~" + tokenAmountToString(amount / 1000000000, 0, 0) + " Bil";
   }
 }
