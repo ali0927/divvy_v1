@@ -7,7 +7,6 @@ import { HousePoolStateContext } from "../../contexts/sol/hpstate";
 export const LiquidityAvailability = () => {
   const { htBalance } = useContext(HousePoolContext);
   const { bettorBalance, liveLiquidity, lockedLiquidity } = useContext(HousePoolStateContext)
-  console.log(htBalance, bettorBalance, liveLiquidity, lockedLiquidity)
   return (
     <div className="liquidity-left">
       <div className="header-align">

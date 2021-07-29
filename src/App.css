@@ -482,6 +482,10 @@ body {
   border-radius: 21.5px;
 }
 
+.CircularProgressBar-path {
+  transition: 0.5
+}
+
 .pool-activity-table .ant-table-thead>tr>th {
   background-color: #0d0d0d;
   font-size: 12px;

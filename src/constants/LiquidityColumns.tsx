@@ -8,7 +8,7 @@ export const LIQUIDITY_ACTIVITY_COLUMNS = [
         title: 'User Pubkey',
         dataIndex: 'pubkey',
         key: 'pubkey',
-        render: (text: string) => <div>{text.substr(0, text.length / 2)} < br /> {text.substr(text.length / 2 + 1)} </div>
+        render: (html: any) => <div style={{ textAlign: "left" }} dangerouslySetInnerHTML={{__html: html}} />
     },
     {
         title: 'Match',

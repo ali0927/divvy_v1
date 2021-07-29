@@ -3,22 +3,20 @@ import { Line } from '@ant-design/charts';
 import { LineConfig } from "@ant-design/charts/es/plots/line";
 import { Pool, PoolGraph } from '../../constants';
 import { DATE_STRING_TO_NUMBER } from '../../constants/DashboardColumns';
-export const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined }) => {
+export const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined, poolPerformance: number }) => {
   const [chartData, setChartData] = useState<PoolGraph[]>([])
   useEffect(() => {
-    console.log(props.data)
     if(props.data) {
       let tmp : PoolGraph[] = [];
       props.data.map(item => {
         let d = (new Date(JSON.parse(item?.day))).toString();
         let tmpArr = [];
         tmpArr = d.split(" ")
-        tmp.push({ "date": tmpArr[2]+"/"+(DATE_STRING_TO_NUMBER as any)[tmpArr[1]]+"/"+tmpArr[3], "performance": item?.earning })
+        tmp.push({ "date": tmpArr[2]+"/"+(DATE_STRING_TO_NUMBER as any)[tmpArr[1]]+"/"+tmpArr[3], "performance": props.poolPerformance == 1 ? item?.earning : props.poolPerformance == 0 ? item?.balance : item?.volume })
       })
-      console.log(tmp)
       setChartData([ ...tmp ]);
     } 
-  }, [props.data])
+  }, [props.data, props.poolPerformance])
 
   var config: LineConfig = {
     data: chartData,

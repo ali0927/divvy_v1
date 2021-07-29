@@ -164,3 +164,12 @@ export interface Transactions {
     amount: number,
     time?: string
 }
+
+export interface TransactionsTable {
+    key: number,
+    type: string,
+    pubkey: string,
+    match: string,
+    odds: string,
+    amount: string
+}

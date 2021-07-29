@@ -1,8 +1,9 @@
 import { Col, Row } from "antd";
 import { LiquidityActivityTable } from "./LiquidityActivityTable";
 import { CommonHeader } from "../Common/CommonHeader";
+import { Transactions } from "../../constants";
 
-export const LiquidityPoolActivity = () => {
+export const LiquidityPoolActivity = (props: { transactions : Array<Transactions> | null | undefined }) => {
     return (
         <div style={{marginTop: 40, padding: 5}}>
             <Row>
@@ -12,7 +13,7 @@ export const LiquidityPoolActivity = () => {
             </Row>
             <Row>
                 <Col span={72} md={24}>
-                    <LiquidityActivityTable />
+                    <LiquidityActivityTable transactions={props.transactions} />
                 </Col>
             </Row>
         </div>      
