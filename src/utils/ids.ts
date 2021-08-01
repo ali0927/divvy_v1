@@ -30,6 +30,8 @@ export const DIVVY_STATE_ACCOUNT = new PublicKey("57L7uKWn31Qp71v8rQJ8LbQzvipNVT
 export const HT_MINT = new PublicKey("H5dfyMFdk6MqXU76BgwwuL5bdj2jbxFXafzTp8WmqZnk");
 export const USDT_MINT_MAINNET = new PublicKey("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
 export const USDT_MINT_DEVNET = new PublicKey("DHbmkxDTm2yS6G3uK86RKGxKkfHtchh7whnmhuxey5i");
+export const FAUCET_PROGRAM_ID = new PublicKey("9QVWpPMaNxa5HPPACrxdijxVgFtR77LcEhQ9X9ArXTZ9");
+
 
 export const getUsdtMint = (env: ENV) => {
   if (env === ENV.Mainnet) {

@@ -12,8 +12,8 @@ export const USDTFaucetLink = () => {
     const chainSelect = useContext(ChainSelectContext);
     const connectionConfig = useConnectionConfig();
     const wallet = useWallet();
-    const isVisible = wallet.connected && chainSelect.chain === ChainType.Sol && connectionConfig.env === ENV.Devnet;
-
+    const isDevnet = chainSelect.chain === ChainType.Sol && connectionConfig.env === ENV.Devnet;
+    const isVisible = wallet.connected && isDevnet;
     return (
         isVisible?
             <Link
@@ -28,6 +28,7 @@ export const USDTFaucetLink = () => {
                     </small>
                 </div>
             </Link>
-            : <div style={{ margin: 20 }}>Connect Wallet to Get  Devnet USDT</div>
+            : isDevnet ? <div className="sidebar-section text-secondary">Connect wallet to get Devnet USDT</div>
+            : <></>
     );
 };

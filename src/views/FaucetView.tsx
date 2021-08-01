@@ -9,7 +9,7 @@ import { useConnection } from "../contexts/sol/connection";
 import { useWallet } from "../contexts/sol/wallet";
 import { airdropTokens } from "../models/sol/instruction/usdtFaucet";
 import { useAccountByMint } from "../hooks";
-import { USDT_MINT_DEVNET } from "../utils/ids";
+import { FAUCET_PROGRAM_ID, USDT_MINT_DEVNET } from "../utils/ids";
 import { PublicKey } from "@solana/web3.js";
 import { MONEY_LINE_BET_LAYOUT } from "../models/sol/state/moneyLineBet";
 import { MARKET_STATE_ACCOUNT_DATA_LAYOUT } from "../models/sol/state/marketState";
@@ -22,9 +22,8 @@ export const FaucetView = () => {
     const { connected } = useWallet();
     const connection = useConnection();
     const usdtAddress = useAccountByMint(USDT_MINT_DEVNET);
-    const FAUCET_ADDRESS = "4tCrsQbAckpLkX8cK2VN2vcbbjbEEgwZMrDhXGtGf33S"
     const callUSDTFaucet = async () => {
-        airdropTokens(usdtAddress?.pubkey, FAUCET_ADDRESS, new u64(100, 10), connection, wallet.wallet)
+        airdropTokens(usdtAddress?.pubkey, FAUCET_PROGRAM_ID, new u64(100000000000), connection, wallet.wallet)
     }
     const [inspectPubkey, setInspectPubkey] = useState("");
     const [inspectAccount, setInspectAccount] = useState<string>("");

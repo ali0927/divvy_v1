@@ -45,13 +45,12 @@ const buildAirdropTokensIx = async (
 
 export const airdropTokens = async (
     usdtAddress: PublicKey | undefined,
-    faucetAddress: string,
+    faucetPubkey: PublicKey,
     amount: u64,
     connection: any,
     wallet: WalletAdapter | undefined,
 ) => {
     if (wallet?.publicKey) {
-        const faucetPubkey = new PublicKey(faucetAddress);
         let tokenDestinationPublicKey = usdtAddress
         const tokenMintPubkey = USDT_MINT_DEVNET
         let ix: any = []
@@ -81,7 +80,7 @@ export const airdropTokens = async (
         await sendTransaction(
             connection,
             ENV.Devnet,
-            wallet!,
+            wallet,
             ix,
             metaData,
             signers
