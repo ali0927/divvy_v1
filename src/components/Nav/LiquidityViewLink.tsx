@@ -3,11 +3,11 @@ import { useContext } from "react";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 import LinkLabel from "../Nav/LinkLabel";
 import { LIQUIDITY_VIEW_PATH, tokenAmountToString } from "../../constants";
-import { HousePoolStateContext } from "../../contexts/sol/hpstate";
+import { BetStateContext } from "../../contexts/sol/betstate";
 
 export const LiquidityViewLink = () => {
   const { htBalance } = useContext(HousePoolContext);
-  const { bettorBalance, liveLiquidity, lockedLiquidity, pendingBets } = useContext(HousePoolStateContext)
+  const { liveLiquidity, lockedLiquidity } = useContext(BetStateContext)
   return (
     <Link to={LIQUIDITY_VIEW_PATH}>
       <div className="sidebar-section text-secondary">
@@ -18,7 +18,7 @@ export const LiquidityViewLink = () => {
           <div className="balance-container">
             <span>House Pool balance</span>
             <span className="balance">
-              {tokenAmountToString(htBalance - bettorBalance, 6, 0)} USDT
+              {tokenAmountToString(htBalance, 6, 0)} USDT
             </span>
           </div>
           <div className="balance-container">
@@ -27,7 +27,7 @@ export const LiquidityViewLink = () => {
           </div>
           <div className="balance-container">
             <span>Available liquidity</span>
-            <span className="balance">{tokenAmountToString(htBalance - bettorBalance - lockedLiquidity - liveLiquidity, 6, 0)} USDT</span>
+            <span className="balance">{tokenAmountToString(htBalance - lockedLiquidity - liveLiquidity, 6, 0)} USDT</span>
           </div>
         </small>
       </div>

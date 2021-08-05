@@ -1,3 +1,4 @@
+import { BetPoolStateProvider } from "./betstate"
 import { HousePoolProvider } from "./hpliquidity"
 import { HousePoolStateProvider } from "./hpstate"
 import { UserHTContextProvider } from "./userht"
@@ -7,11 +8,13 @@ export const SolanaProvider = (props: { children: any }) => {
     return (
         <HousePoolProvider>
             <HousePoolStateProvider>
-                <UserHTContextProvider>
-                    <UserUSDTContextProvider>
-                        {props.children}
-                    </UserUSDTContextProvider>
-                </UserHTContextProvider>
+                <BetPoolStateProvider>
+                    <UserHTContextProvider>
+                        <UserUSDTContextProvider>
+                            {props.children}
+                        </UserUSDTContextProvider>
+                    </UserHTContextProvider>
+                </BetPoolStateProvider>
             </HousePoolStateProvider>
         </HousePoolProvider>
     )

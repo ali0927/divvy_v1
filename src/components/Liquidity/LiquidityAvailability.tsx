@@ -2,19 +2,19 @@
 import { useContext } from "react";
 import { tokenAmountToString } from "../../constants";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
-import { HousePoolStateContext } from "../../contexts/sol/hpstate";
+import { BetStateContext } from "../../contexts/sol/betstate";
 
 export const LiquidityAvailability = () => {
   const { htBalance } = useContext(HousePoolContext);
-  const { bettorBalance, liveLiquidity, lockedLiquidity } = useContext(HousePoolStateContext)
+  const { liveLiquidity, lockedLiquidity } = useContext(BetStateContext)
   return (
     <div className="liquidity-left">
       <div className="header-align">
         <div className="horizontal-outline" />
         <div className="liquidity-content">
           <h6 className="text-secondary">Available Liquidity</h6>
-          <h3><span className="liquidity-heavy">{tokenAmountToString(htBalance - lockedLiquidity - liveLiquidity - bettorBalance, 6, 6)}</span> USDT</h3>
-          <p className="text-primary">{tokenAmountToString(((htBalance - bettorBalance - liveLiquidity - lockedLiquidity) * 100) / (htBalance - bettorBalance), 0, 2)}% available</p>
+          <h3><span className="liquidity-heavy">{tokenAmountToString(htBalance - lockedLiquidity - liveLiquidity, 6, 6)}</span> USDT</h3>
+          <p className="text-primary">{tokenAmountToString(((htBalance - liveLiquidity - lockedLiquidity) * 100) / (htBalance), 0, 2)}% available</p>
         </div>
         <div className="horizontal-outline" />
         <div className="liquidity-content">

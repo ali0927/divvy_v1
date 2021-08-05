@@ -23,13 +23,17 @@ export const PROGRAM_IDS = [
   },
 ];
 
-export const DIVVY_PROGRAM_ID = new PublicKey("6mevH4HoqvLVNUsnbn9dWg4iBt3EZMY6REcjasnQH1YE")
-export const DIVVY_PDA_ACCOUNT = new PublicKey("4qBaNELYUcfNyxuYzC8jQ48rtDAebwFrPA261ADnSSff");
-export const DIVVY_USDT_ACCOUNT = new PublicKey("8CpR6h8pZuxP7upsiRpdqkja2FTLwGq4oooLD3FFvNHq");
-export const DIVVY_STATE_ACCOUNT = new PublicKey("57L7uKWn31Qp71v8rQJ8LbQzvipNVT1mbWcQokZ6DgW6");
-export const HT_MINT = new PublicKey("H5dfyMFdk6MqXU76BgwwuL5bdj2jbxFXafzTp8WmqZnk");
+export const DIVVY_PROGRAM_ID = new PublicKey("FatTSDYddftPGBVCoV6Uu2aCiMg8B8ZxV3QuoxE2PK6U");
+export const BETTING_PROGRAM_ID = new PublicKey("2u9dGXkuj5iTm6B9MRn1Exx55uEYX1ZmM3xda5S3f1oY");
+export const DIVVY_PDA_ACCOUNT = new PublicKey("CrCJYSbgSFa6ZE3KviaTSnmGhhBw2t3auYro2N36irH5");
+export const BET_POOL_PDA_ACCOUNT = new PublicKey("PkimpSks8R9KLHsTAupcHyBgYDitaE2PXk697urr3xP");
+export const DIVVY_USDT_ACCOUNT = new PublicKey("FkFbxeQ9doV1JcDdLV9zUmxGdhJezebEVuCqRr6DqWjj");
+export const DIVVY_STATE_ACCOUNT = new PublicKey("5pU6Z9PeowTPZDEkGkyHTArY5XsU5xeWaWyzoJCPMf9C");
+export const BET_POOL_STATE_ACCOUNT = new PublicKey("2NpaJiSE5j997Y4Nv5YwSinsh5LwMJQkTQWHhCNPBsyU");
+export const BET_POOL_USDT_ACCOUNT = new PublicKey("7aohz3HthaAty4tNshTXXNATuGh85u7oSGWRP7WST3iR");
+export const HT_MINT = new PublicKey("EeL2tEMppwVk8x1mzshbtD7uKLwffG2GWthjJiVrgqna");
 export const USDT_MINT_MAINNET = new PublicKey("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
-export const USDT_MINT_DEVNET = new PublicKey("DHbmkxDTm2yS6G3uK86RKGxKkfHtchh7whnmhuxey5i");
+export const USDT_MINT_DEVNET = new PublicKey("7cnY6yuFXzTLEsnXn4FkgvmXq4FyuUakQDQqHJkbQvYG");
 
 export const getUsdtMint = (env: ENV) => {
   if (env === ENV.Mainnet) {
