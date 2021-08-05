@@ -1,18 +1,19 @@
 import { u64 } from "@solana/spl-token";
 import { Col, Input, Layout, Row, Button } from "antd";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { LeftSideBar } from "../components/LeftSideBar";
 import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
 import { NavBar } from "../components/Nav/NavBar";
-import { RightSideBar } from "../components/RightSideBar";
 import { HeaderTypes } from "../constants/HeaderTypes";
 import { useConnection } from "../contexts/sol/connection";
 import { useWallet } from "../contexts/sol/wallet";
 import { airdropTokens } from "../models/sol/instruction/usdtFaucet";
 import { useAccountByMint } from "../hooks";
-import * as IDS from "../utils/ids";
 import { USDT_MINT_DEVNET } from "../utils/ids";
-import { LAMPORTS_PER_USDT } from "../constants";
+import { PublicKey } from "@solana/web3.js";
+import { MONEY_LINE_BET_LAYOUT } from "../models/sol/state/moneyLineBet";
+import { MARKET_STATE_ACCOUNT_DATA_LAYOUT } from "../models/sol/state/marketState";
+import { HPStateParser, HP_STATE_LAYOUT } from "../models/sol/state/hpState";
 
 export const FaucetView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -23,7 +24,34 @@ export const FaucetView = () => {
     const usdtAddress = useAccountByMint(USDT_MINT_DEVNET);
     const FAUCET_ADDRESS = "4Y4PC5NEPE7Go6tUeEuk64PnVS9t2NXccgFS2nafy3U8"
     const callUSDTFaucet = async () => {
-        airdropTokens(usdtAddress?.pubkey, FAUCET_ADDRESS, new u64(100000 * LAMPORTS_PER_USDT, 10), connection, wallet.wallet)
+        airdropTokens(usdtAddress?.pubkey, FAUCET_ADDRESS, new u64(100, 10), connection, wallet.wallet)
+    }
+    const [inspectPubkey, setInspectPubkey] = useState("");
+    const [inspectAccount, setInspectAccount] = useState<string>("");
+
+    const tryInspect = async (pubkeyString: string) => {
+        setInspectPubkey(pubkeyString);
+        let pubkey: PublicKey;
+        try {
+            pubkey = new PublicKey(pubkeyString);
+        } catch (ex) {
+            setInspectAccount("");
+            return;
+        }
+        let account = await connection.getAccountInfo(pubkey);
+        if (account) {
+            if (account.data.length === MONEY_LINE_BET_LAYOUT.span) {
+                setInspectAccount(JSON.stringify(MONEY_LINE_BET_LAYOUT.decode(account.data), null, 2));
+            } else if (account.data.length === MARKET_STATE_ACCOUNT_DATA_LAYOUT.span) {
+                setInspectAccount(JSON.stringify(MARKET_STATE_ACCOUNT_DATA_LAYOUT.decode(account.data), null, 2));
+            } else if (account.data.length === HP_STATE_LAYOUT.span) {
+                setInspectAccount(JSON.stringify(HPStateParser(pubkey, account), null, 2));
+            } else {
+                setInspectAccount(`Account data has an unfamiliar length of ${account.data.length}. Are you missing a buffer layout or are they out of date?`);
+            }
+        } else {
+            setInspectAccount("");
+        }
     }
 
     return (
@@ -40,20 +68,23 @@ export const FaucetView = () => {
                 {!isMobileMenuVisible && !isBetSlipsVisible &&
                     <Col span={24} xs={24} sm={24} md={19}>
                         <header className="root-content">
-                            <Input disabled={true} value={connected ? wallet.publicKey?.toString() : "Please connect your wallet"} style={{ width: "40%" }} />
+                            {connected ? "" : "Please connect your wallet"}
                             <br />
                             <br />
                             <Button onClick={() => callUSDTFaucet()}>
-                                Get 100K USDT
+                                Get 10 USDT
                             </Button>
+                            <br />
+                            <br />
+                            <Input placeholder="Enter a Solana public key to inspect the account." value={inspectPubkey} onChange={event => { tryInspect(event.currentTarget.value) }} style={{ width: "40%" }} />
+                            <pre>
+                                {inspectAccount}
+                            </pre>
                         </header>
+                        <Layout>
+                        </Layout>
                     </Col>
                 }
-                <Col span={24} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={24}>
-                    <RightSideBar>
-                        {/* <BetSlips /> */}
-                    </RightSideBar>
-                </Col>
             </Row>
         </Layout>
     )

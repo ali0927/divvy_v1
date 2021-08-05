@@ -1,9 +1,8 @@
 import { AccountInfo, PublicKey } from "@solana/web3.js";
-import * as Layout from "../../../utils/layout";
 import * as BufferLayout from "buffer-layout";
 import { ParsedAccount } from "../../../contexts/sol/accounts";
 
-const LAYOUT = BufferLayout.struct([
+export const HP_STATE_LAYOUT = BufferLayout.struct([
   BufferLayout.u8('isInitialized'),
   BufferLayout.blob(32, 'htMint'),
   BufferLayout.blob(32, 'bettingUsdt'),
@@ -20,7 +19,7 @@ export interface HPState {
 }
 
 export const HPStateParser = (id: PublicKey, acc: AccountInfo<Buffer>): ParsedAccount<HPState> => {
-  const decoded = LAYOUT.decode(acc.data) as any;
+  const decoded = HP_STATE_LAYOUT.decode(acc.data) as any;
   const hpstate: ParsedAccount<HPState> = {
     pubkey: id,
     account: { ...acc },
