@@ -76,7 +76,7 @@ export const airdropTokens = async (
             match: "-",
             odds: "-",
             odds_type: "-",
-            amount: 100000
+            amount: 1000000
         }]
         await sendTransaction(
             connection,

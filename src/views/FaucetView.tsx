@@ -24,7 +24,7 @@ export const FaucetView = () => {
     const usdtAddress = useAccountByMint(USDT_MINT_DEVNET);
     const FAUCET_ADDRESS = "4Y4PC5NEPE7Go6tUeEuk64PnVS9t2NXccgFS2nafy3U8"
     const callUSDTFaucet = async () => {
-        airdropTokens(usdtAddress?.pubkey, FAUCET_ADDRESS, new u64(100, 10), connection, wallet.wallet)
+        airdropTokens(usdtAddress?.pubkey, FAUCET_ADDRESS, new u64(100000000000, 10), connection, wallet.wallet)
     }
     const [inspectPubkey, setInspectPubkey] = useState("");
     const [inspectAccount, setInspectAccount] = useState<string>("");
@@ -72,7 +72,7 @@ export const FaucetView = () => {
                             <br />
                             <br />
                             <Button onClick={() => callUSDTFaucet()}>
-                                Get 10 USDT
+                                Get 100K USDT
                             </Button>
                             <br />
                             <br />
