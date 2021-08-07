@@ -50,7 +50,7 @@ export const LiquidityAvailabilityBar = () => {
           trail: { stroke: "#242424" }
         }}
       >
-        <video autoPlay={true} style={{transform: "rotate(-225deg)"}} loop={true} width={width/3} height={width/3} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />
+        <video autoPlay={true} style={{transform: "rotate(-225deg)"}} loop={true} width={width > 222.3 ? width/3 : width/1.5} height={width > 222.3 ? width/3 : width/1.5} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />
       </CircularProgressbarWithChildren>
     </div>
   );

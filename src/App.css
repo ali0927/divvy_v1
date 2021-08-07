@@ -532,6 +532,12 @@ body {
   }
 }
 
+@media (max-width: 1000px) {
+  .liquidity-left, .liquidity-right {
+    text-align: center;
+  }
+}
+
 .sidebar-section-bets-button {
   outline: 1px solid var(--shade-black);
   background-color: var(--off-black);
