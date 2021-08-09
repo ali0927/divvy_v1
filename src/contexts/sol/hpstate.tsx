@@ -13,13 +13,13 @@ export const HousePoolStateProvider = (props: { children: any }) => {
     useEffect(() => {
         let subscriptionId = getAccountInfoAndSubscribe(
             connection,
-            IDS.DIVVY_STATE_ACCOUNT,
+            IDS.HOUSE_POOL_STATE_ACCOUNT,
             parseAccount
         );
 
         async function parseAccount(acc: AccountInfo<Buffer> | null) {
             if (acc) {
-                const parsed = HPStateParser(IDS.DIVVY_STATE_ACCOUNT, acc);
+                const parsed = HPStateParser(IDS.HOUSE_POOL_STATE_ACCOUNT, acc);
                 console.log(parsed);
             } else {
                 // setHTBalance(0);

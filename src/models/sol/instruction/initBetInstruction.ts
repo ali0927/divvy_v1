@@ -119,7 +119,7 @@ export const initBetTransaction = async (
 
 const createBetAccountInstruction = async (fromPubkey: PublicKey, betAccountPubkey: PublicKey, rent: number) => {
   const createTempTokenAccountIx = SystemProgram.createAccount({
-    programId: IDS.BETTING_PROGRAM_ID,
+    programId: IDS.BET_POOL_PROGRAM_ID,
     space: MONEY_LINE_BET_LAYOUT.span,
     lamports: rent,
     fromPubkey: fromPubkey,
@@ -155,13 +155,13 @@ const initBetInstruction = (
       { pubkey: betAccount, isSigner: false, isWritable: true },
       { pubkey: marketAccount, isSigner: false, isWritable: true },
       { pubkey: IDS.BET_POOL_STATE_ACCOUNT, isSigner: false, isWritable: true },
-      { pubkey: IDS.DIVVY_USDT_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.HOUSE_POOL_USDT_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: IDS.BET_POOL_USDT_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: userUsdtAccount, isSigner: false, isWritable: true },
       { pubkey: IDS.TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
     ],
     data: initBetBuffer,
-    programId: IDS.BETTING_PROGRAM_ID
+    programId: IDS.BET_POOL_PROGRAM_ID
   });
 
   return initBetIx;

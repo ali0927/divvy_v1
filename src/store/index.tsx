@@ -1,13 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-// Or from '@reduxjs/toolkit/query/react'
-import { setupListeners } from '@reduxjs/toolkit/query'
-import { Sports } from '../constants/Sports'
 import { betsApi } from './getBets'
 import { seasonsApi } from './seasons'
 import { sportsApi } from './sports'
 import { storeBetsApi } from './storeBets'
 import { poolApi } from './getPool'
 import { transactionsApi } from './getTransactions'
+import { liveMarketsApi } from './getLiveMarkets'
 
 export const store = configureStore({
     reducer: {
@@ -17,12 +15,13 @@ export const store = configureStore({
         [betsApi.reducerPath]: betsApi.reducer,
         [storeBetsApi.reducerPath]: storeBetsApi.reducer,
         [poolApi.reducerPath]: poolApi.reducer,
-        [transactionsApi.reducerPath]: transactionsApi.reducer
+        [transactionsApi.reducerPath]: transactionsApi.reducer,
+        [liveMarketsApi.reducerPath]: liveMarketsApi.reducer
     },
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(sportsApi.middleware, seasonsApi.middleware, betsApi.middleware, storeBetsApi.middleware),
+        getDefaultMiddleware().concat(sportsApi.middleware, seasonsApi.middleware, betsApi.middleware, storeBetsApi.middleware, liveMarketsApi.middleware),
 })
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

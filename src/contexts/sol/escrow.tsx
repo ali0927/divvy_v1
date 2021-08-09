@@ -24,13 +24,13 @@ export const EscrowProvider = ({ children = null as any }) => {
   useEffect(() => {
     let subscriptionId = getAccountInfoAndSubscribe(
       connection,
-      IDS.DIVVY_STATE_ACCOUNT,
+      IDS.HOUSE_POOL_STATE_ACCOUNT,
       parseAccount
     );
 
     function parseAccount(acc: AccountInfo<Buffer>|null) {
       if(acc) {
-        setAccountData(EscrowStateParser(IDS.DIVVY_STATE_ACCOUNT, acc));
+        setAccountData(EscrowStateParser(IDS.HOUSE_POOL_STATE_ACCOUNT, acc));
       } else {
         setAccountData(undefined);
       }

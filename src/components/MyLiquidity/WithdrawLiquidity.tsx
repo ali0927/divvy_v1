@@ -52,7 +52,7 @@ export const WithdrawLiquidity = (props: {}) => {
       return;
     }
 
-    const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyhouse")], IDS.DIVVY_PROGRAM_ID);
+    const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyhouse")], IDS.HOUSE_POOL_PROGRAM_ID);
 
     const [ix, signers] = await depositLiquidityTransaction(
       connection,
