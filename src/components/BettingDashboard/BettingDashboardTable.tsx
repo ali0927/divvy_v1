@@ -28,7 +28,6 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
       setBetData(tmpArr);
     }, [data])
     const handleChange = (pagination: any, filters: any, sorter: any) => {
-        console.log(filters);
         props.setSortedInfo(sorter);
         props.setFilteredInfo(filters);
     }

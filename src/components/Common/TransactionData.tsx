@@ -3,8 +3,11 @@ export const TransactionData = (props: { textContext: string, percentage: number
     return (
         <div className="header-align">
             {
-                props.percentage >= 0 ?
+                props.percentage > 0 ?
                 <p className="text-primary">{props.textContext}: <span style={{color: "#16c57c"}}>{"+"+props.percentage+"%"} <UpOutlined className="direction-icon" /></span></p>
+                :
+                props.percentage === 0 ?
+                <p className="text-primary">{props.textContext}: <span style={{color: "#d75752", marginTop: 1}}>NA</span></p>
                 :
                 <p className="text-primary">{props.textContext}: <span style={{color: "#d75752"}}>{"-"+props.percentage+"%"} <DownOutlined className="direction-icon" /></span></p>
             }

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Col, Row } from "antd";
 import { TransactionData } from "../Common/TransactionData";
 import { Select } from 'antd';
@@ -6,29 +7,38 @@ import { MS_IN_DAY, Pool, Transactions } from "../../constants";
 const { Option } = Select;
 
 export const LiquidityGlance = (props: { setInterval : any, data : any, transactions: Array<Transactions> | undefined | null }) => {
-    const handleChange = (e : any) => {
-        let interval = (e === "24 hours" ? MS_IN_DAY : e === "1 week" ? MS_IN_DAY*7 : MS_IN_DAY*30);         
-        props.setInterval(interval);
-    }
-    const getTransPercent = () => {
+    const getTransPercent = (time : number) => {
         let prevCnt = 0, todayCnt = 0;
         if(props.transactions) {
-            let today = (new Date()).toString();
-            let todArr = today.split(" ");
+            let d = Date.now();
+            d = d-time;
+            let today = d;
+            let transDate;
             props.transactions.map(item => {
-                let tranArr = item.time?.split(" ");
-                if(tranArr && tranArr[1] === todArr[2] && tranArr[2] == todArr[1] && tranArr[3] == todArr[3]) {
+                transDate = (new Date(item.time ? item.time : "")).getTime();
+                // console.log(transDate, today, transDate > today)
+                if(transDate > today) {
                     todayCnt++;
                 } else  {
                     prevCnt++;
                 }
             })
         }
-        return Math.round(((todayCnt/prevCnt)*100)*100)/100;
+        return { "percent": Math.round(((todayCnt/prevCnt)*100)*100)/100, "trans": todayCnt};
     }
-    const volumePercent = (props.data ? props?.data[props?.data?.length-1]?.volume - (props.data.length > 1 ? props?.data[props?.data?.length-2]?.volume : 0) : 0)/100;
-    const liqPercent = (props.data ? props?.data[props?.data?.length-1]?.balance - (props.data.length > 1 ? props?.data[props?.data?.length-2]?.balance : 0) : 0)/100;
-    const transPercent = getTransPercent();
+    const [transData, setTransData] = useState({ 'percent': 0, 'trans': 0 });
+    const volumePercent = (props.data && props.data.length ? props?.data[props?.data?.length-1]?.volume - (props.data.length > 1 ? props?.data[props?.data?.length-2]?.volume : 0) : 0)/100;
+    const liqPercent = (props.data && props.data.length ? props?.data[props?.data?.length-1]?.balance - (props.data.length > 1 ? props?.data[props?.data?.length-2]?.balance : 0) : 0)/100;
+    useEffect(() => {
+        let data = getTransPercent(MS_IN_DAY);
+        setTransData({"percent": data["percent"], "trans": data["trans"]});
+    }, [])
+    const handleChange = (e : any) => {
+        let interval = (e === "24 hours" ? MS_IN_DAY : e === "1 week" ? MS_IN_DAY*7 : MS_IN_DAY*30);         
+        props.setInterval(interval);
+        let data = getTransPercent(interval)
+        setTransData({"percent": data["percent"], "trans": data["trans"]});
+    }
     return (
         <>
             <Row>
@@ -47,13 +57,13 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
             </Row>
             <Row>
                 <Col span={24} md={8}>
-                    <TransactionData textContext={"Volume"} percentage={volumePercent} data={(props.data ? props?.data[props?.data?.length-1]?.volume : "")+" USDT"} />
+                    <TransactionData textContext={"Volume"} percentage={volumePercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.volume : "0")+" USDT"} />
                 </Col>
                 <Col span={24} md={8}>
-                    <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} data={(props.data ? props?.data[props?.data?.length-1]?.balance : "")+" USDT"} />
+                    <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.balance : "0")+" USDT"} />
                 </Col>
                 <Col span={24} md={8}>
-                    <TransactionData textContext={"Number of transactions"} percentage={transPercent} data={(props.transactions ? props.transactions.length.toString() : "0")+" Transactions"} />
+                    <TransactionData textContext={"Number of transactions"} percentage={transData.percent} data={(transData.trans)+" Transactions"} />
                 </Col>
             </Row>
         </>
