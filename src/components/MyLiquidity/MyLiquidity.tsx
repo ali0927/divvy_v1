@@ -40,7 +40,7 @@ export const MyLiquidity = (props: {}) => {
       </div>
       <DepositLiquidity />
       <WithdrawLiquidity />
-      <DivvyDao />
+      {/* <DivvyDao /> */}
       <StakeHT />
     </div>
   );
