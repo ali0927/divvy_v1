@@ -375,9 +375,9 @@ body {
 
 .bets-icon {
   width: 10%;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
   height: 55px;
-  padding: 14px 0 17px;
   border: solid 1px var(--shade-black);
   background-color: var(--off-black);
   cursor: pointer;
