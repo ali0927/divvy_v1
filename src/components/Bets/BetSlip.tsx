@@ -41,7 +41,7 @@ export const BetSlip = () => {
               {tokenAmountToString(totalRisk)} USDT
             </p>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20, paddingBottom: 60 }}>
             <p>
               Total Payout
             </p>
@@ -49,8 +49,8 @@ export const BetSlip = () => {
               {tokenAmountToString(totalPayout)} USDT
             </p>
           </div>
-          <Button className="ant-btn-active" style={{ width: "100%", height: 40 }} type="primary" onClick={() => bets?.placeBetSlip()}>
-            <LinkLabel style={{ marginRight: 20, marginLeft: 20 }}>
+          <Button className="ant-btn-active" style={{ width: "100%", height: 40, position: "absolute", bottom: 0 }} type="primary" onClick={() => bets?.placeBetSlip()}>
+            <LinkLabel style={{ margin:"auto" }}>
               Place {betsCount} Single bets {chain.chain === ChainType.Sol && solTxnCount > 1 ? ` in ${solTxnCount} transactions.` : ""}
             </LinkLabel>
           </Button>
