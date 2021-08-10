@@ -12,13 +12,14 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
     const [betData, setBetData] = useState<BetsTable[]>([]);
     useEffect(() => {
       let tmpArr: BetsTable[] = [];
+      console.log(data)
       data?.map((bet: any, i: number) => {
         tmpArr.push({
           key: i,
           type: 'Single',
           match: bet["match"],
-          sport: bet["sport"],
-          placed: bet["placedOn"],
+          sport: bet["sportName"],
+          placed: bet["placedOn"].split(" "),
           settled: BetStatus[bet["status"]].toLowerCase(),
           odds: bet["betType"]+'<br />'+(bet["odds"] < 0 ? "" : "+")+bet["odds"],
           original: '<b>'+bet["risk"]/LAMPORTS_PER_USDT+' USDT</b>',
@@ -31,9 +32,10 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
         props.setSortedInfo(sorter);
         props.setFilteredInfo(filters);
     }
-    const convertToDate = (date : string) : any=> {
-        let dateArr = date.replace("<br />at", '').split(' ');
-        return new Date(JSON.parse(dateArr[2]), (DATE_STRING_TO_NUMBER as any)[dateArr[0]], JSON.parse(dateArr[1].replace('th', '')), JSON.parse(dateArr[3].split(':')[0]), JSON.parse(dateArr[3].split(':')[1]), 0);
+    const convertToDate = (date : String[]) : any => {
+        let parsedDate =  Date.parse(date.slice(0, 5).join())
+        // console.log(parsedDate)
+        return parsedDate;
     }
 
     const DASHBOARD_COLUMNS = [
@@ -64,7 +66,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           title: 'PLACED ON',
           dataIndex: 'placed',
           key: 'placed',
-          render: (html : any) => <div className="text-table" style={{ textAlign: "right" }} dangerouslySetInnerHTML={{__html: html}} />,
+          render: (date : String[]) => <div className="text-table" style={{ textAlign: "right" }}>{date[1]} {date[2]} <br />at {date[4].split(":")[0]+":"+date[4].split(":")[1] + (JSON.parse(date[4].split(":")[0]) >= 12 ? " PM" : " AM")}</div>,
           sorter: {
             compare: (a: any, b: any) => convertToDate(a.placed)-convertToDate(b.placed)
           },
