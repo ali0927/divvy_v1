@@ -160,6 +160,7 @@ body {
   -webkit-box-align: center;
   align-items: center;
   justify-self: flex-end;
+  justify-content: space-between;
 }
 
 .wallet-wrapper {
