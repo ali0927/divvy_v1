@@ -104,6 +104,7 @@ export const StakeHT = () => {
         onChange={(val: number) => setHtAmount(tokenAmountToString(userHT * val / 100)) }
         label="Percentage to withdraw"
         value={Number(htAmount)}
+        disabled={false}
       />
 
       <Button type="primary" htmlType="submit">

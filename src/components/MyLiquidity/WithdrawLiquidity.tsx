@@ -11,7 +11,7 @@ import { useWallet } from "../../contexts/sol/wallet";
 import { notify } from "../../utils/notifications";
 import { WalletSlider } from "./WalletSlider"
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useAccountByMint } from "../../hooks";
 import * as IDS from "../../utils/ids";
 import { UserHTContext } from "../../contexts/sol/userht";
@@ -24,6 +24,11 @@ export const WithdrawLiquidity = (props: {}) => {
   const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   let [htAmount, setHtAmount] = useState("");
   const { userHT } = useContext(UserHTContext);
+  
+  useEffect(() => {
+   if(userHT === 0) setHtAmount("")
+  }, [userHT])
+  
   const onFinish = async (values: any) => {
     if (wallet.wallet?.publicKey == null) {
       notify({
@@ -95,17 +100,18 @@ export const WithdrawLiquidity = (props: {}) => {
       <Form.Item name="htAmount">
         <Input.Group compact>
           <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
-          <Button style={{ border: "1px solid rgb(67, 67, 67)" }} onClick={e => setHtAmount(tokenAmountToString(userHT))}>MAX</Button>
+          <Button style={{ border: "1px solid rgb(67, 67, 67)" }} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toString())} disabled={userHT === 0}>MAX</Button>
         </Input.Group>
       </Form.Item>
 
       <WalletSlider 
-        onChange={(val: number) => setHtAmount(tokenAmountToString(userHT * val / 100)) }
+        onChange={(val: number) => setHtAmount((userHT / LAMPORTS_PER_HT * val / 100).toString()) }
         label="Percentage to withdraw"
-        value={Number(htAmount) * LAMPORTS_PER_HT / userHT * 100}
+        value={htAmount === "" ? 0: Number(htAmount) * LAMPORTS_PER_HT / userHT * 100}
+        disabled={userHT === 0}
       />
 
-      <Button onClick={onFinish}>
+      <Button onClick={onFinish} disabled={Number(htAmount) === 0}>
         Withdraw
       </Button>
     </div>

@@ -11,7 +11,7 @@ import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
 import { WalletSlider } from "./WalletSlider"
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
 import { LAMPORTS_PER_USDT, tokenAmountToString, Transactions } from "../../constants";
 import * as IDS from "../../utils/ids"
@@ -24,6 +24,10 @@ export const DepositLiquidity = () => {
   const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   const { userUSDT } = useContext(UserUSDTContext)
   let [usdtAmount, setUsdtAmount] = useState("");
+
+  useEffect(() => {
+    if(userUSDT === 0) setUsdtAmount("")
+  }, [userUSDT])
 
   const onFinish = async () => {
     if (wallet?.wallet?.publicKey == null) {
@@ -97,18 +101,19 @@ export const DepositLiquidity = () => {
 
         <Form.Item name="usdtAmount">
           <Input.Group compact>
-            <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => { setUsdtAmount(event.currentTarget.value) }} style={{ width: "75%" }} />
-            <Button style={{ border: "1px solid rgb(67, 67, 67)" }} onClick={e => setUsdtAmount(tokenAmountToString(userUSDT))}>MAX</Button>
+            <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
+            <Button style={{ border: "1px solid rgb(67, 67, 67)" }} onClick={e => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT).toString())} disabled={userUSDT === 0}>MAX</Button>
           </Input.Group>
         </Form.Item>
 
         <WalletSlider 
-          onChange={(val: number) => setUsdtAmount(tokenAmountToString(userUSDT * val / 100)) }
+          onChange={(val: number) => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT * val / 100).toString()) }
           label="Percentage to deposit"
-          value={Number(usdtAmount) * LAMPORTS_PER_USDT / userUSDT  * 100}
+          value={usdtAmount === "" ? 0: Number(usdtAmount) * LAMPORTS_PER_USDT / userUSDT * 100}
+          disabled={userUSDT === 0}
         />
 
-        <Button onClick={onFinish}>
+        <Button onClick={onFinish} disabled={Number(usdtAmount) === 0}>
           Deposit
         </Button>
       </div>

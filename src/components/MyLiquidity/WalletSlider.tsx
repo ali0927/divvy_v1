@@ -6,7 +6,7 @@ const initMarks = {
   100: { label: <small className="text-secondary">100%</small> },
 }
 
-export const WalletSlider = (props: { onChange: any, label: string, value: number }) =>  {
+export const WalletSlider = (props: { onChange: any, label: string, value: number, disabled: boolean }) =>  {
   const [value, setValue] = useState(0)
 
   const marks = useMemo(() => ({
@@ -26,7 +26,7 @@ export const WalletSlider = (props: { onChange: any, label: string, value: numbe
   return (
     <div style={{position: "relative"}}>
       <small className="text-secondary">{props.label}:</small>
-      <Slider marks={marks} tooltipVisible={false} onChange={onChangeValue} value={value} />
+      <Slider marks={marks} tooltipVisible={false} onChange={onChangeValue} value={value} disabled={props.disabled} defaultValue={0} />
     </div>
   );
 }
