@@ -28,8 +28,8 @@ export const decimalToAmerican = (decimalOdds: number): number => {
   return NaN;
 }
 
-export const tokenAmountToString = (tokenAmount: number, decimals: number = 6, fractionDigits = 6): string => {
-  return (tokenAmount / Math.pow(10, decimals)).toLocaleString(undefined, { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits })
+export const tokenAmountToString = (tokenAmount: number, decimals: number = 6, minimumFractionDigits = 6, maximumFractionDigits = 6): string => {
+  return (tokenAmount / Math.pow(10, decimals)).toLocaleString(undefined, { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: maximumFractionDigits })
 }
 
 export const usdtAmountReducedLength = (amount: number) => {
@@ -37,13 +37,13 @@ export const usdtAmountReducedLength = (amount: number) => {
   if (amount <= 999) {
     return amount.toString();
   }
-  else if (amount>999 && amount<=999999) {
-    return "~" + tokenAmountToString(amount / 1000, 0, 0) + " K";
+  else if (amount>999 && amount<=999999999) {
+    return tokenAmountToString(amount / 1000, 0, 0, 9) + "K";
   }
-  else if (amount > 999999 && amount <= 999999999){
-    return "~" + tokenAmountToString(amount / 1000000, 0, 0) + " Mil";
+  else if (amount > 999999999 && amount <= 999999999999){
+    return tokenAmountToString(amount / 1000000, 0, 0, 9) + "M";
   }
   else {
-    return "~" + tokenAmountToString(amount / 1000000000, 0, 0) + " Bil";
+    return tokenAmountToString(amount / 1000000000, 0, 0, 9) + "B";
   }
 }

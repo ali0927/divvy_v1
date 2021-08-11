@@ -9,7 +9,7 @@ import { useConnection } from "../contexts/sol/connection";
 import { useWallet } from "../contexts/sol/wallet";
 import { airdropTokens } from "../models/sol/instruction/usdtFaucet";
 import { useAccountByMint } from "../hooks";
-import { USDT_MINT_DEVNET } from "../utils/ids";
+import { FAUCET_PROGRAM_ID, USDT_MINT_DEVNET } from "../utils/ids";
 import { PublicKey } from "@solana/web3.js";
 import { MONEY_LINE_BET_LAYOUT } from "../models/sol/state/moneyLineBet";
 import { MARKET_STATE_ACCOUNT_DATA_LAYOUT } from "../models/sol/state/marketState";

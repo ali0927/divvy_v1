@@ -39,6 +39,7 @@ export const HOUSE_POOL_USDT_ACCOUNT = new PublicKey("7bmv64R1yHwZaeSd9ZjW5XbZ4J
 export const HT_MINT = new PublicKey("HaMaZZDZzES7RCeCj3hsDbnFtbT2yac3oXkUXBu9bgnu");
 export const USDT_MINT_MAINNET = new PublicKey("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
 export const USDT_MINT_DEVNET = new PublicKey("7cnY6yuFXzTLEsnXn4FkgvmXq4FyuUakQDQqHJkbQvYG");
+export const FAUCET_PROGRAM_ID = new PublicKey("9QVWpPMaNxa5HPPACrxdijxVgFtR77LcEhQ9X9ArXTZ9");
 
 export const getUsdtMint = (env: ENV) => {
   if (env === ENV.Mainnet) {
