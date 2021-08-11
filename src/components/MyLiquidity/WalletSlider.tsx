@@ -1,16 +1,10 @@
 import { Slider, Switch } from 'antd';
 import { useMemo, useState, useEffect } from "react";
 
-const initMarks = {
-  0: { label: <small className="text-secondary">0%</small> },
-  100: { label: <small className="text-secondary">100%</small> },
-}
-
-export const WalletSlider = (props: { onChange: any, label: string, value: number, disabled: boolean }) =>  {
+export const WalletSlider = (props: { onChange: any, value: number, disabled: boolean }) =>  {
   const [value, setValue] = useState(0)
 
   const marks = useMemo(() => ({
-    ...initMarks,
     [value]: {
       label: <small>{value}%</small>
     }
@@ -24,8 +18,7 @@ export const WalletSlider = (props: { onChange: any, label: string, value: numbe
   }, [props.value])
 
   return (
-    <div style={{position: "relative"}}>
-      <small className="text-secondary">{props.label}:</small>
+    <div style={{position: "relative", padding:"0 5px"}}>
       <Slider marks={marks} tooltipVisible={false} onChange={onChangeValue} value={value} disabled={props.disabled} defaultValue={0} />
     </div>
   );

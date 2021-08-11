@@ -99,16 +99,15 @@ export const DepositLiquidity = () => {
           <p className="balance">{tokenAmountToString(userUSDT)} USDT</p>
         </div>
 
-        <Form.Item name="usdtAmount">
+        <Form.Item name="usdtAmount" style={{marginBottom: '1em'}}>
           <Input.Group compact>
             <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
-            <Button style={{ border: "1px solid rgb(67, 67, 67)" }} onClick={e => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT).toString())} disabled={userUSDT === 0}>MAX</Button>
+            <Button style={{ border: "1px solid rgb(67, 67, 67)",  width: "25%" }} onClick={e => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT).toString())} disabled={userUSDT === 0}>MAX</Button>
           </Input.Group>
         </Form.Item>
 
-        <WalletSlider 
+        <WalletSlider         
           onChange={(val: number) => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT * val / 100).toString()) }
-          label="Percentage to deposit"
           value={usdtAmount === "" ? 0: Number(usdtAmount) * LAMPORTS_PER_USDT / userUSDT * 100}
           disabled={userUSDT === 0}
         />

@@ -97,16 +97,15 @@ export const WithdrawLiquidity = (props: {}) => {
         </p>
         <p className="balance">{tokenAmountToString(userHT)} HT</p>
       </div>
-      <Form.Item name="htAmount">
+      <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>
-          <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
-          <Button style={{ border: "1px solid rgb(67, 67, 67)" }} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toString())} disabled={userHT === 0}>MAX</Button>
+          <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{width: "75%"}} />
+          <Button style={{border: "1px solid rgb(67, 67, 67)",  width: "25%"}} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toString())} disabled={userHT === 0}>MAX</Button>
         </Input.Group>
       </Form.Item>
 
       <WalletSlider 
         onChange={(val: number) => setHtAmount((userHT / LAMPORTS_PER_HT * val / 100).toString()) }
-        label="Percentage to withdraw"
         value={htAmount === "" ? 0: Number(htAmount) * LAMPORTS_PER_HT / userHT * 100}
         disabled={userHT === 0}
       />

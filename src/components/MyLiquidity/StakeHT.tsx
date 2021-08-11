@@ -102,7 +102,6 @@ export const StakeHT = () => {
 
       <WalletSlider 
         onChange={(val: number) => setHtAmount(tokenAmountToString(userHT * val / 100)) }
-        label="Percentage to withdraw"
         value={Number(htAmount)}
         disabled={false}
       />
