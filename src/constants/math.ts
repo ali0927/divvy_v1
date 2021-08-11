@@ -38,12 +38,12 @@ export const usdtAmountReducedLength = (amount: number) => {
     return amount.toString();
   }
   else if (amount>999 && amount<=999999999) {
-    return tokenAmountToString(amount / 1000, 0, 0, 9) + "K";
+    return tokenAmountToString(amount / 1000, 0, 0, 3) + "K";
   }
   else if (amount > 999999999 && amount <= 999999999999){
-    return tokenAmountToString(amount / 1000000, 0, 0, 9) + "M";
+    return tokenAmountToString(amount / 1000000, 0, 0, 3) + "M";
   }
   else {
-    return tokenAmountToString(amount / 1000000000, 0, 0, 9) + "B";
+    return tokenAmountToString(amount / 1000000000, 0, 0, 3) + "B";
   }
 }
