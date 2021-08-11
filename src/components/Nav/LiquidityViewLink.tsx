@@ -18,7 +18,7 @@ export const LiquidityViewLink = () => {
           <div className="balance-container">
             <span>House Pool balance</span>
             <span className="balance">
-              {tokenAmountToString(htBalance+liveLiquidity, 6, 0)} USDT
+              {tokenAmountToString(htBalance, 6, 0)} USDT
             </span>
           </div>
           <div className="balance-container">
