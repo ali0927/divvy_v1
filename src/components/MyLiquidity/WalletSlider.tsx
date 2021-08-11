@@ -1,12 +1,12 @@
 import { Slider, Switch } from 'antd';
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 const initMarks = {
   0: { label: <small className="text-secondary">0%</small> },
   100: { label: <small className="text-secondary">100%</small> },
 }
 
-export const WalletSlider = (props: { onChange: any, label: string }) =>  {
+export const WalletSlider = (props: { onChange: any, label: string, value: number }) =>  {
   const [value, setValue] = useState(0)
 
   const marks = useMemo(() => ({
@@ -19,6 +19,9 @@ export const WalletSlider = (props: { onChange: any, label: string }) =>  {
     setValue(val)
     props.onChange(val)
   }
+  useEffect(() => {
+    setValue(parseFloat(props.value <= 100 ? props.value.toFixed(1): '100'))
+  }, [props.value])
 
   return (
     <div style={{position: "relative"}}>

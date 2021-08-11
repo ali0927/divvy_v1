@@ -105,6 +105,7 @@ export const DepositLiquidity = () => {
         <WalletSlider 
           onChange={(val: number) => setUsdtAmount(tokenAmountToString(userUSDT * val / 100)) }
           label="Percentage to deposit"
+          value={Number(usdtAmount) * LAMPORTS_PER_USDT / userUSDT  * 100}
         />
 
         <Button onClick={onFinish}>
