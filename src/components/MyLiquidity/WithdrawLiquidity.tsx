@@ -9,6 +9,7 @@ import {
 } from "../../contexts/sol/connection";
 import { useWallet } from "../../contexts/sol/wallet";
 import { notify } from "../../utils/notifications";
+import { WalletSlider } from "./WalletSlider"
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { useAccountByMint } from "../../hooks";
@@ -93,9 +94,14 @@ export const WithdrawLiquidity = (props: {}) => {
       <Form.Item name="htAmount">
         <Input.Group compact>
           <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
-          <Button style={{ border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+          <Button style={{ border: "1px solid rgb(67, 67, 67)" }} onClick={e => setHtAmount(tokenAmountToString(userHT))}>MAX</Button>
         </Input.Group>
       </Form.Item>
+
+      <WalletSlider 
+        onChange={(val: any) => setHtAmount(tokenAmountToString(userHT * val / 100)) }
+        label="Percentage to withdraw"
+      />
 
       <Button onClick={onFinish}>
         Withdraw

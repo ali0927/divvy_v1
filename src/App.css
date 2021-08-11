@@ -489,6 +489,30 @@ body {
   border: 1px solid #fff;
   border-radius: 21.5px;
 }
+.ant-slider {
+  width: 80%;
+  height: 15px;
+  padding: 0;
+}
+.ant-slider-rail {
+  height: 100%;
+  border-radius: 50px;
+}
+.ant-slider-track {
+  height: 100%;
+  border-radius: 50px;
+  background-image: radial-gradient(circle at -25% 115%, var(--royal-purple), var(--win-green) 89%);
+}
+.ant-slider-handle {
+  height: 15px;
+  width: 15px;
+  margin-top: 0;
+  border: none;
+  background-color: #fff;
+}
+.ant-slider-step {
+  display: none;
+}
 
 .CircularProgressBar-path {
   transition: 0.5

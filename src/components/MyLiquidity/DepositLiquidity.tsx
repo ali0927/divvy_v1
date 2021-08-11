@@ -9,6 +9,7 @@ import { useWallet } from "../../contexts/sol/wallet";
 import { useAccountByMint } from "../../hooks";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
+import { WalletSlider } from "./WalletSlider"
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
 import { useContext, useState } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
@@ -82,6 +83,9 @@ export const DepositLiquidity = () => {
       signers,
     );
   };
+  const onSliderChange = (val: any) => {
+
+  }
   return (
     <div className="sidebar-section form-grey">
       <div>
@@ -96,9 +100,14 @@ export const DepositLiquidity = () => {
         <Form.Item name="usdtAmount">
           <Input.Group compact>
             <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => { setUsdtAmount(event.currentTarget.value) }} style={{ width: "75%" }} />
-            <Button style={{ border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+            <Button style={{ border: "1px solid rgb(67, 67, 67)" }} onClick={e => setUsdtAmount(tokenAmountToString(userUSDT))}>MAX</Button>
           </Input.Group>
         </Form.Item>
+
+        <WalletSlider 
+          onChange={(val: any) => setUsdtAmount(tokenAmountToString(userUSDT * val / 100)) }
+          label="Percentage to deposit"
+        />
 
         <Button onClick={onFinish}>
           Deposit
