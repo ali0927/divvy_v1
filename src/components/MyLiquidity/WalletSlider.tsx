@@ -15,7 +15,7 @@ export const WalletSlider = (props: { onChange: any, label: string }) =>  {
       label: <small>{value}%</small>
     }
   }), [value])
-  const onChangeValue = (val: any) => {
+  const onChangeValue = (val: number) => {
     setValue(val)
     props.onChange(val)
   }

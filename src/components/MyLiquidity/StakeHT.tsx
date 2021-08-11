@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { PublicKey } from "@solana/web3.js";
 import { Form, Input, Button } from "antd";
-import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, LAMPORTS_PER_USDT, tokenAmountToString, Transactions } from "../../constants";
+import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, tokenAmountToString, Transactions } from "../../constants";
 import {
   useConnection,
   useConnectionConfig,
@@ -100,7 +100,7 @@ export const StakeHT = () => {
       </Form.Item>
 
       <WalletSlider 
-        onChange={(val: any) => setHtAmount(tokenAmountToString(userHT * val / 100)) }
+        onChange={(val: number) => setHtAmount(tokenAmountToString(userHT * val / 100)) }
         label="Percentage to withdraw"
       />
 

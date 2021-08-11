@@ -83,9 +83,7 @@ export const DepositLiquidity = () => {
       signers,
     );
   };
-  const onSliderChange = (val: any) => {
-
-  }
+ 
   return (
     <div className="sidebar-section form-grey">
       <div>
@@ -105,7 +103,7 @@ export const DepositLiquidity = () => {
         </Form.Item>
 
         <WalletSlider 
-          onChange={(val: any) => setUsdtAmount(tokenAmountToString(userUSDT * val / 100)) }
+          onChange={(val: number) => setUsdtAmount(tokenAmountToString(userUSDT * val / 100)) }
           label="Percentage to deposit"
         />
 

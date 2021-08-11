@@ -99,7 +99,7 @@ export const WithdrawLiquidity = (props: {}) => {
       </Form.Item>
 
       <WalletSlider 
-        onChange={(val: any) => setHtAmount(tokenAmountToString(userHT * val / 100)) }
+        onChange={(val: number) => setHtAmount(tokenAmountToString(userHT * val / 100)) }
         label="Percentage to withdraw"
       />
 
