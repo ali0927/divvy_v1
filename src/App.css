@@ -716,3 +716,9 @@ h1 {
   color: gray;
   margin-bottom: -4px;
 }
+.error-box {
+  background-color: var(--alert-red);
+  padding: 1vw;
+  margin: 1vw 0;
+  text-align: center;
+}
