@@ -71,7 +71,7 @@ export const StakeHT = () => {
       odds_type: "-",
       amount: Number(htAmount)
     }];
-    await sendTransaction(
+    const [res_status, ] = await sendTransaction(
       connection,
       connectionConfig.env,
       wallet.wallet,
@@ -79,6 +79,7 @@ export const StakeHT = () => {
       metaData,
       signers
     );
+    if (res_status) setHtAmount('0')
   };
 
   return (

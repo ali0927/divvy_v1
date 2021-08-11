@@ -54,7 +54,6 @@ export const DepositLiquidity = () => {
       return;
     }
 
-
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyhouse")], IDS.HOUSE_POOL_PROGRAM_ID);
 
     const [ix, signers] = await depositLiquidityTransaction(
@@ -74,7 +73,7 @@ export const DepositLiquidity = () => {
       odds_type: "-",
       amount: Number(usdtAmount)
     }];
-    await sendTransaction(
+    const [res_status, ] = await sendTransaction(
       connection,
       connectionConfig.env,
       wallet.wallet!,
@@ -82,6 +81,7 @@ export const DepositLiquidity = () => {
       metaData,
       signers,
     );
+    if (res_status) setUsdtAmount('0')
   };
  
   return (
