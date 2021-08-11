@@ -3,7 +3,7 @@ import { Progress } from "antd";
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import { useState, useEffect, useContext } from "react";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
-import { HousePoolStateContext } from "../../contexts/sol/hpstate";
+import { BetStateContext } from "../../contexts/sol/betstate";
 
 class GradientSVG extends Component<{ startColor: string, endColor: string, rotation: number }, {}> {
   render() {
@@ -26,7 +26,7 @@ class GradientSVG extends Component<{ startColor: string, endColor: string, rota
 export const LiquidityAvailabilityBar = () => {
   const [width, setWindowWidth] = useState(0);
   const { htBalance } = useContext(HousePoolContext);
-  const { bettorBalance, liveLiquidity, lockedLiquidity } = useContext(HousePoolStateContext)
+  const { liveLiquidity, lockedLiquidity } = useContext(BetStateContext)
   const updateDimensions = () => {
     const width = window.innerWidth
     setWindowWidth(width / 4.5)
@@ -42,7 +42,7 @@ export const LiquidityAvailabilityBar = () => {
     <div style={{transform: "rotate(225deg)"}}>
       <GradientSVG startColor={"#7c01ff"} endColor={"#00d77d"} rotation={90} />
       <CircularProgressbarWithChildren
-        value={((htBalance - bettorBalance - liveLiquidity - lockedLiquidity) * 100) / (htBalance - bettorBalance)}
+        value={((htBalance - liveLiquidity - lockedLiquidity) * 100) / (htBalance)}
         circleRatio={0.75}
         strokeWidth={15}
         styles={{
@@ -50,7 +50,7 @@ export const LiquidityAvailabilityBar = () => {
           trail: { stroke: "#242424" }
         }}
       >
-        <video autoPlay={true} style={{transform: "rotate(-225deg)"}} loop={true} width={width/3} height={width/3} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />
+        <video autoPlay={true} style={{transform: "rotate(-225deg)"}} loop={true} width={width > 222.3 ? width/3 : width/1.5} height={width > 222.3 ? width/3 : width/1.5} src={"https://siasky.net/AABLoM1oiF4w42__V4_9CO1M1AhNGydb5oaYL0vgiRpFjQ"} />
       </CircularProgressbarWithChildren>
     </div>
   );

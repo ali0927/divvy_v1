@@ -1,4 +1,4 @@
-import { Bet } from '../../constants';
+import { americanToDecimal, Bet, LAMPORTS_PER_USDT } from '../../constants';
 export const PotentialWins = (props: { betSlip: Bet }) => {
     return (
         <div>
@@ -7,7 +7,7 @@ export const PotentialWins = (props: { betSlip: Bet }) => {
                     Original Stake
                 </p>
                 <h3>
-                    {props.betSlip.risk}
+                    {props.betSlip.risk / LAMPORTS_PER_USDT} USDT
                 </h3>
             </div>
             <div className="wins-right">
@@ -15,7 +15,7 @@ export const PotentialWins = (props: { betSlip: Bet }) => {
                     Potential Win
                 </p>
                 <h3>
-                    {props.betSlip.risk * props.betSlip.odds}
+                    {(props.betSlip.risk / LAMPORTS_PER_USDT) * americanToDecimal(props.betSlip.odds)} USDT
                 </h3>
             </div>
         </div>

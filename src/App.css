@@ -128,6 +128,13 @@ body {
   padding: 15px;
 }
 
+.carousel-text {
+  height: 200px;
+  width: 95%;
+  border-radius: 10px;
+  padding: 15px;
+}
+
 .App-link {
   color: var(--light-blue);
 }
@@ -529,6 +536,12 @@ body {
   }
   .mybets-scroll {
     display: "flex";
+  }
+}
+
+@media (max-width: 1000px) {
+  .liquidity-left, .liquidity-right {
+    text-align: center;
   }
 }
 

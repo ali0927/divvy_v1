@@ -3,27 +3,28 @@ import * as Accounts from "./accounts";
 import { getAccountInfoAndSubscribe, useConnection } from "./connection";
 import { AccountInfo, TokenAmount } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
-import { HPState, HPStateParser } from "../../models/sol/state/hpState";
-export const HousePoolStateContext = createContext({
+import { MintStateParser } from "../../models/sol/state/tokenState";
+export const HPTokenContext = createContext({
+    htSupply: 0
 });
 
-export const HousePoolStateProvider = (props: { children: any }) => {
+export const HPTokenProvider = (props: { children: any }) => {
     const connection = useConnection();
+    const [htSupply, setHTSupply] = useState(0);
 
     useEffect(() => {
         let subscriptionId = getAccountInfoAndSubscribe(
             connection,
-            IDS.HOUSE_POOL_STATE_ACCOUNT,
-            parseAccount
+            IDS.HT_MINT,
+            parseTokenMint
         );
 
-        async function parseAccount(acc: AccountInfo<Buffer> | null) {
+        async function parseTokenMint(acc: AccountInfo<Buffer> | null) {
             if (acc) {
-                const parsed = HPStateParser(IDS.HOUSE_POOL_STATE_ACCOUNT, acc);
-                console.log(parsed);
+                const parsed = MintStateParser(IDS.HT_MINT, acc);
+                setHTSupply(parsed.info.supply);
             } else {
-                // setHTBalance(0);
-                // setAccountData(undefined);
+                setHTSupply(0);
             }
         }
 
@@ -32,8 +33,8 @@ export const HousePoolStateProvider = (props: { children: any }) => {
         };
     }, [connection]);
     return (
-        <HousePoolStateContext.Provider value={{}}>
+        <HPTokenContext.Provider value={{ htSupply }}>
             {props.children}
-        </HousePoolStateContext.Provider>
+        </HPTokenContext.Provider>
     )
 }

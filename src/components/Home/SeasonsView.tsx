@@ -6,11 +6,13 @@ import { SportContext } from "../../contexts/sport";
 import { useContext } from "react"
 import { LABELS } from "../../constants";
 import { Loader } from "../Loader";
+import { LiveMarkets } from "./LiveMarkets";
 export const SeasonsView = () => {
     const { sport, changeSport } = useContext(SportContext)
     const { data, error, isLoading } = useGetSeasonsQuery(sport ? sport?.sportId : 0)
     return (
         <>
+            <LiveMarkets />
             <HomeCarousel />
             <SeasonHeader seasonName={sport?.sportName} />
             {error ? LABELS.SERVER_ERROR : null}

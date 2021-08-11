@@ -8,8 +8,13 @@ import { Tooltip } from "antd";
 import { LABELS } from "../../constants/labels"
 import { InfoCircleOutlined } from "@ant-design/icons"
 import { tokenAmountToString } from "../../constants";
+import { HPTokenContext } from "../../contexts/sol/hptoken";
+import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 export const MyLiquidity = (props: {}) => {
   const { userHT } = useContext(UserHTContext);
+  const { htBalance } = useContext(HousePoolContext);
+  const { htSupply } = useContext(HPTokenContext);
+  console.log(htSupply)
   return (
     <div>
       <div className="sidebar-section">
@@ -23,13 +28,13 @@ export const MyLiquidity = (props: {}) => {
           </div>
           <div className="balance-container">
             <span>Balance in USDT</span>
-            <span className="balance">{tokenAmountToString(userHT)} USDT</span>
+            <span className="balance">{tokenAmountToString(userHT / (htSupply / htBalance))} USDT</span>
           </div>
           <div className="balance-container">
             <Tooltip title={LABELS.CONVERSION_RATIO}>
               <span style={{ display: 'flex' }}>Conversion Ratio <InfoCircleOutlined style={{ fontSize: 9, marginTop:3.4, marginLeft:2 }} /></span>
             </Tooltip>
-            <span className="balance">1.00</span>
+            <span className="balance">{htBalance / htSupply}</span>
           </div>
         </small>
       </div>

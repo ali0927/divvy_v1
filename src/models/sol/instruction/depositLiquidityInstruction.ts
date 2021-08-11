@@ -81,12 +81,12 @@ export const depositLiquidityInstruction = (
       { pubkey: IDS.HT_MINT, isSigner: false, isWritable: true },
       { pubkey: IDS.TOKEN_PROGRAM_ID, isSigner: false, isWritable: true },
       { pubkey: userHtTokenAccount, isSigner: false, isWritable: true },
-      { pubkey: IDS.DIVVY_PDA_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.HOUSE_POOL_PDA_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: userUsdtTokenAccount, isSigner: false, isWritable: true },
-      { pubkey: IDS.DIVVY_USDT_ACCOUNT, isSigner: false, isWritable: true },
-      { pubkey: IDS.DIVVY_STATE_ACCOUNT, isSigner: false, isWritable: true }
+      { pubkey: IDS.HOUSE_POOL_USDT_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.HOUSE_POOL_STATE_ACCOUNT, isSigner: false, isWritable: true }
     ],
-    programId: IDS.DIVVY_PROGRAM_ID,
+    programId: IDS.HOUSE_POOL_PROGRAM_ID,
     data: dataBuffer,
   });
   return instruction;

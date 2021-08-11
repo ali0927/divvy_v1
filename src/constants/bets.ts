@@ -126,7 +126,9 @@ export interface Bet {
     marketSide: MarketSide,
     betType: BetType,
     seasonName?: string,
-    sportName?: string
+    sportName?: string,
+    marketName?: string,
+    placedOn?: string
 }
 
 export interface BetsTable {

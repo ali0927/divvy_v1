@@ -18,14 +18,14 @@ export const HousePoolProvider = (props: { children: any }) => {
     useEffect(() => {
         let subscriptionId = getAccountInfoAndSubscribe(
             connection,
-            IDS.DIVVY_USDT_ACCOUNT,
+            IDS.HOUSE_POOL_USDT_ACCOUNT,
             parseAccount
         );
         
         async function parseAccount(acc: AccountInfo<Buffer> | null) {
             if (acc) {
-                const parsed = EscrowStateParser(IDS.DIVVY_USDT_ACCOUNT, acc);
-                const data = await connection.getTokenAccountBalance(IDS.DIVVY_USDT_ACCOUNT);
+                const parsed = EscrowStateParser(IDS.HOUSE_POOL_USDT_ACCOUNT, acc);
+                const data = await connection.getTokenAccountBalance(IDS.HOUSE_POOL_USDT_ACCOUNT);
                 
                 setHTBalance(parseInt(data.value.amount) || 0);
                 setAccountData(parsed);

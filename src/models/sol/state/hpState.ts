@@ -4,18 +4,18 @@ import { ParsedAccount } from "../../../contexts/sol/accounts";
 
 export const HP_STATE_LAYOUT = BufferLayout.struct([
   BufferLayout.u8('isInitialized'),
-  BufferLayout.nu64('lockedLiquidity'),
-  BufferLayout.nu64('liveLiquidity'),
-  BufferLayout.nu64('bettorBalance'),
-  BufferLayout.nu64('pendingBets'),
+  BufferLayout.blob(32, 'htMint'),
+  BufferLayout.blob(32, 'bettingUsdt'),
+  BufferLayout.blob(32, 'poolUsdt'),
+  BufferLayout.blob(1, 'frozenPool'),
 ]);
 
 export interface HPState {
   isInitialized: boolean;
-  lockedLiquidity: number;
-  liveLiquidity: number;
-  bettorBalance: number;
-  pendingBets: number;
+  htMint: String;
+  bettingUsdt: String;
+  poolUsdt: String;
+  frozenPool: boolean;
 }
 
 export const HPStateParser = (id: PublicKey, acc: AccountInfo<Buffer>): ParsedAccount<HPState> => {
@@ -25,11 +25,10 @@ export const HPStateParser = (id: PublicKey, acc: AccountInfo<Buffer>): ParsedAc
     account: { ...acc },
     info: {
       isInitialized: decoded.isInitialized,
-      lockedLiquidity: decoded.lockedLiquidity,
-      liveLiquidity: decoded.liveLiquidity,
-      bettorBalance: decoded.bettorBalance,
-      pendingBets: decoded.pendingBets,
-      ...decoded
+      htMint: new PublicKey(decoded.htMint).toString(),
+      bettingUsdt: new PublicKey(decoded.bettingUsdt).toString(),
+      poolUsdt: new PublicKey(decoded.poolUsdt).toString(),
+      frozenPool: decoded.frozenPool,
     }
   };
   return hpstate;

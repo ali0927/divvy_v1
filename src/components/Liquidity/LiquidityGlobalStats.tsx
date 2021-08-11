@@ -10,15 +10,15 @@ export const LiquidityGlobalStats = () => {
   const { htBalance } = useContext(HousePoolContext);
   return (
     <Row style={{ marginTop: 40, padding: 5 }}>
-      <Col span={15} md={7}>
+      <Col span={15} lg={7} md={24}>
         <LiquidityAvailability />
       </Col>
-      <Col style={{ textAlign: "center" }} span={23} md={10}>
+      <Col style={{ textAlign: "center" }} span={23} lg={10} md={24}>
         <LiquidityAvailabilityBar />
         <LiquidityPool />
       </Col>
       <div className="horizontal-outline" />
-      <Col span={24} md={7} style={{ marginTop: 4, }}>
+      <Col span={24} lg={7} md={24} style={{ marginTop: 4, }}>
         <LiquidityDistribution />
       </Col>
     </Row>
