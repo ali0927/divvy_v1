@@ -251,7 +251,8 @@ export const sendTransaction = async (
           odds: item.odds,
           odds_type: item.odds_type,
           amount: item.amount,
-          time: new Date().toUTCString()
+          time: new Date().toUTCString(),
+          txid,
         }).then((response) => {
           // do  nothing
         }).catch((error) => {

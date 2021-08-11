@@ -93,7 +93,6 @@ const BetsProvider = (props: { children: any }) => {
     if(!connected){
       connect();
     }
-    console.log(currentBets)
     if(currentBets.length > 0){
 
       // Chunk bets into 3s

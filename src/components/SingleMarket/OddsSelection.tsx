@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { Button, Col, Row } from "antd";
+import { SportContext } from "../../contexts/sport";
 import { Odds, BetType, Market, Bet, MarketSide, BetStatus } from "../../constants";
 import { BetsContext } from "../../contexts/bets";
 export const OddsSelection = (props: { market: Market, selection: string, odds: Odds, otherTeam: string, selectionTeam: string, marketSide: MarketSide }) => {
     const bets = useContext(BetsContext);
+    const { sport, changeSport } = useContext(SportContext)
 
     const setSlip = (betType: BetType, odds: number, oddsFeed: string, marketPubkey: string) => {
         if (containsBet(betType)) {
@@ -32,8 +34,10 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
                 otherTeam: props.otherTeam,
                 marketSide: props.marketSide,
                 betType: betType,
-                sportName: props.market.sportName,
+                sportName: sport?.sportName,
                 seasonName: props.market.seasonName,
+                marketName: props.market.teamA + " vs " + props.market.teamB,
+                placedOn: (new Date()).toString()
             }
             bets?.addBet(bet)
         }
