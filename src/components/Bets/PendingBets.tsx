@@ -9,7 +9,7 @@ export const PendingBets = () => {
     const bets = useContext(BetsContext);
 
     return (
-        <div style={{display: "flex", flexDirection: "column"}}>
+        <div className="form-grey">
             <Collapse accordion={true} style={{ display: "grid" }} ghost={true} expandIconPosition="right">
                 {bets?.bets.map((value: Bet) => {
                     if (value.status === BetStatus.Pending) {
