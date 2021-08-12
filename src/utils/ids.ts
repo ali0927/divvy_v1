@@ -25,18 +25,18 @@ export const PROGRAM_IDS = [
 
 // Bet Pool PubKeys
 export const BET_POOL_PROGRAM_ID = new PublicKey("2u9dGXkuj5iTm6B9MRn1Exx55uEYX1ZmM3xda5S3f1oY");
-export const BET_POOL_STATE_ACCOUNT = new PublicKey("9BqRuquccLHj2ei3JM5ALyKDkCgNzjXhf5dnwwxHTnEc");
+export const BET_POOL_STATE_ACCOUNT = new PublicKey("JzCpvHwhPfwLQXMnMGCppCR65qPianZTXS6qsMJ7QU8");
 export const BET_POOL_PDA_ACCOUNT = new PublicKey("PkimpSks8R9KLHsTAupcHyBgYDitaE2PXk697urr3xP");
-export const BET_POOL_USDT_ACCOUNT = new PublicKey("4ywpRYXFtNizjBZE4F4MjyAgWbZB6DgLun3J8nzQdW1p");
+export const BET_POOL_USDT_ACCOUNT = new PublicKey("Gr7WYuA5Rhz2DpKGrhG3EyMag2TDhYUewQ3Jo4FhCyAV");
 
 // House Pool PubKeys
 export const HOUSE_POOL_PROGRAM_ID = new PublicKey("FatTSDYddftPGBVCoV6Uu2aCiMg8B8ZxV3QuoxE2PK6U");
-export const HOUSE_POOL_STATE_ACCOUNT = new PublicKey("3LR6ApqzUKaiVmpZkeRtXrCxcRPW6yjix44W5TsVPbfb");
+export const HOUSE_POOL_STATE_ACCOUNT = new PublicKey("AgHRYGqiasziC1eWu8TL6x8F9u67wFfqtc67qW5qQeBs");
 export const HOUSE_POOL_PDA_ACCOUNT = new PublicKey("CrCJYSbgSFa6ZE3KviaTSnmGhhBw2t3auYro2N36irH5");
-export const HOUSE_POOL_USDT_ACCOUNT = new PublicKey("6XgxN12L9AuAn12bZp56c2Ca2XUokSw1GXv5ceSGX763");
+export const HOUSE_POOL_USDT_ACCOUNT = new PublicKey("HBUwgQUDk9GvdSDDw1x1doKX2Lw6wArmGeVYEq4WuAPS");
 
 //Other Pubkeys
-export const HT_MINT = new PublicKey("GhsGHEaKoVb2iX9GwsZYJYbBRDnDCzrRCQkWYsTqCPdy");
+export const HT_MINT = new PublicKey("Gy6mKs2AxRfZ6ij6QWHXAHM65F3Xaf4J1kofyN4GYj3c");
 export const USDT_MINT_MAINNET = new PublicKey("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
 export const USDT_MINT_DEVNET = new PublicKey("7cnY6yuFXzTLEsnXn4FkgvmXq4FyuUakQDQqHJkbQvYG");
 export const FAUCET_PROGRAM_ID = new PublicKey("4Y4PC5NEPE7Go6tUeEuk64PnVS9t2NXccgFS2nafy3U8");
