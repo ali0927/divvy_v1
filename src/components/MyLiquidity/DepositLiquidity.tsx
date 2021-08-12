@@ -9,8 +9,9 @@ import { useWallet } from "../../contexts/sol/wallet";
 import { useAccountByMint } from "../../hooks";
 import { notify } from "../../utils/notifications";
 import { ExplorerLink } from "../ExplorerLink";
+import { WalletSlider } from "./WalletSlider"
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserUSDTContext } from "../../contexts/sol/userusdt";
 import { LAMPORTS_PER_USDT, tokenAmountToString, Transactions } from "../../constants";
 import * as IDS from "../../utils/ids"
@@ -23,6 +24,10 @@ export const DepositLiquidity = () => {
   const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   const { userUSDT } = useContext(UserUSDTContext)
   let [usdtAmount, setUsdtAmount] = useState("");
+
+  useEffect(() => {
+    if(userUSDT === 0) setUsdtAmount("")
+  }, [userUSDT])
 
   const onFinish = async () => {
     if (wallet?.wallet?.publicKey == null) {
@@ -53,7 +58,6 @@ export const DepositLiquidity = () => {
       return;
     }
 
-
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyhouse")], IDS.HOUSE_POOL_PROGRAM_ID);
 
     const [ix, signers] = await depositLiquidityTransaction(
@@ -73,7 +77,7 @@ export const DepositLiquidity = () => {
       odds_type: "-",
       amount: Number(usdtAmount)
     }];
-    await sendTransaction(
+    const [res_status, ] = await sendTransaction(
       connection,
       connectionConfig.env,
       wallet.wallet!,
@@ -81,7 +85,9 @@ export const DepositLiquidity = () => {
       metaData,
       signers,
     );
+    if (res_status) setUsdtAmount('0')
   };
+ 
   return (
     <div className="sidebar-section form-grey">
       <div>
@@ -93,14 +99,20 @@ export const DepositLiquidity = () => {
           <p className="balance">{tokenAmountToString(userUSDT)} USDT</p>
         </div>
 
-        <Form.Item name="usdtAmount">
+        <Form.Item name="usdtAmount" style={{marginBottom: '1em'}}>
           <Input.Group compact>
-            <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => { setUsdtAmount(event.currentTarget.value) }} style={{ width: "75%" }} />
-            <Button style={{ border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+            <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
+            <Button style={{ border: "1px solid rgb(67, 67, 67)",  width: "25%" }} onClick={e => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT).toString())} disabled={userUSDT === 0}>MAX</Button>
           </Input.Group>
         </Form.Item>
 
-        <Button onClick={onFinish}>
+        <WalletSlider         
+          onChange={(val: number) => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT * val / 100).toString()) }
+          value={usdtAmount === "" ? 0: Number(usdtAmount) * LAMPORTS_PER_USDT / userUSDT * 100}
+          disabled={userUSDT === 0}
+        />
+
+        <Button onClick={onFinish} disabled={Number(usdtAmount) === 0}>
           Deposit
         </Button>
       </div>

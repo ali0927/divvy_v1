@@ -9,8 +9,9 @@ import {
 } from "../../contexts/sol/connection";
 import { useWallet } from "../../contexts/sol/wallet";
 import { notify } from "../../utils/notifications";
+import { WalletSlider } from "./WalletSlider"
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useAccountByMint } from "../../hooks";
 import * as IDS from "../../utils/ids";
 import { UserHTContext } from "../../contexts/sol/userht";
@@ -23,6 +24,11 @@ export const WithdrawLiquidity = (props: {}) => {
   const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   let [htAmount, setHtAmount] = useState("");
   const { userHT } = useContext(UserHTContext);
+  
+  useEffect(() => {
+   if(userHT === 0) setHtAmount("")
+  }, [userHT])
+  
   const onFinish = async (values: any) => {
     if (wallet.wallet?.publicKey == null) {
       notify({
@@ -70,7 +76,7 @@ export const WithdrawLiquidity = (props: {}) => {
       odds_type: "-",
       amount: Number(htAmount)
     }];
-    await sendTransaction(
+    const [res_status, ] = await sendTransaction(
       connection,
       connectionConfig.env,
       wallet.wallet,
@@ -78,6 +84,7 @@ export const WithdrawLiquidity = (props: {}) => {
       metaData,
       signers
     );
+    if (res_status) setHtAmount('0')
   };
 
   return (
@@ -90,14 +97,20 @@ export const WithdrawLiquidity = (props: {}) => {
         </p>
         <p className="balance">{tokenAmountToString(userHT)} HT</p>
       </div>
-      <Form.Item name="htAmount">
+      <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>
-          <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
-          <Button style={{ border: "1px solid rgb(67, 67, 67)" }}>MAX</Button>
+          <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{width: "75%"}} />
+          <Button style={{border: "1px solid rgb(67, 67, 67)",  width: "25%"}} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toString())} disabled={userHT === 0}>MAX</Button>
         </Input.Group>
       </Form.Item>
 
-      <Button onClick={onFinish}>
+      <WalletSlider 
+        onChange={(val: number) => setHtAmount((userHT / LAMPORTS_PER_HT * val / 100).toString()) }
+        value={htAmount === "" ? 0: Number(htAmount) * LAMPORTS_PER_HT / userHT * 100}
+        disabled={userHT === 0}
+      />
+
+      <Button onClick={onFinish} disabled={Number(htAmount) === 0}>
         Withdraw
       </Button>
     </div>

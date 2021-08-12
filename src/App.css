@@ -160,6 +160,7 @@ body {
   -webkit-box-align: center;
   align-items: center;
   justify-self: flex-end;
+  justify-content: space-between;
 }
 
 .wallet-wrapper {
@@ -374,9 +375,9 @@ body {
 
 .bets-icon {
   width: 10%;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
   height: 55px;
-  padding: 14px 0 17px;
   border: solid 1px var(--shade-black);
   background-color: var(--off-black);
   cursor: pointer;
@@ -487,6 +488,31 @@ body {
   color: #fff;
   border: 1px solid #fff;
   border-radius: 21.5px;
+}
+.ant-slider {
+  width: 100%;
+  height: 15px;
+  margin-left: 0;
+  padding: 0;
+}
+.ant-slider-rail {
+  height: 100%;
+  border-radius: 50px;
+}
+.ant-slider-track {
+  height: 100%;
+  border-radius: 50px;
+  background-image: radial-gradient(circle at -25% 115%, var(--royal-purple), var(--win-green) 89%);
+}
+.ant-slider-handle {
+  height: 15px;
+  width: 15px;
+  margin-top: 0;
+  border: none;
+  background-color: #fff;
+}
+.ant-slider-step {
+  display: none;
 }
 
 .CircularProgressBar-path {
@@ -690,4 +716,10 @@ h1 {
 .text-secondary-wins {
   color: gray;
   margin-bottom: -4px;
+}
+.error-box {
+  background-color: var(--alert-red);
+  padding: 1vw;
+  margin: 1vw 0;
+  text-align: center;
 }
