@@ -1,7 +1,7 @@
 import { Bet, BetType } from '../../constants';
 export const ConfirmedOdds = (props: { betType: BetType, bet: Bet }) => {
     return (
-        <div style={{ width: "17em" }}>
+        <div>
             <div className="wins-left">
                 <h4>
                     {props.betType}

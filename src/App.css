@@ -150,7 +150,7 @@ body {
   justify-content: flex-end;
   flex-direction: column;
   max-height: 100vh;
-  overflow: auto;
+  overflow: hidden;
   min-width: 20em;
 }
 
@@ -423,16 +423,6 @@ body {
   padding: 1em;
 }
 
-.sidebar-section-bets-active {
-  outline: 1px solid var(--shade-black);
-  background-color: var(--dark-gray);
-}
-
-.sidebar-section-bets {
-  outline: 1px solid var(--shade-black);
-  background-color: var(--dark-gray);
-}
-
 .switch-tabs {
   min-height: 43px;
   border: solid 1px gray;
@@ -532,23 +522,8 @@ body {
   line-height: 24px;
 }
 
-@media (min-width: 768px) {
-  .sidebar-section-bets-active {
-    width: 20em;
-    position: fixed;
-    bottom: 0;
-    right: 31px;
-    height: 80vh;
-  }
-  .sidebar-section-bets {
-    width: 20em;
-    position: fixed;
-    bottom: 0;
-    right: 31px;
-    height: 10vh;
-  }
+@media (min-width: 768px) {  
   .sidebar-section-bets-button {
-    width: 20em;
     height: 16vh;
     bottom: 0;
     position: fixed;

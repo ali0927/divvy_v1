@@ -50,13 +50,13 @@ const BetsView = () => {
             </LeftSideBar>
           </Col>
           {!isMobileMenuVisible && !isBetSlipsVisible &&
-            <Col span={24} xs={24} sm={24} md={19}>
+            <Col span={14} xs={24} sm={24} md={14}>
               <header className="root-content">
                 <SeasonsView />
               </header>
             </Col>
           }
-          <Col span={24} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={24}>
+          <Col span={5} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={5}>
             <RightSideBar>
               <BetSlips />
             </RightSideBar>

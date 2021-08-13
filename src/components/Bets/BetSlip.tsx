@@ -38,51 +38,52 @@ export const BetSlip = () => {
   const solTxnCount = Math.ceil(betsCount / 3);
 
   return (
-    <div className="form-grey" >
-      <div style={{ height: "75vh", overflowX: "hidden", overflowY: "auto" }}>
+    <div className="form-grey" style={{position:'absolute', top:'70px', bottom:0, left:0, right:0, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+      <div style={{ overflow: 'auto'}}>
         {bets?.bets.map((value: Bet) => {
           return value.status === BetStatus.Current
             ? <MyBet bet={value} />
             : undefined;
         })}
-        {betsCount !== 0 ? <div>
-          {
-            showError &&
-            <div className="error-box">
-              Maximum bet amount exceeded.<br/>
-              Please enter a value under {tokenAmountToString(userUSDT)} USDT
-            </div>
-          }
-          <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
-            <p>
-              Total Wager
-            </p>
-            <p>
-              {tokenAmountToString(totalRisk)} USDT
-            </p>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20, paddingBottom: 60 }}>
-            <p>
-              Total Payout
-            </p>
-            <p>
-              {tokenAmountToString(totalPayout)} USDT
-            </p>
-          </div>
-          <Button 
-            className="ant-btn-active"
-            style={{ width: "100%", height: 40, position: "absolute", bottom: 0 }}
-            type="primary"
-            onClick={() => bets?.placeBetSlip()}
-            disabled={submitDisabled}
-          >
-            <LinkLabel style={{ margin:"auto" }}>
-              Place {betsCount} Single bets {chain.chain === ChainType.Sol && solTxnCount > 1 ? ` in ${solTxnCount} transactions.` : ""}
-            </LinkLabel>
-          </Button>
-        </div> : <></>
-        }
       </div>
+      {betsCount !== 0 ? 
+      <div style={{ padding: '0.5em 1em' }}>
+        {
+          showError &&
+          <div className="error-box">
+            Maximum bet amount exceeded.<br/>
+            Please enter a value under {tokenAmountToString(userUSDT)} USDT
+          </div>
+        }
+        <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
+          <p>
+            Total Wager
+          </p>
+          <p>
+            {tokenAmountToString(totalRisk)} USDT
+          </p>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
+          <p>
+            Total Payout
+          </p>
+          <p>
+            {tokenAmountToString(totalPayout)} USDT
+          </p>
+        </div>
+        <Button 
+          className="ant-btn-active"
+          style={{ width: '100%', height: 40, overflow: 'hidden' }}
+          type="primary"
+          onClick={() => bets?.placeBetSlip()}
+          disabled={submitDisabled}
+        >
+          <LinkLabel style={{ margin:"auto" }}>
+            <span style={{ width: '90%', overflow: 'hidden', textAlign: 'left' }}>Place {betsCount} Single bets {chain.chain === ChainType.Sol && solTxnCount > 1 ? ` in ${solTxnCount} transactions.` : ""}</span>
+          </LinkLabel>
+        </Button>
+      </div> : <></>
+      }
     </div>
   );
 };

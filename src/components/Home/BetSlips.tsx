@@ -1,13 +1,12 @@
 import { useContext, useState } from "react";
-import { Bet, BetStatus, BetType } from "../../constants";
+import { Bet, BetStatus } from "../../constants";
 import { BetSlip } from "../Bets/BetSlip";
 import { PendingBets } from "../Bets/PendingBets";
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
 import { BetsContext } from "../../contexts/bets";
+
 export const BetSlips = () => {
   const [active, setActive] = useState("slips")
-  const [isCollapsed, setIsCollapsed] = useState(true)
   const bets = useContext(BetsContext);
   var slips = 0
   var pending = 0
@@ -20,8 +19,8 @@ export const BetSlips = () => {
     }
   })
   return (
-    <div className={isCollapsed ? "sidebar-section-bets" : "sidebar-section-bets-active"}>
-      <div style={{ display: "flex" }}>
+    <div className="sidebar-section" style={{ display: "flex", flexDirection: 'column', height: '100vh', position: 'relative' }}>
+      <div style={{ display: "flex", position: 'absolute', left: '1em', right: '1em' }}>
         <div onClick={() => setActive('slips')} className={active === "slips" ? "bets-active bets-left" : "bets-left"}>
           <Badge style={{ backgroundColor: "#7c01ff" }} size="default" count={slips}>
             <h3>Bet Slip</h3>
@@ -30,18 +29,15 @@ export const BetSlips = () => {
         <div onClick={() => setActive('pending')} className={active === "pending" ? "bets-active bets-right" : "bets-right"}>
           <h3>Pending ({pending})</h3>
         </div>
-        <div className="bets-icon">
-          {isCollapsed ? <UpOutlined onClick={() => setIsCollapsed(!isCollapsed)} /> : <DownOutlined onClick={() => setIsCollapsed(!isCollapsed)} />}
-        </div>
       </div>
-      {!isCollapsed &&
-        <div className="mybets-scroll">
-          {active === "slips" ? <BetSlip/> : <PendingBets/>}
-        </div>
-      }
+
+      <div className="mybets-scroll">
+        {active === "slips" ? <BetSlip/> : <PendingBets/>}
+      </div>
       <div className="mybets-scroll-mobile">
         {active === "slips" ? <BetSlip/> : <PendingBets/>}
       </div>
+    
     </div>
   );
 };
