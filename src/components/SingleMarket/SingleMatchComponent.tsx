@@ -44,10 +44,17 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                         </Col>
                     </Row>
                 </Col>
-                <Col span={0} md={2}>
-                </Col>
-                <Col span={24} md={22}>
-                    <p className="text-secondary" style={{ marginTop: -4, marginBottom: -5, fontSize: "0.7em", marginLeft:"-1.4%" }}>VS</p>
+                <Col span={24}>
+                  <Row>
+                    <Col span={4}>
+                      <Row>
+                        <Col span={12} xs={0} sm={0} md={10}></Col>
+                        <Col span={12} xs={24} sm={24} md={14}>
+                          <p className="text-secondary" style={{ marginTop: -4, marginBottom: -5, fontSize: "0.7em"}}>VS</p>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
                 </Col>
                 <Col span={24}>
                     <Row>
