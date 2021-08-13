@@ -211,30 +211,62 @@ body {
 }
 
 .team-logo {
-  /* border-radius: 10000px; */
-  width: 70px;
-  height: 70px;
-  margin-top: -23px;
+  position: relative;
+  width: 100%; /* The size you want */
 }
-
-.odds {
+.team-logo:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%; /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
+}
+.team-logo img{
+  /* border-radius: 10000px; */
+  position: absolute; /* Take your picture out of the flow */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; /* Make the picture taking the size of it's parent */
+  width: 100%; /* This if for the object-fit */
+  height: 100%; /* This if for the object-fit */
+  object-fit: cover; /* Equivalent of the background-size: cover; of a background-image */
+  object-position: center;
+}
+.odd-container {
   border-radius: 22.5px;
-  height: 36px;
   width: 100%;
-  padding-top: 9px;
   font-size: 15px;
-  font-size: 0.7em;
+  text-align: center;
+  background-color: var(--shade-black);
+  display: flex;
+  align-items: center;
+  margin: 0.5vw 0;
+}
+.odds {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   cursor: pointer;
-  background-color: var(--shade-black);
+  padding: 3px 5px;
 }
-
-.odds:hover {
+.odds-first {
+  width: 110%;
+}
+.odds-first:hover {
   background-color: var(--gray);
+  border-radius: 22.5px;
+  margin-right: -10px;
+  z-index: 2;
 }
 
 .odds-active {
-  background-image: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
+  background-image: radial-gradient(circle at -25% 115%, var(--royal-purple), var(--win-green) 89%);
+  border-radius: 22.5px;
+  background-color: none;
+  width: 110%
+}
+.odds-active .text-secondary {
+  color: #fff;
 }
 
 .odds-type {
@@ -246,6 +278,17 @@ body {
   justify-content: space-around;
 }
 
+@media (min-width: 768px) { 
+  .bet-time-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    text-align: center; 
+  }
+}
 .liquidity-left {
   height: 300px;
   padding: 0;
