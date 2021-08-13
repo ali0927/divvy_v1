@@ -2,25 +2,29 @@ import { Col, Row } from 'antd';
 export const OddsType = () => {
     return (
         <Row>
-            <Col span={5} md={4}>
-            </Col>
-            <Col className="odds-type" span={5} md={4}>
-                <div style={{ textAlign: "center", marginLeft: "6%" }}>
+          <Col span={6} md={6}>
+          </Col>
+          <Col span={18} md={14}>
+            <Row>
+              <Col className="odds-type" span={8} md={10}>
+                <div style={{ textAlign: "center" }}>
                     Win
                 </div>
-            </Col>
-            <Col className="odds-type" span={7} md={2}>
-                <div style={{ textAlign: "center", marginLeft: "11%" }}>
-                    Spread
-                </div>
-            </Col>
-            <Col className="odds-type" span={6} md={4}>
-                <div style={{ textAlign: "center", marginLeft: "8%" }}>
-                    Total
-                </div>
-            </Col>
-            <Col span={1} md={4}>
-            </Col>
-        </Row >
+              </Col>
+              <Col className="odds-type" span={8} md={7}>
+                  <div style={{ textAlign: "center" }}>
+                      Spread
+                  </div>
+              </Col>
+              <Col className="odds-type" span={8} md={7}>
+                  <div style={{ textAlign: "center" }}>
+                      Total
+                  </div>
+              </Col>
+            </Row>
+          </Col>
+          <Col span={0} md={4}>
+          </Col>
+        </Row>
     );
 };
