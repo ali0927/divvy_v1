@@ -14,6 +14,7 @@ import { PublicKey } from "@solana/web3.js";
 import { MONEY_LINE_BET_LAYOUT } from "../models/sol/state/moneyLineBet";
 import { MARKET_STATE_ACCOUNT_DATA_LAYOUT } from "../models/sol/state/marketState";
 import { HPStateParser, HP_STATE_LAYOUT } from "../models/sol/state/hpState";
+import { ConnectLink } from "../components/Nav/ConnectLink";
 
 export const FaucetView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -67,6 +68,7 @@ export const FaucetView = () => {
                 {!isMobileMenuVisible && !isBetSlipsVisible &&
                     <Col span={24} xs={24} sm={24} md={19}>
                         <header className="root-content">
+                            <ConnectLink />
                             {connected ? "" : "Please connect your wallet"}
                             <br />
                             <br />

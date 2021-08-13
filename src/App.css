@@ -702,3 +702,9 @@ h1 {
   background: rgba(0, 0, 0, 0) !important; 
   border: none !important;
 }
+.wallet-connect {
+  margin: 1em;
+}
+.wallet {
+  justify-content: flex-end;
+}

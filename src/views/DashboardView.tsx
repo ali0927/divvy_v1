@@ -12,6 +12,7 @@ import { HeaderTypes } from "../constants/HeaderTypes";
 import { BetsContext } from "../contexts/bets";
 import { useWallet } from "../contexts/sol/wallet";
 import { useGetBetsQuery } from "../store/getBets";
+import { ConnectLink } from "../components/Nav/ConnectLink";
 
 export const DashboardView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -51,6 +52,7 @@ export const DashboardView = () => {
                 {!isMobileMenuVisible && !isBetSlipsVisible &&
                     <Col span={24} xs={24} sm={24} md={19}>
                         <div style={{margin: "40px 8vw"}}>
+                            <ConnectLink />
                             <header className="root-content">
                                 {isLoading ? <Loader /> : null}
                             </header>

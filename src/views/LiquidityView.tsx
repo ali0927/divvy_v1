@@ -14,6 +14,7 @@ import { HeaderTypes } from "../constants/HeaderTypes"
 import { useGetPoolQuery } from "../store/getPool";
 import { MS_IN_DAY } from "../constants";
 import { useGetTransactionsQuery } from "../store/getTransactions";
+import { ConnectLink } from "../components/Nav/ConnectLink";
 
 const currTime = (new Date()).getTime(); 
 const LiquidityView = () => {
@@ -36,6 +37,7 @@ const LiquidityView = () => {
         {!isMobileMenuVisible && !isBetSlipsVisible &&
           <Col span={14} xs={24} sm={24} md={14}>
             <header className="root-content">
+              <ConnectLink />
               <GoBack />
               <LiquidityGlobalStats />
               <LiquidityGlance data={data} setInterval={setInterval} transactions={transData} />

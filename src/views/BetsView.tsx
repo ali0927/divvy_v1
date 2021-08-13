@@ -12,6 +12,8 @@ import { SeasonsView } from "../components/Home/SeasonsView";
 import { useWallet } from "../contexts/sol/wallet";
 import { useGetBetsQuery } from "../store/getBets";
 import { BetsContext } from "../contexts/bets";
+import { ConnectLink } from "../components/Nav/ConnectLink";
+
 const BetsView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
@@ -51,7 +53,9 @@ const BetsView = () => {
           </Col>
           {!isMobileMenuVisible && !isBetSlipsVisible &&
             <Col span={14} xs={24} sm={24} md={14}>
+               
               <header className="root-content">
+                <ConnectLink />
                 <SeasonsView />
               </header>
             </Col>
