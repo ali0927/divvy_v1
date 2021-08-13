@@ -85,7 +85,7 @@ export const BetSlip = () => {
           disabled={!submitEnabled}
         >
           <LinkLabel style={{ margin:"auto" }}>
-            <span style={{ width: '90%', overflow: 'hidden', textAlign: 'left' }}>Place {betsCount} Single bets {chain.chain === ChainType.Sol && solTxnCount > 1 ? ` in ${solTxnCount} transactions.` : ""}</span>
+            <span style={{ width: '90%', overflow: 'hidden', textAlign: 'left' }}>Place {betsCount} Single bets {chain.chain === ChainType.Sol && solTxnCount > 1 ? ` in ${solTxnCount} txns.` : ""}</span>
           </LinkLabel>
         </Button>
       </div> : <></>
