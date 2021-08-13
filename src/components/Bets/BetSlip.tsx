@@ -13,14 +13,21 @@ export const BetSlip = () => {
   const { userUSDT } = useContext(UserUSDTContext)
   const bets = useContext(BetsContext)
   const chain = useContext(ChainSelectContext);
-  const [submitDisabled, setSubmitDisabled] = useState(false)
+  const [submitEnabled, setSubmitEnabled] = useState(false)
   const [showError, setShowError] = useState(false)
 
   useEffect(() => {
-    if(totalRisk === 0 || totalRisk > userUSDT) setSubmitDisabled(true)
-    else setSubmitDisabled(false)
+    setSubmitEnabled(true)
+    bets?.bets.forEach((bet: Bet) => {
+      if (bet.status === BetStatus.Current && bet.risk <= 0) {
+        setSubmitEnabled(false)
+      }
+    })
     
-    if(totalRisk > userUSDT) setShowError(true)
+    if(totalRisk > userUSDT) {
+      setShowError(true)
+      setSubmitEnabled(false)
+    }
     else setShowError(false)
   }, [userUSDT, bets])
 
@@ -51,8 +58,7 @@ export const BetSlip = () => {
         {
           showError &&
           <div className="error-box">
-            Maximum bet amount exceeded.<br/>
-            Please enter a value under {tokenAmountToString(userUSDT)} USDT
+            Wallet balance exceeded.           
           </div>
         }
         <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
@@ -72,11 +78,11 @@ export const BetSlip = () => {
           </p>
         </div>
         <Button 
-          className="ant-btn-active"
-          style={{ width: '100%', height: 40, overflow: 'hidden' }}
+          className="ant-btn-active bet-submit"
+          style={{ width: '100%', height: 40}}
           type="primary"
           onClick={() => bets?.placeBetSlip()}
-          disabled={submitDisabled}
+          disabled={!submitEnabled}
         >
           <LinkLabel style={{ margin:"auto" }}>
             <span style={{ width: '90%', overflow: 'hidden', textAlign: 'left' }}>Place {betsCount} Single bets {chain.chain === ChainType.Sol && solTxnCount > 1 ? ` in ${solTxnCount} transactions.` : ""}</span>

@@ -698,3 +698,7 @@ h1 {
   margin: 1vw 0;
   text-align: center;
 }
+.bet-submit[disabled] {
+  background: rgba(0, 0, 0, 0) !important; 
+  border: none !important;
+}
