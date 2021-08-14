@@ -46,7 +46,7 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
                     <div className="heading-align-container">
                         <div className="header-align" style={{flexDirection: 'column'}}>
                             <span className="pool-header">At a glance</span>
-                            <Select defaultValue="24 hours" onSelect={handleChange} suffixIcon={<DownOutlined style={{marginTop: 0, color: "#fff"}} className="direction-icon" />}>
+                            <Select defaultValue="24 hours" onSelect={handleChange} className="glance-select" suffixIcon={<DownOutlined style={{marginTop: 0, color: "#fff"}} className="direction-icon" />}>
                                 <Option value="24 hours">24 hours</Option>
                                 <Option value="1 week">1 week</Option>
                                 <Option value="1 month">1 month</Option>

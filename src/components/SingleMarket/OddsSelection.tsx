@@ -48,23 +48,23 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
     }
 
     return (
-      <Row className="odd-container">
-        <Col span={8}             
+      <Row>
+        <Col span={8} style={{padding: '0.5vw'}}        
             onClick={() => setSlip(BetType.moneyline, props.odds.moneyline, props.odds.moneylineFeedPubkey, props.market.moneylineMarketPubkey)}>
-          <div className={containsBet(BetType.moneyline) ? "odds odds-first odds-active" : "odds odds-first"}>
+          <div className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"}>
             <label className="text-secondary" style={{fontSize: '0.8em'}}>Money Line</label>
             <b style={{fontSize: '1em'}}>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline}`}</b>
           </div>
         </Col>
         {/* TODO: add after we enable spreads: onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)} */}
-        <Col span={8} style={{borderLeft:'1px solid rgba(255, 255, 255, 0.12)', borderRight:'1px solid rgba(255, 255, 255, 0.12)'}}>
+        <Col span={8} style={{padding: '0.5vw'}} >
           <div className={containsBet(BetType.spread) ? "odds odds-active" : "odds disabled"}>
             <label className="text-secondary" style={{fontSize: '0.8em'}}>Spread</label>
             <b style={{fontSize: '1em'}}>{`(${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints)}) ${props.odds.spread >= 0 ? "+" : ""}${String(props.odds.spread)}`}</b>
           </div>
         </Col>
         {/* TODO: add after we enable totals: onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.totalMarketPubkey)} */}
-        <Col span={8}>
+        <Col span={8} style={{padding: '0.5vw'}} >
           <div className={containsBet(BetType.total) ? "odds odds-active" : "odds disabled"}>
             <label className="text-secondary" style={{fontSize: '0.8em'}}>Total</label>
             <b style={{fontSize: '1em'}}>{`(${props.odds.totalPoints >= 0 ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>

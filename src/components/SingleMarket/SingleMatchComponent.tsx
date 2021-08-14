@@ -22,7 +22,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
               {getDate(props.market.commenceTime)} {getTime(props.market.commenceTime)} {getShortTimezone()}
             </div>
           </Col>
-          <Col span={8} md={10} style={{display:'flex', flexDirection:'column', justifyContent:'space-around'}}>
+          <Col span={6} md={8} style={{display:'flex', flexDirection:'column', justifyContent:'space-around'}}>
             <TeamDetails name={props.market.teamA} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamA + ".svg"} />
             <Row>
               <Col span={0} md={4}></Col>
@@ -34,7 +34,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
             </Row>
             <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamB + ".svg"} />
           </Col>
-          <Col span={16} md={10}>
+          <Col span={18} md={12}>
             <div style={{display:'flex', flexDirection:'column', justifyContent:'space-around', height:'100%'}}>
               <OddsSelection marketSide={MarketSide.teamA} market={props.market} selectionTeam={props.market.teamA} otherTeam={props.market.teamB} selection={"teamA"} odds={{
                 moneyline: props.market.teamAOddsMoneyline,
