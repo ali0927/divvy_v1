@@ -38,7 +38,7 @@ const LiquidityView = () => {
           <Col span={14} xs={24} sm={24} md={14}>
             <header className="root-content">
               <ConnectLink />
-              <GoBack path={`${BETS_VIEW_PATH}`} label="Go Betting"/>
+              <GoBack path={`${BETS_VIEW_PATH}`} label="Back to Betting"/>
               <LiquidityGlobalStats />
               <LiquidityGlance data={data} setInterval={setInterval} transactions={transData} />
               <LiquidityPoolPerformance data={data} />

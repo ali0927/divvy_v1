@@ -65,7 +65,7 @@ export const BetSlip = () => {
           <p>
             Total Wager
           </p>
-          <p>
+          <p style={{overflowWrap: 'anywhere', marginLeft: '0.5vw'}}>
             {tokenAmountToString(totalRisk)} USDT
           </p>
         </div>
@@ -73,7 +73,7 @@ export const BetSlip = () => {
           <p>
             Total Payout
           </p>
-          <p>
+          <p style={{overflowWrap: 'anywhere', marginLeft: '0.5vw'}}>
             {tokenAmountToString(totalPayout)} USDT
           </p>
         </div>

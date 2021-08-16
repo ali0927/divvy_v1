@@ -147,11 +147,10 @@ body {
 }
 
 .RightSideBar {
-  justify-content: flex-end;
+  justify-content: flex-start;
   flex-direction: column;
   max-height: 100vh;
-  overflow: hidden;
-  min-width: 20em;
+  width: 100%;
 }
 
 .wallet {
@@ -417,7 +416,6 @@ body {
 }
 
 .secondary-team {
-  width: 179px;
   height: 12px;
   margin: 0 3px 0 0;
   font-size: 12px;
@@ -430,7 +428,6 @@ body {
 }
 
 .primary-team {
-  width: 213px;
   height: 24px;
   margin: 1px 27px 7px 0;
   font-size: 16px;
@@ -512,7 +509,7 @@ body {
 }
 
 .glance-select .ant-select-selector {
-  border-radius: 0 !important;
+  border-radius: 2px !important;
 }
 
 .ant-slider {

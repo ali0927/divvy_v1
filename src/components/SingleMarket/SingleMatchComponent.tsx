@@ -28,7 +28,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
               <Col span={0} md={4}></Col>
               <Col span={24} md={20}>
                 <div style={{position: 'relative', marginLeft: '0.5vw'}}>
-                  <label className="text-secondary" style={{fontSize:"0.8em", position:'absolute', transform:'translate(0,-50%)'}}>Versus</label>
+                  <label className="text-secondary" style={{fontSize:"0.8em", position:'absolute', transform:'translate(0,-50%)'}}>VS</label>
                 </div>
               </Col>
             </Row>

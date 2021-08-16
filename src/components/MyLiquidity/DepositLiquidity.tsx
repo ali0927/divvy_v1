@@ -101,8 +101,8 @@ export const DepositLiquidity = () => {
 
         <Form.Item name="usdtAmount" style={{marginBottom: '1em'}}>
           <Input.Group compact>
-            <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
-            <Button style={{ border: "1px solid rgb(67, 67, 67)",  width: "25%" }} onClick={e => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT).toString())} disabled={userUSDT === 0}>MAX</Button>
+            <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{width: "70%"}} />
+            <Button style={{border:"1px solid rgb(67, 67, 67)",  width:"30%", padding:0}} onClick={e => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT).toString())} disabled={userUSDT === 0}>MAX</Button>
           </Input.Group>
         </Form.Item>
 
