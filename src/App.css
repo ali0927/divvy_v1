@@ -631,6 +631,17 @@ body {
   padding: 7px 17px 8px;
 }
 
+.sports-list-item {
+  width: 5vw;
+  margin: 0 0.6vw;
+}
+.sports-list-item .search-button {
+  color: gray;
+}
+.sports-list-item-selected .search-button {
+  color: white !important;
+}
+
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   height: 45px;
   align-items: center;
