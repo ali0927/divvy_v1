@@ -748,7 +748,7 @@ h1 {
   border: none !important;
 }
 .wallet-connect {
-  margin: 1em;
+  float: right;
 }
 .wallet {
   justify-content: flex-end;
