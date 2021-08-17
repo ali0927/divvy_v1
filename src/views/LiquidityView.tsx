@@ -37,8 +37,10 @@ const LiquidityView = () => {
         {!isMobileMenuVisible && !isBetSlipsVisible &&
           <Col span={14} xs={24} sm={24} md={14}>
             <header className="root-content">
-              <ConnectLink />
-              <GoBack path={`${BETS_VIEW_PATH}`} label="Back to Betting"/>
+              <div style={{display:'flex', justifyContent:'space-between'}}>
+                <GoBack path={`${BETS_VIEW_PATH}`} label="Back to Betting"/>
+                <ConnectLink />
+              </div>
               <LiquidityGlobalStats />
               <LiquidityGlance data={data} setInterval={setInterval} transactions={transData} />
               <LiquidityPoolPerformance data={data} />
