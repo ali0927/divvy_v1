@@ -1,15 +1,19 @@
 import { Row, Col } from 'antd'
 export const TeamDetails = (props: { name: string, logo: string }) => {
-    return (
-        <div style={{ alignItems: "center", paddingTop: 18 }}>
-            <Row>
-                <Col span={12} xs={0} sm={0} md={10}>
-                    <img className={"team-logo"} src={props.logo} alt="Team logo" />
-                </Col>
-                <Col span={12} xs={24} sm={24} md={14}>
-                    <div style={{ fontSize: "1em", hyphens: "auto" }}>{props.name}</div>
-                </Col>
-            </Row>
-        </div>
-    );
+  return (
+    <div>
+      <Row>
+        <Col span={0} md={4}>
+          <div className="team-logo">
+            <img src={props.logo} alt="Team logo" />
+          </div>
+        </Col>
+        <Col span={24} md={20}>
+          <div style={{ display: 'flex', alignItems: 'center', height: '100%', marginLeft: '0.5vw' }}>
+            <b style={{ fontSize: "1em" }}>{props.name}</b>
+          </div>
+        </Col>
+      </Row>
+    </div>
+  );
 };

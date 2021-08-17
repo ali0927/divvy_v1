@@ -37,6 +37,7 @@ export const EthConnectButton = () => {
     return (
         <Dropdown.Button
             overlay={menu}
+            style={{marginRight: '1em'}}
         >
             {LABELS.CONNECT_LABEL}
         </Dropdown.Button>

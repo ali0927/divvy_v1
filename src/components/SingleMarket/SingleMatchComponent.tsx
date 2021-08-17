@@ -15,68 +15,59 @@ export const SingleMatchComponent = (props: { market: Market }) => {
         return code;
     }
     return (
-        <div className="single-match">
+      <div className="single-match">
+        <Row>
+          <Col span={24} md={0}>
+            <div className="bet-time-container text-secondary">
+              {getDate(props.market.commenceTime)} {getTime(props.market.commenceTime)} {getShortTimezone()}
+            </div>
+          </Col>
+          <Col span={6} md={8} style={{display:'flex', flexDirection:'column', justifyContent:'space-around'}}>
+            <TeamDetails name={props.market.teamA} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamA + ".svg"} />
             <Row>
-                <Col span={24}>
-                    <OddsType />
-                </Col>
-                <Col span={24}>
-                    <Row>
-                        <Col span={4}>
-                            {/* TO DO: logo */}
-                            <TeamDetails name={props.market.teamA} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamA + ".svg"} />
-                        </Col>
-                        <Col span={20} md={10}>
-                            <OddsSelection marketSide={MarketSide.teamA} market={props.market} selectionTeam={props.market.teamA} otherTeam={props.market.teamB} selection={"teamA"} odds={{
-                                moneyline: props.market.teamAOddsMoneyline,
-                                spread: props.market.teamAOddsSpread,
-                                spreadPoints: props.market.teamASpreadPoints,
-                                total: props.market.teamAOddsTotal,
-                                totalPoints: props.market.teamATotalPoints,
-                                moneylineFeedPubkey: props.market.teamAOddsMoneylineFeedPubkey,
-                                spreadPointsFeedPubkey: props.market.teamASpreadPointsFeedPubkey,
-                                spreadFeedPubkey: props.market.teamAOddsSpreadFeedPubkey,
-                                totalFeedPubkey: props.market.teamAOddsTotalFeedPubkey,
-                                totalPointsFeedPubkey: props.market.teamATotalPointsFeedPubkey,
-                            }} />
-                        </Col>
-                        <Col span={0} md={3}>
-                        </Col>
-                    </Row>
-                </Col>
-                <Col span={0} md={2}>
-                </Col>
-                <Col span={24} md={22}>
-                    <p className="text-secondary" style={{ marginTop: -4, marginBottom: -5, fontSize: "0.7em", marginLeft:"-1.4%" }}>VS</p>
-                </Col>
-                <Col span={24}>
-                    <Row>
-                        <Col span={4}>
-                            {/* TO DO: logo */}
-                            <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamB + ".svg"} />
-                        </Col>
-                        <Col span={20} md={10}>
-                            <OddsSelection marketSide={MarketSide.teamB} market={props.market} selectionTeam={props.market.teamB} otherTeam={props.market.teamA} selection={"teamB"} odds={{
-                                moneyline: props.market.teamBOddsMoneyline,
-                                spread: props.market.teamBOddsSpread,
-                                spreadPoints: props.market.teamBSpreadPoints,
-                                total: props.market.teamBOddsTotal,
-                                totalPoints: props.market.teamBTotalPoints,
-                                moneylineFeedPubkey: props.market.teamBOddsMoneylineFeedPubkey,
-                                spreadPointsFeedPubkey: props.market.teamBSpreadPointsFeedPubkey,
-                                spreadFeedPubkey: props.market.teamBOddsSpreadFeedPubkey,
-                                totalFeedPubkey: props.market.teamBOddsTotalFeedPubkey,
-                                totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
-                            }} />
-                        </Col>
-                        <Col span={0} md={3}>
-                            <div style={{ marginLeft: "5%", marginTop: "-20%", textAlign: "center", fontSize: "1em" }}>
-                                {getDate(props.market.commenceTime)}<br />{getTime(props.market.commenceTime)}<br />{getShortTimezone()}
-                            </div>
-                        </Col>
-                    </Row>
-                </Col>
+              <Col span={0} md={4}></Col>
+              <Col span={24} md={20}>
+                <div style={{position: 'relative', marginLeft: '0.5vw'}}>
+                  <label className="text-secondary" style={{fontSize:"0.8em", position:'absolute', transform:'translate(0,-50%)'}}>VS</label>
+                </div>
+              </Col>
             </Row>
-        </div>
+            <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamB + ".svg"} />
+          </Col>
+          <Col span={18} md={12}>
+            <div style={{display:'flex', flexDirection:'column', justifyContent:'space-around', height:'100%'}}>
+              <OddsSelection marketSide={MarketSide.teamA} market={props.market} selectionTeam={props.market.teamA} otherTeam={props.market.teamB} selection={"teamA"} odds={{
+                moneyline: props.market.teamAOddsMoneyline,
+                spread: props.market.teamAOddsSpread,
+                spreadPoints: props.market.teamASpreadPoints,
+                total: props.market.teamAOddsTotal,
+                totalPoints: props.market.teamATotalPoints,
+                moneylineFeedPubkey: props.market.teamAOddsMoneylineFeedPubkey,
+                spreadPointsFeedPubkey: props.market.teamASpreadPointsFeedPubkey,
+                spreadFeedPubkey: props.market.teamAOddsSpreadFeedPubkey,
+                totalFeedPubkey: props.market.teamAOddsTotalFeedPubkey,
+                totalPointsFeedPubkey: props.market.teamATotalPointsFeedPubkey,
+              }} />
+              <OddsSelection marketSide={MarketSide.teamB} market={props.market} selectionTeam={props.market.teamB} otherTeam={props.market.teamA} selection={"teamB"} odds={{
+                moneyline: props.market.teamBOddsMoneyline,
+                spread: props.market.teamBOddsSpread,
+                spreadPoints: props.market.teamBSpreadPoints,
+                total: props.market.teamBOddsTotal,
+                totalPoints: props.market.teamBTotalPoints,
+                moneylineFeedPubkey: props.market.teamBOddsMoneylineFeedPubkey,
+                spreadPointsFeedPubkey: props.market.teamBSpreadPointsFeedPubkey,
+                spreadFeedPubkey: props.market.teamBOddsSpreadFeedPubkey,
+                totalFeedPubkey: props.market.teamBOddsTotalFeedPubkey,
+                totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
+              }} />
+            </div>
+          </Col>
+          <Col span={0} md={4}>
+            <div className="bet-time-container">
+              {getDate(props.market.commenceTime)}<br />{getTime(props.market.commenceTime)}<br />{getShortTimezone()}
+            </div>
+          </Col>
+        </Row>
+      </div>
     );
 };

@@ -99,8 +99,8 @@ export const WithdrawLiquidity = (props: {}) => {
       </div>
       <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>
-          <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{width: "75%"}} />
-          <Button style={{border: "1px solid rgb(67, 67, 67)",  width: "25%"}} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toString())} disabled={userHT === 0}>MAX</Button>
+          <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{width: "70%"}} />
+          <Button style={{border: "1px solid rgb(67, 67, 67)", width: "30%", padding:0}} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toString())} disabled={userHT === 0}>MAX</Button>
         </Input.Group>
       </Form.Item>
 
