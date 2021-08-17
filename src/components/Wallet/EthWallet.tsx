@@ -10,7 +10,7 @@ import { EthSettings } from "../Settings/EthSettings";
 export const EthWallet = (props: { left?: JSX.Element; right?: JSX.Element }) => {
 
     const TopBar = (
-        <div className="wallet">
+        <div className="wallet">           
             <EthConnectButton />
             <Popover
                 placement="topRight"

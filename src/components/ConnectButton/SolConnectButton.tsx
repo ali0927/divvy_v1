@@ -41,6 +41,7 @@ export const SolConnectButton = (props: ConnectButtonProps) => {
       onClick={connected ? onClick : connect}
       disabled={connected && disabled}
       overlay={menu}
+      style={{marginRight: '1em'}}
     >
       {LABELS.CONNECT_LABEL}
     </Dropdown.Button>

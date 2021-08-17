@@ -13,9 +13,9 @@ export const BetSlip = () => {
   const { userUSDT } = useContext(UserUSDTContext)
   const bets = useContext(BetsContext)
   const chain = useContext(ChainSelectContext);
-  const [submitDisabled, setSubmitDisabled] = useState(false)
+  const [submitEnabled, setSubmitEnabled] = useState(false)
   const [showError, setShowError] = useState(false)
-
+  
   var totalRisk = 0
   var totalPayout = 0
   var betsCount = 0
@@ -28,61 +28,68 @@ export const BetSlip = () => {
   })
 
   useEffect(() => {
-    if(totalRisk === 0 || totalRisk > userUSDT) setSubmitDisabled(true)
-    else setSubmitDisabled(false)
+    setSubmitEnabled(true)
+    bets?.bets.forEach((bet: Bet) => {
+      if (bet.status === BetStatus.Current && bet.risk <= 0) {
+        setSubmitEnabled(false)
+      }
+    })
     
-    if(totalRisk > userUSDT) setShowError(true)
+    if(totalRisk > userUSDT) {
+      setShowError(true)
+      setSubmitEnabled(false)
+    }
     else setShowError(false)
   }, [userUSDT, bets, totalRisk])
   
   const solTxnCount = Math.ceil(betsCount / 3);
 
   return (
-    <div className="form-grey" >
-      <div style={{ height: "75vh", overflowX: "hidden", overflowY: "auto" }}>
+    <div className="form-grey" style={{position:'absolute', top:'70px', bottom:0, left:0, right:0, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+      <div style={{ overflow: 'auto'}}>
         {bets?.bets.map((value: Bet) => {
           return value.status === BetStatus.Current
             ? <MyBet bet={value} />
             : undefined;
         })}
-        {betsCount !== 0 ? <div>
-          {
-            showError &&
-            <div className="error-box">
-              Maximum bet amount exceeded.<br/>
-              Please enter a value under {tokenAmountToString(userUSDT)} USDT
-            </div>
-          }
-          <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
-            <p>
-              Total Wager
-            </p>
-            <p>
-              {tokenAmountToString(totalRisk)} USDT
-            </p>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20, paddingBottom: 60 }}>
-            <p>
-              Total Payout
-            </p>
-            <p>
-              {tokenAmountToString(totalPayout)} USDT
-            </p>
-          </div>
-          <Button 
-            className="ant-btn-active"
-            style={{ width: "100%", height: 40, position: "absolute", bottom: 0 }}
-            type="primary"
-            onClick={() => bets?.placeBetSlip()}
-            disabled={submitDisabled}
-          >
-            <LinkLabel style={{ margin:"auto" }}>
-              Place {betsCount} Single bets {chain.chain === ChainType.Sol && solTxnCount > 1 ? ` in ${solTxnCount} transactions.` : ""}
-            </LinkLabel>
-          </Button>
-        </div> : <></>
-        }
       </div>
+      {betsCount !== 0 ? 
+      <div style={{ padding: '0.5em 1em' }}>
+        {
+          showError &&
+          <div className="error-box">
+            Wallet balance exceeded.           
+          </div>
+        }
+        <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
+          <p>
+            Total Wager
+          </p>
+          <p style={{overflowWrap: 'anywhere', marginLeft: '0.5vw'}}>
+            {tokenAmountToString(totalRisk)} USDT
+          </p>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
+          <p>
+            Total Payout
+          </p>
+          <p style={{overflowWrap: 'anywhere', marginLeft: '0.5vw'}}>
+            {tokenAmountToString(totalPayout)} USDT
+          </p>
+        </div>
+        <Button 
+          className="ant-btn-active bet-submit"
+          style={{ width: '100%', height: 40}}
+          type="primary"
+          onClick={() => bets?.placeBetSlip()}
+          disabled={!submitEnabled}
+        >
+          <LinkLabel style={{ margin:"auto" }}>
+            <span style={{ width: '90%', overflow: 'hidden', textAlign: 'left' }}>Place {betsCount} Single bets {chain.chain === ChainType.Sol && solTxnCount > 1 ? ` in ${solTxnCount} txns.` : ""}</span>
+          </LinkLabel>
+        </Button>
+      </div> : <></>
+      }
     </div>
   );
 };

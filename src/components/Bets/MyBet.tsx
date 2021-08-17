@@ -2,7 +2,7 @@ import { GameTeams } from "./GameTeams";
 import { Form, Input, Divider } from "antd";
 import { ConfirmedOdds } from "./ConfirmedOdds";
 import { Bet } from "../../constants/bets";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { CloseOutlined } from "@ant-design/icons"
 import { BetsContext } from "../../contexts/bets";
 import { americanToDecimal, LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";

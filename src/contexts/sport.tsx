@@ -1,7 +1,7 @@
 import { useState, createContext, useEffect } from "react"
 import { Sports } from "../constants/Sports";
 const SPORT_KEY: string = "sport"
-const DEFAULT_SPORT = { sportId: 1, sportName: "Baseball", count: 0 };
+const DEFAULT_SPORT = { sportId: 1, sportName: "Baseball", count: 0, sportLogo: "" };
 export const SportContext = createContext<{
     sport: Sports | null,
     changeSport: (sport: Sports | null) => void

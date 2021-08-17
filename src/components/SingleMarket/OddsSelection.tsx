@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Button, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import { SportContext } from "../../contexts/sport";
 import { Odds, BetType, Market, Bet, MarketSide, BetStatus } from "../../constants";
 import { BetsContext } from "../../contexts/bets";
@@ -48,21 +48,28 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
     }
 
     return (
-        <Row style={{ display: "flex", alignItems: "center", height: 36, marginLeft: 20, marginTop: 10 }}>
-            <Col span={8} onClick={() => setSlip(BetType.moneyline, props.odds.moneyline, props.odds.moneylineFeedPubkey, props.market.moneylineMarketPubkey)}
-                    className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"}>
-                    <b>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline}`}</b>
-            </Col>
-            {/* TODO: add after we enable spreads: onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)} */}
-            <Col span={8}
-                    className={containsBet(BetType.spread) ? "odds odds-active" : "odds disabled"}>
-                    <b>{`(${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints)}) ${props.odds.spread >= 0 ? "+" : ""}${String(props.odds.spread)}`}</b>
-            </Col>
-            {/* TODO: add after we enable totals: onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.totalMarketPubkey)} */}
-            <Col span={8}
-                    className={containsBet(BetType.total) ? "odds odds-active" : "odds disabled"}>
-                    <b>{`(${props.odds.totalPoints >= 0 ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>
-            </Col>
-        </Row>
+      <Row>
+        <Col span={8} style={{padding: '0.5vw'}}        
+            onClick={() => setSlip(BetType.moneyline, props.odds.moneyline, props.odds.moneylineFeedPubkey, props.market.moneylineMarketPubkey)}>
+          <div className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"}>
+            <label className="text-secondary" style={{fontSize: '0.8em'}}>Money Line</label>
+            <b style={{fontSize: '1em'}}>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline}`}</b>
+          </div>
+        </Col>
+        {/* TODO: add after we enable spreads: onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)} */}
+        <Col span={8} style={{padding: '0.5vw'}} >
+          <div className={containsBet(BetType.spread) ? "odds odds-active" : "odds disabled"}>
+            <label className="text-secondary" style={{fontSize: '0.8em'}}>Spread</label>
+            <b style={{fontSize: '1em'}}>{`(${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints)}) ${props.odds.spread >= 0 ? "+" : ""}${String(props.odds.spread)}`}</b>
+          </div>
+        </Col>
+        {/* TODO: add after we enable totals: onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.totalMarketPubkey)} */}
+        <Col span={8} style={{padding: '0.5vw'}} >
+          <div className={containsBet(BetType.total) ? "odds odds-active" : "odds disabled"}>
+            <label className="text-secondary" style={{fontSize: '0.8em'}}>Total</label>
+            <b style={{fontSize: '1em'}}>{`(${props.odds.totalPoints >= 0 ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>
+          </div>
+        </Col>
+      </Row>
     )
 };

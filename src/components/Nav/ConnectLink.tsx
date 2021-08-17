@@ -7,14 +7,14 @@ export const ConnectLink = () => {
   const { chain } = useContext(ChainSelectContext)
   if (chain === ChainType.Eth) {
     return (
-      <div className="sidebar-section">
+      <div className="wallet-connect">
         <EthWallet />
       </div>
     )
   }
   else {
     return (
-      <div className="sidebar-section">
+      <div className="wallet-connect">
         <SolWallet />
       </div>
     );

@@ -12,8 +12,9 @@ import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
 import { useState } from "react";
 import { HeaderTypes } from "../constants/HeaderTypes"
 import { useGetPoolQuery } from "../store/getPool";
-import { MS_IN_DAY } from "../constants";
+import { MS_IN_DAY, BETS_VIEW_PATH } from "../constants";
 import { useGetTransactionsQuery } from "../store/getTransactions";
+import { ConnectLink } from "../components/Nav/ConnectLink";
 
 const currTime = (new Date()).getTime(); 
 const LiquidityView = () => {
@@ -36,7 +37,10 @@ const LiquidityView = () => {
         {!isMobileMenuVisible && !isBetSlipsVisible &&
           <Col span={14} xs={24} sm={24} md={14}>
             <header className="root-content">
-              <GoBack />
+              <div style={{display:'flex', justifyContent:'space-between'}}>
+                <GoBack path={`${BETS_VIEW_PATH}`} label="Back to Betting"/>
+                <ConnectLink />
+              </div>
               <LiquidityGlobalStats />
               <LiquidityGlance data={data} setInterval={setInterval} transactions={transData} />
               <LiquidityPoolPerformance data={data} />
