@@ -15,6 +15,8 @@ import { useContext, useState, useEffect } from "react";
 import { useAccountByMint } from "../../hooks";
 import * as IDS from "../../utils/ids";
 import { UserHTContext } from "../../contexts/sol/userht";
+import { HPTokenContext } from "../../contexts/sol/hptoken";
+import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 
 export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();
@@ -24,6 +26,8 @@ export const WithdrawLiquidity = (props: {}) => {
   const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   let [htAmount, setHtAmount] = useState("");
   const { userHT } = useContext(UserHTContext);
+  const { htBalance } = useContext(HousePoolContext);
+  const { htSupply } = useContext(HPTokenContext);
   
   useEffect(() => {
    if(userHT === 0) setHtAmount("")
@@ -60,7 +64,7 @@ export const WithdrawLiquidity = (props: {}) => {
 
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyhouse")], IDS.HOUSE_POOL_PROGRAM_ID);
 
-    const [ix, signers] = await depositLiquidityTransaction(
+    const res = await depositLiquidityTransaction(
       connection,
       wallet.wallet.publicKey,
       htTokenAccount.pubkey,
@@ -69,6 +73,7 @@ export const WithdrawLiquidity = (props: {}) => {
       "withdraw",
       htLamports,
       bumpSeed);
+    const [ix, signers] = res
     let metaData: Array<Transactions> = [{
       type: "Withdraw",
       match: "-",
@@ -95,7 +100,7 @@ export const WithdrawLiquidity = (props: {}) => {
         <p>
           <small className="text-secondary">Withdrawable balance</small>
         </p>
-        <p className="balance">{tokenAmountToString(userHT)} HT</p>
+        <p className="balance">{tokenAmountToString(userHT)} HT({tokenAmountToString(htBalance / htSupply * userHT)} USDT)</p>
       </div>
       <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>
