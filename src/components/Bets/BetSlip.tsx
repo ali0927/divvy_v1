@@ -16,14 +16,6 @@ export const BetSlip = () => {
   const [submitDisabled, setSubmitDisabled] = useState(false)
   const [showError, setShowError] = useState(false)
 
-  useEffect(() => {
-    if(totalRisk === 0 || totalRisk > userUSDT) setSubmitDisabled(true)
-    else setSubmitDisabled(false)
-    
-    if(totalRisk > userUSDT) setShowError(true)
-    else setShowError(false)
-  }, [userUSDT, bets])
-
   var totalRisk = 0
   var totalPayout = 0
   var betsCount = 0
@@ -34,6 +26,14 @@ export const BetSlip = () => {
       betsCount++;
     }
   })
+
+  useEffect(() => {
+    if(totalRisk === 0 || totalRisk > userUSDT) setSubmitDisabled(true)
+    else setSubmitDisabled(false)
+    
+    if(totalRisk > userUSDT) setShowError(true)
+    else setShowError(false)
+  }, [userUSDT, bets, totalRisk])
   
   const solTxnCount = Math.ceil(betsCount / 3);
 

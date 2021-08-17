@@ -7,7 +7,7 @@ export const LiquidityPool = () => {
     return (
       <div className="liquidity-pool">
         <p className="text-primary">Total in Liquidity Pool</p>
-        <h2><span style={{ fontSize: "2rem", fontWeight: 800 }}>{tokenAmountToString(htBalance, 6, 6)}</span> USDT</h2>
+        <h2><span style={{ fontSize: "2rem", fontWeight: 800 }}>{tokenAmountToString(htBalance)}</span> USDT</h2>
       </div>
     );
 };
