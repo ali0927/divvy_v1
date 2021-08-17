@@ -605,7 +605,7 @@ body {
 }
 
 .balance {
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 

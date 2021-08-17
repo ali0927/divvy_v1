@@ -100,7 +100,7 @@ export const WithdrawLiquidity = (props: {}) => {
         <p>
           <small className="text-secondary">Withdrawable balance</small>
         </p>
-        <p className="balance">{tokenAmountToString(userHT)} HT({tokenAmountToString(htBalance / htSupply * userHT)} USDT)</p>
+        <p className="balance">{tokenAmountToString(userHT)} HT ({tokenAmountToString(htBalance / htSupply * userHT)} USDT)</p>
       </div>
       <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>

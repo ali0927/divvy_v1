@@ -11,12 +11,16 @@ export const MyBet = (props: { bet: Bet }) => {
     const [risk, setRisk] = useState(0)
     const bets = useContext(BetsContext);
 
+    useEffect(() => {
+      setRisk(props.bet.risk)
+      setRiskStr((props.bet.risk / LAMPORTS_PER_USDT).toString())      
+    }, [props.bet])
+
     const doSetRisk = (risk: string) => {
         let parsedRisk = parseFloat(risk) * LAMPORTS_PER_USDT;
         if (isNaN(parsedRisk)) {
             parsedRisk = 0;
         }
-
         setRiskStr(risk);
         setRisk(parsedRisk);
         bets?.editBetRisk(props.bet.betId, parsedRisk)
