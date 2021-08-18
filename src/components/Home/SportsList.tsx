@@ -29,7 +29,7 @@ export const SportsList = ({ search = "" as any }) => {
                 <div className="team-logo">
                   <img src={"EA_Sports-Logo.svg"} alt="Sport logo" />
                 </div>
-                <div style={{textAlign:'center', whiteSpace:'pre-wrap', fontSize:'1em'}}>
+                <div style={{textAlign:'center', whiteSpace:'pre-wrap', fontSize:'1.2vw'}}>
                   {sportData.sportName}
                 </div>
               </Button>

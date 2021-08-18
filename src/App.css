@@ -238,7 +238,7 @@ body {
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  padding: 3px 5px;
+  padding: 5px 2px;
   border-radius: 22.5px;
   background-color: var(--shade-black);
 }
@@ -259,7 +259,7 @@ body {
 }
 
 .odds-type {
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
 .single-match {
@@ -388,9 +388,11 @@ body {
   width: 50%;
   text-align: center;
   height: 55px;
-  padding: 14px 0 17px;
   border: solid 1px var(--shade-black);
   background-color: var(--off-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
 
@@ -399,9 +401,11 @@ body {
   width: 50%;
   text-align: center;
   height: 55px;
-  padding: 14px 0 17px;
   border: solid 1px var(--shade-black);
   background-color: var(--off-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
 
@@ -638,7 +642,7 @@ body {
 
 .sports-list-item {
   width: 5vw;
-  margin: 0 0.6vw;
+  margin: 0 0.8vw;
 }
 .sports-list-item .search-button {
   color: gray;
