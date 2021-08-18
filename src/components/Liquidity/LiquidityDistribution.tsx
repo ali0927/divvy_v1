@@ -17,9 +17,9 @@ export const LiquidityDistribution = () => {
         </div>
         <div className="horizontal-outline" />
         <div className="liquidity-content">
-          <h6 className="text-secondary">Reserved For</h6>
+          <h6 className="text-secondary">Bettor's Risk</h6>
           {/* Change this */}
-          <h3>{pendingBets} Pending <br />Bets</h3>
+          <h3><span className="liquidity-heavy">1,023</span> USDT</h3>
         </div>
         <div className="horizontal-outline" />
       </div>

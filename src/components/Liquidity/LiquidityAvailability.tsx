@@ -6,7 +6,7 @@ import { BetStateContext } from "../../contexts/sol/betstate";
 
 export const LiquidityAvailability = () => {
   const { htBalance } = useContext(HousePoolContext);
-  const { liveLiquidity, lockedLiquidity } = useContext(BetStateContext)
+  const { liveLiquidity, lockedLiquidity, pendingBets } = useContext(BetStateContext)
   return (
     <div className="liquidity-left">
       <div className="header-align">
@@ -18,8 +18,11 @@ export const LiquidityAvailability = () => {
         </div>
         <div className="horizontal-outline" />
         <div className="liquidity-content">
-          <h6 className="text-secondary">Distributed Amongst</h6>
-          <h3>278 Liquidity <br />Providers</h3>
+          <h6 className="text-secondary">Reserved For</h6>
+          {/* Change this */}
+          <h3>{pendingBets} Pending <br />Bets</h3>
+          {/* <h6 className="text-secondary">Distributed Amongst</h6>
+          <h3>278 Liquidity <br />Providers</h3> */}
         </div>
         <div className="horizontal-outline" />
       </div>

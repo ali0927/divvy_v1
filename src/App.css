@@ -461,6 +461,7 @@ body {
   align-items: center;
   display: flex;
   flex-direction: row;
+  line-height: initial;
 }
 
 .switch-tab {
@@ -471,6 +472,8 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  line-height: initial;
+  padding: 0.5vw;
 }
 
 .switch-tab-active {
@@ -483,6 +486,7 @@ body {
   text-align: center;
   border: 1px solid #fff;
   border-radius: 21.5px;
+  padding: 0.5vw;
 }
 
 .switch-tabs-small {
