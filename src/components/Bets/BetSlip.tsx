@@ -15,6 +15,17 @@ export const BetSlip = () => {
   const chain = useContext(ChainSelectContext);
   const [submitEnabled, setSubmitEnabled] = useState(false)
   const [showError, setShowError] = useState(false)
+  
+  var totalRisk = 0
+  var totalPayout = 0
+  var betsCount = 0
+  bets?.bets.forEach((bet: Bet) => {
+    if (bet.status === BetStatus.Current) {
+      totalRisk += bet.risk
+      totalPayout += bet.risk * americanToDecimal(bet.odds)
+      betsCount++;
+    }
+  })
 
   useEffect(() => {
     setSubmitEnabled(true)
@@ -29,18 +40,7 @@ export const BetSlip = () => {
       setSubmitEnabled(false)
     }
     else setShowError(false)
-  }, [userUSDT, bets])
-
-  var totalRisk = 0
-  var totalPayout = 0
-  var betsCount = 0
-  bets?.bets.forEach((bet: Bet) => {
-    if (bet.status === BetStatus.Current) {
-      totalRisk += bet.risk
-      totalPayout += bet.risk * americanToDecimal(bet.odds)
-      betsCount++;
-    }
-  })
+  }, [userUSDT, bets, totalRisk])
   
   const solTxnCount = Math.ceil(betsCount / 3);
 
