@@ -6,17 +6,17 @@ export const OddsType = () => {
           </Col>
           <Col span={18} md={14}>
             <Row>
-              <Col className="odds-type" span={8} md={10}>
+              <Col className="odds-type" span={8} md={8}>
                 <div style={{ textAlign: "center" }}>
                     Win
                 </div>
               </Col>
-              <Col className="odds-type" span={8} md={7}>
+              <Col className="odds-type" span={8} md={8}>
                   <div style={{ textAlign: "center" }}>
                       Spread
                   </div>
               </Col>
-              <Col className="odds-type" span={8} md={7}>
+              <Col className="odds-type" span={8} md={8}>
                   <div style={{ textAlign: "center" }}>
                       Total
                   </div>

@@ -1,7 +1,6 @@
 import { Col, Row } from 'antd'
 import { TeamDetails } from "./TeamDetails"
 import { OddsSelection } from './OddsSelection';
-import { OddsType } from './OddsType';
 import { Market, MarketSide } from '../../constants';
 import { getDate, getShortTimezone, getTime } from '../../utils/date';
 import { codes } from "../../constants/processed"
@@ -22,7 +21,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
               {getDate(props.market.commenceTime)} {getTime(props.market.commenceTime)} {getShortTimezone()}
             </div>
           </Col>
-          <Col span={6} md={8} style={{display:'flex', flexDirection:'column', justifyContent:'space-around'}}>
+          <Col span={6} md={6} style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
             <TeamDetails name={props.market.teamA} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamA + ".svg"} />
             <Row>
               <Col span={0} md={4}></Col>
@@ -34,7 +33,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
             </Row>
             <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamB + ".svg"} />
           </Col>
-          <Col span={18} md={12}>
+          <Col span={18} md={14}>
             <div style={{display:'flex', flexDirection:'column', justifyContent:'space-around', height:'100%'}}>
               <OddsSelection marketSide={MarketSide.teamA} market={props.market} selectionTeam={props.market.teamA} otherTeam={props.market.teamB} selection={"teamA"} odds={{
                 moneyline: props.market.teamAOddsMoneyline,
