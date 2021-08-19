@@ -7,10 +7,10 @@ import { BetsContext } from "../../contexts/bets";
 import { americanToDecimal, tokenAmountToString } from "../../constants/math";
 import { ChainSelectContext } from "../../contexts/chainselect";
 import { ChainType } from "../../constants/chains";
-import { UserUSDTContext } from "../../contexts/sol/userusdt";
+import { UserUSDCContext } from "../../contexts/sol/userusdc";
 
 export const BetSlip = () => {
-  const { userUSDT } = useContext(UserUSDTContext)
+  const { userUSDC } = useContext(UserUSDCContext)
   const bets = useContext(BetsContext)
   const chain = useContext(ChainSelectContext);
   const [submitEnabled, setSubmitEnabled] = useState(false)
@@ -24,12 +24,12 @@ export const BetSlip = () => {
       }
     })
     
-    if(totalRisk > userUSDT) {
+    if(totalRisk > userUSDC) {
       setShowError(true)
       setSubmitEnabled(false)
     }
     else setShowError(false)
-  }, [userUSDT, bets])
+  }, [userUSDC, bets])
 
   var totalRisk = 0
   var totalPayout = 0
@@ -66,7 +66,7 @@ export const BetSlip = () => {
             Total Wager
           </p>
           <p style={{overflowWrap: 'anywhere', marginLeft: '0.5vw'}}>
-            {tokenAmountToString(totalRisk)} USDT
+            {tokenAmountToString(totalRisk)} USDC
           </p>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", marginRight: 20, marginLeft: 20 }}>
@@ -74,7 +74,7 @@ export const BetSlip = () => {
             Total Payout
           </p>
           <p style={{overflowWrap: 'anywhere', marginLeft: '0.5vw'}}>
-            {tokenAmountToString(totalPayout)} USDT
+            {tokenAmountToString(totalPayout)} USDC
           </p>
         </div>
         <Button 

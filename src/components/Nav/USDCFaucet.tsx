@@ -8,7 +8,7 @@ import LinkLabel from "./LinkLabel";
 import { ChainType } from "../../constants/chains";
 import { useWallet } from "../../contexts/sol/wallet";
 
-export const USDTFaucetLink = () => {
+export const USDCFaucetLink = () => {
     const chainSelect = useContext(ChainSelectContext);
     const connectionConfig = useConnectionConfig();
     const wallet = useWallet();
@@ -20,7 +20,7 @@ export const USDTFaucetLink = () => {
                 to={FAUCET_VIEW_PATH}>
                 <div className="sidebar-section text-secondary">
                     <LinkLabel style={{ marginBottom: "0.83em" }}>
-                        <h2 style={{ marginBottom: 0 }}>Get Devnet USDT</h2>
+                        <h2 style={{ marginBottom: 0 }}>Get Devnet USDC</h2>
                     </LinkLabel>
                     <small>
                         <div className="balance-container">
@@ -28,7 +28,7 @@ export const USDTFaucetLink = () => {
                     </small>
                 </div>
             </Link>
-            : isDevnet ? <div className="sidebar-section text-secondary">Connect wallet to get Devnet USDT</div>
+            : isDevnet ? <div className="sidebar-section text-secondary">Connect wallet to get Devnet USDC</div>
             : <></>
     );
 };

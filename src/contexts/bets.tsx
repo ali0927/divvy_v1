@@ -26,7 +26,7 @@ const BetsProvider = (props: { children: any }) => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
-  const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env));
+  const usdcTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env));
   const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString())
   const [
     storeBet, // This is the mutation trigger
@@ -116,7 +116,7 @@ const BetsProvider = (props: { children: any }) => {
           connection,
           connectionConfig.env,
           wallet.wallet,
-          usdtTokenAccount?.pubkey,
+          usdcTokenAccount?.pubkey,
           betChunk);
 
         if (ok && wallet.publicKey) {

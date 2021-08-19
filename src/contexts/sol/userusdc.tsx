@@ -5,37 +5,37 @@ import { AccountInfo } from "@solana/web3.js";
 import * as IDS from "../../utils/ids";
 import { EscrowState, EscrowStateParser } from "../../models/sol/state/escrowState";
 import { useAccountByMint } from "../../hooks";
-export const UserUSDTContext = createContext({
-    userUSDT: 0,
+export const UserUSDCContext = createContext({
+    userUSDC: 0,
 });
-export const UserUSDTContextProvider = (props: { children: any }) => {
+export const UserUSDCContextProvider = (props: { children: any }) => {
     const connection = useConnection();
     const connectionConfig = useConnectionConfig();
-    const USDTMint = IDS.getUsdtMint(connectionConfig.env);
-    const userUSDTPubkey = useAccountByMint(USDTMint)?.pubkey
+    const USDCMint = IDS.getUsdtMint(connectionConfig.env);
+    const userUSDCPubkey = useAccountByMint(USDCMint)?.pubkey
     let [accountData, setAccountData] =
         useState<Accounts.ParsedAccount<EscrowState>>();
-    const [userUSDT, setUserUSDT] = useState(0);
+    const [userUSDC, setUserUSDC] = useState(0);
     useEffect(() => {
         const check = async () => {
-            if(userUSDTPubkey == null){
-                setUserUSDT(0);
+            if(userUSDCPubkey == null){
+                setUserUSDC(0);
                 setAccountData(undefined);
                 return;
             }
             let subscriptionId = getAccountInfoAndSubscribe(
                 connection,
-                userUSDTPubkey,
+                userUSDCPubkey,
                 parseAccount
             );
             async function parseAccount(acc: AccountInfo<Buffer>|null) {
-                if (acc && userUSDTPubkey) {
-                    const parsed = EscrowStateParser(userUSDTPubkey, acc);
-                    const data = await connection.getTokenAccountBalance(userUSDTPubkey);
-                    setUserUSDT(parseInt(data.value.amount) || 0)
+                if (acc && userUSDCPubkey) {
+                    const parsed = EscrowStateParser(userUSDCPubkey, acc);
+                    const data = await connection.getTokenAccountBalance(userUSDCPubkey);
+                    setUserUSDC(parseInt(data.value.amount) || 0)
                     setAccountData(parsed)
                 } else {
-                    setUserUSDT(0);
+                    setUserUSDC(0);
                     setAccountData(undefined);
                 }
             }
@@ -44,10 +44,10 @@ export const UserUSDTContextProvider = (props: { children: any }) => {
             }
         }
         check()
-    }, [connection, connectionConfig, userUSDTPubkey]);
+    }, [connection, connectionConfig, userUSDCPubkey]);
     return (
-        <UserUSDTContext.Provider value={{ userUSDT }}>
+        <UserUSDCContext.Provider value={{ userUSDC }}>
             {props.children}
-        </UserUSDTContext.Provider>
+        </UserUSDCContext.Provider>
     )
 }

@@ -20,9 +20,9 @@ export const depositLiquidityTransaction = async (
   userAccount: PublicKey,
   userHtTokenAccount: PublicKey | undefined,
   userUsdtTokenAccount: PublicKey | undefined,
-  usdtMintPubkey: PublicKey,
+  usdcMintPubkey: PublicKey,
   action: "deposit" | "withdraw",
-  usdtLamports: number,
+  usdcLamports: number,
   divvyPdaBumpSeed: number)
   : Promise<[ix: TransactionInstruction[], signers: Signer[]]> => {
 
@@ -39,13 +39,13 @@ export const depositLiquidityTransaction = async (
   }
 
   if (userUsdtTokenAccount == null) {
-    let [usdtSigner, usdtIx] = await createTokenAccount(
+    let [usdcSigner, usdcIx] = await createTokenAccount(
       connection,
-      usdtMintPubkey,
+      usdcMintPubkey,
       userAccount);
-    ix = [...ix, ...usdtIx];
-    signers = [...signers, usdtSigner];
-    userUsdtTokenAccount = usdtSigner.publicKey;
+    ix = [...ix, ...usdcIx];
+    signers = [...signers, usdcSigner];
+    userUsdtTokenAccount = usdcSigner.publicKey;
   }
 
   const depositLiquidityIx = depositLiquidityInstruction(
@@ -53,7 +53,7 @@ export const depositLiquidityTransaction = async (
     userHtTokenAccount,
     userUsdtTokenAccount,
     action,
-    usdtLamports,
+    usdcLamports,
     divvyPdaBumpSeed);
 
   return [[...ix, depositLiquidityIx], signers];
@@ -64,12 +64,12 @@ export const depositLiquidityInstruction = (
   userHtTokenAccount: PublicKey,
   userUsdtTokenAccount: PublicKey,
   action: "deposit" | "withdraw",
-  usdtLamports: number,
+  usdcLamports: number,
   divvyPdaBumpSeed: number): TransactionInstruction => {
 
   const data: DepositLiquidityData = {
     action: action === "deposit" ? 0 : 1,
-    amount: usdtLamports,
+    amount: usdcLamports,
     divvyPdaBumpSeed: divvyPdaBumpSeed
   };
   const dataBuffer = Buffer.alloc(LAYOUT.span);
@@ -83,7 +83,7 @@ export const depositLiquidityInstruction = (
       { pubkey: userHtTokenAccount, isSigner: false, isWritable: true },
       { pubkey: IDS.HOUSE_POOL_PDA_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: userUsdtTokenAccount, isSigner: false, isWritable: true },
-      { pubkey: IDS.HOUSE_POOL_USDT_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.HOUSE_POOL_USDC_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: IDS.HOUSE_POOL_STATE_ACCOUNT, isSigner: false, isWritable: true }
     ],
     programId: IDS.HOUSE_POOL_PROGRAM_ID,

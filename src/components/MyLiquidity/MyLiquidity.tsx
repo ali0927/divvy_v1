@@ -27,8 +27,8 @@ export const MyLiquidity = (props: {}) => {
             </span>
           </div>
           <div className="balance-container">
-            <span>Balance in USDT</span>
-            <span className="balance">{tokenAmountToString(userHT / (htSupply / htBalance))} USDT</span>
+            <span>Balance in USDC</span>
+            <span className="balance">{tokenAmountToString(userHT / (htSupply / htBalance))} USDC</span>
           </div>
           <div className="balance-container">
             <Tooltip title={LABELS.CONVERSION_RATIO}>

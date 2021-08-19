@@ -7,9 +7,9 @@ import { NavBar } from "../components/Nav/NavBar";
 import { HeaderTypes } from "../constants/HeaderTypes";
 import { useConnection } from "../contexts/sol/connection";
 import { useWallet } from "../contexts/sol/wallet";
-import { airdropTokens } from "../models/sol/instruction/usdtFaucet";
+import { airdropTokens } from "../models/sol/instruction/usdcFaucet";
 import { useAccountByMint } from "../hooks";
-import { FAUCET_PROGRAM_ID, USDT_MINT_DEVNET } from "../utils/ids";
+import { FAUCET_PROGRAM_ID, USDC_MINT_DEVNET } from "../utils/ids";
 import { PublicKey } from "@solana/web3.js";
 import { MONEY_LINE_BET_LAYOUT } from "../models/sol/state/moneyLineBet";
 import { MARKET_STATE_ACCOUNT_DATA_LAYOUT } from "../models/sol/state/marketState";
@@ -22,9 +22,9 @@ export const FaucetView = () => {
     const wallet = useWallet();
     const { connected } = useWallet();
     const connection = useConnection();
-    const usdtAddress = useAccountByMint(USDT_MINT_DEVNET);
-    const callUSDTFaucet = async () => {
-        airdropTokens(usdtAddress?.pubkey, FAUCET_PROGRAM_ID, new u64(100000000000, 10), connection, wallet.wallet)
+    const usdcAddress = useAccountByMint(USDC_MINT_DEVNET);
+    const callUSDCFaucet = async () => {
+        airdropTokens(usdcAddress?.pubkey, FAUCET_PROGRAM_ID, new u64(100000000000, 10), connection, wallet.wallet)
     }
     const [inspectPubkey, setInspectPubkey] = useState("");
     const [inspectAccount, setInspectAccount] = useState<string>("");
@@ -72,8 +72,8 @@ export const FaucetView = () => {
                             {connected ? "" : "Please connect your wallet"}
                             <br />
                             <br />
-                            <Button onClick={() => callUSDTFaucet()}>
-                                Get 100K USDT
+                            <Button onClick={() => callUSDCFaucet()}>
+                                Get 100K USDC
                             </Button>
                             <br />
                             <br />

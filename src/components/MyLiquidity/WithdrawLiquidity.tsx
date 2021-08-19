@@ -1,7 +1,7 @@
 import { PublicKey } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
-import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, LAMPORTS_PER_USDT, tokenAmountToString, Transactions } from "../../constants";
+import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, LAMPORTS_PER_USDC, tokenAmountToString, Transactions } from "../../constants";
 import {
   useConnection,
   useConnectionConfig,
@@ -23,7 +23,7 @@ export const WithdrawLiquidity = (props: {}) => {
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
   const htTokenAccount = useAccountByMint(IDS.HT_MINT)
-  const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
+  const usdcTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   let [htAmount, setHtAmount] = useState("");
   const { userHT } = useContext(UserHTContext);
   const { htBalance } = useContext(HousePoolContext);
@@ -68,7 +68,7 @@ export const WithdrawLiquidity = (props: {}) => {
       connection,
       wallet.wallet.publicKey,
       htTokenAccount.pubkey,
-      usdtTokenAccount?.pubkey,
+      usdcTokenAccount?.pubkey,
       IDS.getUsdtMint(connectionConfig.env),
       "withdraw",
       htLamports,
@@ -100,7 +100,7 @@ export const WithdrawLiquidity = (props: {}) => {
         <p>
           <small className="text-secondary">Withdrawable balance</small>
         </p>
-        <p className="balance">{tokenAmountToString(userHT)} HT ({tokenAmountToString(htBalance / htSupply * userHT)} USDT)</p>
+        <p className="balance">{tokenAmountToString(userHT)} HT ({tokenAmountToString(htBalance / htSupply * userHT)} USDC)</p>
       </div>
       <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>

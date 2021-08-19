@@ -20,7 +20,7 @@ export const StakeHT = () => {
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
   const htTokenAccount = useAccountByMint(IDS.HT_MINT)
-  const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
+  const usdcTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   const { userHT } = useContext(UserHTContext);
   let [htAmount, setHtAmount] = useState("");
 
@@ -59,7 +59,7 @@ export const StakeHT = () => {
       connection,
       wallet.wallet.publicKey,
       htTokenAccount.pubkey,
-      usdtTokenAccount?.pubkey,
+      usdcTokenAccount?.pubkey,
       IDS.getUsdtMint(connectionConfig.env),
       "withdraw",
       htLamports,
@@ -92,8 +92,8 @@ export const StakeHT = () => {
           <p className="balance">{tokenAmountToString(userHT)} HT</p>
       </div>
       <Form.Item
-        name="usdtAmount"
-        rules={[{ required: true, message: "Please input the USDT amount." }]}>
+        name="usdcAmount"
+        rules={[{ required: true, message: "Please input the USDC amount." }]}>
         <Input.Group compact>
           <Input placeholder={"House Token"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{ width: "75%" }} />
           <Button style={{ border: "1px solid rgb(67, 67, 67)" }} onClick={e => setHtAmount(tokenAmountToString(userHT))}>MAX</Button>

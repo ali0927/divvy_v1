@@ -57,10 +57,10 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
             </Row>
             <Row>
                 <Col span={24} md={8}>
-                    <TransactionData textContext={"Volume"} percentage={volumePercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.volume : "0")+" USDT"} />
+                    <TransactionData textContext={"Volume"} percentage={volumePercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.volume : "0")+" USDC"} />
                 </Col>
                 <Col span={24} md={8}>
-                    <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.balance : "0")+" USDT"} />
+                    <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.balance : "0")+" USDC"} />
                 </Col>
                 <Col span={24} md={8}>
                     <TransactionData textContext={"Number of txns"} percentage={transData.percent} data={(transData.trans)+" Transactions"} />

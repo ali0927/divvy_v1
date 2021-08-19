@@ -5,7 +5,7 @@ import { Bet } from "../../constants/bets";
 import { useState, useContext, useEffect } from "react";
 import { CloseOutlined } from "@ant-design/icons"
 import { BetsContext } from "../../contexts/bets";
-import { americanToDecimal, LAMPORTS_PER_USDT, tokenAmountToString } from "../../constants";
+import { americanToDecimal, LAMPORTS_PER_USDC, tokenAmountToString } from "../../constants";
 export const MyBet = (props: { bet: Bet }) => {
     const [riskStr, setRiskStr] = useState("0")
     const [payoutStr, setPayoutStr] = useState("0")
@@ -14,11 +14,11 @@ export const MyBet = (props: { bet: Bet }) => {
 
     useEffect(() => {
       setRisk(props.bet.risk)
-      setRiskStr((props.bet.risk / LAMPORTS_PER_USDT).toString())      
+      setRiskStr((props.bet.risk / LAMPORTS_PER_USDC).toString())      
     }, [props.bet])
 
     const doSetRisk = (risk: string) => {
-        let parsedRisk = parseFloat(risk) * LAMPORTS_PER_USDT;
+        let parsedRisk = parseFloat(risk) * LAMPORTS_PER_USDC;
         if (isNaN(parsedRisk)) {
             parsedRisk = 0;
         }
@@ -29,7 +29,7 @@ export const MyBet = (props: { bet: Bet }) => {
     }
     const doSetRiskByPayout = (payout: string) => {
       let risk = parseFloat(payout) / americanToDecimal(props.bet.odds)
-      let parsedRisk = risk * LAMPORTS_PER_USDT;
+      let parsedRisk = risk * LAMPORTS_PER_USDC;
         if (isNaN(parsedRisk)) {
             parsedRisk = 0;
             setRiskStr("0");
