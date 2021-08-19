@@ -459,8 +459,8 @@ body {
 
 .switch-tabs {
   min-height: 43px;
-  border: solid 1px gray;
-  border-radius: 21.5px;
+  /* border: solid 1px gray; */
+  /* border-radius: 21.5px; */
   justify-content: center;
   align-items: center;
   display: flex;
@@ -478,6 +478,8 @@ body {
   text-align: center;
   line-height: initial;
   padding: 0.5vw;
+  color:gray;
+  cursor: pointer;
 }
 
 .switch-tab-active {
