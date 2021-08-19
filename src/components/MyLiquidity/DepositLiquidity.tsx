@@ -102,12 +102,12 @@ export const DepositLiquidity = () => {
         <Form.Item name="usdcAmount" style={{marginBottom: '1em'}}>
           <Input.Group compact>
             <Input placeholder={"USDC"} name="usdcAmount" value={usdcAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{width: "70%"}} />
-            <Button style={{border:"1px solid rgb(67, 67, 67)",  width:"30%", padding:0}} onClick={e => setUsdtAmount((userUSDC / LAMPORTS_PER_USDC).toString())} disabled={userUSDC === 0}>MAX</Button>
+            <Button style={{border:"1px solid rgb(67, 67, 67)",  width:"30%", padding:0}} onClick={e => setUsdtAmount((userUSDC / LAMPORTS_PER_USDC).toFixed(2).toString())} disabled={userUSDC === 0}>MAX</Button>
           </Input.Group>
         </Form.Item>
 
         <WalletSlider         
-          onChange={(val: number) => setUsdtAmount((userUSDC / LAMPORTS_PER_USDC * val / 100).toString()) }
+          onChange={(val: number) => setUsdtAmount((userUSDC / LAMPORTS_PER_USDC * val / 100).toFixed(2).toString()) }
           value={usdcAmount === "" ? 0: Number(usdcAmount) * LAMPORTS_PER_USDC / userUSDC * 100}
           disabled={userUSDC === 0}
         />

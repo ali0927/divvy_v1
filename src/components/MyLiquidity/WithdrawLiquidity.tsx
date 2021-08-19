@@ -105,12 +105,12 @@ export const WithdrawLiquidity = (props: {}) => {
       <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>
           <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{width: "70%"}} />
-          <Button style={{border: "1px solid rgb(67, 67, 67)", width: "30%", padding:0}} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toString())} disabled={userHT === 0}>MAX</Button>
+          <Button style={{border: "1px solid rgb(67, 67, 67)", width: "30%", padding:0}} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toFixed(2).toString())} disabled={userHT === 0}>MAX</Button>
         </Input.Group>
       </Form.Item>
 
       <WalletSlider 
-        onChange={(val: number) => setHtAmount((userHT / LAMPORTS_PER_HT * val / 100).toString()) }
+        onChange={(val: number) => setHtAmount((userHT / LAMPORTS_PER_HT * val / 100).toFixed(2).toString()) }
         value={htAmount === "" ? 0: Number(htAmount) * LAMPORTS_PER_HT / userHT * 100}
         disabled={userHT === 0}
       />

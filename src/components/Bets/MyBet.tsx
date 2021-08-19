@@ -15,6 +15,7 @@ export const MyBet = (props: { bet: Bet }) => {
     useEffect(() => {
       setRisk(props.bet.risk)
       setRiskStr((props.bet.risk / LAMPORTS_PER_USDC).toString())      
+      setPayoutStr(tokenAmountToString(props.bet.risk * (americanToDecimal(props.bet.odds))))
     }, [props.bet])
 
     const doSetRisk = (risk: string) => {
