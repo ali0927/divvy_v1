@@ -7,7 +7,7 @@ import { Transactions } from "../../../constants";
 import { ENV } from "../../../constants/sol/env";
 import { sendTransaction } from "../../../contexts/sol/connection";
 import { WalletAdapter } from "../../../contexts/sol/wallet";
-import { USDT_MINT_DEVNET } from "../../../utils/ids";
+import { USDC_MINT_DEVNET } from "../../../utils/ids";
 import { createTokenAccount } from "./createTokenAccount";
 const FAUCET_PROGRAM_ID = new PublicKey(
     "4bXpkKSV8swHSnwqtzuboGPaPDeEgAn4Vt8GfarV5rZt"
@@ -44,25 +44,25 @@ const buildAirdropTokensIx = async (
 };
 
 export const airdropTokens = async (
-    usdtAddress: PublicKey | undefined,
+    usdcAddress: PublicKey | undefined,
     faucetPubkey: PublicKey,
     amount: u64,
     connection: any,
     wallet: WalletAdapter | undefined,
 ) => {
     if (wallet?.publicKey) {
-        let tokenDestinationPublicKey = usdtAddress
-        const tokenMintPubkey = USDT_MINT_DEVNET
+        let tokenDestinationPublicKey = usdcAddress
+        const tokenMintPubkey = USDC_MINT_DEVNET
         let ix: any = []
         let signers: any = []
         if (tokenDestinationPublicKey == null) {
-            let [usdtSigner, usdtIx] = await createTokenAccount(
+            let [usdcSigner, usdcIx] = await createTokenAccount(
                 connection,
-                USDT_MINT_DEVNET,
+                USDC_MINT_DEVNET,
                 wallet.publicKey);
-            ix = usdtIx;
-            signers.push(usdtSigner);
-            tokenDestinationPublicKey = usdtSigner.publicKey;
+            ix = usdcIx;
+            signers.push(usdcSigner);
+            tokenDestinationPublicKey = usdcSigner.publicKey;
         }
         ix = [...ix, await buildAirdropTokensIx(
             amount,
@@ -71,7 +71,7 @@ export const airdropTokens = async (
             faucetPubkey
         )];
         let metaData: Array<Transactions> = [{
-            type: "USDT Faucet",
+            type: "USDC Faucet",
             match: "-",
             odds: "-",
             odds_type: "-",

@@ -7,8 +7,8 @@ export const DASHBOARD_DATA = [
       placed: 'Sep 22th 2021<br />at 12:38 AM',
       settled: 'pending',
       odds: 'Money Line <br /> +725',
-      original: '<b>0,000 USDT</b>',
-      potential: '4,000 USDT'
+      original: '<b>0,000 USDC</b>',
+      potential: '4,000 USDC'
     },
     {
         key: '2',
@@ -18,8 +18,8 @@ export const DASHBOARD_DATA = [
         placed: 'Sep 29th 2021<br />at 12:38 AM',
         settled: 'pending',
         odds: 'Money Line <br /> +725',
-        original: '<b>0,000 USDT</b>',
-        potential: '1,000 USDT'
+        original: '<b>0,000 USDC</b>',
+        potential: '1,000 USDC'
       },
       {
         key: '3',
@@ -29,8 +29,8 @@ export const DASHBOARD_DATA = [
         placed: 'Sep 13th 2021<br />at 12:38 AM',
         settled: 'pending',
         odds: 'Money Line <br /> +725',
-        original: '<b>0,000 USDT</b>',
-        potential: '2,000 USDT'
+        original: '<b>0,000 USDC</b>',
+        potential: '2,000 USDC'
       },
       {
         key: '4',
@@ -40,8 +40,8 @@ export const DASHBOARD_DATA = [
         placed: 'Sep 17th 2021<br />at 12:38 AM',
         settled: 'pending',
         odds: 'Money Line <br /> +725',
-        original: '<b>0,000 USDT</b>',
-        potential: '3,000 USDT'
+        original: '<b>0,000 USDC</b>',
+        potential: '3,000 USDC'
       },
 ];
 

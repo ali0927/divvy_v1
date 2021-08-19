@@ -43,7 +43,7 @@ export const initBet = async (
   if (userUsdtAccount == null) {
     notify({
       message: "Transaction failed...",
-      description: "User does not have a USDT token account.",
+      description: "User does not have a USDC token account.",
       type: "error",
     });
     return [false, undefined];
@@ -155,8 +155,8 @@ const initBetInstruction = (
       { pubkey: betAccount, isSigner: false, isWritable: true },
       { pubkey: marketAccount, isSigner: false, isWritable: true },
       { pubkey: IDS.BET_POOL_STATE_ACCOUNT, isSigner: false, isWritable: true },
-      { pubkey: IDS.HOUSE_POOL_USDT_ACCOUNT, isSigner: false, isWritable: true },
-      { pubkey: IDS.BET_POOL_USDT_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.HOUSE_POOL_USDC_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.BET_POOL_USDC_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: userUsdtAccount, isSigner: false, isWritable: true },
       { pubkey: IDS.TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
     ],

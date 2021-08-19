@@ -2,14 +2,14 @@ import { useContext } from "react";
 import { Col, Row } from "antd";
 import { CommonHeader } from "../Common/CommonHeader";
 import { useWallet } from "../../contexts/sol/wallet";
-import { UserUSDTContext } from "../../contexts/sol/userusdt";
-import { LAMPORTS_PER_USDT } from "../../constants/math";
+import { UserUSDCContext } from "../../contexts/sol/userusdc";
+import { LAMPORTS_PER_USDC } from "../../constants/math";
 import { ChainSelectContext } from "../../contexts/chainselect";
 
 export const BettingDashboardHeader = (props: { data: any , error: any}) => {
   const wallet = useWallet();
   const { chain } = useContext(ChainSelectContext)
-  const { userUSDT } = useContext(UserUSDTContext)
+  const { userUSDC } = useContext(UserUSDCContext)
   return (
     <div>
       <Row>
@@ -22,7 +22,7 @@ export const BettingDashboardHeader = (props: { data: any , error: any}) => {
         <Col md={6}>
             <div className="liquidity-content">
                 <span className="text-primary">Wallet Balance:</span>
-                <h3 className="text-heavy">{userUSDT/LAMPORTS_PER_USDT} USDT</h3>
+                <h3 className="text-heavy">{userUSDC/LAMPORTS_PER_USDC} USDC</h3>
             </div>
         </Col>
         <Col md={14}>

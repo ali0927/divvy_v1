@@ -4,7 +4,7 @@ import { DATE_STRING_TO_NUMBER } from "../../constants/DashboardColumns";
 import { BetStatus, BetsTable } from "../../constants/bets";
 import { useGetBetsQuery } from "../../store/getBets";
 import { useWallet } from "../../contexts/sol/wallet";
-import { americanToDecimal, LAMPORTS_PER_USDT } from "../../constants/math";
+import { americanToDecimal, LAMPORTS_PER_USDC } from "../../constants/math";
 
 export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, filteredInfo: any, setSortedInfo: any, setFilteredInfo: any }) => {
     const wallet = useWallet();  
@@ -22,8 +22,8 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           placed: bet["placedOn"].split(" "),
           settled: BetStatus[bet["status"]].toLowerCase(),
           odds: bet["betType"]+'<br />'+(bet["odds"] < 0 ? "" : "+")+americanToDecimal(bet["odds"]),
-          original: '<b>'+bet["risk"]/LAMPORTS_PER_USDT+' USDT</b>',
-          potential: bet["payout"]/LAMPORTS_PER_USDT+' USDT'
+          original: '<b>'+bet["risk"]/LAMPORTS_PER_USDC+' USDC</b>',
+          potential: bet["payout"]/LAMPORTS_PER_USDC+' USDC'
         })
       })
       setBetData(tmpArr);
@@ -95,7 +95,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           dataIndex: "potential",
           key: "potential",
           sorter: {
-              compare: (a: any, b: any) => JSON.parse(a.potential.split(' USDT')[0].replace(',', ''))-JSON.parse(b.potential.split(' USDT')[0].replace(',', ''))
+              compare: (a: any, b: any) => JSON.parse(a.potential.split(' USDC')[0].replace(',', ''))-JSON.parse(b.potential.split(' USDC')[0].replace(',', ''))
           },
           sortOrder: props.sortedInfo.columnKey === 'potential' && props.sortedInfo.order,
         }

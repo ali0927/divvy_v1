@@ -22,12 +22,10 @@ export const BetSlips = () => {
     <div className="sidebar-section" style={{ display: "flex", flexDirection: 'column', height: '100vh', position: 'relative' }}>
       <div style={{ display: "flex", position: 'absolute', left: 0, right: 0, top: 0 }}>
         <div onClick={() => setActive('slips')} className={active === "slips" ? "bets-active bets-left" : "bets-left"}>
-          <Badge style={{ backgroundColor: "#7c01ff", right: -14 }} size="default" count={slips}>
-            <h3>Bet Slip</h3>
-          </Badge>
+          <h3 style={{margin:0}}>Bet Slip{slips > 0 ? ` (${slips})`: ''}</h3>            
         </div>
         <div onClick={() => setActive('pending')} className={active === "pending" ? "bets-active bets-right" : "bets-right"}>
-          <h3>Pending ({pending})</h3>
+          <h3 style={{margin:0}}>Pending ({pending})</h3>
         </div>
       </div>
 

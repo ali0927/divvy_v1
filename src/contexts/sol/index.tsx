@@ -3,7 +3,7 @@ import { HousePoolProvider } from "./hpliquidity"
 import { HousePoolStateProvider } from "./hpstate"
 import { HPTokenProvider } from "./hptoken"
 import { UserHTContextProvider } from "./userht"
-import { UserUSDTContextProvider } from "./userusdt"
+import { UserUSDCContextProvider } from "./userusdc"
 
 export const SolanaProvider = (props: { children: any }) => {
     return (
@@ -12,9 +12,9 @@ export const SolanaProvider = (props: { children: any }) => {
                 <HPTokenProvider>
                     <BetPoolStateProvider>
                         <UserHTContextProvider>
-                            <UserUSDTContextProvider>
+                            <UserUSDCContextProvider>
                                 {props.children}
-                            </UserUSDTContextProvider>
+                            </UserUSDCContextProvider>
                         </UserHTContextProvider>
                     </BetPoolStateProvider>
                 </HPTokenProvider>

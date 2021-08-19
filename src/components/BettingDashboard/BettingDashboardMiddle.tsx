@@ -20,7 +20,7 @@ export const BettingDashboardMiddle = () => {
                     <BettingSwitch siwtchVal={switchVal} setSwitchVal={setSwitchVal} />
                 </Col>
                 <Col span={36} md={10} offset={4} style={{textAlign: "right"}}>
-                    <TransactionData textContext={"All time betting P&L"} percentage={114} data={"9,739.73 USDT"} />
+                    <TransactionData textContext={"All time betting P&L"} percentage={114} data={"9,739.73 USDC"} />
                 </Col>
             </Row>
         </div>

@@ -6,7 +6,7 @@ export const WAD = TEN.pow(new BN(18));
 export const RAY = TEN.pow(new BN(27));
 export const ZERO = new BN(0);
 export const LAMPORTS_PER_SOL = 1000000000;
-export const LAMPORTS_PER_USDT = 1000000;
+export const LAMPORTS_PER_USDC = 1000000;
 export const LAMPORTS_PER_HP = 1000000;
 export const MS_IN_DAY = 86400000;
 
@@ -33,7 +33,7 @@ export const tokenAmountToString = (tokenAmount: number, decimals: number = 6, m
   return (tokenAmount / Math.pow(10, decimals)).toLocaleString(undefined, { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: maximumFractionDigits })
 }
 
-export const usdtAmountReducedLength = (amount: number) => {
+export const usdcAmountReducedLength = (amount: number) => {
   amount = amount / Math.pow(10, 6)
   if (amount <= 999) {
     return amount.toString();

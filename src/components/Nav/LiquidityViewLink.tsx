@@ -18,16 +18,16 @@ export const LiquidityViewLink = () => {
           <div className="balance-container">
             <span>House Pool balance</span>
             <span className="balance">
-              {tokenAmountToString(htBalance)} USDT
+              {tokenAmountToString(htBalance)} USDC
             </span>
           </div>
           <div className="balance-container">
             <span>Locked liquidity</span>
-            <span className="balance">{tokenAmountToString(liveLiquidity + lockedLiquidity)} USDT</span>
+            <span className="balance">{tokenAmountToString(liveLiquidity + lockedLiquidity)} USDC</span>
           </div>
           <div className="balance-container">
             <span>Available liquidity</span>
-            <span className="balance">{tokenAmountToString(htBalance - lockedLiquidity)} USDT</span>
+            <span className="balance">{tokenAmountToString(htBalance - lockedLiquidity)} USDC</span>
           </div>
         </small>
       </div>

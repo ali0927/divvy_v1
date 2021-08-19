@@ -9,10 +9,10 @@ export const LiquidityPoolPerformance = (props: { data : Array<Pool> | undefined
     return(
         <div style={{marginTop: 40, padding: 5}}>
             <Row>
-                <Col span={36} md={10}>
-                    <CommonHeader side={false} heading={"Pool Performance"} />
+                <Col span={24} md={10}>
+                    <CommonHeader side={false} heading={"House Performance"} />
                 </Col>
-                <Col span={36} md={14}>
+                <Col span={24} md={14}>
                     <div className="heading-align-container">
                         <div className="header-align">
                             <LiquidityPoolTabs poolPerformance={poolPerformance} setPoolPerformance={setPoolPerformance} />

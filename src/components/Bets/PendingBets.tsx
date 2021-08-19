@@ -10,7 +10,7 @@ export const PendingBets = () => {
 
     return (
         <div className="form-grey">
-            <Collapse accordion={true} style={{ display: "grid" }} ghost={true} expandIconPosition="right">
+            <Collapse accordion={true} style={{ display: "grid", marginTop: '70px' }} ghost={true} expandIconPosition="right">
                 {bets?.bets.map((value: Bet) => {
                     if (value.status === BetStatus.Pending) {
                         return (

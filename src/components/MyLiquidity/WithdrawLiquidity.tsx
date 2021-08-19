@@ -1,7 +1,7 @@
 import { PublicKey } from "@solana/web3.js";
 
 import { Form, Input, Button } from "antd";
-import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, LAMPORTS_PER_USDT, tokenAmountToString, Transactions } from "../../constants";
+import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, LAMPORTS_PER_USDC, tokenAmountToString, Transactions } from "../../constants";
 import {
   useConnection,
   useConnectionConfig,
@@ -15,15 +15,19 @@ import { useContext, useState, useEffect } from "react";
 import { useAccountByMint } from "../../hooks";
 import * as IDS from "../../utils/ids";
 import { UserHTContext } from "../../contexts/sol/userht";
+import { HPTokenContext } from "../../contexts/sol/hptoken";
+import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 
 export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
   const htTokenAccount = useAccountByMint(IDS.HT_MINT)
-  const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
+  const usdcTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
   let [htAmount, setHtAmount] = useState("");
   const { userHT } = useContext(UserHTContext);
+  const { htBalance } = useContext(HousePoolContext);
+  const { htSupply } = useContext(HPTokenContext);
   
   useEffect(() => {
    if(userHT === 0) setHtAmount("")
@@ -60,15 +64,16 @@ export const WithdrawLiquidity = (props: {}) => {
 
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyhouse")], IDS.HOUSE_POOL_PROGRAM_ID);
 
-    const [ix, signers] = await depositLiquidityTransaction(
+    const res = await depositLiquidityTransaction(
       connection,
       wallet.wallet.publicKey,
       htTokenAccount.pubkey,
-      usdtTokenAccount?.pubkey,
+      usdcTokenAccount?.pubkey,
       IDS.getUsdtMint(connectionConfig.env),
       "withdraw",
       htLamports,
       bumpSeed);
+    const [ix, signers] = res
     let metaData: Array<Transactions> = [{
       type: "Withdraw",
       match: "-",
@@ -95,17 +100,17 @@ export const WithdrawLiquidity = (props: {}) => {
         <p>
           <small className="text-secondary">Withdrawable balance</small>
         </p>
-        <p className="balance">{tokenAmountToString(userHT)} HT</p>
+        <p className="balance">{tokenAmountToString(userHT)} HT ({tokenAmountToString(htBalance / htSupply * userHT)} USDC)</p>
       </div>
       <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>
           <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{width: "70%"}} />
-          <Button style={{border: "1px solid rgb(67, 67, 67)", width: "30%", padding:0}} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toString())} disabled={userHT === 0}>MAX</Button>
+          <Button style={{border: "1px solid rgb(67, 67, 67)", width: "30%", padding:0}} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toFixed(2).toString())} disabled={userHT === 0}>MAX</Button>
         </Input.Group>
       </Form.Item>
 
       <WalletSlider 
-        onChange={(val: number) => setHtAmount((userHT / LAMPORTS_PER_HT * val / 100).toString()) }
+        onChange={(val: number) => setHtAmount((userHT / LAMPORTS_PER_HT * val / 100).toFixed(2).toString()) }
         value={htAmount === "" ? 0: Number(htAmount) * LAMPORTS_PER_HT / userHT * 100}
         disabled={userHT === 0}
       />

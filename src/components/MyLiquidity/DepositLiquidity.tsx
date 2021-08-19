@@ -12,8 +12,8 @@ import { ExplorerLink } from "../ExplorerLink";
 import { WalletSlider } from "./WalletSlider"
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
 import { useContext, useState, useEffect } from "react";
-import { UserUSDTContext } from "../../contexts/sol/userusdt";
-import { LAMPORTS_PER_USDT, tokenAmountToString, Transactions } from "../../constants";
+import { UserUSDCContext } from "../../contexts/sol/userusdc";
+import { LAMPORTS_PER_USDC, tokenAmountToString, Transactions } from "../../constants";
 import * as IDS from "../../utils/ids"
 
 export const DepositLiquidity = () => {
@@ -21,13 +21,13 @@ export const DepositLiquidity = () => {
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
   const htTokenAccount = useAccountByMint(IDS.HT_MINT)
-  const usdtTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
-  const { userUSDT } = useContext(UserUSDTContext)
-  let [usdtAmount, setUsdtAmount] = useState("");
+  const usdcTokenAccount = useAccountByMint(IDS.getUsdtMint(connectionConfig.env))
+  const { userUSDC } = useContext(UserUSDCContext)
+  let [usdcAmount, setUsdtAmount] = useState("");
 
   useEffect(() => {
-    if(userUSDT === 0) setUsdtAmount("")
-  }, [userUSDT])
+    if(userUSDC === 0) setUsdtAmount("")
+  }, [userUSDC])
 
   const onFinish = async () => {
     if (wallet?.wallet?.publicKey == null) {
@@ -39,20 +39,20 @@ export const DepositLiquidity = () => {
       return;
     }
 
-    const usdtLamports = Number(usdtAmount) * LAMPORTS_PER_USDT;
-    if (isNaN(usdtLamports)) {
+    const usdcLamports = Number(usdcAmount) * LAMPORTS_PER_USDC;
+    if (isNaN(usdcLamports)) {
       notify({
         message: "Transaction failed...",
-        description: "Invalid USDT amount.",
+        description: "Invalid USDC amount.",
         type: "error",
       });
       return;
     }
 
-    if (usdtTokenAccount == null) {
+    if (usdcTokenAccount == null) {
       notify({
         message: "Transaction failed...",
-        description: "User does not have a USDT token account.",
+        description: "User does not have a USDC token account.",
         type: "error",
       });
       return;
@@ -64,10 +64,10 @@ export const DepositLiquidity = () => {
       connection,
       wallet.wallet.publicKey,
       htTokenAccount?.pubkey,
-      usdtTokenAccount.pubkey,
+      usdcTokenAccount.pubkey,
       IDS.getUsdtMint(connectionConfig.env),
       "deposit",
-      usdtLamports,
+      usdcLamports,
       bumpSeed);
 
     let metaData: Array<Transactions> = [{
@@ -75,7 +75,7 @@ export const DepositLiquidity = () => {
       match: "-",
       odds: "-",
       odds_type: "-",
-      amount: Number(usdtAmount)
+      amount: Number(usdcAmount)
     }];
     const [res_status, ] = await sendTransaction(
       connection,
@@ -96,23 +96,23 @@ export const DepositLiquidity = () => {
           <p>
             <small className="text-secondary">Wallet balance</small>
           </p>
-          <p className="balance">{tokenAmountToString(userUSDT)} USDT</p>
+          <p className="balance">{tokenAmountToString(userUSDC)} USDC</p>
         </div>
 
-        <Form.Item name="usdtAmount" style={{marginBottom: '1em'}}>
+        <Form.Item name="usdcAmount" style={{marginBottom: '1em'}}>
           <Input.Group compact>
-            <Input placeholder={"USDT"} name="usdtAmount" value={usdtAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{width: "70%"}} />
-            <Button style={{border:"1px solid rgb(67, 67, 67)",  width:"30%", padding:0}} onClick={e => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT).toString())} disabled={userUSDT === 0}>MAX</Button>
+            <Input placeholder={"USDC"} name="usdcAmount" value={usdcAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{width: "70%"}} />
+            <Button style={{border:"1px solid rgb(67, 67, 67)",  width:"30%", padding:0}} onClick={e => setUsdtAmount((userUSDC / LAMPORTS_PER_USDC).toFixed(2).toString())} disabled={userUSDC === 0}>MAX</Button>
           </Input.Group>
         </Form.Item>
 
         <WalletSlider         
-          onChange={(val: number) => setUsdtAmount((userUSDT / LAMPORTS_PER_USDT * val / 100).toString()) }
-          value={usdtAmount === "" ? 0: Number(usdtAmount) * LAMPORTS_PER_USDT / userUSDT * 100}
-          disabled={userUSDT === 0}
+          onChange={(val: number) => setUsdtAmount((userUSDC / LAMPORTS_PER_USDC * val / 100).toFixed(2).toString()) }
+          value={usdcAmount === "" ? 0: Number(usdcAmount) * LAMPORTS_PER_USDC / userUSDC * 100}
+          disabled={userUSDC === 0}
         />
 
-        <Button onClick={onFinish} disabled={Number(usdtAmount) === 0}>
+        <Button onClick={onFinish} disabled={Number(usdcAmount) === 0}>
           Deposit
         </Button>
       </div>

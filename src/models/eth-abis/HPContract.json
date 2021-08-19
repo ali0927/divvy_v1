@@ -200,7 +200,7 @@
     },
     {
       "inputs": [],
-      "name": "USDTHouseAccount",
+      "name": "USDCHouseAccount",
       "outputs": [
         {
           "internalType": "contract ERC20",
@@ -419,7 +419,7 @@
     },
     {
       "inputs": [],
-      "name": "get_HPUSDT",
+      "name": "get_HPUSDC",
       "outputs": [
         {
           "internalType": "uint256",

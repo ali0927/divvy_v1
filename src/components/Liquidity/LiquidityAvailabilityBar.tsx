@@ -1,18 +1,19 @@
 import { Component } from 'react';
 import { Progress } from "antd";
-import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import { CircularProgressbarWithChildren, CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { useState, useEffect, useContext } from "react";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 import { BetStateContext } from "../../contexts/sol/betstate";
+import "react-circular-progressbar/dist/styles.css";
 
-class GradientSVG extends Component<{ startColor: string, endColor: string, rotation: number }, {}> {
+class GradientSVG extends Component<{ startColor: string, endColor: string, rotation: number, id: string }, {}> {
   render() {
     let gradientTransform = `rotate(${this.props.rotation})`;
 
     return (
       <svg style={{ height: 0 }}>
         <defs>
-          <linearGradient id={"gradient-progress"} gradientTransform={gradientTransform}>
+          <linearGradient id={this.props.id} gradientTransform={gradientTransform}>
             <stop offset="0%" stopColor={this.props.startColor} />
             <stop offset="100%" stopColor={this.props.endColor} />
           </linearGradient>
@@ -40,17 +41,31 @@ export const LiquidityAvailabilityBar = () => {
   }, [])
   return (
     <div style={{transform: "rotate(225deg)"}}>
-      <GradientSVG startColor={"#7c01ff"} endColor={"#00d77d"} rotation={90} />
+      <GradientSVG startColor={"#7c01ff"} endColor={"#00d77d"} rotation={90} id={"gradient-progress-green"} />
+      <GradientSVG startColor={"#f5d020"} endColor={"#f53803"} rotation={120} id={"gradient-progress-orange"} />
+      <GradientSVG startColor={"#7c01ff00"} endColor={"#ff0000"} rotation={100} id={"gradient-progress-red"} />
       <CircularProgressbarWithChildren
-        value={((htBalance - liveLiquidity - lockedLiquidity) * 100) / (htBalance)}
+        value={95}
         circleRatio={0.75}
         strokeWidth={15}
-        styles={{
-          path: { stroke: `url(#gradient-progress)`, height: '100%', transition: 'stroke-dashoffset 0.5s ease 0s', }, 
-          trail: { stroke: "#242424" }
-        }}
+        styles={buildStyles({
+          pathColor: `url(#gradient-progress-orange)`,
+          trailColor: `url(#gradient-progress-red)`,
+          strokeLinecap: "butt"
+        })}
       >
-        <video autoPlay={true} style={{ transform: "rotate(-225deg)" }} loop={true} width={width > 222.3 ? width / 3 : width / 1.5} height={width > 222.3 ? width / 3 : width / 1.5} src={"https://storage.googleapis.com/divvy-cdn/assets/animated_logo.mp4"} />
+        {/* Foreground path */}
+        <CircularProgressbar
+          value={((htBalance - liveLiquidity - lockedLiquidity) * 100) / (htBalance)}
+          circleRatio={0.75}
+          strokeWidth={15}  
+          styles={buildStyles({
+            pathColor: `url(#gradient-progress-green)`,
+            trailColor: "transparent",
+            strokeLinecap: "butt"
+          })}
+        />
+        <video autoPlay={true} style={{position:'absolute', transform: "rotate(-225deg)" }} loop={true} width={width > 222.3 ? width / 3 : width / 1.5} height={width > 222.3 ? width / 3 : width / 1.5} src={"https://storage.googleapis.com/divvy-cdn/assets/animated_logo.mp4"} />
       </CircularProgressbarWithChildren>
     </div>
   );
