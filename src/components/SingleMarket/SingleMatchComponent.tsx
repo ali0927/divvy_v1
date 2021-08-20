@@ -22,7 +22,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
             </div>
           </Col>
           <Col span={6} md={6} style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly'}}>
-            <TeamDetails name={props.market.teamA} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamA + ".svg"} />
+            <TeamDetails name={props.market.teamA} logo={"https://storage.googleapis.com/divvy-cdn/MLB/" + props.market.teamA.toLowerCase().replaceAll(" ", "-").replaceAll("-fc", "")  + ".svg"} />
             <Row>
               <Col span={0} md={4}></Col>
               <Col span={24} md={20}>
@@ -31,7 +31,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                 </div>
               </Col>
             </Row>
-            <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/" + "MLB/" + props.market.teamB + ".svg"} />
+            <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/MLB/" + props.market.teamB.toLowerCase().replaceAll(" ", "-").replaceAll("-fc", "")  + ".svg"} />
           </Col>
           <Col span={18} md={14}>
             <div style={{display:'flex', flexDirection:'column', justifyContent:'space-around', height:'100%'}}>
