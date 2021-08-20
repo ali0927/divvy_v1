@@ -1,9 +1,10 @@
-import { Table } from 'antd';
+import { Table, Row, Col } from 'antd';
 import { useEffect, useState } from 'react';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { Transactions, TransactionsTable } from '../../constants';
-import { LIQUIDITY_ACTIVITY_COLUMNS } from '../../constants/LiquidityColumns';
+import { LIQUIDITY_ACTIVITY_COLUMNS, LIQUIDITY_ACTIVITY_MOBILE_COLUMNS } from '../../constants/LiquidityColumns';
 import { DIVVY_WEBSOCKET_API } from "../../constants/urls";
+import { shortenAddress } from "../../utils/utils";
 
 const client = new W3CWebSocket(DIVVY_WEBSOCKET_API);
 
@@ -16,7 +17,7 @@ export const LiquidityActivityTable = (props: { transactions : Array<Transaction
         tmpArr.push({
           key: item.id ? item.id : 0,
           type: item.type,
-          pubkey: (item.pubkey && item.pubkey?.substr(0, item.pubkey?.length/2))+"<br />"+(item.pubkey && item.pubkey?.substr(item.pubkey?.length/2+1)),
+          pubkey: (item.pubkey && shortenAddress(item.pubkey?.toString(), 12)) + "",
           match: item.match,
           odds: item.odds_type+" <br />"+(item.odds && item.odds.includes('-') ? item.odds : item.odds == "0" ? item.odds_type != "-" ? "-" : "" : "+"+item.odds),
           amount: (item.amount).toString()
@@ -40,10 +41,22 @@ export const LiquidityActivityTable = (props: { transactions : Array<Transaction
   }
 
   return (
-    <Table
-      columns={LIQUIDITY_ACTIVITY_COLUMNS}
-      dataSource={data}
-      className={"pool-activity-table"}
-    />
+    <Row>
+      <Col span={0} md={0} lg={24}>
+        <Table
+          columns={LIQUIDITY_ACTIVITY_COLUMNS}
+          dataSource={data}
+          className={"pool-activity-table"}
+        />
+      </Col>
+      <Col span={24} lg={0}>
+        <Table
+          columns={LIQUIDITY_ACTIVITY_MOBILE_COLUMNS}
+          dataSource={data}
+          className={"pool-activity-table"}
+        />
+      </Col>
+    </Row>
+  
   );
 };

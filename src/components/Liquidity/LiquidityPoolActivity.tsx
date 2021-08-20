@@ -4,18 +4,18 @@ import { CommonHeader } from "../Common/CommonHeader";
 import { Transactions } from "../../constants";
 
 export const LiquidityPoolActivity = (props: { transactions : Array<Transactions> | null | undefined }) => {
-    return (
-        <div style={{marginTop: 40, padding: 5}}>
-            <Row>
-                <Col span={36} md={24}>
-                    <CommonHeader side={false} heading={"Pool Activity Stream"} />
-                </Col>
-            </Row>
-            <Row>
-                <Col span={72} md={24}>
-                    <LiquidityActivityTable transactions={props.transactions} />
-                </Col>
-            </Row>
-        </div>      
-    );
+  return (
+    <div style={{marginTop: 40, padding: 5}}>
+      <Row>
+        <Col span={24}>
+          <CommonHeader side={false} heading={"Pool Activity Stream"} />
+        </Col>
+      </Row>
+      <Row>
+        <Col span={24} style={{overflow:'hidden'}}>
+          <LiquidityActivityTable transactions={props.transactions} />
+        </Col>
+      </Row>
+    </div>      
+  );
 };

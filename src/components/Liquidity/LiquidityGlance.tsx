@@ -41,31 +41,31 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
     }
     return (
         <>
-            <Row>
-                <Col span={36} md={24}>
-                    <div className="heading-align-container">
-                        <div className="header-align" style={{flexDirection: 'column'}}>
-                            <span className="pool-header">At a glance</span>
-                            <Select defaultValue="24 hours" onSelect={handleChange} className="glance-select" suffixIcon={<DownOutlined style={{marginTop: 0, color: "#fff"}} className="direction-icon" />}>
-                                <Option value="24 hours">24 hours</Option>
-                                <Option value="1 week">1 week</Option>
-                                <Option value="1 month">1 month</Option>
-                            </Select>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-                <Col span={24} md={8}>
-                    <TransactionData textContext={"Volume"} percentage={volumePercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.volume : "0")+" USDC"} />
-                </Col>
-                <Col span={24} md={8}>
-                    <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.balance : "0")+" USDC"} />
-                </Col>
-                <Col span={24} md={8}>
-                    <TransactionData textContext={"Number of txns"} percentage={transData.percent} data={(transData.trans)+" Transactions"} />
-                </Col>
-            </Row>
+          <Row>
+            <Col span={36} md={24}>
+              <div className="heading-align-container">
+                <div className="header-align" style={{display:'flex'}}>
+                  <span className="pool-header">At a glance</span>
+                  <Select defaultValue="24 hours" onSelect={handleChange} className="glance-select" suffixIcon={<DownOutlined style={{marginTop: 0, color: "#fff"}} className="direction-icon" />}>
+                    <Option value="24 hours">24 hours</Option>
+                    <Option value="1 week">1 week</Option>
+                    <Option value="1 month">1 month</Option>
+                  </Select>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12} md={8}>
+                <TransactionData textContext={"Volume"} percentage={volumePercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.volume : "0")+" USDC"} />
+            </Col>
+            <Col span={12} md={8}>
+                <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.balance : "0")+" USDC"} />
+            </Col>
+            <Col span={24} md={8}>
+                <TransactionData textContext={"Number of txns"} percentage={transData.percent} data={(transData.trans)+" Transactions"} />
+            </Col>
+          </Row>
         </>
     );
 };
