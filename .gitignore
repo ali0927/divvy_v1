@@ -24,3 +24,10 @@ yarn-error.log*
 package-lock.json*
 
 .vscode
+
+# idea
+.idea/
+*.iml
+
+# yarn lock
+yarn.lock
