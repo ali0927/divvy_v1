@@ -35,11 +35,13 @@ const LiquidityView = () => {
           </LeftSideBar>
         </Col>
         {!isMobileMenuVisible && !isBetSlipsVisible &&
-          <Col span={14} xs={24} sm={24} md={14}>
+          <Col span={24} md={14}>
             <header className="root-content">
-              <div style={{display:'flex', justifyContent:'space-between'}}>
-                <GoBack path={`${BETS_VIEW_PATH}`} label="Back to Betting"/>
-                <ConnectLink />
+              <div>
+                <Row  style={{display:'flex', justifyContent:'space-between'}}>
+                  <Col span={24} md={10}><GoBack path={`${BETS_VIEW_PATH}`} label="Back to Betting"/></Col>
+                  <Col span={0} md={10}><ConnectLink /></Col>
+                </Row>
               </div>
               <LiquidityGlobalStats />
               <LiquidityGlance data={data} setInterval={setInterval} transactions={transData} />

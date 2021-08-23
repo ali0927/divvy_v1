@@ -19,10 +19,7 @@ export const LiquidityAvailability = () => {
         <div className="horizontal-outline" />
         <div className="liquidity-content">
           <h6 className="text-secondary">Reserved For</h6>
-          {/* Change this */}
-          <h3>{pendingBets} Pending <br />Bets</h3>
-          {/* <h6 className="text-secondary">Distributed Amongst</h6>
-          <h3>278 Liquidity <br />Providers</h3> */}
+          <h3><span className="liquidity-heavy">{pendingBets}</span> Pending <br />Bets</h3>
         </div>
         <div className="horizontal-outline" />
       </div>
