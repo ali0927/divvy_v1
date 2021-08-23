@@ -1,20 +1,20 @@
-import type { PublicKey } from "@solana/web3.js";
+import type { PublicKey } from '@solana/web3.js';
 
-import Wallet from "@project-serum/sol-wallet-adapter";
-import { Transaction } from "@solana/web3.js";
-import { Button, Modal } from "antd";
-import EventEmitter from "eventemitter3";
+import Wallet from '@project-serum/sol-wallet-adapter';
+import { Transaction } from '@solana/web3.js';
+import { Button, Modal } from 'antd';
+import EventEmitter from 'eventemitter3';
 import React, {
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
-} from "react";
-import { notify } from "../../utils/notifications";
-import { useConnectionConfig } from "./connection";
-import { useLocalStorageState } from "../../utils/utils";
-import { WALLET_PROVIDERS } from "../../constants/sol/walletproviders";
+} from 'react';
+import { notify } from '../../utils/notifications';
+import { useConnectionConfig } from './connection';
+import { useLocalStorageState } from '../../utils/utils';
+import { WALLET_PROVIDERS } from '../../constants/sol/walletproviders';
 
 export interface WalletAdapter extends EventEmitter {
   publicKey: PublicKey | null;
@@ -31,19 +31,19 @@ export const WalletContext = React.createContext<{
 }>({
   wallet: undefined,
   connected: false,
-  select() { },
+  select() {},
   provider: undefined,
 });
 
 export function WalletProvider({ children = null as any }) {
   const { endpoint } = useConnectionConfig();
 
-  const [autoConnect, setAutoConnect] = useState(false);
-  const [providerUrl, setProviderUrl] = useLocalStorageState("walletProvider");
+  const [autoConnect, setAutoConnect] = useState(true);
+  const [providerUrl, setProviderUrl] = useLocalStorageState('walletProvider');
 
   const provider = useMemo(
     () => WALLET_PROVIDERS.find(({ url }) => url === providerUrl),
-    [providerUrl]
+    [providerUrl],
   );
 
   const wallet = useMemo(
@@ -51,44 +51,44 @@ export function WalletProvider({ children = null as any }) {
       if (provider) {
         return new (provider.adapter || Wallet)(
           providerUrl,
-          endpoint
+          endpoint,
         ) as WalletAdapter;
       }
     },
-    [provider, providerUrl, endpoint]
+    [provider, providerUrl, endpoint],
   );
 
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
     if (wallet) {
-      wallet.on("connect", () => {
+      wallet.on('connect', () => {
         if (wallet.publicKey) {
           setConnected(true);
           const walletPublicKey = wallet.publicKey.toBase58();
           const keyToDisplay =
             walletPublicKey.length > 20
               ? `${walletPublicKey.substring(
-                0,
-                7
-              )}.....${walletPublicKey.substring(
-                walletPublicKey.length - 7,
-                walletPublicKey.length
-              )}`
+                  0,
+                  7,
+                )}.....${walletPublicKey.substring(
+                  walletPublicKey.length - 7,
+                  walletPublicKey.length,
+                )}`
               : walletPublicKey;
 
           notify({
-            message: "Wallet update",
-            description: "Connected to wallet " + keyToDisplay,
+            message: 'Wallet update',
+            description: 'Connected to wallet ' + keyToDisplay,
           });
         }
       });
 
-      wallet.on("disconnect", () => {
+      wallet.on('disconnect', () => {
         setConnected(false);
         notify({
-          message: "Wallet update",
-          description: "Disconnected from wallet",
+          message: 'Wallet update',
+          description: 'Disconnected from wallet',
         });
       });
     }
@@ -107,7 +107,7 @@ export function WalletProvider({ children = null as any }) {
       setAutoConnect(false);
     }
 
-    return () => { };
+    return () => {};
   }, [wallet, autoConnect]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -129,11 +129,11 @@ export function WalletProvider({ children = null as any }) {
         title="Select Wallet"
         okText="Connect"
         visible={isModalVisible}
-        okButtonProps={{ style: { display: "none" } }}
+        okButtonProps={{ style: { display: 'none' } }}
         onCancel={close}
         width={400}
       >
-        {WALLET_PROVIDERS.map((provider) => {
+        {WALLET_PROVIDERS.map(provider => {
           const onClick = function () {
             setProviderUrl(provider.url);
             setAutoConnect(true);
@@ -143,7 +143,7 @@ export function WalletProvider({ children = null as any }) {
           return (
             <Button
               size="large"
-              type={providerUrl === provider.url ? "primary" : "ghost"}
+              type={providerUrl === provider.url ? 'primary' : 'ghost'}
               onClick={onClick}
               icon={
                 <img
@@ -155,9 +155,9 @@ export function WalletProvider({ children = null as any }) {
                 />
               }
               style={{
-                display: "block",
-                width: "100%",
-                textAlign: "left",
+                display: 'block',
+                width: '100%',
+                textAlign: 'left',
                 marginBottom: 8,
               }}
               key={provider.name}

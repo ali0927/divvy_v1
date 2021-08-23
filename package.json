@@ -76,6 +76,7 @@
   "author": "",
   "license": "GPLv3",
   "devDependencies": {
-    "@types/websocket": "^1.0.3"
+    "@types/websocket": "^1.0.3",
+    "prettier": "^2.3.2"
   }
 }
