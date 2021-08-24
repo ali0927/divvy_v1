@@ -15,15 +15,6 @@ export const SolConnectButton = (props: ConnectButtonProps) => {
   const { onClick, children, disabled, allowWalletChange, ...rest } = props;
 
   // only show if wallet selected or user connected
-
-  const menu = (
-    <Menu>
-      <Menu.Item key="3" onClick={select}>
-        Change Wallet
-      </Menu.Item>
-    </Menu>
-  );
-
   if (!provider || !allowWalletChange) {
     return (
       <Button
@@ -37,13 +28,12 @@ export const SolConnectButton = (props: ConnectButtonProps) => {
   }
 
   return (
-    <Dropdown.Button
-      onClick={connected ? onClick : connect}
+    <Button
+      onClick={connected ? onClick : select}
       disabled={connected && disabled}
-      overlay={menu}
       style={{marginRight: '1em'}}
     >
       {LABELS.CONNECT_LABEL}
-    </Dropdown.Button>
+    </Button>
   );
 };

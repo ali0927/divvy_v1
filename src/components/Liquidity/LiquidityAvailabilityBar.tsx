@@ -1,11 +1,9 @@
 import { Component } from 'react';
-import { Progress } from "antd";
 import { CircularProgressbarWithChildren, CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { useState, useEffect, useContext } from "react";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 import { BetStateContext } from "../../contexts/sol/betstate";
 import "react-circular-progressbar/dist/styles.css";
-
 class GradientSVG extends Component<{ startColor: string, endColor: string, rotation: number, id: string }, {}> {
   render() {
     let gradientTransform = `rotate(${this.props.rotation})`;
@@ -22,7 +20,6 @@ class GradientSVG extends Component<{ startColor: string, endColor: string, rota
     );
   }
 }
-
 
 export const LiquidityAvailabilityBar = () => {
   const [width, setWindowWidth] = useState(0);
@@ -47,7 +44,7 @@ export const LiquidityAvailabilityBar = () => {
           circleRatio={0.75}
           strokeWidth={15}
           styles={buildStyles({
-            pathColor: `url(#gradient-progress-orange)`,
+            pathColor: `gray`,
             trailColor: `url(#gradient-progress-red)`,
             strokeLinecap: "butt"
           })}
@@ -68,7 +65,7 @@ export const LiquidityAvailabilityBar = () => {
       </div>
       <GradientSVG startColor={"#7c01ff"} endColor={"#00d77d"} rotation={90} id={"gradient-progress-green"} />
       <GradientSVG startColor={"#f5d020"} endColor={"#f53803"} rotation={120} id={"gradient-progress-orange"} />
-      <GradientSVG startColor={"#7c01ff00"} endColor={"#ff0000"} rotation={100} id={"gradient-progress-red"} />
+      <GradientSVG startColor={"#BD79B4"} endColor={"#D75752"} rotation={100} id={"gradient-progress-red"} />
     </>
   );
 };
