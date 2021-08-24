@@ -515,6 +515,15 @@ body {
 .glance-select .ant-select-selector {
   border-radius: 2px !important;
 }
+.sol-setting-item .ant-select {
+  margin: 5px 0 !important;
+}
+.sol-setting-item .ant-select-selector {
+  border-radius: 2px !important;
+  height: auto !important;
+  text-align: left !important;
+}
+
 
 .ant-slider {
   width: 100%;
