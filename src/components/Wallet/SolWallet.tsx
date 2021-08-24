@@ -29,8 +29,6 @@ export const SolWallet = (props: { left?: JSX.Element; right?: JSX.Element }) =>
         trigger="click"
       >
         <Button
-          shape="circle"
-          size="large"
           type="text"
           icon={<SettingOutlined />}
         />

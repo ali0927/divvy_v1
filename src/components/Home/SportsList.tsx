@@ -1,4 +1,4 @@
-import { Button, Row, Col } from 'antd'
+import { Button } from 'antd'
 import { useContext } from 'react';
 import { LABELS } from '../../constants';
 import { Sports } from '../../constants/Sports';
@@ -29,7 +29,7 @@ export const SportsList = ({ search = "" as any }) => {
                 <div className="team-logo">
                   <img src={"EA_Sports-Logo.svg"} alt="Sport logo" />
                 </div>
-                <div style={{textAlign:'center', whiteSpace:'pre-wrap', fontSize:'1.2vw'}}>
+                <div style={{textAlign:'center', whiteSpace:'pre-wrap', fontSize:'1rem'}}>
                   {sportData.sportName}
                 </div>
               </Button>
@@ -40,7 +40,7 @@ export const SportsList = ({ search = "" as any }) => {
       return market;
     }
     return (
-        <div style={{display:'flex', margin:"2vw 0", justifyContent:'center'}}>
+        <div style={{display:'flex', margin:"1.5rem 0", justifyContent:'center'}}>
           {error ? LABELS.SERVER_ERROR : null}
           {isLoading ? <Loader /> : null}
           {ListsUI()}
