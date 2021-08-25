@@ -84,7 +84,8 @@ export const depositLiquidityInstruction = (
       { pubkey: IDS.HOUSE_POOL_PDA_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: userUsdtTokenAccount, isSigner: false, isWritable: true },
       { pubkey: IDS.HOUSE_POOL_USDC_ACCOUNT, isSigner: false, isWritable: true },
-      { pubkey: IDS.HOUSE_POOL_STATE_ACCOUNT, isSigner: false, isWritable: true }
+      { pubkey: IDS.HOUSE_POOL_STATE_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.BET_POOL_STATE_ACCOUNT, isSigner: false, isWritable: false }
     ],
     programId: IDS.HOUSE_POOL_PROGRAM_ID,
     data: dataBuffer,
