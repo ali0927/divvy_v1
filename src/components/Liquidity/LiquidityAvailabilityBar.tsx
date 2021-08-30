@@ -65,7 +65,7 @@ export const LiquidityAvailabilityBar = () => {
       </div>
       <GradientSVG startColor={"#7c01ff"} endColor={"#00d77d"} rotation={90} id={"gradient-progress-green"} />
       <GradientSVG startColor={"#f5d020"} endColor={"#f53803"} rotation={120} id={"gradient-progress-orange"} />
-      <GradientSVG startColor={"#D75752"} endColor={"#ff0000"} rotation={100} id={"gradient-progress-red"} />
+      <GradientSVG startColor={"#D75752"} endColor={"#D75752"} rotation={100} id={"gradient-progress-red"} />
     </>
   );
 };
