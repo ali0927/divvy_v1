@@ -52,9 +52,12 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
         <Col span={8} style={{padding: '0.5vw'}}        
             onClick={() => setSlip(BetType.moneyline, props.odds.moneyline, props.odds.moneylineFeedPubkey, props.market.moneylineMarketPubkey)}>
           <div className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"}>
+            { props.marketSide === MarketSide.draw && <label>(Draw)</label>}
             <b style={{fontSize: '1em'}}>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline}`}</b>
           </div>
         </Col>
+        { props.marketSide != MarketSide.draw && 
+        <>
         {/* TODO: add after we enable spreads: onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)} */}
         <Col span={8} style={{padding: '0.5vw'}} >
           <div className={containsBet(BetType.spread) ? "odds odds-active" : "odds disabled"}>
@@ -67,6 +70,8 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
             <b style={{fontSize: '1em'}}>{`(${props.odds.totalPoints >= 0 ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>
           </div>
         </Col>
+        </>
+        }
       </Row>
     )
 };
