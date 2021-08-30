@@ -210,7 +210,7 @@ body {
 
 .team-logo {
   position: relative;
-  width: 100%; /* The size you want */
+  width: 70%; /* The size you want */
 }
 .team-logo:after {
   content: "";

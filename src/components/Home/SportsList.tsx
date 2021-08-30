@@ -27,10 +27,7 @@ export const SportsList = ({ search = "" as any }) => {
                 key={sportData.sportId}>
               <Button className="search-button" ghost type="default">
                 <div className="team-logo">
-                  <img src={"EA_Sports-Logo.svg"} alt="Sport logo" />
-                </div>
-                <div style={{textAlign:'center', whiteSpace:'pre-wrap', fontSize:'1rem'}}>
-                  {sportData.sportName}
+                  <img src={sportData.sportLogo} alt="Sport logo" />
                 </div>
               </Button>
             </div>
