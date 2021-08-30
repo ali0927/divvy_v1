@@ -128,7 +128,8 @@ export interface Bet {
     seasonName?: string,
     sportName?: string,
     marketName?: string,
-    placedOn?: string
+    placedOn?: string,
+    points: number,
 }
 
 export interface BetsTable {
@@ -174,4 +175,17 @@ export interface TransactionsTable {
     match: string,
     odds: string,
     amount: string
+}
+
+export const getBetType = (betType: BetType) => {
+    switch (betType) {
+        case BetType.moneyline:
+            return 0;
+
+        case BetType.spread:
+            return 1;
+
+        case BetType.total:
+            return 2;
+    }
 }

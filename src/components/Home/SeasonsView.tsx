@@ -13,6 +13,7 @@ export const SeasonsView = () => {
     const { sport, changeSport } = useContext(SportContext)
     const { data, error, isLoading } = useGetSeasonsQuery(sport ? sport?.sportId : 0)
     const [search, setSearch] = useState("")
+    console.log(data)
     return (
       <>
         <LiveMarkets />

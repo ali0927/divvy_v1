@@ -51,7 +51,7 @@ export const LiquidityAvailabilityBar = () => {
         >
           {/* Foreground path */}
           <CircularProgressbar
-            value={((htBalance - liveLiquidity - lockedLiquidity) * 100) / (htBalance)}
+            value={((htBalance) * 100) / (htBalance + lockedLiquidity + liveLiquidity)}
             circleRatio={0.75}
             strokeWidth={15}  
             styles={buildStyles({

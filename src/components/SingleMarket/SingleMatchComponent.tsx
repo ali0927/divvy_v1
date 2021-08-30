@@ -13,6 +13,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
         }
         return code;
     }
+    console.log(props.market)
     return (
       <div className="single-match">
         <Row>
