@@ -511,9 +511,13 @@ body {
   border: 1px solid #fff;
   border-radius: 21.5px;
 }
-
+.glance-select {
+  width: 100px !important;
+}
 .glance-select .ant-select-selector {
-  border-radius: 2px !important;
+  border: none !important;
+  height: 40px !important;
+  padding: 0 8px !important;
 }
 .sol-setting-item .ant-select {
   margin: 5px 0 !important;

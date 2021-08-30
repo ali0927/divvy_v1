@@ -44,7 +44,7 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
           <Row>
             <Col span={36} md={24}>
               <div className="heading-align-container">
-                <div className="header-align" style={{display:'flex'}}>
+                <div className="header-align" style={{display:'flex', alignItems:'center'}}>
                   <span className="pool-header">At a glance</span>
                   <Select defaultValue="24 hours" onSelect={handleChange} className="glance-select" suffixIcon={<DownOutlined style={{marginTop: 0, color: "#fff"}} className="direction-icon" />}>
                     <Option value="24 hours">24 hours</Option>
@@ -63,7 +63,7 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
                 <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.balance : "0")+" USDC"} />
             </Col>
             <Col span={24} md={8}>
-                <TransactionData textContext={"Number of txns"} percentage={transData.percent} data={(transData.trans)+" Transactions"} />
+                <TransactionData textContext={"Transactions"} percentage={transData.percent} data={(transData.trans)+" Txns"} />
             </Col>
           </Row>
         </>

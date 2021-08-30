@@ -16,7 +16,7 @@ export const SeasonsView = () => {
     return (
       <>
         <LiveMarkets />
-        <HomeCarousel />
+        {/* <HomeCarousel /> */}
         <SportsList />
         <SeasonHeader seasonName={sport?.sportName} onChange={setSearch}/>
         {error ? LABELS.SERVER_ERROR : null}

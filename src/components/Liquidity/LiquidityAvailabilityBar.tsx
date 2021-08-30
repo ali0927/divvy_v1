@@ -60,7 +60,7 @@ export const LiquidityAvailabilityBar = () => {
               strokeLinecap: "butt"
             })}
           />
-          <video autoPlay={true} style={{position:'absolute', transform: "rotate(-225deg)" }} loop={true} width={width > 160 ? width / 3 : width / 1.5} height={width > 160 ? width / 3 : width / 1.5} src={"https://storage.googleapis.com/divvy-cdn/assets/animated_logo.mp4"} />
+          <video autoPlay={true} style={{position:'absolute', transform:"rotate(-225deg) translate(-60%, -5%)", top:'50%', right:'50%' }} loop={true} width={width > 160 ? width / 3 : width / 1.5} height={width > 160 ? width / 3 : width / 1.5} src={"https://storage.googleapis.com/divvy-cdn/assets/animated_logo.mp4"} />
         </CircularProgressbarWithChildren>
       </div>
       <GradientSVG startColor={"#7c01ff"} endColor={"#00d77d"} rotation={90} id={"gradient-progress-green"} />
