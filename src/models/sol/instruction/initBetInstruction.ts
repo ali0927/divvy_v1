@@ -1,6 +1,7 @@
+import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { Connection, Keypair, PublicKey, SystemProgram, TransactionInstruction } from "@solana/web3.js";
 import * as BufferLayout from "buffer-layout";
-import { Bet, BetStatus, MarketSide, Transactions } from "../../../constants";
+import { Bet, BetStatus, getBetType, MarketSide, Transactions } from "../../../constants";
 import { ENV } from "../../../constants/sol/env";
 import { sendTransaction } from "../../../contexts/sol/connection";
 import { WalletAdapter } from "../../../contexts/sol/wallet";
@@ -10,16 +11,22 @@ import { MONEY_LINE_BET_LAYOUT } from "../state/moneyLineBet";
 
 const INIT_BET_LAYOUT: BufferLayout.Layout = BufferLayout.struct([
   BufferLayout.u8("action"),
-  BufferLayout.nu64("amount"),
+  BufferLayout.nu64("risk"),
+  BufferLayout.u16("points"),
   BufferLayout.nu64("odds"),
   BufferLayout.u8("marketSide"),
+  BufferLayout.u8("betType"),
+  BufferLayout.u8("bumpSeed"),
 ]);
 
 interface INIT_BET_DATA {
   action: number;
-  amount: number;
+  risk: number;
+  points: number,
   odds: number;
   marketSide: number;
+  betType: number,
+  bumpSeed: number;
 };
 
 export const initBet = async (
@@ -63,7 +70,7 @@ export const initBet = async (
       bet.odds,
       new PublicKey(bet.marketPubkey),
       new PublicKey(bet.oddsPubKey),
-      betAccountRent);
+      betAccountRent, bet.points, getBetType(bet.betType));
     ixs.push(...ix);
     betAccounts.push(betAccount);
     metaData.push({
@@ -96,14 +103,14 @@ export const initBetTransaction = async (
   odds: number,
   marketPubkey: PublicKey,
   oddsFeed: PublicKey,
-  betAccountRent: number): Promise<[tx: TransactionInstruction[], betAccount: Keypair]> => {
+  betAccountRent: number, points: number, betType: number): Promise<[tx: TransactionInstruction[], betAccount: Keypair]> => {
 
   const betAccount = Keypair.generate();
   const createTempTokenAccountIx = await createBetAccountInstruction(
     userAccount,
     betAccount.publicKey,
     betAccountRent);
-  const initBetIx = initBetInstruction(
+  const initBetIx = await initBetInstruction(
     userAccount,
     userUsdtAccount,
     oddsFeed,
@@ -111,7 +118,7 @@ export const initBetTransaction = async (
     marketPubkey,
     riskedUsdt,
     odds,
-    marketSide);
+    marketSide, points, betType);
   const ix = [createTempTokenAccountIx, initBetIx];
 
   return [ix, betAccount];
@@ -128,7 +135,7 @@ const createBetAccountInstruction = async (fromPubkey: PublicKey, betAccountPubk
   return createTempTokenAccountIx;
 }
 
-const initBetInstruction = (
+const initBetInstruction = async (
   userAccount: PublicKey,
   userUsdtAccount: PublicKey,
   oddsFeed: PublicKey,
@@ -136,14 +143,19 @@ const initBetInstruction = (
   marketAccount: PublicKey,
   riskedUsdt: number,
   odds: number,
-  marketSide: MarketSide) => {
-
+  marketSide: MarketSide,
+  points: number,
+  betType: number,) => {
+    const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyhouse")], IDS.HOUSE_POOL_PROGRAM_ID);
   const initBetData: INIT_BET_DATA = {
     action: 0,
-    amount: riskedUsdt,
+    risk: riskedUsdt,
+    points: points,
     // sending mod of odds since we are just using switchboard odds. Should check later.
     odds: odds > 0 ? odds : -odds,
-    marketSide: MarketSide.toIndex(marketSide)
+    marketSide: MarketSide.toIndex(marketSide),
+    betType: betType,
+    bumpSeed: bumpSeed
   };
 
   const initBetBuffer = Buffer.alloc(INIT_BET_LAYOUT.span);
@@ -158,7 +170,11 @@ const initBetInstruction = (
       { pubkey: IDS.HOUSE_POOL_USDC_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: IDS.BET_POOL_USDC_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: userUsdtAccount, isSigner: false, isWritable: true },
-      { pubkey: IDS.TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
+      { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: true },
+      { pubkey: IDS.HOUSE_POOL_PDA_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.BET_POOL_PDA_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.HOUSE_POOL_STATE_ACCOUNT, isSigner: false, isWritable: true },
+      { pubkey: IDS.HOUSE_POOL_PROGRAM_ID, isSigner: false, isWritable: true },
     ],
     data: initBetBuffer,
     programId: IDS.BET_POOL_PROGRAM_ID

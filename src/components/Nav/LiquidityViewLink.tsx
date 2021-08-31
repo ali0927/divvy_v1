@@ -27,7 +27,7 @@ export const LiquidityViewLink = () => {
           </div>
           <div className="balance-container">
             <span>Available liquidity</span>
-            <span className="balance">{tokenAmountToString(htBalance - lockedLiquidity)} USDC</span>
+            <span className="balance">{tokenAmountToString(htBalance)} USDC</span>
           </div>
         </small>
       </div>

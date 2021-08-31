@@ -11,8 +11,10 @@ export const MONEY_LINE_BET_LAYOUT = BufferLayout.struct([
   Layout.publicKey('userAccount'),
   BufferLayout.nu64('risk'),
   BufferLayout.nu64('payout'),
+  BufferLayout.u16('points'),
   BufferLayout.u8('marketSide'),
-  BufferLayout.u8('outcome')
+  BufferLayout.u8('outcome'),
+  BufferLayout.u8('betType')
 ]);
 
 export interface MoneyLineBet {
