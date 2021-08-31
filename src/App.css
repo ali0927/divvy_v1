@@ -659,7 +659,24 @@ body {
 .sports-list-item-selected .search-button {
   color: white !important;
 }
-
+.sports-list-item .team-logo {
+  width: 90%;
+}
+.sports-list-item img {
+  opacity: 50%;
+  border-radius: 50%;
+  padding: 0.5rem
+}
+.sports-list-item img:hover {
+  opacity: 100%;
+}
+.sports-list-item-selected img {
+  opacity: 100%;
+  background-image: linear-gradient(var(--off-black), var(--off-black)), radial-gradient(circle at top left, var(--royal-purple), var(--win-green));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: double 2px transparent;
+}
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   height: 45px;
   align-items: center;
