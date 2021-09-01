@@ -1,3 +1,4 @@
+import { useContext, useState } from "react"
 import { Col, Row } from 'antd'
 import { TeamDetails } from "./TeamDetails"
 import { OddsType } from './OddsType';
@@ -5,7 +6,10 @@ import { OddsSelection } from './OddsSelection';
 import { Market, MarketSide } from '../../constants';
 import { getDate, getShortTimezone, getTime } from '../../utils/date';
 import { codes } from "../../constants/processed"
+import { SportContext } from "../../contexts/sport";
+
 export const SingleMatchComponent = (props: { market: Market }) => {
+    const { sport, changeSport } = useContext(SportContext)
     const countryCodeToFlagCode = (countryCode: string) => {
         let code = codes[countryCode]?.code?.toLowerCase();
 
@@ -71,24 +75,28 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                 }} />
               </Col>
             </Row>
-            <Row>
-              <Col span={6} md={6}>
-              </Col>
-              <Col span={18}>
-                <OddsSelection marketSide={MarketSide.draw} market={props.market} selectionTeam={props.market.draw} otherTeam={props.market.teamA} selection={"Draw"} odds={{
-                  moneyline: props.market.drawOddsMoneyline,
-                  spread: props.market.drawOddsSpread,
-                  spreadPoints: props.market.drawSpreadPoints,
-                  total: props.market.drawOddsTotal,
-                  totalPoints: props.market.drawTotalPoints,
-                  moneylineFeedPubkey: props.market.drawOddsMoneylineFeedPubkey,
-                  spreadPointsFeedPubkey: props.market.drawSpreadPointsFeedPubkey,
-                  spreadFeedPubkey: props.market.drawOddsSpreadFeedPubkey,
-                  totalFeedPubkey: props.market.drawOddsTotalFeedPubkey,
-                  totalPointsFeedPubkey: props.market.drawTotalPointsFeedPubkey,
-                }} />
-              </Col>
-            </Row>
+            
+            { sport?.sportId === 3 &&
+              <Row>
+                <Col span={6} md={6}>
+                </Col>
+                <Col span={18}>
+                  <OddsSelection marketSide={MarketSide.draw} market={props.market} selectionTeam={props.market.draw} otherTeam={props.market.teamA} selection={"Draw"} odds={{
+                    moneyline: props.market.drawOddsMoneyline,
+                    spread: props.market.drawOddsSpread,
+                    spreadPoints: props.market.drawSpreadPoints,
+                    total: props.market.drawOddsTotal,
+                    totalPoints: props.market.drawTotalPoints,
+                    moneylineFeedPubkey: props.market.drawOddsMoneylineFeedPubkey,
+                    spreadPointsFeedPubkey: props.market.drawSpreadPointsFeedPubkey,
+                    spreadFeedPubkey: props.market.drawOddsSpreadFeedPubkey,
+                    totalFeedPubkey: props.market.drawOddsTotalFeedPubkey,
+                    totalPointsFeedPubkey: props.market.drawTotalPointsFeedPubkey,
+                  }} />
+                </Col>
+              </Row>
+            }
+            
           </Col>         
           <Col span={0} md={4}>
             <div className="bet-time-container">
