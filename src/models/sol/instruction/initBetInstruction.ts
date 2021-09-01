@@ -150,7 +150,7 @@ const initBetInstruction = async (
   const initBetData: INIT_BET_DATA = {
     action: 0,
     risk: riskedUsdt,
-    points: points,
+    points: points > 0 ? points * 100 : -points * 100,
     // sending mod of odds since we are just using switchboard odds. Should check later.
     odds: odds > 0 ? odds : -odds,
     marketSide: MarketSide.toIndex(marketSide),
