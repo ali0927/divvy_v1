@@ -3,7 +3,8 @@ import { Line } from '@ant-design/charts';
 import { LineConfig } from "@ant-design/charts/es/plots/line";
 import { Pool, PoolGraph } from '../../constants';
 import { DATE_STRING_TO_NUMBER } from '../../constants/DashboardColumns';
-export const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined, poolPerformance: number }) => {
+
+const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined, poolPerformance: number }) => {
   const [chartData, setChartData] = useState<PoolGraph[]>([])
   useEffect(() => {
     if(props.data) {
@@ -40,8 +41,7 @@ export const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined, pool
   };
 
   return (
-    <Line
-      {...config}
-    />
+    <Line {...config} /> 
   );
 };
+export default LiquidityPoolGraph;

@@ -17,9 +17,8 @@ export const SolWallet = (props: { left?: JSX.Element; right?: JSX.Element }) =>
       ) : (
         <SolConnectButton
           type="text"
-          size="large"
           allowWalletChange={true}
-          style={{ color: "#2abdd2" }}
+          style={{ marginRight: '1em' }}
         />
       )}
       <Popover

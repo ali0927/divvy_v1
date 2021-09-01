@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { Col, Row } from "antd";
 import { LiquidityPoolTabs } from './LiquidityPoolTabs';
-import { LiquidityPoolGraph } from './LiquidityPoolGraph';
 import { CommonHeader } from "../Common/CommonHeader";
 import { Pool } from '../../constants';
+
+const LiquidityPoolGraph = React.lazy(()=>import('./LiquidityPoolGraph'))
+
 export const LiquidityPoolPerformance = (props: { data : Array<Pool> | undefined }) => {
     const [poolPerformance, setPoolPerformance] = useState(1);
     return(
@@ -22,7 +24,9 @@ export const LiquidityPoolPerformance = (props: { data : Array<Pool> | undefined
             </Row>
             <Row>
                 <Col span={24} md={24}>
-                    <LiquidityPoolGraph data={props.data} poolPerformance={poolPerformance}  />
+                    <Suspense fallback={<div>loading ..</div>}>
+                        <LiquidityPoolGraph data={props.data} poolPerformance={poolPerformance} />
+                    </Suspense>                    
                 </Col>
             </Row>
         </div>

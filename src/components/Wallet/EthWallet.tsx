@@ -20,7 +20,6 @@ export const EthWallet = (props: { left?: JSX.Element; right?: JSX.Element }) =>
             >
                 <Button
                     shape="circle"
-                    size="large"
                     type="text"
                     icon={<SettingOutlined />}
                 />
