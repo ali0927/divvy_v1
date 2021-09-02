@@ -43,7 +43,7 @@ export const LiquidityAvailabilityBar = () => {
     <>
       <div style={{transform: "rotate(225deg)"}}>
         <CircularProgressbarWithChildren
-          value={((htBalance) * 100) / (htBalance + lockedLiquidity + liveLiquidity)}
+          value={(htBalance * 100) / (htBalance + bettorBalance)}
           circleRatio={0.75}
           strokeWidth={15}
           styles={buildStyles({
@@ -54,7 +54,7 @@ export const LiquidityAvailabilityBar = () => {
         >
           <CircularProgressbar
             value={100}
-            circleRatio={(htBalance) / (bettorBalance - lockedLiquidity - liveLiquidity) * 0.75}
+            circleRatio={bettorBalance === 0 ? 0: (bettorBalance - lockedLiquidity - liveLiquidity) / (htBalance + bettorBalance) * 0.75}
             strokeWidth={15}  
             styles={buildStyles({
               pathColor: `url(#gradient-progress-red)`,
