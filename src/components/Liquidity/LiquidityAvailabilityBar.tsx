@@ -3,6 +3,7 @@ import { CircularProgressbarWithChildren, CircularProgressbar, buildStyles } fro
 import { useState, useEffect, useContext } from "react";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 import { BetStateContext } from "../../contexts/sol/betstate";
+import { BetPoolContext } from "../../contexts/sol/betusdt";
 import "react-circular-progressbar/dist/styles.css";
 class GradientSVG extends Component<{ startColor: string, endColor: string, rotation: number, id: string }, {}> {
   render() {
@@ -25,6 +26,8 @@ export const LiquidityAvailabilityBar = () => {
   const [width, setWindowWidth] = useState(0);
   const { htBalance } = useContext(HousePoolContext);
   const { liveLiquidity, lockedLiquidity } = useContext(BetStateContext)
+  const { bettorBalance } = useContext(BetPoolContext);
+
   const updateDimensions = () => {
     const width = window.innerWidth
     setWindowWidth(width / 4.5)
@@ -40,25 +43,26 @@ export const LiquidityAvailabilityBar = () => {
     <>
       <div style={{transform: "rotate(225deg)"}}>
         <CircularProgressbarWithChildren
-          value={95}
+          value={((htBalance) * 100) / (htBalance + lockedLiquidity + liveLiquidity)}
           circleRatio={0.75}
           strokeWidth={15}
           styles={buildStyles({
-            pathColor: `gray`,
-            trailColor: `url(#gradient-progress-red)`,
-            strokeLinecap: "butt"
+            pathColor: `url(#gradient-progress-green)`,
+            trailColor: `gray`,
+            strokeLinecap: "butt",
           })}
         >
-          {/* Foreground path */}
           <CircularProgressbar
-            value={((htBalance) * 100) / (htBalance + lockedLiquidity + liveLiquidity)}
-            circleRatio={0.75}
+            value={100}
+            circleRatio={(htBalance) / (bettorBalance - lockedLiquidity - liveLiquidity) * 0.75}
             strokeWidth={15}  
             styles={buildStyles({
-              pathColor: `url(#gradient-progress-green)`,
-              trailColor: "transparent",
-              strokeLinecap: "butt"
+              pathColor: `url(#gradient-progress-red)`,
+              trailColor: `url(#gradient-progress-red)`,
+              strokeLinecap: "butt",  
+              rotation: - 0.25
             })}
+            counterClockwise
           />
           <video autoPlay={true} style={{position:'absolute', transform:"rotate(-225deg) translate(-60%, -5%)", top:'50%', right:'50%' }} loop={true} width={width > 160 ? width / 3 : width / 1.5} height={width > 160 ? width / 3 : width / 1.5} src={"https://storage.googleapis.com/divvy-cdn/assets/animated_logo.mp4"} />
         </CircularProgressbarWithChildren>
