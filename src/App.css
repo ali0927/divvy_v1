@@ -210,7 +210,7 @@ body {
 
 .team-logo {
   position: relative;
-  width: 70%; /* The size you want */
+  width: 80%; /* The size you want */
 }
 .team-logo:after {
   content: "";
@@ -417,7 +417,6 @@ body {
 }
 
 .secondary-team {
-  height: 12px;
   margin: 0 3px 0 0;
   font-size: 12px;
   font-weight: 600;
@@ -429,7 +428,6 @@ body {
 }
 
 .primary-team {
-  height: 24px;
   margin: 1px 27px 7px 0;
   font-size: 16px;
   font-weight: 800;
