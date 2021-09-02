@@ -6,7 +6,7 @@ export const PotentialWins = (props: { betSlip: Bet }) => {
                 <p className="text-secondary-wins">
                     Original Stake
                 </p>
-                <h3>
+                <h3 style={{overflowWrap:'anywhere'}}>
                     {props.betSlip.risk / LAMPORTS_PER_USDC} USDC
                 </h3>
             </div>
@@ -14,7 +14,7 @@ export const PotentialWins = (props: { betSlip: Bet }) => {
                 <p className="text-secondary-wins">
                     Potential Win
                 </p>
-                <h3>
+                <h3 style={{overflowWrap:'anywhere'}}>
                     {(props.betSlip.risk / LAMPORTS_PER_USDC) * americanToDecimal(props.betSlip.odds)} USDC
                 </h3>
             </div>

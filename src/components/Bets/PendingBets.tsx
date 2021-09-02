@@ -15,8 +15,10 @@ export const PendingBets = () => {
                     if (value.status === BetStatus.Pending) {
                         return (
                             <Collapse.Panel header={<GameTeams selectionTeam={value.selectionTeam} otherTeam={value.otherTeam} betSlip={value} />} key={value.betId}>
-                                <PotentialWins betSlip={value} />
-                                <ConfirmedOdds betType={value.betType} bet={value} />
+                                <div style={{display:'flex', flexDirection:'column'}}>
+                                    <PotentialWins betSlip={value} />
+                                    <ConfirmedOdds betType={value.betType} bet={value} />
+                                </div>
                             </Collapse.Panel>
                         )
                     }
