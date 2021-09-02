@@ -417,7 +417,6 @@ body {
 }
 
 .secondary-team {
-  height: 12px;
   margin: 0 3px 0 0;
   font-size: 12px;
   font-weight: 600;
@@ -429,7 +428,6 @@ body {
 }
 
 .primary-team {
-  height: 24px;
   margin: 1px 27px 7px 0;
   font-size: 16px;
   font-weight: 800;
