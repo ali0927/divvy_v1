@@ -11,7 +11,7 @@ export const LiveMarkets = () => {
     const { data, error, isLoading } = useGetLiveMarketsQuery(null);
     return (
         <div>
-            <h2>Live Games</h2>
+            {/* <h2>Live Games</h2>
             {isLoading ? <Loader /> :
                 <div className="carousel" style={{ display: "flex" }}>
                     {data?.map((market: Market) => {
@@ -32,7 +32,7 @@ export const LiveMarkets = () => {
                         );
                     })}
                 </div >
-            }
+            } */}
         </div >
     )
 }

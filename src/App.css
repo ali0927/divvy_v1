@@ -223,8 +223,9 @@ body {
   bottom: 0;
   left: 0;
   right: 0; /* Make the picture taking the size of it's parent */
-  width: 100%; /* This if for the object-fit */
-  height: 100%; /* This if for the object-fit */
+  width: 50px; /* This if for the object-fit */
+  height: 50px; /* This if for the object-fit */
+  border-radius: 100%;
   object-fit: cover; /* Equivalent of the background-size: cover; of a background-image */
   object-position: center;
 }
@@ -664,15 +665,15 @@ body {
   width: 90%;
 }
 .sports-list-item img {
-  opacity: 80%;
+  /* opacity: 80%; */
   border-radius: 50%;
   padding: 0.5rem
 }
 .sports-list-item img:hover {
-  opacity: 100%;
+  /* opacity: 100%; */
 }
 .sports-list-item-selected img {
-  opacity: 100%;
+  /* opacity: 100%; */
   background-image: linear-gradient(var(--off-black), var(--off-black)), radial-gradient(circle at top left, var(--royal-purple), var(--win-green));
   background-origin: border-box;
   background-clip: padding-box, border-box;

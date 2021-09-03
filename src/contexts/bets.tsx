@@ -99,7 +99,7 @@ const BetsProvider = (props: { children: any }) => {
       // Transactions have a limit of 1232 bytes
       // We hit the limit above 3 bets
       // https://github.com/solana-labs/solana/issues/17102 tracks the transaction limit
-      const perChunk = 3;
+      const perChunk = 2;
       var betChunks = currentBets.reduce((resultArray: any, item, index) => { 
         const chunkIndex = Math.floor(index/perChunk)
         if(!resultArray[chunkIndex]) {

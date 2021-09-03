@@ -58,7 +58,7 @@ export const LiquidityAvailabilityBar = () => {
             strokeWidth={15}  
             styles={buildStyles({
               pathColor: `url(#gradient-progress-red)`,
-              trailColor: `url(#gradient-progress-red)`,
+              trailColor: 'transparent',
               strokeLinecap: "butt",  
               rotation: - 0.25
             })}
