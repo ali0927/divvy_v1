@@ -29,6 +29,35 @@ export const SingleMatchComponent = (props: { market: Market }) => {
             </div>
           </Col>
           <Col span={24} md={20}>
+          <Row style={{alignItems:'center'}}>
+              <Col span={6}>
+                <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/MLB/" + props.market.teamB.toLowerCase().replaceAll(" ", "-").replaceAll("-fc", "")  + ".svg"} />
+              </Col>
+              <Col span={18}>
+                <OddsSelection marketSide={MarketSide.teamB} market={props.market} selectionTeam={props.market.teamB} otherTeam={props.market.teamA} selection={"teamB"} odds={{
+                  moneyline: props.market.teamBOddsMoneyline,
+                  spread: props.market.teamBOddsSpread,
+                  spreadPoints: props.market.teamBSpreadPoints,
+                  total: props.market.teamBOddsTotal,
+                  totalPoints: props.market.teamBTotalPoints,
+                  moneylineFeedPubkey: props.market.teamBOddsMoneylineFeedPubkey,
+                  spreadPointsFeedPubkey: props.market.teamBSpreadPointsFeedPubkey,
+                  spreadFeedPubkey: props.market.teamBOddsSpreadFeedPubkey,
+                  totalFeedPubkey: props.market.teamBOddsTotalFeedPubkey,
+                  totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
+                }} />
+              </Col>
+            </Row>
+
+            <Row>
+              <Col span={0} md={2}></Col>
+              <Col span={24} md={22}>
+                <div style={{position: 'relative'}}>
+                  <label className="text-secondary" style={{fontSize:"0.8em", position:'absolute', transform:'translate(0,-50%)'}}>@</label>
+                </div>
+              </Col>
+            </Row>
+
             <Row style={{alignItems:'center'}}>
               <Col span={6}>
                 <TeamDetails name={props.market.teamA} logo={"https://storage.googleapis.com/divvy-cdn/MLB/" + props.market.teamA.toLowerCase().replaceAll(" ", "-").replaceAll("-fc", "")  + ".svg"} />
@@ -45,33 +74,6 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                   spreadFeedPubkey: props.market.teamAOddsSpreadFeedPubkey,
                   totalFeedPubkey: props.market.teamAOddsTotalFeedPubkey,
                   totalPointsFeedPubkey: props.market.teamATotalPointsFeedPubkey,
-                }} />
-              </Col>
-            </Row>
-            <Row>
-              <Col span={0} md={2}></Col>
-              <Col span={24} md={22}>
-                <div style={{position: 'relative'}}>
-                  <label className="text-secondary" style={{fontSize:"0.8em", position:'absolute', transform:'translate(0,-50%)'}}>VS</label>
-                </div>
-              </Col>
-            </Row>
-            <Row style={{alignItems:'center'}}>
-              <Col span={6}>
-                <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/MLB/" + props.market.teamB.toLowerCase().replaceAll(" ", "-").replaceAll("-fc", "")  + ".svg"} />
-              </Col>
-              <Col span={18}>
-                <OddsSelection marketSide={MarketSide.teamB} market={props.market} selectionTeam={props.market.teamB} otherTeam={props.market.teamA} selection={"teamB"} odds={{
-                  moneyline: props.market.teamBOddsMoneyline,
-                  spread: props.market.teamBOddsSpread,
-                  spreadPoints: props.market.teamBSpreadPoints,
-                  total: props.market.teamBOddsTotal,
-                  totalPoints: props.market.teamBTotalPoints,
-                  moneylineFeedPubkey: props.market.teamBOddsMoneylineFeedPubkey,
-                  spreadPointsFeedPubkey: props.market.teamBSpreadPointsFeedPubkey,
-                  spreadFeedPubkey: props.market.teamBOddsSpreadFeedPubkey,
-                  totalFeedPubkey: props.market.teamBOddsTotalFeedPubkey,
-                  totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
                 }} />
               </Col>
             </Row>

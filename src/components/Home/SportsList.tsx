@@ -37,7 +37,7 @@ export const SportsList = ({ search = "" as any }) => {
       return market;
     }
     return (
-        <div style={{display:'flex', margin:"1.5rem 0", justifyContent:'center'}}>
+        <div style={{display:'flex', margin:"3rem 0", justifyContent:'center', width:'100%'}}>
           {error ? LABELS.SERVER_ERROR : null}
           {isLoading ? <Loader /> : null}
           {ListsUI()}
