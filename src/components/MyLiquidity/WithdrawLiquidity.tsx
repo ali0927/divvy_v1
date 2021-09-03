@@ -100,7 +100,7 @@ export const WithdrawLiquidity = (props: {}) => {
         <p>
           <small className="text-secondary">Withdrawable balance</small>
         </p>
-        <p className="balance">{tokenAmountToString(userHT)} HT ({tokenAmountToString(htBalance / htSupply * userHT)} USDC)</p>
+        <p className="balance">{tokenAmountToString(htBalance / htSupply * userHT)} USDC</p>
       </div>
       <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>
@@ -110,8 +110,8 @@ export const WithdrawLiquidity = (props: {}) => {
       </Form.Item>
 
       <WalletSlider 
-        onChange={(val: number) => setHtAmount((userHT / LAMPORTS_PER_HT * val / 100).toFixed(2).toString()) }
-        value={htAmount === "" ? 0: Number(htAmount) * LAMPORTS_PER_HT / userHT * 100}
+        onChange={(val: number) => setHtAmount((htBalance / htSupply * userHT / LAMPORTS_PER_HT * val / 100).toFixed(2).toString()) }
+        value={htAmount === "" ? 0: Number(htAmount) * LAMPORTS_PER_HT / ( htBalance / htSupply * userHT ) * 100}
         disabled={userHT === 0}
       />
 

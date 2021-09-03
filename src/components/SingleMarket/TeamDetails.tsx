@@ -10,7 +10,7 @@ export const TeamDetails = (props: { name: string, logo: string }) => {
         </Col>
         <Col span={24} md={16}>
           <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-            <b style={{ fontSize: "1em" }}>{props.name}</b>
+            <b style={{ fontSize: "1em", lineHeight: 'normal' }}>{props.name}</b>
           </div>
         </Col>
       </Row>
