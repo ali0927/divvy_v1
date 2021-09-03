@@ -12,7 +12,7 @@ export const LiquidityPool = () => {
     return (
       <div className="liquidity-pool">
         <p className="text-primary">Total in Divvy</p>
-        <h2><span style={{ fontSize: "2rem", fontWeight: 800 }}>{tokenAmountToString(htBalance + lockedLiquidity + liveLiquidity + bettorBalance)}</span> USDC</h2>
+        <h2><span style={{ fontSize: "2rem", fontWeight: 800 }}>{tokenAmountToString(htBalance + bettorBalance)}</span> USDC</h2>
       </div>
     );
 };

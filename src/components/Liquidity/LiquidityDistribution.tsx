@@ -15,7 +15,7 @@ export const LiquidityDistribution = () => {
         <div className="liquidity-content">
           <h6 className="text-secondary">Locked Liquidity</h6>
           <h3><span className="liquidity-heavy">{tokenAmountToString(liveLiquidity + lockedLiquidity)}</span> USDC</h3>
-          <p className="text-primary">{tokenAmountToString((liveLiquidity + lockedLiquidity)*100 / (htBalance), 0, 2)}% locked</p>
+          <p className="text-primary">{tokenAmountToString((liveLiquidity + lockedLiquidity)*100 / (htBalance + liveLiquidity + lockedLiquidity), 0, 2)}% locked</p>
         </div>
         <div className="horizontal-outline" />
         <div className="liquidity-content">
