@@ -10,11 +10,12 @@ import { InfoCircleOutlined } from "@ant-design/icons"
 import { tokenAmountToString } from "../../constants";
 import { HPTokenContext } from "../../contexts/sol/hptoken";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
+import { BetStateContext } from "../../contexts/sol/betstate";
 export const MyLiquidity = (props: {}) => {
   const { userHT } = useContext(UserHTContext);
   const { htBalance } = useContext(HousePoolContext);
   const { htSupply } = useContext(HPTokenContext);
-  console.log(htSupply)
+  const { lockedLiquidity } = useContext(BetStateContext)
   return (
     <div>
       <div className="sidebar-section">
@@ -34,7 +35,7 @@ export const MyLiquidity = (props: {}) => {
             <Tooltip title={LABELS.CONVERSION_RATIO}>
               <span style={{ display: 'flex' }}>Conversion Ratio <InfoCircleOutlined style={{ fontSize: 9, marginTop:3.4, marginLeft:2 }} /></span>
             </Tooltip>
-            <span className="balance">{htBalance / htSupply}</span>
+            <span className="balance">{(htBalance + lockedLiquidity) / htSupply}</span>
           </div>
         </small>
       </div>
