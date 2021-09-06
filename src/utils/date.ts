@@ -9,7 +9,9 @@ const checkDate = (date1: Date, date2: Date) => {
 }
 
 export const getDate = (unixEpochMs: number) => {
-  var d = new Date(unixEpochMs);
+  var d = new Date();
+  unixEpochMs -= d.getTimezoneOffset()*60000;
+  d = new Date(unixEpochMs);
   var today = new Date();
   var tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -27,7 +29,9 @@ export const getDate = (unixEpochMs: number) => {
   return (days[d.getDay()] + ', ' + (months[d.getMonth()]) + ' ' + d.getDate());
 }
 export const getTime = (unixEpochMs: number) => {
-  var d = new Date(unixEpochMs);
+  var d = new Date();
+  unixEpochMs -= d.getTimezoneOffset()*60000;
+  d = new Date(unixEpochMs);
   return d.toLocaleTimeString(undefined, { timeStyle: "short", hour12: true }).replace("pm", "PM").replace("am", "AM")
 }
 let shortTimeZone: string;
