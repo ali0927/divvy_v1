@@ -5,7 +5,7 @@ import { useWallet } from "../../contexts/sol/wallet";
 import { UserUSDCContext } from "../../contexts/sol/userusdc";
 import { LAMPORTS_PER_USDC } from "../../constants/math";
 import { ChainSelectContext } from "../../contexts/chainselect";
-
+import { tokenAmountToString } from "../../constants";
 export const BettingDashboardHeader = (props: { data: any , error: any}) => {
   const wallet = useWallet();
   const { chain } = useContext(ChainSelectContext)
@@ -22,7 +22,7 @@ export const BettingDashboardHeader = (props: { data: any , error: any}) => {
         <Col md={6}>
             <div className="liquidity-content">
                 <span className="text-primary">Wallet Balance:</span>
-                <h3 className="text-heavy">{userUSDC/LAMPORTS_PER_USDC} USDC</h3>
+                <h3 className="text-heavy">{tokenAmountToString(userUSDC)} USDC</h3>
             </div>
         </Col>
         <Col md={14}>

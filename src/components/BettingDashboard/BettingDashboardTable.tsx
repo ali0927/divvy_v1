@@ -4,7 +4,7 @@ import { DATE_STRING_TO_NUMBER } from "../../constants/DashboardColumns";
 import { BetStatus, BetsTable } from "../../constants/bets";
 import { useGetBetsQuery } from "../../store/getBets";
 import { useWallet } from "../../contexts/sol/wallet";
-import { americanToDecimal, LAMPORTS_PER_USDC } from "../../constants/math";
+import { americanToDecimal, LAMPORTS_PER_USDC, numStringToNumberFormat } from "../../constants/math";
 
 export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, filteredInfo: any, setSortedInfo: any, setFilteredInfo: any }) => {
     const wallet = useWallet();  
@@ -12,8 +12,13 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
     const [betData, setBetData] = useState<BetsTable[]>([]);
     useEffect(() => {
       let tmpArr: BetsTable[] = [];
-      console.log("asdsa", data)
       data?.map((bet: any, i: number) => {
+        let odds = (bet["odds"] < 0 ? "" : "+")+bet["odds"];;
+        if(bet["betType"] === "Points Spread") {
+          odds += "<br />"+(bet["marketName"].split(" vs ")[0] === bet["selectionTeam"] ? (bet["teamASpreadPoints"] >= 0 ? "+" : "-" )+bet["teamASpreadPoints"] : (bet["teamBSpreadPoints"] >= 0 ? "+" : "-" )+bet["teamBSpreadPoints"]);
+        } else if(bet["betType"] === "Total Score") {
+          odds += "<br />"+(bet["marketName"].split(" vs ")[0] === bet["selectionTeam"] ? (bet["teamATotalPoints"] >= 0 ? "O " : "U " )+bet["teamATotalPoints"] : (bet["teamBTotalPoints"] >= 0 ? "O " : "U " )+bet["teamBTotalPoints"]);
+        }
         tmpArr.push({
           key: i,
           type: 'Single',
@@ -22,7 +27,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           placed: bet["placedOn"].split(" "),
           settled: BetStatus[bet["status"]].toLowerCase(),
           bettype: bet["betType"],
-          odds: (bet["odds"] < 0 ? "" : "+")+bet["odds"],
+          odds: odds, 
           wager: '<b>'+bet["risk"]/LAMPORTS_PER_USDC+' USDC</b>',
           potential: bet["payout"]+' USDC'
         })
@@ -41,7 +46,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
 
     const DASHBOARD_COLUMNS = [
         {
-          title: 'TYPE',
+          title: 'BET TYPE',
           dataIndex: 'type',
           key: 'type',
         },
@@ -67,7 +72,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           title: 'PLACED ON',
           dataIndex: 'placed',
           key: 'placed',
-          render: (date : String[]) => <div className="text-table" style={{ textAlign: "right" }}>{date[1]} {date[2]} <br />at {date[4].split(":")[0]+":"+date[4].split(":")[1] + (JSON.parse(date[4].split(":")[0]) >= 12 ? " PM" : " AM")}</div>,
+          render: (date : String[]) => <div className="text-table" style={{ textAlign: "right" }}>{date[1]} {date[2]} <br />at {date[4].split(":")[0]+":"+date[4].split(":")[1] + (parseFloat(date[4].split(":")[0]) >= 12 ? " PM" : " AM")}</div>,
           sorter: {
             compare: (a: any, b: any) => convertToDate(a.placed)-convertToDate(b.placed)
           },
@@ -83,6 +88,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           title: "ODDS",
           dataIndex: "odds",
           key: "odds",
+          render: (html : any) => <div className="text-table" style={{ textAlign: "right" }} dangerouslySetInnerHTML={{__html: html}} />
         },
         {
           title: "BET TYPE",
@@ -90,7 +96,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           key: "bettype",
         },
         {
-          title: "Wager",
+          title: "Risk",
           dataIndex: "wager",
           key: "wager",
           render: (html : any) => <div className="text-table" style={{ textAlign: "right" }} dangerouslySetInnerHTML={{__html: html}} />
