@@ -3,7 +3,8 @@ import { Col, Row } from "antd";
 import { TransactionData } from "../Common/TransactionData";
 import { Select } from 'antd';
 import { DownOutlined } from "@ant-design/icons";
-import { MS_IN_DAY, Pool, Transactions } from "../../constants";
+import { MS_IN_DAY, Pool, Transactions, numStringToNumberFormat } from "../../constants";
+
 const { Option } = Select;
 
 export const LiquidityGlance = (props: { setInterval : any, data : any, transactions: Array<Transactions> | undefined | null }) => {
@@ -57,13 +58,16 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
           </Row>
           <Row>
             <Col span={12} md={8}>
-                <TransactionData textContext={"Volume"} percentage={volumePercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.volume : "0")+" USDC"} />
+                <TransactionData textContext={"Volume"} percentage={volumePercent} 
+                  data={(props.data && props.data.length ? numStringToNumberFormat(props?.data[props?.data?.length-1]?.volume) : "0")+" USDC"} />
             </Col>
             <Col span={12} md={8}>
-                <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} data={(props.data && props.data.length ? props?.data[props?.data?.length-1]?.balance : "0")+" USDC"} />
+                <TransactionData textContext={"Total Liquidity"} percentage={liqPercent} 
+                  data={(props.data && props.data.length ? numStringToNumberFormat(props?.data[props?.data?.length-1]?.balance) : "0")+" USDC"} />
             </Col>
             <Col span={24} md={8}>
-                <TransactionData textContext={"Transactions"} percentage={transData.percent} data={(transData.trans)+" Txns"} />
+                <TransactionData textContext={"Transactions"} percentage={transData.percent} 
+                  data={numStringToNumberFormat(transData.trans.toString())+" Txns"} />
             </Col>
           </Row>
         </>

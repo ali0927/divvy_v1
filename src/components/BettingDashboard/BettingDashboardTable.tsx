@@ -22,7 +22,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           placed: bet["placedOn"].split(" "),
           settled: BetStatus[bet["status"]].toLowerCase(),
           odds: bet["betType"]+'<br />'+(bet["odds"] < 0 ? "" : "+")+americanToDecimal(bet["odds"]),
-          original: '<b>'+bet["risk"]/LAMPORTS_PER_USDC+' USDC</b>',
+          risk: '<b>'+bet["risk"]/LAMPORTS_PER_USDC+' USDC</b>',
           potential: bet["payout"]/LAMPORTS_PER_USDC+' USDC'
         })
       })
@@ -40,7 +40,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
 
     const DASHBOARD_COLUMNS = [
         {
-          title: 'TYPE',
+          title: 'BET TYPE',
           dataIndex: 'type',
           key: 'type',
         },
@@ -85,13 +85,13 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           render: (html : any) => <div className="text-table" style={{ textAlign: "right" }} dangerouslySetInnerHTML={{__html: html}} />
         },
         {
-          title: "ORIGINAL BET",
-          dataIndex: "original",
-          key: "original",
+          title: "RISK",
+          dataIndex: "risk",
+          key: "risk",
           render: (html : any) => <div className="text-table" style={{ textAlign: "right" }} dangerouslySetInnerHTML={{__html: html}} />
         },
         {
-          title: "POTENTIAL WIN",
+          title: "TO WIN",
           dataIndex: "potential",
           key: "potential",
           sorter: {

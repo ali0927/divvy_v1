@@ -1,7 +1,7 @@
 import { UpOutlined, DownOutlined } from "@ant-design/icons";
 export const TransactionData = (props: { textContext: string, percentage: number, data: string }) => {
     return (
-        <div className="header-align">
+        <div style={{margin:'0 1.2vw'}}>
             {
                 props.percentage > 0 ?
                 <p className="text-primary">{props.textContext}: <span style={{color: "#16c57c"}}>{"+"+props.percentage+"%"} <UpOutlined className="direction-icon" /></span></p>

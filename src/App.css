@@ -808,3 +808,7 @@ h1 {
   padding: 0.5rem 0.5rem;
   background-color: var(--off-black);
 }
+.ant-table-pagination.ant-pagination {
+  display: flex;
+  align-items: center;
+}
