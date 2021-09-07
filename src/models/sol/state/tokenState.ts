@@ -22,7 +22,7 @@ export interface MintState {
 
 export const MintStateParser = (id: PublicKey, acc: AccountInfo<Buffer>): ParsedAccount<MintState> => {
     const decoded = MINT_LAYOUT.decode(acc.data) as any;
-    console.log(acc);
+    // console.log(acc);
     const mintState: ParsedAccount<MintState> = {
         pubkey: id,
         account: { ...acc },

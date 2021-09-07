@@ -20,7 +20,7 @@ export const HousePoolStateProvider = (props: { children: any }) => {
         async function parseAccount(acc: AccountInfo<Buffer> | null) {
             if (acc) {
                 const parsed = HPStateParser(IDS.HOUSE_POOL_STATE_ACCOUNT, acc);
-                console.log(parsed);
+                // console.log(parsed);
             } else {
                 // setHTBalance(0);
                 // setAccountData(undefined);

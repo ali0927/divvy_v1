@@ -5,7 +5,7 @@ import { DIVVY_API, DIVVY_API_GET_BETS } from '../constants/urls'
 // Define a service using a base URL and expected endpoints
 export const betsApi = createApi({
     reducerPath: 'getBets',
-    baseQuery: fetchBaseQuery({ baseUrl: DIVVY_API }),
+    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/" }),
     endpoints: (builder) => ({
         getBets: builder.query<Array<Bet>, string | null | undefined>({
             query: (userAddr: string | null | undefined) => DIVVY_API_GET_BETS + userAddr,

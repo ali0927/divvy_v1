@@ -6,6 +6,7 @@ import { useWallet } from "./sol/wallet";
 import { initBet } from "../models/sol/instruction/initBetInstruction";
 import * as IDS from "../utils/ids"
 import { useGetBetsQuery } from "../store/getBets";
+import { americanToDecimal, tokenAmountToString } from "../constants";
 import { useStoreBetsMutation } from "../store/storeBets";
 
 export const BetsContext = createContext<{
@@ -121,6 +122,11 @@ const BetsProvider = (props: { children: any }) => {
 
         if (ok && wallet.publicKey) {
           for(const bet of betChunk) {
+            bet.payout = JSON.parse(tokenAmountToString(bet.risk * (americanToDecimal(bet.odds))));
+            bet.teamASpreadPoints = bet.market.teamASpreadPoints;
+            bet.teamBSpreadPoints = bet.market.teamBSpreadPoints;
+            bet.teamATotalPoints = bet.market.teamATotalPoints;
+            bet.teamBTotalPoints = bet.market.teamBTotalPoints;
             storeBet(bet)
           }
         }

@@ -40,7 +40,7 @@ export interface BetState {
 
 export const BetStateParser = (id: PublicKey, acc: AccountInfo<Buffer>): ParsedAccount<BetState> => {
     const decoded = LAYOUT.decode(acc.data) as any;
-    console.log(decoded, 'betstate')
+    // console.log(decoded, 'betstate')
     const betstate: ParsedAccount<BetState> = {
         pubkey: id,
         account: { ...acc },

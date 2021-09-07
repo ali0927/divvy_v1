@@ -139,6 +139,10 @@ export interface Bet {
     marketName?: string,
     placedOn?: string,
     points: number,
+    teamASpreadPoints?: number,
+    teamBSpreadPoints?: number,
+    teamATotalPoints?: number,
+    teamBTotalPoints?: number,
 }
 
 export interface BetsTable {
@@ -149,7 +153,8 @@ export interface BetsTable {
     placed: string,
     settled: string,
     odds: string,
-    original: string,
+    bettype: string,
+    wager: string,
     potential: string
 }
 

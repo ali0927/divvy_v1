@@ -12,18 +12,19 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
     const [betData, setBetData] = useState<BetsTable[]>([]);
     useEffect(() => {
       let tmpArr: BetsTable[] = [];
-      console.log(data)
+      console.log("asdsa", data)
       data?.map((bet: any, i: number) => {
         tmpArr.push({
           key: i,
           type: 'Single',
-          match: bet["match"],
+          match: bet["marketName"],
           sport: bet["sportName"],
           placed: bet["placedOn"].split(" "),
           settled: BetStatus[bet["status"]].toLowerCase(),
-          odds: bet["betType"]+'<br />'+(bet["odds"] < 0 ? "" : "+")+americanToDecimal(bet["odds"]),
-          original: '<b>'+bet["risk"]/LAMPORTS_PER_USDC+' USDC</b>',
-          potential: bet["payout"]/LAMPORTS_PER_USDC+' USDC'
+          bettype: bet["betType"],
+          odds: (bet["odds"] < 0 ? "" : "+")+bet["odds"],
+          wager: '<b>'+bet["risk"]/LAMPORTS_PER_USDC+' USDC</b>',
+          potential: bet["payout"]+' USDC'
         })
       })
       setBetData(tmpArr);
@@ -82,16 +83,20 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           title: "ODDS",
           dataIndex: "odds",
           key: "odds",
+        },
+        {
+          title: "BET TYPE",
+          dataIndex: "bettype",
+          key: "bettype",
+        },
+        {
+          title: "Wager",
+          dataIndex: "wager",
+          key: "wager",
           render: (html : any) => <div className="text-table" style={{ textAlign: "right" }} dangerouslySetInnerHTML={{__html: html}} />
         },
         {
-          title: "ORIGINAL BET",
-          dataIndex: "original",
-          key: "original",
-          render: (html : any) => <div className="text-table" style={{ textAlign: "right" }} dangerouslySetInnerHTML={{__html: html}} />
-        },
-        {
-          title: "POTENTIAL WIN",
+          title: "TO WIN",
           dataIndex: "potential",
           key: "potential",
           sorter: {
