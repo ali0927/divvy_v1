@@ -8,7 +8,7 @@ export const LiquidityPoolActivity = (props: { transactions : Array<Transactions
     <div style={{marginTop: 40, padding: 5}}>
       <Row>
         <Col span={24}>
-          <CommonHeader side={false} heading={"Pool Activity Stream"} />
+          <CommonHeader side={false} heading={"Divvy Activity Stream"} />
         </Col>
       </Row>
       <Row>

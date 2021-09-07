@@ -17,6 +17,7 @@ import * as IDS from "../../utils/ids";
 import { UserHTContext } from "../../contexts/sol/userht";
 import { HPTokenContext } from "../../contexts/sol/hptoken";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
+import { BetStateContext } from "../../contexts/sol/betstate";
 
 export const WithdrawLiquidity = (props: {}) => {
   const wallet = useWallet();
@@ -28,7 +29,7 @@ export const WithdrawLiquidity = (props: {}) => {
   const { userHT } = useContext(UserHTContext);
   const { htBalance } = useContext(HousePoolContext);
   const { htSupply } = useContext(HPTokenContext);
-  
+  const { lockedLiquidity } = useContext(BetStateContext)
   useEffect(() => {
    if(userHT === 0) setHtAmount("")
   }, [userHT])
@@ -100,18 +101,18 @@ export const WithdrawLiquidity = (props: {}) => {
         <p>
           <small className="text-secondary">Withdrawable balance</small>
         </p>
-        <p className="balance">{tokenAmountToString(htBalance / htSupply * userHT)} USDC</p>
+        <p className="balance">{tokenAmountToString((htBalance + lockedLiquidity) / htSupply * userHT)} USDC({tokenAmountToString(userHT)} HT)</p>
       </div>
       <Form.Item name="htAmount" style={{marginBottom: '1em'}}>
         <Input.Group compact>
-          <Input placeholder={"HT"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{width: "70%"}} />
+          <Input placeholder={"USDC"} value={htAmount} onChange={event => setHtAmount(event.currentTarget.value)} style={{width: "70%"}} />
           <Button style={{border: "1px solid rgb(67, 67, 67)", width: "30%", padding:0}} onClick={e => setHtAmount((userHT / LAMPORTS_PER_HT).toFixed(2).toString())} disabled={userHT === 0}>MAX</Button>
         </Input.Group>
       </Form.Item>
 
       <WalletSlider 
-        onChange={(val: number) => setHtAmount((htBalance / htSupply * userHT / LAMPORTS_PER_HT * val / 100).toFixed(2).toString()) }
-        value={htAmount === "" ? 0: Number(htAmount) * LAMPORTS_PER_HT / ( htBalance / htSupply * userHT ) * 100}
+        onChange={(val: number) => setHtAmount(((htBalance + lockedLiquidity) / htSupply * userHT / LAMPORTS_PER_HT * val / 100).toFixed(2).toString()) }
+        value={htAmount === "" ? 0: Number(htAmount) * LAMPORTS_PER_HT / ( (htBalance + lockedLiquidity) / htSupply * userHT ) * 100}
         disabled={userHT === 0}
       />
 

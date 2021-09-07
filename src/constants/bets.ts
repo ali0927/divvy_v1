@@ -149,7 +149,7 @@ export interface BetsTable {
     placed: string,
     settled: string,
     odds: string,
-    original: string,
+    risk: string,
     potential: string
 }
 

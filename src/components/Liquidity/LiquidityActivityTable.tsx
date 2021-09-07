@@ -1,7 +1,7 @@
 import { Table, Row, Col } from 'antd';
 import { useEffect, useState } from 'react';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { Transactions, TransactionsTable } from '../../constants';
+import { Transactions, TransactionsTable, numStringToNumberFormat } from '../../constants';
 import { LIQUIDITY_ACTIVITY_COLUMNS, LIQUIDITY_ACTIVITY_MOBILE_COLUMNS } from '../../constants/LiquidityColumns';
 import { DIVVY_WEBSOCKET_API } from "../../constants/urls";
 import { shortenAddress } from "../../utils/utils";
@@ -20,9 +20,10 @@ export const LiquidityActivityTable = (props: { transactions : Array<Transaction
           pubkey: (item.pubkey && shortenAddress(item.pubkey?.toString(), 12)) + "",
           match: item.match,
           odds: item.odds_type+" <br />"+(item.odds && item.odds.includes('-') ? item.odds : item.odds == "0" ? item.odds_type != "-" ? "-" : "" : "+"+item.odds),
-          amount: (item.amount).toString()
+          amount: numStringToNumberFormat(item.amount.toString())
         })
       })
+      tmpArr.reverse()
       setData(tmpArr);
     }
   }, [props.transactions])

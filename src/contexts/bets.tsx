@@ -48,6 +48,10 @@ const BetsProvider = (props: { children: any }) => {
       if (b["status"] === BetStatus.Current) {
         bet.push(b)
       }
+      if (b['status'] === BetStatus.Pending) {
+        const idx = bet.findIndex(item => { return b.marketSide === item.marketSide && b.marketId === item.marketId});
+        if (idx === -1) bet.push(b)
+      }
     })
     bet.push(betSlip)
     setBets(bet)

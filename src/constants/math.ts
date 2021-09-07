@@ -1,3 +1,4 @@
+import { parse } from "@fortawesome/fontawesome-svg-core";
 import BN from "bn.js";
 
 export const TEN = new BN(10);
@@ -31,6 +32,11 @@ export const decimalToAmerican = (decimalOdds: number): number => {
 export const tokenAmountToString = (tokenAmount: number, decimals: number = 6, minimumFractionDigits = 2, maximumFractionDigits = 2): string => {
   maximumFractionDigits = Math.max(maximumFractionDigits, minimumFractionDigits);
   return (tokenAmount / Math.pow(10, decimals)).toLocaleString(undefined, { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: maximumFractionDigits })
+}
+
+export const numStringToNumberFormat = (str: string) => {
+  let dollarUSLocale = Intl.NumberFormat('en-US');
+  return dollarUSLocale.format(parseFloat(str))
 }
 
 export const usdcAmountReducedLength = (amount: number) => {

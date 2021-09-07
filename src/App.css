@@ -668,7 +668,7 @@ body {
 .sports-list-item img {
   /* opacity: 80%; */
   border-radius: 50%;
-  padding: 0.5rem;
+  padding: 8px;
   width: 100%;
   height: 100%;
   background-color: var(--gray);
@@ -682,6 +682,7 @@ body {
   background-origin: border-box;
   background-clip: padding-box, border-box;
   border: double 2px transparent;
+  padding: 6px;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   height: 45px;
@@ -806,4 +807,8 @@ h1 {
   align-items: center;
   padding: 0.5rem 0.5rem;
   background-color: var(--off-black);
+}
+.ant-table-pagination.ant-pagination {
+  display: flex;
+  align-items: center;
 }
