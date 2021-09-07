@@ -4,7 +4,7 @@ import { DATE_STRING_TO_NUMBER } from "../../constants/DashboardColumns";
 import { BetStatus, BetsTable } from "../../constants/bets";
 import { useGetBetsQuery } from "../../store/getBets";
 import { useWallet } from "../../contexts/sol/wallet";
-import { americanToDecimal, LAMPORTS_PER_USDC } from "../../constants/math";
+import { americanToDecimal, LAMPORTS_PER_USDC, numStringToNumberFormat } from "../../constants/math";
 
 export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, filteredInfo: any, setSortedInfo: any, setFilteredInfo: any }) => {
     const wallet = useWallet();  
@@ -21,7 +21,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           sport: bet["sportName"],
           placed: bet["placedOn"].split(" "),
           settled: BetStatus[bet["status"]].toLowerCase(),
-          odds: bet["betType"]+'<br />'+(bet["odds"] < 0 ? "" : "+")+americanToDecimal(bet["odds"]),
+          odds: bet["betType"]+'<br />'+(bet["odds"] < 0 ? "" : "+")+americanToDecimal(bet["odds"]).toFixed(2),
           risk: '<b>'+bet["risk"]/LAMPORTS_PER_USDC+' USDC</b>',
           potential: bet["payout"]/LAMPORTS_PER_USDC+' USDC'
         })
@@ -66,7 +66,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           title: 'PLACED ON',
           dataIndex: 'placed',
           key: 'placed',
-          render: (date : String[]) => <div className="text-table" style={{ textAlign: "right" }}>{date[1]} {date[2]} <br />at {date[4].split(":")[0]+":"+date[4].split(":")[1] + (JSON.parse(date[4].split(":")[0]) >= 12 ? " PM" : " AM")}</div>,
+          render: (date : String[]) => <div className="text-table" style={{ textAlign: "right" }}>{date[1]} {date[2]} <br />at {date[4].split(":")[0]+":"+date[4].split(":")[1] + (parseFloat(date[4].split(":")[0]) >= 12 ? " PM" : " AM")}</div>,
           sorter: {
             compare: (a: any, b: any) => convertToDate(a.placed)-convertToDate(b.placed)
           },
