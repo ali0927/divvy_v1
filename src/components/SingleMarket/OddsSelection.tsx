@@ -67,7 +67,7 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
           </Col>
           <Col onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.moneylineMarketPubkey, props.odds.totalPoints)}  span={8} style={{padding: '0.5vw'}} >
             <div className={containsBet(BetType.total) ? "odds odds-active" : "odds"}>
-              <b style={{fontSize: '1em'}}>{`(${props.odds.total >= 0 ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>
+              <b style={{fontSize: '1em'}}>{`(${props.marketSide === MarketSide.teamB ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>
             </div>
           </Col>
           </>
