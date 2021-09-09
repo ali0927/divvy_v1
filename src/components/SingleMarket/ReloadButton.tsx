@@ -21,7 +21,7 @@ export const ReloadButton = (props: { refetch: any }) => {
     return (
         <div className="reload-container" onClick={() => reFetch()}>
             <Tooltip title="Data will auto-refresh after every 30 seconds, click to refresh now">
-                <Progress type="circle" percent={timer} width={30} format={() => ''} />
+                <Progress type="circle" percent={timer} width={20} format={() => ''} />
             </Tooltip>
         </div>
     )
