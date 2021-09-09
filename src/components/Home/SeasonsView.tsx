@@ -11,7 +11,7 @@ import { SportsList } from "./SportsList";
 
 export const SeasonsView = () => {
     const { sport, changeSport } = useContext(SportContext)
-    const { data, error, isLoading } = useGetSeasonsQuery(sport ? sport?.sportId : 0)
+    const { data, error, isLoading, refetch } = useGetSeasonsQuery(sport ? sport?.sportId : 0)
     const [search, setSearch] = useState("")
     // console.log(data)
     return (
@@ -19,7 +19,7 @@ export const SeasonsView = () => {
         <LiveMarkets />
         {/* <HomeCarousel /> */}
         <SportsList />
-        <SeasonHeader seasonName={sport?.sportName} onChange={setSearch}/>
+        <SeasonHeader refetch={refetch} seasonName={sport?.sportName} onChange={setSearch}/>
         {error ? LABELS.SERVER_ERROR : null}
         {isLoading ? <Loader /> : null}
         {data?.map(season => <SeasonGames season={season} key={season.season.seasonId} search={search}/>)}

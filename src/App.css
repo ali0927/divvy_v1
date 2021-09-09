@@ -812,3 +812,11 @@ h1 {
   display: flex;
   align-items: center;
 }
+.reload-container {
+  margin-right: 10px;
+  border-radius: 20px;
+}
+.reload-container:hover {
+  background: radial-gradient(circle at -25% 115%, var(--royal-purple), var(--win-green) 89%);
+  cursor: pointer;
+}
