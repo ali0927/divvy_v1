@@ -10,12 +10,14 @@ export const MARKET_SIDE_LAYOUT = struct([
 ]);
 
 export const MARKET_STATE_ACCOUNT_DATA_LAYOUT = struct([
-  u8("isInitialized"),
-  seq(MARKET_SIDE_LAYOUT, 3, "marketSides"),
-  nu64("lockedLiquidity"),
+  blob(1, "isInitialized"),
+  blob(246, "marketSides"),
+  blob(8, "lockedLiquidity"),
   blob(32, "resultFeed"),
-  u8("result"), 
-  nu64("bettorBalance"),
-  nu64("pendingBets"),
-  u8("betType"),
+  u8("result"),
+  blob(8, "bettorBalance"),
+  blob(8, "pendingBets"),
+  blob(2, "teamAScore"),
+  blob(2, "teamBScore"),
+  blob(2, "totalScore"),
 ]);

@@ -26,7 +26,7 @@ export const BetPoolStateProvider = (props: { children: any }) => {
         async function parseAccount(acc: AccountInfo<Buffer> | null) {
             if (acc) {
                 const parsed = BetStateParser(IDS.BET_POOL_STATE_ACCOUNT, acc);
-                // console.log(parsed);
+                console.log(parsed);
                 setLiveLiquidity(parsed.info.liveLiquidity);
                 setLockedLiquidity(parsed.info.lockedLiquidity);
                 setPendingBets(parsed.info.pendingBets);
