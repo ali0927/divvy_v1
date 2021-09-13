@@ -2,16 +2,22 @@ import { Input } from 'antd'
 import { SearchOutlined } from "@ant-design/icons"
 import { ReloadButton } from './ReloadButton'
 
-export const SeasonHeader = (props: { seasonName: string | undefined, onChange: any, refetch: any }) => {
+type SeasonHeaderProps = {
+  seasonName?: string,
+  onChange: any,
+  refetch: any
+}
+
+export const SeasonHeader = ({ seasonName, onChange, refetch, ...props }: SeasonHeaderProps) => {
     return (
-      <div style={style.wrapper}>
-        <h1>{props.seasonName}</h1>
+      <div style={style.wrapper} {...props}>
+        <h1>{seasonName}</h1>
         <div className="balance-container">
-          <ReloadButton refetch={props.refetch} />
+          <ReloadButton refetch={refetch} />
           <Input  
               style={style.input}
               placeholder={"Search for bets"} prefix={<SearchOutlined />}
-              onChange={(event) => props.onChange(event.currentTarget.value)} />
+              onChange={(event) => onChange(event.currentTarget.value)} />
         </div>
       </div>
     )
