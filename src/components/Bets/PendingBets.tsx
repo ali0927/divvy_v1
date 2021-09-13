@@ -14,7 +14,6 @@ export const PendingBets = () => {
         <div className="form-grey" style={{ paddingTop : '70px' }}>
             {bets?.bets.map((value: Bet, i: number) => {
                 const { betType, status, selectionTeam, otherTeam } = value
-                console.log(betType)
 
                 if (status === BetStatus.Pending) {
 
@@ -23,7 +22,7 @@ export const PendingBets = () => {
                             <PendingHeader selectionTeam={selectionTeam} otherTeam={otherTeam} betType={betType}/>
                             <div style={{display:'flex', flexDirection:'column'}}>
                                 <PotentialWins betSlip={value} />
-                                <ConfirmedOdds betType={value.betType} bet={value} />
+                                <ConfirmedOdds betType={betType} bet={value} />
                             </div>  
                             { i !== bets?.bets.length - 1 && <Divider />}
                         </div>
