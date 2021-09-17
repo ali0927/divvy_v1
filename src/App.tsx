@@ -7,6 +7,8 @@ import * as PATHS from "./constants/paths";
 import { store } from './store'
 import { DashboardView } from "./views/DashboardView";
 import { FaucetView } from "./views/FaucetView";
+import { GamesView } from "./views/GamesView";
+import { MoonShot } from "./views/MoonShot";
 const load = (Component: any) => (props: any) => (
   <Suspense fallback={<div></div>}>
     <Component {...props} />
@@ -27,6 +29,9 @@ function App() {
             <BetsProvider>
               {/* Routes are ordered specific to general. the '/' route must be placed last */}
               <Switch>
+                <Route path={PATHS.GAMES_VIEW_PATH + PATHS.MOONSHOT_VIEW_PATH}>
+                  <MoonShot />
+                </Route>
                 <Route path={PATHS.FAUCET_VIEW_PATH}>
                   <FaucetView />
                 </Route>
@@ -38,6 +43,9 @@ function App() {
                 </Route>
                 <Route path={PATHS.BETS_VIEW_PATH}>
                   <BetsView />
+                </Route>
+                <Route path={PATHS.GAMES_VIEW_PATH}>
+                  <GamesView />
                 </Route>
                 <Route path={PATHS.LANDING_PAGE_VIEW_PATH}>
                   <LandingPageView />
