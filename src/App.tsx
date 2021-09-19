@@ -1,6 +1,6 @@
 import "./App.css";
 import "flag-icon-css/css/flag-icon.css"
-import { lazy, Suspense } from 'react';
+import {lazy, Suspense} from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Provider } from 'react-redux'
 import * as PATHS from "./constants/paths";
@@ -9,6 +9,7 @@ import { DashboardView } from "./views/DashboardView";
 import { FaucetView } from "./views/FaucetView";
 import { GamesView } from "./views/GamesView";
 import { MoonShot } from "./views/MoonShot";
+
 const load = (Component: any) => (props: any) => (
   <Suspense fallback={<div></div>}>
     <Component {...props} />
@@ -30,7 +31,7 @@ function App() {
               {/* Routes are ordered specific to general. the '/' route must be placed last */}
               <Switch>
                 <Route path={PATHS.GAMES_VIEW_PATH + PATHS.MOONSHOT_VIEW_PATH}>
-                  <MoonShot />
+                    <MoonShot />
                 </Route>
                 <Route path={PATHS.FAUCET_VIEW_PATH}>
                   <FaucetView />

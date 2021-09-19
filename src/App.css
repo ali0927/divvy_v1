@@ -190,6 +190,18 @@ body {
   display: flex;
   flex-direction: column;
 }
+.flex-vertical-full {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.center-child-flex {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .flex-start {
   justify-content: flex-start;
@@ -228,6 +240,19 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.overlay-banner {
+  position: absolute;
+  display: flex;
+  top: 20%;
+  left: 42%;
+  margin: auto;
+  /*width: 150px;*/
+  /*height: 100px;*/
+  background-color: rgba(89, 78, 214, 0.6);
+  text-align: center;
+  justify-content: center;
+}
+
 .odds {
   display: flex;
   flex-direction: column;
@@ -263,7 +288,7 @@ body {
   justify-content: space-around;
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
   .bet-time-container {
     display: flex;
     height: 100%;
@@ -271,7 +296,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1em;
-    text-align: center; 
+    text-align: center;
   }
 }
 .liquidity-left {
@@ -572,7 +597,7 @@ body {
   line-height: 24px;
 }
 
-@media (min-width: 768px) {  
+@media (min-width: 768px) {
   .sidebar-section-bets-button {
     height: 16vh;
     bottom: 0;
@@ -664,7 +689,7 @@ body {
 .sports-list-item .team-logo {
   width: 100%;
 }
- 
+
 .sports-list-item img {
   /* opacity: 80%; */
   border-radius: 50%;
@@ -720,7 +745,7 @@ body {
 
 .transparent-button {
   cursor: pointer;
-} 
+}
 
 .search-button {
   border-width: 0px;
@@ -785,14 +810,14 @@ h1 {
   text-align: center;
 }
 .bet-submit[disabled] {
-  background: rgba(0, 0, 0, 0) !important; 
+  background: rgba(0, 0, 0, 0) !important;
   border: none !important;
 }
 .wallet-connect {
   float: right;
   display: none;
 }
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
   .wallet-connect {
     display: block;
   }
@@ -802,7 +827,7 @@ h1 {
 }
 
 .sol-wallet-setting .sol-wallet-info {
-  display: flex; 
+  display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.5rem;
