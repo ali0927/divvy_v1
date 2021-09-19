@@ -13,13 +13,21 @@ export const PendingBets = () => {
     return (
         <div className="form-grey" style={{ paddingTop : '70px' }}>
             {bets?.bets.map((value: Bet, i: number) => {
-                const { betType, status, selectionTeam, otherTeam } = value
+                const { betType, status, selectionTeam, otherTeam, market } = value
+                const { commenceTime, endTime } = market
 
                 if (status === BetStatus.Pending) {
 
                     return (
                         <div>
-                            <PendingHeader selectionTeam={selectionTeam} otherTeam={otherTeam} betType={betType}/>
+                            <PendingHeader 
+                                selectionTeam={selectionTeam} 
+                                otherTeam={otherTeam} 
+                                betType={betType} 
+                                commenceTime={commenceTime} 
+                                endTime={endTime}
+                            />
+                            
                             <div style={{display:'flex', flexDirection:'column'}}>
                                 <PotentialWins betSlip={value} />
                                 <ConfirmedOdds betType={betType} bet={value} />
