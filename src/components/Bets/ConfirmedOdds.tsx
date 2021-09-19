@@ -2,7 +2,6 @@ import { Bet, BetType } from '../../constants';
 export const ConfirmedOdds = (props: { betType: BetType, bet: Bet }) => {
     const { betType, bet } = props
     const prefix = bet.odds > 0 && '+'
-    console.log(bet)
     const { selection, market } = bet
 
     return (
