@@ -1,13 +1,15 @@
 import {CommonResponse} from "./common";
 
-export interface Bet {
-    bet: number,
+export interface BustBet {
+    risk: number,
     userPubkey: string,
+    userUSDTPubkey: string,
+    multiplier: number,
     payout: number,
     status: number,
     placedOn: string
 }
 
 export interface PostBetsResponse extends CommonResponse {
-    bet: Bet
+    bet: BustBet
 }
