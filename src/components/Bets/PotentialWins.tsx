@@ -1,4 +1,6 @@
 import { americanToDecimal, Bet, LAMPORTS_PER_USDC } from '../../constants';
+import { round } from '../../utils/numbers';
+
 export const PotentialWins = (props: { betSlip: Bet }) => {
     return (
         <div>
@@ -7,7 +9,7 @@ export const PotentialWins = (props: { betSlip: Bet }) => {
                     Wager
                 </p>
                 <h3 style={{overflowWrap:'anywhere'}}>
-                    {props.betSlip.risk / LAMPORTS_PER_USDC} USDC
+                    {round(props.betSlip.risk / LAMPORTS_PER_USDC)} USDC
                 </h3>
             </div>
             <div className="wins-right">
@@ -15,7 +17,7 @@ export const PotentialWins = (props: { betSlip: Bet }) => {
                     To win
                 </p>
                 <h3 style={{overflowWrap:'anywhere'}}>
-                    {(props.betSlip.risk / LAMPORTS_PER_USDC) * americanToDecimal(props.betSlip.odds)} USDC
+                    {round((props.betSlip.risk / LAMPORTS_PER_USDC) * americanToDecimal(props.betSlip.odds))} USDC
                 </h3>
             </div>
         </div>

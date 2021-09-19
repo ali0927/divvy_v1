@@ -2,6 +2,8 @@ import { Bet, BetType } from '../../constants';
 export const ConfirmedOdds = (props: { betType: BetType, bet: Bet }) => {
     const { betType, bet } = props
     const prefix = bet.odds > 0 && '+'
+    console.log(bet)
+    const { selection, market } = bet
 
     return (
         <div style={{display:'flex', alignItems:'flex-end'}}>
@@ -15,8 +17,8 @@ export const ConfirmedOdds = (props: { betType: BetType, bet: Bet }) => {
             </div>
             <div className="wins-right">
                 <h3 style={{ marginTop: 0 }}>
-                    {betType === BetType.spread ? bet.selection === "teamA" ? bet.market.teamASpreadPoints : bet.market.teamBSpreadPoints : null}
-                    {betType === BetType.total ? bet.selection === "teamA" ? bet.market.teamATotalPoints : bet.market.teamBTotalPoints : null}
+                    {betType === BetType.spread ? selection === "teamA" ? market.teamASpreadPoints : market.teamBSpreadPoints : null}
+                    {betType === BetType.total ? selection === "teamA" ? 'O' + market.teamATotalPoints : 'O' + market.teamBTotalPoints : null}
                     {
                         betType === BetType.moneyline 
                         ? <>{prefix}{bet.odds}</>
