@@ -1,7 +1,5 @@
 import { BetType } from '../../constants'
-import Countdown from 'react-countdown'
-import { isPast } from 'date-fns'
-import { useEffect, useState } from 'react'
+import { Timer } from '../Common/Timer'
 
 type PendingHeaderProps = {
     selectionTeam?: string,
@@ -9,23 +7,6 @@ type PendingHeaderProps = {
     betType?: BetType,
     commenceTime?: number
     endTime: number
-}
-
-const Completed = (props: {endTime: number}) => {
-    const [ended, setEnded] = useState(false)
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setEnded(isPast(props?.endTime))
-        }, 1000);
-
-        ended && clearInterval(timer)
-        return () => clearInterval(timer);
-    })
-
-    return(
-        <div>{ ended ? 'Ended' : 'LIVE' }</div>
-    )
 }
 
 export const PendingHeader = ({ selectionTeam, otherTeam, betType, commenceTime, endTime, ...props }: PendingHeaderProps) => {
@@ -38,7 +19,7 @@ export const PendingHeader = ({ selectionTeam, otherTeam, betType, commenceTime,
                 <h3 style={fadedTeam === otherTeam ? style.fadedTeam : style.team}>{otherTeam}</h3>
             </div>
 
-            <Countdown date={commenceTime}><Completed endTime={endTime}/></Countdown>
+            <Timer commenceTime={commenceTime} endTime={endTime}/>
         </div>
     )
 }
