@@ -1,5 +1,5 @@
 import {Table} from "antd";
-import { LEADERBOARD_DUMMY_DATA } from "../../constants/dymmyData";
+import { LEADERBOARD_DUMMY_DATA } from "../../../constants/dymmyData";
 
 const BetsTable = () => {
     const DASHBOARD_COLUMNS = [
