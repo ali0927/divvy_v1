@@ -22,8 +22,8 @@ export interface Odds {
 }
 export enum BetType {
     moneyline = "Money Line",
-    spread = "Points Spread",
-    total = "Total Score",
+    spread = "Spread",
+    total = "Over/Under",
 }
 export enum MarketSide {
     teamA = "teamA",
