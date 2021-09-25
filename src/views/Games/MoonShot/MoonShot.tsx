@@ -1,7 +1,7 @@
 import {Col, Row} from "antd";
-import BetsTable from "../components/Games/BetsTable";
-import PlaceBet from "../components/Games/PlaceBet";
-import {MultiplierGraph} from "../components/Games/MultiplierGraph";
+import BetsTable from "../../../components/Games/MoonShot/BetsTable";
+import PlaceBet from "../../../components/Games/MoonShot/PlaceBet";
+import {MultiplierGraph} from "../../../components/Games/MoonShot/MultiplierGraph";
 
 export const MoonShot = () => {
     return (

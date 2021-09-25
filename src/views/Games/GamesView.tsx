@@ -1,14 +1,14 @@
 import { Col, Layout, Row } from "antd";
 import { useState } from "react";
-import { LeftSideBar } from "../components/LeftSideBar";
-import { MobileHeader } from "../components/Nav/Mobile/MobileHeader";
-import { NavBar } from "../components/Nav/NavBar";
-import { HeaderTypes } from "../constants/HeaderTypes";
-import { useWallet } from "../contexts/sol/wallet";
-import { ConnectLink } from "../components/Nav/ConnectLink";
+import { LeftSideBar } from "../../components/LeftSideBar";
+import { MobileHeader } from "../../components/Nav/Mobile/MobileHeader";
+import { NavBar } from "../../components/Nav/NavBar";
+import { HeaderTypes } from "../../constants/HeaderTypes";
+import { useWallet } from "../../contexts/sol/wallet";
+import { ConnectLink } from "../../components/Nav/ConnectLink";
 import { Card } from 'antd';
 import { Link } from "react-router-dom";
-import { GAMES_VIEW_PATH, MOONSHOT_VIEW_PATH } from "../constants";
+import { GAMES_VIEW_PATH, MOONSHOT_VIEW_PATH } from "../../constants";
 
 const { Meta } = Card;
 

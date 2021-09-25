@@ -1,12 +1,12 @@
 import {Button, Form, Input} from "antd";
 import { useState } from "react";
-import { useConnection, useConnectionConfig } from "../../contexts/sol/connection";
-import { useWallet } from "../../contexts/sol/wallet";
-import { useAccountByMint } from "../../hooks";
-import { BustBet } from "../../models/games/moonshot/bets";
-import { initBustBet } from "../../models/sol/instruction/initBustBetInstruction";
-import { useStoreBetsMutation } from "../../store/games/moonshot/storeBet";
-import { getUsdtMint } from "../../utils/ids";
+import { useConnection, useConnectionConfig } from "../../../contexts/sol/connection";
+import { useWallet } from "../../../contexts/sol/wallet";
+import { useAccountByMint } from "../../../hooks";
+import { BustBet } from "../../../models/games/moonshot/bets";
+import { initBustBet } from "../../../models/sol/instruction/initBustBetInstruction";
+import { useStoreBetsMutation } from "../../../store/games/moonshot/storeBet";
+import { getUsdtMint } from "../../../utils/ids";
 
 const PlaceBet = () => {
     const [storeBets, { isLoading: isUpdating }] = useStoreBetsMutation();
