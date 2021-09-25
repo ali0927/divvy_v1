@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import {getDuration, getMappedMultiplier} from "../../constants/games";
+import {getDuration, getMappedMultiplier} from "../../../constants/games";
 import {Line, LineChart, Tooltip, XAxis, YAxis} from "recharts";
-import {MultiplierGraphModel} from "../../models/games/moonshot/bets";
+import {MultiplierGraphModel} from "../../../models/games/moonshot/bets";
 import {io} from "socket.io-client";
 
 export const MultiplierGraph = () => {

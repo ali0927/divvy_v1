@@ -31,7 +31,7 @@ export const decimalToAmerican = (decimalOdds: number): number => {
 
 export const tokenAmountToString = (tokenAmount: number, decimals: number = 6, minimumFractionDigits = 2, maximumFractionDigits = 2): string => {
   maximumFractionDigits = Math.max(maximumFractionDigits, minimumFractionDigits);
-  return (tokenAmount / Math.pow(10, decimals)).toLocaleString(undefined, { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: maximumFractionDigits })
+  return (tokenAmount / Math.pow(10, decimals)).toLocaleString('en-US', { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: maximumFractionDigits })
 }
 
 export const numStringToNumberFormat = (str: string) => {

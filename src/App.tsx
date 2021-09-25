@@ -7,8 +7,8 @@ import * as PATHS from "./constants/paths";
 import { store } from './store'
 import { DashboardView } from "./views/DashboardView";
 import { FaucetView } from "./views/FaucetView";
-import { GamesView } from "./views/GamesView";
-import { MoonShot } from "./views/MoonShot";
+import { GamesView } from "./views/Games/GamesView";
+import { MoonShot } from "./views/Games/MoonShot/MoonShot";
 
 const load = (Component: any) => (props: any) => (
   <Suspense fallback={<div></div>}>

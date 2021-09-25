@@ -796,7 +796,7 @@ h1 {
 .wins-right {
   float: right;
   width: 50%;
-  text-align: right;
+  text-align: left;
 }
 
 .text-secondary-wins {
