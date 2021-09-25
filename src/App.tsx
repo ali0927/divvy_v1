@@ -18,7 +18,6 @@ const load = (Component: any) => (props: any) => (
 const ChainProvider = load(lazy(() => import("./contexts/chainselect")));
 const BetsView = load(lazy(() => import("./views/BetsView")));
 const LiquidityView = load(lazy(() => import("./views/LiquidityView")));
-const LandingPageView = load(lazy(() => import("./views/LandingPageView")));
 const RootContextProvider = load(lazy(() => import("./contexts")));
 const BetsProvider = load(lazy(() => import("./contexts/bets")));
 function App() {
@@ -42,14 +41,11 @@ function App() {
                 <Route path={PATHS.LIQUIDITY_VIEW_PATH}>
                   <LiquidityView />
                 </Route>
-                <Route path={PATHS.BETS_VIEW_PATH}>
-                  <BetsView />
-                </Route>
                 <Route path={PATHS.GAMES_VIEW_PATH}>
                   <GamesView />
                 </Route>
-                <Route path={PATHS.LANDING_PAGE_VIEW_PATH}>
-                  <LandingPageView />
+                <Route path={PATHS.BETS_VIEW_PATH}>
+                  <BetsView />
                 </Route>
               </Switch>
             </BetsProvider>
