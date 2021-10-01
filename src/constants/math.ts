@@ -13,9 +13,9 @@ export const MS_IN_DAY = 86400000;
 
 export const americanToDecimal = (americanOdds: number): number => {
   if (americanOdds > 0) {
-    return 1 + (americanOdds / 100);
+    return parseFloat((1 + (americanOdds / 100)).toFixed(2));
   } else if (americanOdds <= 0) {
-    return 1 - (100 / americanOdds);
+    return parseFloat((1 - (100 / americanOdds)).toFixed(2));
   }
   return NaN;
 }
