@@ -10,15 +10,7 @@ import { SportContext } from "../../contexts/sport";
 
 export const SingleMatchComponent = (props: { market: Market }) => {
     const { sport, changeSport } = useContext(SportContext)
-    const countryCodeToFlagCode = (countryCode: string) => {
-        let code = codes[countryCode]?.code?.toLowerCase();
-
-        if (code === "wl") { // This is a hack for wales smh
-            return "gb-wls";
-        }
-        return code;
-    }
-    // console.log(props.market)
+    const [oddsType, setoddsType] = useState("decimal")
     return (
       <div className="single-match">
         <OddsType />
@@ -38,13 +30,13 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                   moneyline: props.market.teamBOddsMoneyline,
                   spread: props.market.teamBOddsSpread,
                   spreadPoints: props.market.teamBSpreadPoints,
-                  total: props.market.teamBOddsTotal,
-                  totalPoints: props.market.teamBTotalPoints,
+                  total: props.market.teamAOddsTotal,
+                  totalPoints: props.market.teamATotalPoints,
                   moneylineFeedPubkey: props.market.teamBOddsMoneylineFeedPubkey,
                   spreadPointsFeedPubkey: props.market.teamBSpreadPointsFeedPubkey,
                   spreadFeedPubkey: props.market.teamBOddsSpreadFeedPubkey,
-                  totalFeedPubkey: props.market.teamBOddsTotalFeedPubkey,
-                  totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
+                  totalFeedPubkey: props.market.teamAOddsTotalFeedPubkey,
+                  totalPointsFeedPubkey: props.market.teamATotalPointsFeedPubkey,
                 }} />
               </Col>
             </Row>
@@ -67,13 +59,13 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                   moneyline: props.market.teamAOddsMoneyline,
                   spread: props.market.teamAOddsSpread,
                   spreadPoints: props.market.teamASpreadPoints,
-                  total: props.market.teamAOddsTotal,
-                  totalPoints: props.market.teamATotalPoints,
+                  total: props.market.teamBOddsTotal,
+                  totalPoints: props.market.teamBTotalPoints,
                   moneylineFeedPubkey: props.market.teamAOddsMoneylineFeedPubkey,
                   spreadPointsFeedPubkey: props.market.teamASpreadPointsFeedPubkey,
                   spreadFeedPubkey: props.market.teamAOddsSpreadFeedPubkey,
-                  totalFeedPubkey: props.market.teamAOddsTotalFeedPubkey,
-                  totalPointsFeedPubkey: props.market.teamATotalPointsFeedPubkey,
+                  totalFeedPubkey: props.market.teamBOddsTotalFeedPubkey,
+                  totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
                 }} />
               </Col>
             </Row>
