@@ -22,7 +22,7 @@ import axios from "axios";
 import { DIVVY_API, DIVVY_API_STORE_TXNS } from "../../constants/urls";
 import { Transactions } from "../../constants/bets";
 
-const DEFAULT = ENDPOINTS[2].endpoint;
+const DEFAULT = ENDPOINTS[0].endpoint;
 const DEFAULT_SLIPPAGE = 0.25;
 const DEFAULT_COMMITMENT = "singleGossip";
 
@@ -43,13 +43,13 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
   setSlippage: (val: number) => { },
   connection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
   sendConnection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
-  env: ENDPOINTS[2].name,
+  env: ENDPOINTS[0].name,
 });
 
 export function ConnectionProvider({ children = undefined as any }) {
   const [endpoint, setEndpoint] = useLocalStorageState(
     "connectionEndpts",
-    ENDPOINTS[2].endpoint
+    ENDPOINTS[0].endpoint
   );
 
   const [slippage, setSlippage] = useLocalStorageState(
@@ -67,7 +67,7 @@ export function ConnectionProvider({ children = undefined as any }) {
   );
 
   const chain =
-    ENDPOINTS.find((end) => end.endpoint === endpoint) || ENDPOINTS[2];
+    ENDPOINTS.find((end) => end.endpoint === endpoint) || ENDPOINTS[0];
   const env = chain.name;
 
   setProgramIds(env);

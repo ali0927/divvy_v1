@@ -25,22 +25,22 @@ export const PROGRAM_IDS = [
 
 
 // Bet Pool PubKeys
-export const BET_POOL_PROGRAM_ID = new PublicKey("2u9dGXkuj5iTm6B9MRn1Exx55uEYX1ZmM3xda5S3f1oY");
-export const BET_POOL_STATE_ACCOUNT = new PublicKey("6ohmTzruLC4mPQUYCctY5VCa3N9ztYNQuZbHjg5MdT4z");
-export const BET_POOL_PDA_ACCOUNT = new PublicKey("PkimpSks8R9KLHsTAupcHyBgYDitaE2PXk697urr3xP");
-export const BET_POOL_USDC_ACCOUNT = new PublicKey("77Xncw1Qq4TrWQTPDvPoThvp44tDEVfkkEh9KQZJjpBf");
+export const BET_POOL_PROGRAM_ID = new PublicKey("GWYmzg8M2QBH1ShezcQuFNhtxHhssSMCRrNviLs6wQyL");
+export const BET_POOL_STATE_ACCOUNT = new PublicKey("65eRJhLAXGDd4gh2t4pJTLkyAacEfJKfVZMzgvPY8ckv");
+export const BET_POOL_PDA_ACCOUNT = new PublicKey("3Xsg8pok9jw44kGHwXfDy7aAikazR81dBAccgDGtpziQ");
+export const BET_POOL_USDC_ACCOUNT = new PublicKey("64GsfUcpupHwLuZLwAA7wuMpkhVcabDYaqFfdgHgxTM8");
 
 // House Pool PubKeys
-export const HOUSE_POOL_PROGRAM_ID = new PublicKey("FatTSDYddftPGBVCoV6Uu2aCiMg8B8ZxV3QuoxE2PK6U");
-export const HOUSE_POOL_STATE_ACCOUNT = new PublicKey("GJrS8crWmrEqdEds2kD7WS9WsAY5KHyNa2V6ysZ5c9XH");
-export const HOUSE_POOL_PDA_ACCOUNT = new PublicKey("CrCJYSbgSFa6ZE3KviaTSnmGhhBw2t3auYro2N36irH5");
-export const HOUSE_POOL_USDC_ACCOUNT = new PublicKey("9iUwecYoH7w3J5MUSSNvMT2okbezzWay82NVpCu75Bvp");
+export const HOUSE_POOL_PROGRAM_ID = new PublicKey("AGetrKU8hVdHEEzisekqPuer1ALHLG2jp5RkgTWKs2hC");
+export const HOUSE_POOL_STATE_ACCOUNT = new PublicKey("8h9zF5kQEHJMGgiR8qtYWKVBf3ksAXE6M8NynN8LS547");
+export const HOUSE_POOL_PDA_ACCOUNT = new PublicKey("5tqXcnJgyJY5axjL7BjPeT1GAibqH3aicUi86wf9zmFC");
+export const HOUSE_POOL_USDC_ACCOUNT = new PublicKey("8NxNRhx1VdqYpxo4jaMXv5t9bpk467hJgjcoXwB5Bdu7");
 
 // Game Keys
 export const BUST_ACCOUNT = new PublicKey("GkCzD8kfGhPn3L4hXQpwuTjpqbGRQcSKsuqdjTHnHBzT");
 
 //Other Pubkeys
-export const HT_MINT = new PublicKey("H7WkKtJ8ABtsKhMonVJWrb6oFuB6CDjMgqkUeRsDk78v");
+export const HT_MINT = new PublicKey("8HCWbqq5qEsjbu6uT6ZmcA4g8grrZXGJ5xSDQYNptpHk");
 export const USDC_MINT_MAINNET = new PublicKey("Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
 export const USDC_MINT_DEVNET = new PublicKey("7cnY6yuFXzTLEsnXn4FkgvmXq4FyuUakQDQqHJkbQvYG");
 export const FAUCET_PROGRAM_ID = new PublicKey("4Y4PC5NEPE7Go6tUeEuk64PnVS9t2NXccgFS2nafy3U8");
