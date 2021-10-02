@@ -143,6 +143,10 @@ export interface Bet {
     teamBSpreadPoints?: number,
     teamATotalPoints?: number,
     teamBTotalPoints?: number,
+    lockedLiquidity?: string,
+    availableLiquidity?: string,
+    htTokensBalance?: string,
+    htPrice?: string
 }
 
 export interface BetsTable {
