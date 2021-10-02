@@ -22,7 +22,7 @@ const LiquidityView = load(lazy(() => import("./views/LiquidityView")));
 const RootContextProvider = load(lazy(() => import("./contexts")));
 const BetsProvider = load(lazy(() => import("./contexts/bets")));
 function App() {
-  ReactGA.initialize("UA-208887655-1");
+  ReactGA.initialize("UA-208887655-2");
   const location = useLocation();
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
