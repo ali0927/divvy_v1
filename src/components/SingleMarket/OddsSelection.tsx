@@ -1,10 +1,17 @@
 import { useContext } from "react";
 import { Col, Row } from "antd";
 import { SportContext } from "../../contexts/sport";
+import { HousePoolContext } from "../../contexts/sol/hpliquidity";
+import { BetStateContext } from "../../contexts/sol/betstate";
+import { HPTokenContext } from "../../contexts/sol/hptoken";
+import { tokenAmountToString } from "../../constants";
 import { Odds, BetType, Market, Bet, MarketSide, BetStatus } from "../../constants";
 import { BetsContext } from "../../contexts/bets";
 export const OddsSelection = (props: { market: Market, selection: string, odds: Odds, otherTeam: string, selectionTeam: string, marketSide: MarketSide }) => {
     const bets = useContext(BetsContext);
+    const { htBalance } = useContext(HousePoolContext);
+    const { htSupply } = useContext(HPTokenContext);
+    const { liveLiquidity, lockedLiquidity } = useContext(BetStateContext)
     const { sport, changeSport } = useContext(SportContext)
 
     const setSlip = (betType: BetType, odds: number, oddsFeed: string, marketPubkey: string, points: number) => {
@@ -38,7 +45,11 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
                 seasonName: props.market.seasonName,
                 marketName: props.market.teamA + " vs " + props.market.teamB,
                 placedOn: (new Date()).toString(),
-                points: points
+                points: points,
+                lockedLiquidity: tokenAmountToString(lockedLiquidity + liveLiquidity),
+                availableLiquidity: tokenAmountToString(htBalance-lockedLiquidity),
+                htTokensBalance: tokenAmountToString((-1)*htBalance),
+                htPrice: ((htBalance + lockedLiquidity) / htSupply).toString()
             }
             bets?.addBet(bet)
         }

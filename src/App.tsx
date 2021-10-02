@@ -1,7 +1,8 @@
 import "./App.css";
 import "flag-icon-css/css/flag-icon.css"
-import {lazy, Suspense} from 'react';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {lazy, Suspense, useEffect} from 'react';
+import ReactGA from 'react-ga';
+import { Switch, Route, useLocation } from "react-router-dom";
 import { Provider } from 'react-redux'
 import * as PATHS from "./constants/paths";
 import { store } from './store'
@@ -21,8 +22,12 @@ const LiquidityView = load(lazy(() => import("./views/LiquidityView")));
 const RootContextProvider = load(lazy(() => import("./contexts")));
 const BetsProvider = load(lazy(() => import("./contexts/bets")));
 function App() {
+  ReactGA.initialize("G-PNNLDPF5NP");
+  const location = useLocation();
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, [location])
   return (
-    <BrowserRouter>
       <Provider store={store}>
         <ChainProvider>
           <RootContextProvider>
@@ -52,7 +57,6 @@ function App() {
           </RootContextProvider>
         </ChainProvider>
       </Provider>
-    </BrowserRouter>
   );
 }
 

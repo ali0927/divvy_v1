@@ -123,15 +123,13 @@ const BetsProvider = (props: { children: any }) => {
           wallet.wallet,
           usdcTokenAccount?.pubkey,
           betChunk);
-
         if (ok && wallet.publicKey) {
           for(const bet of betChunk) {
-            bet.payout = JSON.parse(tokenAmountToString(bet.risk * bet.odds));
+            bet.payout = JSON.parse(tokenAmountToString(bet.risk * bet.odds).replace(",", ""));
             bet.teamASpreadPoints = bet.market.teamASpreadPoints;
             bet.teamBSpreadPoints = bet.market.teamBSpreadPoints;
             bet.teamATotalPoints = bet.market.teamATotalPoints;
             bet.teamBTotalPoints = bet.market.teamBTotalPoints;
-            console.log(bet);
             storeBet(bet)
           }
         }
