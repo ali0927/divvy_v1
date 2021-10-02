@@ -1,4 +1,4 @@
-export const DIVVY_API = "https://api.divvy.bet/"
+export const DIVVY_API = /*"https://api.divvy.bet/"*/ "http://localhost:8000/"
 // "https://api.divvy.bet/"
 // "http://localhost/"
 export const DIVVY_API_GET_SPORTS = "sports"
