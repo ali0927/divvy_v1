@@ -264,7 +264,7 @@ export const sendTransaction = async (
     }
   }
 
-  return [false, txid];
+  return [true, txid];
 };
 
 export type AccountCallback = (acc: AccountInfo<Buffer> | null, context: Context) => void;
