@@ -28,11 +28,11 @@ export const SolWalletSettings = () => {
               <CopyOutlined onClick={onCopyText}/>
             }
           </div>
-          <div style={{display:'flex', marginTop:'0.5rem'}}>
+          {/* <div style={{display:'flex', marginTop:'0.5rem'}}>
             <Button type="primary" onClick={() => window.open('https://ftx.com/pay/request?coin=USDC&address='+wallet?.publicKey?.toString()+'&tag=&wallet=sol&memoIsRequired=false&memo=&allowTip=false','_blank','resizable,width=700,height=900')} style={{marginRight:'1rem'}}>
-              Buy USDC with a credit Card
+              Buy USDC with a Credit Card
             </Button>
-          </div>
+          </div> */}
           <div style={{display:'flex', marginTop:'0.5rem'}}>
             <Button type="primary" onClick={select} style={{marginRight:'1rem'}}>
               Change Wallet

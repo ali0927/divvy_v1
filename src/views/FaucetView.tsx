@@ -15,6 +15,7 @@ import { MONEY_LINE_BET_LAYOUT } from "../models/sol/state/moneyLineBet";
 import { MARKET_STATE_ACCOUNT_DATA_LAYOUT } from "../models/sol/state/marketState";
 import { HPStateParser, HP_STATE_LAYOUT } from "../models/sol/state/hpState";
 import { ConnectLink } from "../components/Nav/ConnectLink";
+import { notify } from "../utils/notifications";
 
 export const FaucetView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -24,7 +25,7 @@ export const FaucetView = () => {
     const connection = useConnection();
     const usdcAddress = useAccountByMint(USDC_MINT_DEVNET);
     const callUSDCFaucet = async () => {
-        airdropTokens(usdcAddress?.pubkey, FAUCET_PROGRAM_ID, new u64(100000000000, 10), connection, wallet.wallet)
+        airdropTokens(usdcAddress?.pubkey, FAUCET_PROGRAM_ID, new u64(10000000000, 10), connection, wallet.wallet)
     }
     const [inspectPubkey, setInspectPubkey] = useState("");
     const [inspectAccount, setInspectAccount] = useState<string>("");
@@ -54,6 +55,13 @@ export const FaucetView = () => {
         }
     }
 
+    const requestSolAirdrop = async () => {
+        if(wallet?.publicKey){
+            await connection.requestAirdrop(wallet?.publicKey, 1000000000);
+            notify({message: 'Succesfully Airdropped 1 SOL'})
+        }
+    }
+
     return (
         <Layout style={{ backgroundColor: "#0D0D0D" }}>
             <Row>
@@ -72,15 +80,20 @@ export const FaucetView = () => {
                             {connected ? "" : "Please connect your wallet"}
                             <br />
                             <br />
-                            <Button onClick={() => callUSDCFaucet()}>
-                                Get 100K USDC
+                            <Button onClick={() => requestSolAirdrop()}>
+                                Get 1 SOL
                             </Button>
                             <br />
+                            <br />
+                            <Button onClick={() => callUSDCFaucet()}>
+                                Get 10K USDC
+                            </Button>
+                            {/* <br />
                             <br />
                             <Input placeholder="Enter a Solana public key to inspect the account." value={inspectPubkey} onChange={event => { tryInspect(event.currentTarget.value) }} style={{ width: "40%" }} />
                             <pre>
                                 {inspectAccount}
-                            </pre>
+                            </pre> */}
                         </header>
                         <Layout>
                         </Layout>
