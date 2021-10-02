@@ -147,6 +147,7 @@ const initBetInstruction = async (
   points: number,
   betType: number,) => {
     const [, bumpSeed] = await PublicKey.findProgramAddress([Buffer.from("divvyhouse")], IDS.HOUSE_POOL_PROGRAM_ID);
+    console.log(bumpSeed)
   const initBetData: INIT_BET_DATA = {
     action: 0,
     risk: riskedUsdt,
@@ -170,11 +171,11 @@ const initBetInstruction = async (
       { pubkey: IDS.HOUSE_POOL_USDC_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: IDS.BET_POOL_USDC_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: userUsdtAccount, isSigner: false, isWritable: true },
-      { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: true },
+      { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
       { pubkey: IDS.HOUSE_POOL_PDA_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: IDS.BET_POOL_PDA_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: IDS.HOUSE_POOL_STATE_ACCOUNT, isSigner: false, isWritable: true },
-      { pubkey: IDS.HOUSE_POOL_PROGRAM_ID, isSigner: false, isWritable: true },
+      { pubkey: IDS.HOUSE_POOL_PROGRAM_ID, isSigner: false, isWritable: false },
     ],
     data: initBetBuffer,
     programId: IDS.BET_POOL_PROGRAM_ID
