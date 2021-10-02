@@ -17,7 +17,7 @@ export const PotentialWins = (props: { betSlip: Bet }) => {
                     To win
                 </p>
                 <h3 style={{overflowWrap:'anywhere'}}>
-                    {round((props.betSlip.risk / LAMPORTS_PER_USDC) * americanToDecimal(props.betSlip.odds))} USDC
+                    {round((props.betSlip.risk / LAMPORTS_PER_USDC) * props.betSlip.odds)} USDC
                 </h3>
             </div>
         </div>

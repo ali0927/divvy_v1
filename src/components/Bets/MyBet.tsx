@@ -15,7 +15,7 @@ export const MyBet = (props: { bet: Bet }) => {
     useEffect(() => {
       setRisk(props.bet.risk)
       setRiskStr((props.bet.risk / LAMPORTS_PER_USDC).toString())      
-      setPayoutStr(tokenAmountToString(props.bet.risk * (americanToDecimal(props.bet.odds))))
+      setPayoutStr(tokenAmountToString(props.bet.risk * props.bet.odds))
     }, [props.bet])
 
     const doSetRisk = (risk: string) => {
@@ -24,12 +24,12 @@ export const MyBet = (props: { bet: Bet }) => {
             parsedRisk = 0;
         }
         setRiskStr(risk);
-        setPayoutStr(tokenAmountToString(parsedRisk * (americanToDecimal(props.bet.odds))))
+        setPayoutStr(tokenAmountToString(parsedRisk * props.bet.odds))
         setRisk(parsedRisk);
         bets?.editBetRisk(props.bet.betId, parsedRisk)
     }
     const doSetRiskByPayout = (payout: string) => {
-      let risk = parseFloat(payout) / americanToDecimal(props.bet.odds)
+      let risk = parseFloat(payout) / props.bet.odds
       let parsedRisk = risk * LAMPORTS_PER_USDC;
         if (isNaN(parsedRisk)) {
             parsedRisk = 0;

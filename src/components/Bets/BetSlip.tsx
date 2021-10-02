@@ -22,7 +22,7 @@ export const BetSlip = () => {
   bets?.bets.forEach((bet: Bet) => {
     if (bet.status === BetStatus.Current) {
       totalRisk += bet.risk
-      totalPayout += bet.risk * americanToDecimal(bet.odds)
+      totalPayout += bet.risk * bet.odds
       betsCount++;
     }
   })
@@ -35,7 +35,7 @@ export const BetSlip = () => {
     bets?.bets.forEach((bet: Bet) => {
       if (bet.status === BetStatus.Current) {
         totalRisk += bet.risk
-        totalPayout += bet.risk * americanToDecimal(bet.odds)
+        totalPayout += bet.risk * bet.odds
         betsCount++;
         if(bet.risk <= 0) setSubmitEnabled(false)
       }

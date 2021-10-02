@@ -17,7 +17,7 @@ export const ConfirmedOdds = (props: { betType: BetType, bet: Bet }) => {
             <div className="wins-right">
                 <h3 style={{ marginTop: 0 }}>
                     {betType === BetType.spread ? selection === "teamA" ? market.teamASpreadPoints : market.teamBSpreadPoints : null}
-                    {betType === BetType.total ? selection === "teamA" ? 'O' + market.teamATotalPoints : 'O' + market.teamBTotalPoints : null}
+                    {betType === BetType.total ? selection === "teamA" ? 'U' + market.teamATotalPoints : 'O' + market.teamBTotalPoints : null}
                     {
                         betType === BetType.moneyline 
                         ? <>{prefix}{bet.odds}</>

@@ -22,7 +22,7 @@ import axios from "axios";
 import { DIVVY_API, DIVVY_API_STORE_TXNS } from "../../constants/urls";
 import { Transactions } from "../../constants/bets";
 
-const DEFAULT = ENDPOINTS[0].endpoint;
+const DEFAULT = ENDPOINTS[2].endpoint;
 const DEFAULT_SLIPPAGE = 0.25;
 const DEFAULT_COMMITMENT = "singleGossip";
 
@@ -43,13 +43,13 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
   setSlippage: (val: number) => { },
   connection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
   sendConnection: new Connection(DEFAULT, DEFAULT_COMMITMENT),
-  env: ENDPOINTS[0].name,
+  env: ENDPOINTS[2].name,
 });
 
 export function ConnectionProvider({ children = undefined as any }) {
   const [endpoint, setEndpoint] = useLocalStorageState(
     "connectionEndpts",
-    ENDPOINTS[0].endpoint
+    ENDPOINTS[2].endpoint
   );
 
   const [slippage, setSlippage] = useLocalStorageState(
@@ -67,7 +67,7 @@ export function ConnectionProvider({ children = undefined as any }) {
   );
 
   const chain =
-    ENDPOINTS.find((end) => end.endpoint === endpoint) || ENDPOINTS[0];
+    ENDPOINTS.find((end) => end.endpoint === endpoint) || ENDPOINTS[2];
   const env = chain.name;
 
   setProgramIds(env);
@@ -207,6 +207,8 @@ export const sendTransaction = async (
     skipPreflight: true,
     preflightCommitment: "singleGossip",
   };
+  console.log(transaction.serializeMessage().toString("base64"));
+
   const txid = await connection.sendRawTransaction(
     transaction.serialize(),
     options
@@ -221,7 +223,6 @@ export const sendTransaction = async (
         options && (options.preflightCommitment as any)
       )
     ).value;
-
     if (status?.err) {
       ok = false;
       notify({

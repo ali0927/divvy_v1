@@ -3,22 +3,14 @@ import { Col, Row } from 'antd'
 import { TeamDetails } from "./TeamDetails"
 import { OddsType } from './OddsType';
 import { OddsSelection } from './OddsSelection';
-import { Market, MarketSide } from '../../constants';
+import { americanToDecimal, Market, MarketSide } from '../../constants';
 import { getDate, getShortTimezone, getTime } from '../../utils/date';
 import { codes } from "../../constants/processed"
 import { SportContext } from "../../contexts/sport";
 
 export const SingleMatchComponent = (props: { market: Market }) => {
     const { sport, changeSport } = useContext(SportContext)
-    const countryCodeToFlagCode = (countryCode: string) => {
-        let code = codes[countryCode]?.code?.toLowerCase();
-
-        if (code === "wl") { // This is a hack for wales smh
-            return "gb-wls";
-        }
-        return code;
-    }
-    // console.log(props.market)
+    const [oddsType, setoddsType] = useState("decimal")
     return (
       <div className="single-match">
         <OddsType />
@@ -35,16 +27,16 @@ export const SingleMatchComponent = (props: { market: Market }) => {
               </Col>
               <Col span={18}>
                 <OddsSelection marketSide={MarketSide.teamB} market={props.market} selectionTeam={props.market.teamB} otherTeam={props.market.teamA} selection={"teamB"} odds={{
-                  moneyline: props.market.teamBOddsMoneyline,
-                  spread: props.market.teamBOddsSpread,
+                  moneyline: americanToDecimal(props.market.teamBOddsMoneyline),
+                  spread: americanToDecimal(props.market.teamBOddsSpread),
                   spreadPoints: props.market.teamBSpreadPoints,
-                  total: props.market.teamBOddsTotal,
-                  totalPoints: props.market.teamBTotalPoints,
+                  total: americanToDecimal(props.market.teamAOddsTotal),
+                  totalPoints: props.market.teamATotalPoints,
                   moneylineFeedPubkey: props.market.teamBOddsMoneylineFeedPubkey,
                   spreadPointsFeedPubkey: props.market.teamBSpreadPointsFeedPubkey,
                   spreadFeedPubkey: props.market.teamBOddsSpreadFeedPubkey,
-                  totalFeedPubkey: props.market.teamBOddsTotalFeedPubkey,
-                  totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
+                  totalFeedPubkey: props.market.teamAOddsTotalFeedPubkey,
+                  totalPointsFeedPubkey: props.market.teamATotalPointsFeedPubkey,
                 }} />
               </Col>
             </Row>
@@ -64,16 +56,16 @@ export const SingleMatchComponent = (props: { market: Market }) => {
               </Col>
               <Col span={18}>
                 <OddsSelection marketSide={MarketSide.teamA} market={props.market} selectionTeam={props.market.teamA} otherTeam={props.market.teamB} selection={"teamA"} odds={{
-                  moneyline: props.market.teamAOddsMoneyline,
-                  spread: props.market.teamAOddsSpread,
+                  moneyline: americanToDecimal(props.market.teamAOddsMoneyline),
+                  spread: americanToDecimal(props.market.teamAOddsSpread),
                   spreadPoints: props.market.teamASpreadPoints,
-                  total: props.market.teamAOddsTotal,
-                  totalPoints: props.market.teamATotalPoints,
+                  total: americanToDecimal(props.market.teamBOddsTotal),
+                  totalPoints: props.market.teamBTotalPoints,
                   moneylineFeedPubkey: props.market.teamAOddsMoneylineFeedPubkey,
                   spreadPointsFeedPubkey: props.market.teamASpreadPointsFeedPubkey,
                   spreadFeedPubkey: props.market.teamAOddsSpreadFeedPubkey,
-                  totalFeedPubkey: props.market.teamAOddsTotalFeedPubkey,
-                  totalPointsFeedPubkey: props.market.teamATotalPointsFeedPubkey,
+                  totalFeedPubkey: props.market.teamBOddsTotalFeedPubkey,
+                  totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
                 }} />
               </Col>
             </Row>
@@ -84,10 +76,10 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                 </Col>
                 <Col span={18}>
                   <OddsSelection marketSide={MarketSide.draw} market={props.market} selectionTeam={props.market.draw} otherTeam={props.market.teamA} selection={"Draw"} odds={{
-                    moneyline: props.market.drawOddsMoneyline,
-                    spread: props.market.drawOddsSpread,
+                    moneyline: americanToDecimal(props.market.drawOddsMoneyline),
+                    spread: americanToDecimal(props.market.drawOddsSpread),
                     spreadPoints: props.market.drawSpreadPoints,
-                    total: props.market.drawOddsTotal,
+                    total: americanToDecimal(props.market.drawOddsTotal),
                     totalPoints: props.market.drawTotalPoints,
                     moneylineFeedPubkey: props.market.drawOddsMoneylineFeedPubkey,
                     spreadPointsFeedPubkey: props.market.drawSpreadPointsFeedPubkey,

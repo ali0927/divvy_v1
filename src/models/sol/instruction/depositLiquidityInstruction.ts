@@ -79,7 +79,7 @@ export const depositLiquidityInstruction = (
     keys: [
       { pubkey: userAccount, isSigner: true, isWritable: true },
       { pubkey: IDS.HT_MINT, isSigner: false, isWritable: true },
-      { pubkey: IDS.TOKEN_PROGRAM_ID, isSigner: false, isWritable: true },
+      { pubkey: IDS.TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
       { pubkey: userHtTokenAccount, isSigner: false, isWritable: true },
       { pubkey: IDS.HOUSE_POOL_PDA_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: userUsdtTokenAccount, isSigner: false, isWritable: true },

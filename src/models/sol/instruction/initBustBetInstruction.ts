@@ -1,7 +1,7 @@
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { Connection, Keypair, PublicKey, SystemProgram, TransactionInstruction } from "@solana/web3.js";
 import * as BufferLayout from "buffer-layout";
-import { Bet, BetStatus, getBetType, MarketSide, Transactions } from "../../../constants";
+import { Bet, BetStatus, decimalToAmerican, getBetType, MarketSide, Transactions } from "../../../constants";
 import { ENV } from "../../../constants/sol/env";
 import { sendTransaction } from "../../../contexts/sol/connection";
 import { WalletAdapter } from "../../../contexts/sol/wallet";
@@ -58,7 +58,7 @@ export const initBustBet = async (
       userUsdtAccount,
       bet.risk,
       betAccountRent,
-      bet.multiplier
+      decimalToAmerican(bet.multiplier)
       );
     ixs.push(...ix);
     betAccounts.push(betAccount);
@@ -131,7 +131,7 @@ const initBustBetInstruction = async (
     keys: [
       { pubkey: IDS.BUST_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: bustBetAccount, isSigner: false, isWritable: true },
-      { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: true },
+      { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
       { pubkey: IDS.BET_POOL_USDC_ACCOUNT, isSigner: false, isWritable: true },
       { pubkey: userUsdtAccount, isSigner: false, isWritable: true },
       { pubkey: userAccount, isSigner: true, isWritable: true },

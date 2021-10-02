@@ -100,9 +100,9 @@ const BetsProvider = (props: { children: any }) => {
     }
     if(currentBets.length > 0){
 
-      // Chunk bets into 3s
+      // Chunk bets into 2s
       // Transactions have a limit of 1232 bytes
-      // We hit the limit above 3 bets
+      // We hit the limit above 2 bets
       // https://github.com/solana-labs/solana/issues/17102 tracks the transaction limit
       const perChunk = 2;
       var betChunks = currentBets.reduce((resultArray: any, item, index) => { 
@@ -126,7 +126,7 @@ const BetsProvider = (props: { children: any }) => {
 
         if (ok && wallet.publicKey) {
           for(const bet of betChunk) {
-            bet.payout = JSON.parse(tokenAmountToString(bet.risk * (americanToDecimal(bet.odds))));
+            bet.payout = JSON.parse(tokenAmountToString(bet.risk * bet.odds));
             bet.teamASpreadPoints = bet.market.teamASpreadPoints;
             bet.teamBSpreadPoints = bet.market.teamBSpreadPoints;
             bet.teamATotalPoints = bet.market.teamATotalPoints;
