@@ -1,6 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
 
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Tooltip } from "antd";
 import { LAMPORTS_PER_HP as LAMPORTS_PER_HT, LAMPORTS_PER_USDC, tokenAmountToString, Transactions } from "../../constants";
 import {
   useConnection,
@@ -9,7 +9,10 @@ import {
 } from "../../contexts/sol/connection";
 import { useWallet } from "../../contexts/sol/wallet";
 import { notify } from "../../utils/notifications";
-import { WalletSlider } from "./WalletSlider"
+import { LABELS } from "../../constants/labels"
+import { WalletSlider } from "./WalletSlider";
+import { Market } from "../../constants";
+import { InfoCircleOutlined } from "@ant-design/icons"
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
 import { useContext, useState, useEffect } from "react";
 import { useAccountByMint } from "../../hooks";
@@ -19,7 +22,7 @@ import { HPTokenContext } from "../../contexts/sol/hptoken";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 import { BetStateContext } from "../../contexts/sol/betstate";
 
-export const WithdrawLiquidity = (props: {}) => {
+export const WithdrawLiquidity = (props: { isLoading: boolean, data: Array<Market> | undefined }) => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
@@ -95,8 +98,11 @@ export const WithdrawLiquidity = (props: {}) => {
 
   return (
     <div className="sidebar-section form-grey">
-      <h3>Divvy House Withdrawal</h3>
-
+      { 
+        <Tooltip title={LABELS.ACTIVE_GAMES_WARNING}>
+          <h3>Divvy House Withdrawal <InfoCircleOutlined style={{ fontSize: 9, marginTop:3.4, marginLeft:2 }} /></h3>
+        </Tooltip>
+      }
       <div className="balance-container">
         <p>
           <small className="text-secondary">Withdrawable balance</small>

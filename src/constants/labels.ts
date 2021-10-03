@@ -107,4 +107,5 @@ export const LABELS = {
   SAFER: "Safer",
   RISKIER: "Riskier",
   CONVERSION_RATIO: "HT derives it's value from the performance of the House Pool. In the event the House turns a profit, HT token holders are rewarded with a higher conversion ratio. Deposits and withdrawals do not affect the conversion ratio.",
+  ACTIVE_GAMES_WARNING: "Deposit and withdrawal might fail since there are one or more games that are live at the moment."
 };

@@ -1,5 +1,5 @@
 import { PublicKey } from "@solana/web3.js";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Tooltip } from "antd";
 import {
   useConnection,
   useConnectionConfig,
@@ -8,7 +8,10 @@ import {
 import { useWallet } from "../../contexts/sol/wallet";
 import { useAccountByMint } from "../../hooks";
 import { notify } from "../../utils/notifications";
+import { LABELS } from "../../constants/labels"
 import { ExplorerLink } from "../ExplorerLink";
+import { Market } from "../../constants";
+import { InfoCircleOutlined } from "@ant-design/icons"
 import { WalletSlider } from "./WalletSlider"
 import { depositLiquidityTransaction } from "../../models/sol/instruction/depositLiquidityInstruction";
 import { useContext, useState, useEffect } from "react";
@@ -16,7 +19,7 @@ import { UserUSDCContext } from "../../contexts/sol/userusdc";
 import { LAMPORTS_PER_USDC, tokenAmountToString, Transactions } from "../../constants";
 import * as IDS from "../../utils/ids"
 
-export const DepositLiquidity = () => {
+export const DepositLiquidity = (props: { isLoading: boolean, data: Array<Market> | undefined }) => {
   const wallet = useWallet();
   const connection = useConnection();
   const connectionConfig = useConnectionConfig();
@@ -91,7 +94,14 @@ export const DepositLiquidity = () => {
   return (
     <div className="sidebar-section form-grey">
       <div>
-        <h3>Divvy House Deposit</h3>
+        {
+          !props.isLoading && props.data && props.data.length ? 
+          <Tooltip title={LABELS.ACTIVE_GAMES_WARNING}>
+            <h3>Divvy House Deposit <InfoCircleOutlined style={{ fontSize: 9, marginTop:3.4, marginLeft:2 }} /></h3>
+          </Tooltip>
+          :
+          <h3>Divvy House Deposit</h3>
+        }
         <div className="balance-container">
           <p>
             <small className="text-secondary">Wallet balance</small>
