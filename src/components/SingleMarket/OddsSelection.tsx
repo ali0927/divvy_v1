@@ -4,6 +4,7 @@ import { SportContext } from "../../contexts/sport";
 import { HousePoolContext } from "../../contexts/sol/hpliquidity";
 import { BetStateContext } from "../../contexts/sol/betstate";
 import { HPTokenContext } from "../../contexts/sol/hptoken";
+import { LAMPORTS_PER_USDC } from "../../constants/math";
 import { tokenAmountToString } from "../../constants";
 import { Odds, BetType, Market, Bet, MarketSide, BetStatus } from "../../constants";
 import { BetsContext } from "../../contexts/bets";
@@ -48,7 +49,7 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
                 points: points,
                 lockedLiquidity: tokenAmountToString(lockedLiquidity + liveLiquidity),
                 availableLiquidity: tokenAmountToString(htBalance-lockedLiquidity),
-                htTokensBalance: htSupply.toString(),
+                htTokensBalance: (htSupply/LAMPORTS_PER_USDC).toString(),
                 htPrice: ((htBalance + lockedLiquidity) / htSupply).toString()
             }
             bets?.addBet(bet)
