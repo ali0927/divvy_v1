@@ -80,9 +80,9 @@ export const FaucetView = () => {
                             {connected ? "" : "Please connect your wallet"}
                             <br />
                             <br />
-                            <Button onClick={() => requestSolAirdrop()}>
+                            {/* <Button onClick={() => requestSolAirdrop()}>
                                 Get 1 SOL
-                            </Button>
+                            </Button> */}
                             <br />
                             <br />
                             <Button onClick={() => callUSDCFaucet()}>

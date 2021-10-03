@@ -23,7 +23,7 @@ export const ENDPOINTS = [
     },
     {
         name: ENV.Devnet,
-        endpoint: clusterApiUrl(ENV.Devnet),
+        endpoint: "https://fragrant-little-sun.solana-devnet.quiknode.pro/20008be8fe54bd8340c51d68d01b837daffa66d6/",
         chainID: ChainID.Devnet,
     },
     {
