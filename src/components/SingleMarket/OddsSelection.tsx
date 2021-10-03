@@ -49,7 +49,7 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
                 lockedLiquidity: tokenAmountToString(lockedLiquidity + liveLiquidity),
                 availableLiquidity: tokenAmountToString(htBalance-lockedLiquidity),
                 htTokensBalance: tokenAmountToString((-1)*htBalance),
-                htPrice: ((htBalance + lockedLiquidity) / htSupply).toString()
+                htPrice: htSupply
             }
             bets?.addBet(bet)
         }
