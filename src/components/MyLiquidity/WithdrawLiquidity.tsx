@@ -98,10 +98,13 @@ export const WithdrawLiquidity = (props: { isLoading: boolean, data: Array<Marke
 
   return (
     <div className="sidebar-section form-grey">
-      { 
+      {
+        !props.isLoading && props.data && props.data.length ? 
         <Tooltip title={LABELS.ACTIVE_GAMES_WARNING}>
           <h3>Divvy House Withdrawal <InfoCircleOutlined style={{ fontSize: 9, marginTop:3.4, marginLeft:2 }} /></h3>
         </Tooltip>
+        :
+        <h3>Divvy House Withdrawal</h3>
       }
       <div className="balance-container">
         <p>
