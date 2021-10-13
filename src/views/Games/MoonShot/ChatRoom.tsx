@@ -32,7 +32,7 @@ export const ChatRoom = () => {
         }
       </div>
       <div style={{position:'absolute', bottom:'0', display:'flex', alignItems:'center', padding:'10px', width:'100%', height:'4em'}}>
-        <Input placeholder="Your message:" value={message} onChange={e => { setMessage(e.currentTarget.value) }} style={{border:'none'}}/>
+        <Input placeholder="Your message:" className="game-moonshot__input" value={message} onChange={e => { setMessage(e.currentTarget.value) }} />
         <SendOutlined style={{margin:'10px', color:'var(--game-blue)', fontSize:'1.5em'}}/>
         <Divider type="vertical" style={{height:'1.5em', margin:'0'}}/>
         <strong style={{margin:'10px', fontSize:'1.2em', color:'var(--game-blue)'}}>LN</strong>

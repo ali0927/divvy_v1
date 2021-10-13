@@ -1,20 +1,54 @@
+import React, { useState } from 'react';
 import { Divider } from 'antd';
 import { CaretRightFilled } from '@ant-design/icons';
+import { Tabs, Input, Button } from 'antd';
+import { DeleteFilled } from "@ant-design/icons";
+import { Auto } from './Auto';
+
+const { TabPane } = Tabs;
 
 export const GameRoom = () => {
+  const [bet, setBet] = useState('')
+
   return (
     <div style={{backgroundColor:'var(--game-back-gray)', borderRadius:'1em', height:'100%', textAlign:'center'}}>
-      <img src="../hodl.svg" style={{width:'65%', margin:'4em auto'}} alt="hodl" />
-      <div style={{fontSize:'2em', color:'white', backgroundColor:'var(--off-black)', borderRadius:'0.5em', padding:'0.2em', margin:'0 0.8em', textAlign:'center'}}>
+      <img src="../hodl.svg" style={{width:'80%', margin:'auto', padding:'4em'}} alt="hodl" />
+      <div style={{fontSize:'2em', color:'white', backgroundColor:'var(--off-black)', borderRadius:'0.5em', padding:'0.2em', margin:'0.8em', textAlign:'center'}}>
         1.15&times;
       </div>
-      <Divider />
-      <div style={{margin:'10em auto', display:'flex', justifyContent:'center', alignItems:'center'}}>
-        <CaretRightFilled style={{fontSize:'3.6em', color:'var(--game-blue)'}}/>
-        <a href="#" style={{color:'var(--game-blue)'}}>Login</a>
-        &nbsp;or&nbsp;
-        <a href="#" style={{color:'var(--game-blue)'}}>register</a>
-        &nbsp;to start playing
+      <Divider style={{margin:0}}/>
+      <div style={{}}>
+        <Tabs defaultActiveKey="1" className="game-moonshot__room__tabs">
+          <TabPane tab="Manual" key="1" style={{padding:'1em'}}>
+            <div style={{display:'flex', margin:'1em 0', flexDirection:'column'}}>
+              <label style={{margin:'0.5em', textAlign:'left'}}>Bet</label>
+              <div style={{height:'3em', backgroundColor:'var(--off-black)', display:'flex', alignItems:'center', borderRadius:'0.6em'}}>
+                <Input className="game-moonshot__input" value={bet} onChange={(e) => { setBet(e.currentTarget.value) }} />
+                <label style={{padding:'0.5em 1em', height:'100%', display:'flex', alignItems:'center', backgroundColor:'var(--game-blue)'}}>bits</label>
+                <label style={{padding:'0.5em 1em'}}>BTC</label>                
+              </div>
+            </div>
+            <div style={{display:'flex', margin:'1em 0', flexDirection:'column'}}>
+              <label style={{margin:'0.5em', textAlign:'left'}}>Payout</label>
+              <div style={{height:'3em', backgroundColor:'var(--off-black)', display:'flex', alignItems:'center', borderRadius:'0.6em'}}>
+                <Input className="game-moonshot__input" value={bet} onChange={(e) => { setBet(e.currentTarget.value) }} />
+                <DeleteFilled style={{padding:'0.8em', height:'100%', display:'flex', alignItems:'center', fontSize:'1.2em',color:'gray', borderLeft:'1px solid #303030'}}/>
+              </div>
+            </div>
+            <div style={{margin:'1.5em 0'}}>
+              <Button style={{width:'100%', padding:'1.5em', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'0.6em', backgroundColor:'var(--game-blue)'}}>
+                Bet
+              </Button>
+            </div>
+            <div style={{textAlign:'left', margin:'1em 0.5em'}}>
+              <span style={{color:'gray'}}>Target profit: </span> 0 bits
+            </div>
+          </TabPane>
+          <TabPane tab="Auto" key="2">
+            <Auto />
+          </TabPane>       
+        </Tabs>
+       
       </div>
 
     </div>

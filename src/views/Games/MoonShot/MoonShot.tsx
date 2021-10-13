@@ -1,15 +1,13 @@
 import {Col, Row} from "antd";
-import BetsTable from "../../../components/Games/MoonShot/BetsTable";
-import PlaceBet from "../../../components/Games/MoonShot/PlaceBet";
-import {MultiplierGraph} from "../../../components/Games/MoonShot/MultiplierGraph";
-import { ChatRoom } from "./ChatRoom";
-import { GameRoom } from "./GameRoom";
 import { Tabs } from 'antd';
-
 import { ConnectLink } from "../../../components/Nav/ConnectLink";
 import { ReactComponent as Logo } from "../../../img/Divvy_UI_Logo_Beta.svg"
 import { BETS_VIEW_PATH } from "../../../constants"
 import { Link } from "react-router-dom";
+
+import { ChatRoom } from "./ChatRoom";
+import { GameRoom } from "./GameRoom";
+import { History } from "./History";
 
 const { TabPane } = Tabs;
 export const MoonShot = () => {
@@ -28,19 +26,21 @@ export const MoonShot = () => {
         </div>
         
         <Col md={24}>
-          <Tabs defaultActiveKey="1" centered style={{height:"100vh"}}>
+          <Tabs defaultActiveKey="1" centered style={{height:"100vh"}} className="game-moonshot-tabs">
             <TabPane tab="Game" key="1" style={{height:"100%"}}>
               <Row style={{height:"100%"}}> 
-                <Col md={7}>
+
+                <Col span={24} md={7}>
                   <ChatRoom />
                 </Col>
-                <Col md={17}>
-                  <Row style={{height:'100%', backgroundColor:'var(--off-black)', padding:'2em', borderRadius:'2em 0 0 0'}}>
-                    <Col md={11}>
+
+                <Col span={24} md={17}>
+                  <Row gutter={16} style={{height:'100%', backgroundColor:'var(--off-black)', padding:'2em', borderRadius:'2em 0 0 0'}}>
+                    <Col span={24} md={11}>
                       <GameRoom />
                     </Col>
-                    <Col md={13}>
-
+                    <Col span={24} md={13}>
+                      <History />
                     </Col>
                   </Row>
                 </Col>
@@ -52,20 +52,6 @@ export const MoonShot = () => {
             </TabPane>
           </Tabs>
         </Col>
-    
-        {/* <Col md={12} xs={24}>
-            <div className={"flex-vertical-full"}>
-                <div className={"center-child-flex"}>
-                    <MultiplierGraph />
-                </div>
-                <div className={"center-child-flex"}>
-                    <PlaceBet />
-                </div>
-            </div>
-        </Col>
-        <Col md={6} xs={24}>
-            <BetsTable />
-        </Col> */}
     </Row>
   )
 }
