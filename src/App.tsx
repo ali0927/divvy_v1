@@ -34,9 +34,9 @@ function App() {
             <BetsProvider>
               {/* Routes are ordered specific to general. the '/' route must be placed last */}
               <Switch>
-                {/* <Route path={PATHS.GAMES_VIEW_PATH + PATHS.MOONSHOT_VIEW_PATH}>
-                    <MoonShot />
-                </Route> */}
+                <Route path={PATHS.GAMES_VIEW_PATH + PATHS.MOONSHOT_VIEW_PATH}>
+                  <MoonShot />
+                </Route>
                 <Route path={PATHS.FAUCET_VIEW_PATH}>
                   <FaucetView />
                 </Route>
@@ -46,9 +46,9 @@ function App() {
                 <Route path={PATHS.LIQUIDITY_VIEW_PATH}>
                   <LiquidityView />
                 </Route>
-                {/* <Route path={PATHS.GAMES_VIEW_PATH}>
+                <Route path={PATHS.GAMES_VIEW_PATH}>
                   <GamesView />
-                </Route> */}
+                </Route>
                 <Route path={PATHS.BETS_VIEW_PATH}>
                   <BetsView />
                 </Route>

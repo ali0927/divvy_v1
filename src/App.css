@@ -90,6 +90,8 @@ html {
   --shade-black: #1f1f1f;
   --dark-gray: #242424;
   --light-blue: #61dafb;
+  --game-back-gray: #1A191E;
+  --game-blue: #4B7DFD;
 }
 
 body {
@@ -844,4 +846,49 @@ h1 {
 .reload-container:hover {
   background: radial-gradient(circle at -25% 115%, var(--royal-purple), var(--win-green) 89%);
   cursor: pointer;
+}
+.game-moonshot-tabs .ant-tabs-tab  {
+  padding: 1em;
+  font-size: 1em;
+}
+.game-moonshot-tabs .ant-tabs-nav {
+  margin: 0 !important;
+}
+.game-moonshot-tabs .ant-tabs-nav::before {
+  border: none;
+  /* border-bottom: 1px solid #303030; */
+}
+.game-moonshot-tabs .ant-tabs-content {
+  height: 100%;
+}
+.game-moonshot__room__tabs .ant-tabs-nav::before {
+  border-bottom: 1px solid #303030;
+}
+.game-moonshot__room__tabs .ant-tabs-nav {
+  padding-left: 10px;
+}
+.game-moonshot__input {
+  border: none !important;
+  box-shadow: none !important;
+}
+.game-moonshot__auto__mode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  cursor: pointer;
+}
+.game-moonshot__auto__mode:hover {
+  background-color: var(--gray);
+}
+.game-moonshot__history__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1em;
+  height: 6em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  background-color: var(--game-back-gray);
 }
