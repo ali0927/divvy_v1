@@ -1,14 +1,14 @@
-import {useEffect, useState} from "react";
-import {getDuration, getMappedMultiplier} from "../../../constants/games";
-import {Line, LineChart, Tooltip, XAxis, YAxis} from "recharts";
+import React, {useEffect, useState} from "react";
 import {MultiplierGraphModel} from "../../../models/games/moonshot/bets";
+import {getDuration, getMappedMultiplier} from "../../../constants/games";
 import {io} from "socket.io-client";
 
-export const MultiplierGraph = () => {
-    const [val, setVal] = useState("0");
+export const MultiplierRocket = () => {
     const [data, setData] = useState<MultiplierGraphModel[]>([{"multiplier": 0, "time": 0}]);
+    const [val, setVal] = useState("0");
     const [seed, setSeed] = useState(0);
     const [multiplier, setMultiplier] = useState(0);
+
     const time = getDuration(multiplier);
     const handleGraph = () => {
         let i = 0;
@@ -36,7 +36,7 @@ export const MultiplierGraph = () => {
         }, 100);
     }
     useEffect(() => {
-        const socket = io("http://localhost:8001");
+        const socket = io("http://34.146.175.16");
         socket.on('connect', () => {
             console.log("Conected");
             socket.on('data', data => {
@@ -56,19 +56,11 @@ export const MultiplierGraph = () => {
         }
     }, [multiplier])
     return (
-        <div>
-            <div className="overlay-banner"><span style={{fontSize: 30}}>x{val}</span></div>
-            <LineChart
-                width={500}
-                height={500}
-                data={data}
-                margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-            >
-                <XAxis dataKey="time" tick={false} />
-                <YAxis domain={[0, 5]} />
-                <Tooltip />
-                <Line type="monotone" dataKey="multiplier" stroke="#327feb" yAxisId={0} />
-            </LineChart>
-        </div>
-    );
+        <>
+            <img src="../hodl.svg" style={{width:'80%', margin:'auto', padding:'4em'}} alt="hodl" />
+            <div style={{fontSize:'2em', color:'white', backgroundColor:'var(--off-black)', borderRadius:'0.5em', padding:'0.2em', margin:'0.8em', textAlign:'center'}}>
+                {val}&times;
+            </div>
+        </>
+    )
 }

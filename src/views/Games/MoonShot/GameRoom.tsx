@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Divider } from 'antd';
 import { CaretRightFilled } from '@ant-design/icons';
 import { Tabs, Input, Button } from 'antd';
 import { DeleteFilled } from "@ant-design/icons";
 import { Auto } from './Auto';
+import {MultiplierRocket} from "../../../components/Games/MoonShot/MultiplierRocket";
 
 const { TabPane } = Tabs;
 
@@ -11,22 +12,17 @@ export const GameRoom = () => {
   const [bet, setBet] = useState('')
   const [payout, setPayout] = useState('')
   const [currency, setCurrency] = useState('dolar')
-
-  const onBetChange = (e: any) => { 
-    setBet(e.currentTarget.value) 
-    setPayout(e.currentTarget.value) 
+  const onBetChange = (e: any) => {
+    setBet(e.currentTarget.value)
+    setPayout(e.currentTarget.value)
   }
-  const onPayoutChange = (e: any) => { 
-    setPayout(e.currentTarget.value) 
-    setBet(e.currentTarget.value) 
+  const onPayoutChange = (e: any) => {
+    setPayout(e.currentTarget.value)
+    setBet(e.currentTarget.value)
   }
-
   return (
     <div style={{backgroundColor:'var(--game-back-gray)', borderRadius:'1em', height:'100%', textAlign:'center'}}>
-      <img src="../hodl.svg" style={{width:'80%', margin:'auto', padding:'4em'}} alt="hodl" />
-      <div style={{fontSize:'2em', color:'white', backgroundColor:'var(--off-black)', borderRadius:'0.5em', padding:'0.2em', margin:'0.8em', textAlign:'center'}}>
-        1.15&times;
-      </div>
+      <MultiplierRocket />
       <Divider style={{margin:0}}/>
       <div style={{}}>
         <Tabs defaultActiveKey="1" className="game-moonshot__room__tabs">
@@ -39,16 +35,16 @@ export const GameRoom = () => {
                 { currency === 'dolar' &&
                   <>
                     <span style={{padding:'0.5em 1em', backgroundColor:'var(--game-blue)'}} onClick={()=>{setCurrency('dolar')}}>$</span>
-                    <span style={{padding:'0.5em 1em'}} onClick={()=>{setCurrency('usdc')}}>USDC</span>    
+                    <span style={{padding:'0.5em 1em'}} onClick={()=>{setCurrency('usdc')}}>USDC</span>
                   </>
                 }
                 { currency === 'usdc' &&
                   <>
                     <span style={{padding:'0.5em 1em',}} onClick={()=>{setCurrency('dolar')}}>$</span>
-                    <span style={{padding:'0.5em 1em', backgroundColor:'var(--game-blue)'}} onClick={()=>{setCurrency('usdc')}}>USDC</span>    
+                    <span style={{padding:'0.5em 1em', backgroundColor:'var(--game-blue)'}} onClick={()=>{setCurrency('usdc')}}>USDC</span>
                   </>
-                }    
-                </div>                       
+                }
+                </div>
               </div>
             </div>
             <div style={{display:'flex', margin:'1em 0', flexDirection:'column'}}>
@@ -69,9 +65,9 @@ export const GameRoom = () => {
           </TabPane>
           <TabPane tab="Auto" key="2">
             <Auto />
-          </TabPane>       
+          </TabPane>
         </Tabs>
-       
+
       </div>
 
     </div>

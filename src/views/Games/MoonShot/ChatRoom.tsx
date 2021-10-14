@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Divider } from 'antd';
 import { SendOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 
@@ -31,7 +30,7 @@ export const ChatRoom = () => {
         <Input placeholder="Your message:" className="game-moonshot__input" value={message} onChange={e => { setMessage(e.currentTarget.value) }} />
         <SendOutlined style={{margin:'10px', cursor:'pointer', color:'var(--game-blue)', fontSize:'1.5em'}}/>
       </div>
-    
+
     </div>
   )
 }
