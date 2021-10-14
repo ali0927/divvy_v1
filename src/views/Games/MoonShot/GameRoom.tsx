@@ -9,6 +9,17 @@ const { TabPane } = Tabs;
 
 export const GameRoom = () => {
   const [bet, setBet] = useState('')
+  const [payout, setPayout] = useState('')
+  const [currency, setCurrency] = useState('dolar')
+
+  const onBetChange = (e: any) => { 
+    setBet(e.currentTarget.value) 
+    setPayout(e.currentTarget.value) 
+  }
+  const onPayoutChange = (e: any) => { 
+    setPayout(e.currentTarget.value) 
+    setBet(e.currentTarget.value) 
+  }
 
   return (
     <div style={{backgroundColor:'var(--game-back-gray)', borderRadius:'1em', height:'100%', textAlign:'center'}}>
@@ -22,21 +33,33 @@ export const GameRoom = () => {
           <TabPane tab="Manual" key="1" style={{padding:'1em'}}>
             <div style={{display:'flex', margin:'1em 0', flexDirection:'column'}}>
               <label style={{margin:'0.5em', textAlign:'left'}}>Bet</label>
-              <div style={{height:'3em', backgroundColor:'var(--off-black)', display:'flex', alignItems:'center', borderRadius:'0.6em'}}>
-                <Input className="game-moonshot__input" value={bet} onChange={(e) => { setBet(e.currentTarget.value) }} />
-                <label style={{padding:'0.5em 1em', height:'100%', display:'flex', alignItems:'center', backgroundColor:'var(--game-blue)'}}>bits</label>
-                <label style={{padding:'0.5em 1em'}}>BTC</label>                
+              <div style={{height:'3em', backgroundColor:'var(--off-black)', display:'flex', alignItems:'center', borderRadius:'0.6em', overflow:'hidden'}}>
+                <Input className="game-moonshot__input" value={bet} onChange={onBetChange} />
+                <div style={{cursor:'pointer', height:'100%', display:'flex', alignItems:'center'}}>
+                { currency === 'dolar' &&
+                  <>
+                    <span style={{padding:'0.5em 1em', backgroundColor:'var(--game-blue)'}} onClick={()=>{setCurrency('dolar')}}>$</span>
+                    <span style={{padding:'0.5em 1em'}} onClick={()=>{setCurrency('usdc')}}>USDC</span>    
+                  </>
+                }
+                { currency === 'usdc' &&
+                  <>
+                    <span style={{padding:'0.5em 1em',}} onClick={()=>{setCurrency('dolar')}}>$</span>
+                    <span style={{padding:'0.5em 1em', backgroundColor:'var(--game-blue)'}} onClick={()=>{setCurrency('usdc')}}>USDC</span>    
+                  </>
+                }    
+                </div>                       
               </div>
             </div>
             <div style={{display:'flex', margin:'1em 0', flexDirection:'column'}}>
               <label style={{margin:'0.5em', textAlign:'left'}}>Payout</label>
               <div style={{height:'3em', backgroundColor:'var(--off-black)', display:'flex', alignItems:'center', borderRadius:'0.6em'}}>
-                <Input className="game-moonshot__input" value={bet} onChange={(e) => { setBet(e.currentTarget.value) }} />
+                <Input className="game-moonshot__input" value={bet} onChange={onPayoutChange} />
                 <DeleteFilled style={{padding:'0.8em', height:'100%', display:'flex', alignItems:'center', fontSize:'1.2em',color:'gray', borderLeft:'1px solid #303030'}}/>
               </div>
             </div>
             <div style={{margin:'1.5em 0'}}>
-              <Button style={{width:'100%', padding:'1.5em', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'0.6em', backgroundColor:'var(--game-blue)'}}>
+              <Button style={{width:'100%', padding:'1.5em', display:'flex', alignItems:'center', justifyContent:'center', borderRadius:'0.6em', backgroundColor:'var(--game-blue)', border:'none'}}>
                 Bet
               </Button>
             </div>
