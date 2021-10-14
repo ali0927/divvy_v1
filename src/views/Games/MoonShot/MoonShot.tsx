@@ -5,7 +5,7 @@ import { ReactComponent as Logo } from "../../../img/Divvy_UI_Logo_Beta.svg"
 import { BETS_VIEW_PATH } from "../../../constants"
 import { Link } from "react-router-dom";
 
-import { ChatRoom } from "./ChatRoom";
+import { ChatRoom } from "../../../components/Games/MoonShot/ChatRoom";
 import { GameRoom } from "./GameRoom";
 import { History } from "./History";
 
@@ -20,15 +20,15 @@ export const MoonShot = () => {
             </div>
           </Link>
         </div>
-        
+
         <div style={{position:'absolute', top:0, right:0, display:'flex', alignItems:'center', padding:'0.5em 1em', zIndex:1}}>
           <ConnectLink />
         </div>
-        
+
         <Col md={24}>
           <Tabs defaultActiveKey="1" centered style={{height:"100vh"}} className="game-moonshot-tabs">
             <TabPane tab="Game" key="1" style={{height:"100%"}}>
-              <Row style={{height:"100%"}}> 
+              <Row style={{height:"100%"}}>
 
                 <Col span={24} md={7}>
                   <ChatRoom />

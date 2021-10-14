@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {MultiplierGraphModel} from "../../../models/games/moonshot/bets";
 import {getDuration, getMappedMultiplier} from "../../../constants/games";
-import {io} from "socket.io-client";
+import {MoonshotSocketContext} from "../../../contexts/moonshot-socket";
 
 export const MultiplierRocket = () => {
     const [data, setData] = useState<MultiplierGraphModel[]>([{"multiplier": 0, "time": 0}]);
     const [val, setVal] = useState("0");
     const [seed, setSeed] = useState(0);
     const [multiplier, setMultiplier] = useState(0);
+    const socket = useContext(MoonshotSocketContext);
 
     const time = getDuration(multiplier);
-    const handleGraph = () => {
+    const handleRocket = () => {
         let i = 0;
         if(seed) {
             let arr = [];
@@ -36,23 +37,19 @@ export const MultiplierRocket = () => {
         }, 100);
     }
     useEffect(() => {
-        const socket = io("http://34.146.175.16");
-        socket.on('connect', () => {
-            console.log("Conected");
-            socket.on('data', data => {
-                setData([{"multiplier": 0, "time": 0}]);
-                if(Date.now()-data.start_time > 2000) {
-                    console.log(Date.now()-data.start_time);
-                    setSeed((Date.now()-data.start_time)/1000.0);
-                }
-                setMultiplier(data.multiplier)
-                console.log(data.multiplier);
-            })
+        socket.on('data', data => {
+            setData([{"multiplier": 0, "time": 0}]);
+            if(Date.now()-data.start_time > 2000) {
+                console.log(Date.now()-data.start_time);
+                setSeed((Date.now()-data.start_time)/1000.0);
+            }
+            setMultiplier(data.multiplier)
+            console.log(data.multiplier);
         })
-    }, [])
+    }, [socket])
     useEffect(() => {
         if(multiplier) {
-            handleGraph();
+            handleRocket();
         }
     }, [multiplier])
     return (
