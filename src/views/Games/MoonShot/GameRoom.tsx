@@ -5,6 +5,7 @@ import { Tabs, Input, Button } from 'antd';
 import { DeleteFilled } from "@ant-design/icons";
 import { Auto } from './Auto';
 import {MultiplierRocket} from "../../../components/Games/MoonShot/MultiplierRocket";
+import { RocketAnimation } from './RocketAnimation';
 
 const { TabPane } = Tabs;
 
@@ -22,7 +23,11 @@ export const GameRoom = () => {
   }
   return (
     <div style={{backgroundColor:'var(--game-back-gray)', borderRadius:'1em', height:'100%', textAlign:'center'}}>
-      <MultiplierRocket />
+      {/* <MultiplierRocket /> */}
+      <RocketAnimation />
+      <div style={{fontSize:'2em', color:'white', backgroundColor:'var(--off-black)', borderRadius:'0.5em', padding:'0.2em', margin:'0.8em', textAlign:'center'}}>
+        1.15&times;
+      </div>
       <Divider style={{margin:0}}/>
       <div style={{}}>
         <Tabs defaultActiveKey="1" className="game-moonshot__room__tabs">
