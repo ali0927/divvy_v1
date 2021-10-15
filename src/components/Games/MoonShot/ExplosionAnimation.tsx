@@ -7,7 +7,7 @@ export const ExplosionAnimation = () => {
       setTimeout(() => {
         setIsExplosion(!isExplosion)
       }, isExplosion ? 1000: 3000)
-    })
+    }, [isExplosion])
     return (
         <>
         { isExplosion &&

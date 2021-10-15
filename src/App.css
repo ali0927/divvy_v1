@@ -242,16 +242,16 @@ body {
   transform: translate(-50%, -50%);
 }
 
+
 .overlay-banner {
   position: absolute;
   display: flex;
-  top: 20%;
-  left: 42%;
+  height: 100%;
+  width: 100%;
   margin: auto;
-  /*width: 150px;*/
-  /*height: 100px;*/
-  background-color: rgba(89, 78, 214, 0.6);
+  padding: 10px;
   text-align: center;
+  align-items: center;
   justify-content: center;
 }
 

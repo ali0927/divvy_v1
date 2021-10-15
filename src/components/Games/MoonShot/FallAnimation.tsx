@@ -3,8 +3,8 @@ import { Reveal, Fade } from "react-awesome-reveal";
 import { keyframes } from "@emotion/react";
 
 export const FallAnimation = (props: {
-    image: any, 
-    maxPos: number, 
+    image: any,
+    maxPos: number,
     size: number,
     delay: number,
     duration: number
@@ -15,7 +15,7 @@ export const FallAnimation = (props: {
     setTimeout(() => {
       setPosition(Math.random() * props.maxPos)
     }, props.duration + delay)
-  })
+  }, [position])
 
   const customAnimation = keyframes`
     from {
@@ -26,15 +26,15 @@ export const FallAnimation = (props: {
       opacity: 1;
       transform: translate(${position}px, max(400px, 50vh));
     }`;
-  
+
   return (
-    <Reveal 
-      keyframes={customAnimation} 
-      duration={props.duration} 
+    <Reveal
+      keyframes={customAnimation}
+      duration={props.duration}
       delay={delay}
-      triggerOnce 
+      triggerOnce
       style={{position:'absolute', top:0, width:'100%', display:'flex'}}>
         <img src={props.image} style={{width:`${props.size}em`}} alt="star" />
-    </Reveal>      
+    </Reveal>
   )
 }
