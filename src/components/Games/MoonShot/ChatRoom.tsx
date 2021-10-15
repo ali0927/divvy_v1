@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext, useRef} from "react";
 import { SendOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import {io} from "socket.io-client";
@@ -14,7 +14,7 @@ const username = generateUsername().toLowerCase().replace(" ", "-");
 export const ChatRoom = () => {
   const [message, setMessage] = useState('');
   const [chats, setChats] = useState<ChatsModel[]>([]);
-
+  const chatContainerRef = useRef(null);
   const socket = useContext(MoonshotSocketContext);
   const handleSend = () => {
       if(message !== "") {
@@ -34,6 +34,10 @@ export const ChatRoom = () => {
           }
           temp.push(data);
           setChats([ ...temp ]);
+          if(document.querySelector('.ui-chat')) {
+              let query = document?.querySelector('.ui-chat')?.scrollTop;
+              query = document?.querySelector('.ui-chat')?.scrollHeight as number;
+          }
       })
       socket.on("all-msgs", data => {
           setChats([ ...data ]);
@@ -43,13 +47,22 @@ export const ChatRoom = () => {
   useEffect(() => {
       socket.emit("get-msgs");
   }, [])
+    useEffect(() => {
+      if (chatContainerRef && chatContainerRef?.current) {
+          // @ts-ignore
+          chatContainerRef?.current?.addEventListener('DOMNodeInserted', event => {
+              const { currentTarget: target } = event;
+              target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+          });
+      }
+  }, [])
   return (
     <div style={{position:'relative', height:'98%'}}>
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', padding:'10px'}}>
         <strong style={{fontSize:'1.5em'}}>Chat</strong>
           You are chatting as {username} &emsp;
       </div>
-      <div style={{position:'absolute', top:'4em', bottom:'4em', padding:'10px', overflow:'scroll', width:'100%', borderTop:'1px solid var(--gray)', borderBottom:'1px solid var(--gray)'}}>
+      <div ref={chatContainerRef} className={"ui-chat"} style={{position:'absolute', top:'4em', bottom:'4em', padding:'10px', overflow:'scroll', width:'100%', borderTop:'1px solid var(--gray)', borderBottom:'1px solid var(--gray)'}}>
         {
           chats.map(item => (
             <p>

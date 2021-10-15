@@ -242,7 +242,6 @@ export const CHARACTER_FIRST_NAMES = [
     "Thor",
     "Napoleon",
     "Maximus",
-    "Khan",
     "Geronimo",
     "Leon",
     "Leonidas",
