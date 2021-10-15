@@ -68,7 +68,7 @@ export const ChatRoom = () => {
             <p>
               <span style={{color: item.name === username ? 'var(--game-red)' : 'var(--game-blue)'}}>{item.name}: </span>
               <span> {item.text} </span>
-              <span style={{color:'grey', fontSize:'0.7em'}}> {item.date}</span>
+              <span style={{color:'grey', fontSize:'0.7em', float: "right"}}> {new Date(item.date).getHours()}:{new Date(item.date).getMinutes()}</span>
             </p>
           ))
         }
