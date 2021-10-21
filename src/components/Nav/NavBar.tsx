@@ -1,4 +1,5 @@
 import { BetsViewLink } from "./BetsViewLink";
+import { DivvyLinks } from "./DivvyLinks";
 import { LiquidityViewLink } from "./LiquidityViewLink";
 import { MyDashboardLink } from "./MyDashboardLink";
 import { MarketsLink } from "./MarketsLink";
@@ -7,12 +8,15 @@ import { SearchOutlined } from "@ant-design/icons"
 import { useState } from "react";
 import { USDCFaucetLink } from "./USDCFaucet";
 import { DivvyGamesLink } from "./DivvyGames";
+import { DivvyNFTS } from "./DivvyNFTS";
 
 export const NavBar = () => {
   const [search, setSearch] = useState("")
   return (
     <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
       <BetsViewLink />
+      <DivvyNFTS />
+      <DivvyLinks />
       <LiquidityViewLink />
       <MyDashboardLink />
       {/* <DivvyGamesLink /> */}
