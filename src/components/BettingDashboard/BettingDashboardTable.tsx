@@ -8,8 +8,13 @@ import { americanToDecimal, LAMPORTS_PER_USDC, numStringToNumberFormat } from ".
 
 export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, filteredInfo: any, setSortedInfo: any, setFilteredInfo: any }) => {
     const wallet = useWallet();  
-    const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString());
+    const { data, error, isLoading, refetch } = useGetBetsQuery(wallet?.publicKey?.toString());
     const [betData, setBetData] = useState<BetsTable[]>([]);
+
+    useEffect(() => {
+      refetch()
+    }, [])
+
     useEffect(() => {
       let tmpArr: BetsTable[] = [];
       data?.map((bet: any, i: number) => {

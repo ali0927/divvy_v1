@@ -19,7 +19,7 @@ export const BetSlips = () => {
     }
   })
   return (
-    <div className="sidebar-section" style={{ display: "flex", flexDirection: 'column', height: '100vh', position: 'relative' }}>
+    <div className="sidebar-section side-section-betslip" style={{ display: "flex", flexDirection: 'column', position: 'relative' }}>
       <div style={{ display: "flex", position: 'absolute', left: 0, right: 0, top: 0 }}>
         <div onClick={() => setActive('slips')} className={active === "slips" ? "bets-active bets-left" : "bets-left"}>
           <h3 style={{margin:0}}>Bet Slip{slips > 0 ? ` (${slips})`: ''}</h3>            
@@ -32,9 +32,9 @@ export const BetSlips = () => {
       <div className="mybets-scroll">
         {active === "slips" ? <BetSlip/> : <PendingBets/>}
       </div>
-      <div className="mybets-scroll-mobile">
+      {/* <div className="mybets-scroll-mobile">
         {active === "slips" ? <BetSlip/> : <PendingBets/>}
-      </div>
+      </div> */}
     
     </div>
   );
