@@ -19,6 +19,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
         } else if(bet["betType"] === "Total Score") {
           odds += "<br />"+(bet["marketName"].split(" vs ")[0] === bet["selectionTeam"] ? (bet["teamATotalPoints"] >= 0 ? "O " : "U " )+bet["teamATotalPoints"] : (bet["teamBTotalPoints"] >= 0 ? "O " : "U " )+bet["teamBTotalPoints"]);
         }
+        console.log('---------', bet)
         tmpArr.push({
           key: i,
           type: 'Single',
@@ -29,7 +30,8 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           bettype: bet["betType"],
           odds: odds, 
           wager: '<b>'+bet["risk"]/LAMPORTS_PER_USDC+' USDC</b>',
-          potential: bet["payout"]+' USDC'
+          potential: bet["payout"]+' USDC',
+          time: bet["placedOn"].split(" ")
         })
       })
       setBetData(tmpArr);
@@ -91,7 +93,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           render: (html : any) => <div className="text-table" style={{ textAlign: "right" }} dangerouslySetInnerHTML={{__html: html}} />
         },
         {
-          title: "BET TYPE",
+          title: "SPREAD",
           dataIndex: "bettype",
           key: "bettype",
         },
@@ -109,7 +111,17 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
               compare: (a: any, b: any) => JSON.parse(a.potential.split(' USDC')[0].replace(',', ''))-JSON.parse(b.potential.split(' USDC')[0].replace(',', ''))
           },
           sortOrder: props.sortedInfo.columnKey === 'potential' && props.sortedInfo.order,
-        }
+        },
+        {
+          title: 'EVENT TIME',
+          dataIndex: 'time',
+          key: 'time',
+          render: (date : String[]) => <div className="text-table" style={{ textAlign: "right" }}>{date[1]} {date[2]} <br />at {date[4].split(":")[0]+":"+date[4].split(":")[1] + (parseFloat(date[4].split(":")[0]) >= 12 ? " PM" : " AM")}</div>,
+          sorter: {
+            compare: (a: any, b: any) => convertToDate(a.placed)-convertToDate(b.placed)
+          },
+          sortOrder: props.sortedInfo.columnKey === 'placed' && props.sortedInfo.order,
+        },
     ];
 
     return (

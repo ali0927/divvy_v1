@@ -66,7 +66,7 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
             onClick={() => setSlip(BetType.moneyline, props.odds.moneyline, props.odds.moneylineFeedPubkey, props.market.moneylineMarketPubkey, 0)}>
           <div className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"}>
             { props.marketSide === MarketSide.draw && <label>(Draw)</label>}
-            <b style={{fontSize: '1em'}}>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline}`}</b>
+            <b style={{fontSize: '1em'}}>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline.toFixed(2)}`}</b>
           </div>
         </Col>
         { props.marketSide != MarketSide.draw && 
@@ -74,12 +74,12 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
           {/* TODO: add after we enable spreads: onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)} */}
           <Col onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.moneylineMarketPubkey, props.odds.spreadPoints)}  span={8} style={{padding: '0.5vw'}} >
             <div className={containsBet(BetType.spread) ? "odds odds-active" : "odds"}>
-              <b style={{fontSize: '1em'}}>{`(${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints)}) ${props.odds.spread >= 0 ? "+" : ""}${String(props.odds.spread)}`}</b>
+              <b style={{fontSize: '1em'}}>{`${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints.toFixed(2))} (${String(props.odds.spread.toFixed(2))})`}</b>
             </div>
           </Col>
           <Col onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.moneylineMarketPubkey, props.odds.totalPoints)}  span={8} style={{padding: '0.5vw'}} >
             <div className={containsBet(BetType.total) ? "odds odds-active" : "odds"}>
-              <b style={{fontSize: '1em'}}>{`(${props.marketSide === MarketSide.teamB ? "O" : "U"} ${Math.abs(props.odds.totalPoints)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total}`}</b>
+              <b style={{fontSize: '1em'}}>{`(${props.marketSide === MarketSide.teamB ? "O" : "U"} ${Math.abs(props.odds.totalPoints).toFixed(2)}) ${props.odds.total >= 0 ? "+" : ""}${props.odds.total.toFixed(2)}`}</b>
             </div>
           </Col>
           </>
