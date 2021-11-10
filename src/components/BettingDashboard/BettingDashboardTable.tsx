@@ -25,13 +25,14 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           odds += "<br />"+(bet["marketName"].split(" vs ")[0] === bet["selectionTeam"] ? (bet["teamATotalPoints"] >= 0 ? "O " : "U " )+bet["teamATotalPoints"] : (bet["teamBTotalPoints"] >= 0 ? "O " : "U " )+bet["teamBTotalPoints"]);
         }
         console.log('---------', bet)
+        const betStatus = bet["status"] !== 2 ? BetStatus[bet["status"]]: bet["payout"] > 0 ? 'Win': 'Loss'
         tmpArr.push({
           key: i,
           type: 'Single',
           match: bet["marketName"],
           sport: bet["sportName"],
           placed: bet["placedOn"].split(" "),
-          settled: BetStatus[bet["status"]].toLowerCase(),
+          settled: betStatus,
           bettype: bet["betType"],
           odds: odds, 
           wager: '<b>'+bet["risk"]/LAMPORTS_PER_USDC+' USDC</b>',
