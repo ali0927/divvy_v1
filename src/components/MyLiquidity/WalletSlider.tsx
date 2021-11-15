@@ -5,9 +5,14 @@ export const WalletSlider = (props: { onChange: any, value: number, disabled: bo
   const [value, setValue] = useState(0)
 
   const marks = useMemo(() => ({
+    0: { label: <small style={{color: 'gray'}} onClick={() => { onChangeValue(0) }}>0%</small> },
+    25: { label: <small style={{color: 'gray'}} onClick={() => { onChangeValue(25) }}>25%</small> },
+    50: { label: <small style={{color: 'gray'}} onClick={() => { onChangeValue(50) }}>50%</small> },
+    75: { label: <small style={{color: 'gray'}} onClick={() => { onChangeValue(75) }}>75%</small> },
+    100: { label: <small style={{color: 'gray'}} onClick={() => { onChangeValue(100) }}>100%</small> },
     [value]: {
-      label: <small>{value}%</small>
-    }
+      label: <small style={{fontWeight: 'bold'}}>{value}%</small>
+    },
   }), [value])
   const onChangeValue = (val: number) => {
     setValue(val)

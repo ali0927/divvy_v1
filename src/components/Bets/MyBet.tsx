@@ -35,7 +35,7 @@ export const MyBet = (props: { bet: Bet }) => {
             parsedRisk = 0;
             setRiskStr("0");
         }
-        else setRiskStr(risk.toString());
+        else setRiskStr(risk.toFixed(2));
         setPayoutStr(payout)
         setRisk(parsedRisk);
         bets?.editBetRisk(props.bet.betId, parsedRisk)

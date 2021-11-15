@@ -159,7 +159,8 @@ export interface BetsTable {
     odds: string,
     bettype: string,
     wager: string,
-    potential: string
+    potential: string,
+    time: string
 }
 
 export interface Pool {

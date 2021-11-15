@@ -51,7 +51,7 @@ export const DashboardView = () => {
                 </Col>
                 {!isMobileMenuVisible && !isBetSlipsVisible &&
                     <Col span={24} xs={24} sm={24} md={19}>
-                        <div style={{margin: "40px 8vw"}}>
+                        <div style={{margin: "40px 4vw"}}>
                             <ConnectLink />
                             <header className="root-content">
                                 {isLoading ? <Loader /> : null}

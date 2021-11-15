@@ -16,7 +16,7 @@ export const SeasonGames = (props: { season: Season, search: string }) => {
     <div className="single-market">
       <Row>
         <Col span={24}>
-          <Collapse defaultActiveKey={"1"} accordion={true} style={{ display: "grid" }} ghost={true} expandIconPosition="right">
+          <Collapse defaultActiveKey={"0"} accordion={true} style={{ display: "grid" }} ghost={true} expandIconPosition="right">
             <Panel header={<SeasonName name={props.season.season.seasonName} matches={props.season.markets.length} />} key="1">
               {markets.map((value: Market, index: number) => {
                 if(value.teamA.concat(value.teamB).toLowerCase().includes(props.search.toLowerCase())) {

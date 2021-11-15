@@ -11,7 +11,7 @@ type SeasonHeaderProps = {
 export const SeasonHeader = ({ seasonName, onChange, refetch, ...props }: SeasonHeaderProps) => {
     return (
       <div style={style.wrapper} {...props}>
-        <h1>{seasonName}</h1>
+        <h1 className="season_sports_name">{seasonName}</h1>
         <div className="balance-container">
           <ReloadButton refetch={refetch} />
           <Input  
