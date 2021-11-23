@@ -87,7 +87,7 @@ export const StakeHT = () => {
       <h3>Stake your House Tokens</h3>
       <div className="balance-container">
           <p>
-              <small className="text-secondary">House Token Balance</small>
+            <small className="text-secondary">House Token Balance</small>
           </p>
           <p className="balance">{tokenAmountToString(userHT)} HT</p>
       </div>
