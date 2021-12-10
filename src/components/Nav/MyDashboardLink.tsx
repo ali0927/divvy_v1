@@ -9,7 +9,6 @@ export const MyDashboardLink = () => {
   const abort = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
   };
-  const { htBalance } = useContext(HousePoolContext);
   const { userUSDC } = useContext(UserUSDCContext)
   let isMobile = useMediaQuery('(max-width: 400px)');
   return (
