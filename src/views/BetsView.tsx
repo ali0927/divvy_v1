@@ -13,6 +13,7 @@ import { useWallet } from "../contexts/sol/wallet";
 import { useGetBetsQuery } from "../store/getBets";
 import { BetsContext } from "../contexts/bets";
 import { ConnectLink } from "../components/Nav/ConnectLink";
+import { useMediaQuery } from "../utils/utils";
 
 const BetsView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -20,6 +21,7 @@ const BetsView = () => {
   const wallet = useWallet();
   const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString())
   const bets = useContext(BetsContext)
+  let isMobile = useMediaQuery('(max-width: 400px)');
 
   if (!isLoading && !error && !bets?.bets.length && data?.length) {
     let bet: Array<Bet> = [];
@@ -51,7 +53,7 @@ const BetsView = () => {
               <NavBar />
             </LeftSideBar>
           </Col>
-          {!isMobileMenuVisible && !isBetSlipsVisible &&
+          {(!isMobile || !isMobileMenuVisible && !isBetSlipsVisible) &&
             <Col span={16} xs={24} sm={24} md={16}>
                
               <header className="root-content">
