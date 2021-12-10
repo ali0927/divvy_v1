@@ -60,8 +60,8 @@ export const DashboardView = () => {
                             <header className="root-content">
                                 {isLoading ? <Loader /> : null}
                             </header>
-                            <BettingDashboardHeader data={data} error={error} />
                             <BettingDashboardMiddle  switchVal={switchVal} setSwitchVal={setSwitchVal} />
+                            <BettingDashboardHeader data={data} error={error} />
                             { switchVal === 0 &&
                                 <LiquidityProviderDashboard />
                             }

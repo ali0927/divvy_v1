@@ -5,10 +5,10 @@ import { BettingSwitch } from "./BettingSwitch";
 import { TransactionData } from "../Common/TransactionData";
 export const BettingDashboardMiddle = (props: { switchVal: number, setSwitchVal: any }) => {
     return (
-        <div style={{marginTop: 50}}>
-            <Row>
+        <div style={{marginTop: 10}}>
+            <Row style={{justifyContent: 'flex-end'}}>
                 <Col span={36} md={10} className="balance-container">
-                    <BettingSwitch switchVal={props.switchVal} setSwitchVal={props.setSwitchVal} />
+                    <BettingSwitch switchVal={props.switchVal} setSwitchVal={props.setSwitchVal}/>
                 </Col>
                 <Col span={36} md={16} className="balance-container">
                 </Col>                
