@@ -24,6 +24,7 @@ import { BetStateContext } from "../../contexts/sol/betstate";
 import { HPTokenContext } from "../../contexts/sol/hptoken";
 import LinkLabel from "../Nav/LinkLabel";
 import * as IDS from "../../utils/ids"
+import { useMediaQuery } from "../../utils/utils";
 
 export const LiquidityProviderDeposit = (props: { isLoading: boolean, data: Array<Market> | undefined }) => {
   const wallet = useWallet();
@@ -38,6 +39,7 @@ export const LiquidityProviderDeposit = (props: { isLoading: boolean, data: Arra
   const { htBalance } = useContext(HousePoolContext);
   const { lockedLiquidity } = useContext(BetStateContext)
   const { htSupply } = useContext(HPTokenContext);
+  let isMobile = useMediaQuery('(max-width: 400px)');
 
   useEffect(() => {
     if(userUSDC === 0) setUsdtAmount("")
@@ -113,9 +115,19 @@ export const LiquidityProviderDeposit = (props: { isLoading: boolean, data: Arra
       <Divider />
       <Form.Item name="usdcAmount" style={{marginBottom:'1em'}}>
         <Input.Group compact style={{display:'flex', alignItems:'center'}}>
-          <label style={{width: "30%"}}>Amount to deposit: </label>
-          <Input placeholder={"USDC"} name="usdcAmount" value={usdcAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={{width: "50%"}} />
-          <Button style={{border:"1px solid rgb(67, 67, 67)",  width:"20%", padding:0}} onClick={e => setUsdtAmount((userUSDC / LAMPORTS_PER_USDC).toFixed(2).toString())} disabled={userUSDC === 0}>MAX</Button>
+          <label
+            style={isMobile ? {
+              width: '100%',
+              position: 'absolute',
+              top: 7,
+              left: 10,
+              fontSize: 10,
+              color: '#6a6a6a'
+            } : {
+              width: "30%"
+            }}>Amount to deposit: </label>
+          <Input placeholder={"USDC"} name="usdcAmount" value={usdcAmount} onChange={event => setUsdtAmount(event.currentTarget.value)} style={isMobile ? {width: '80%', height: 50, paddingTop: 20} : {width: "50%"}} />
+          <Button style={{border:"1px solid rgb(67, 67, 67)",  width:"20%", height: isMobile ? 50 : 32, padding:0}} onClick={e => setUsdtAmount((userUSDC / LAMPORTS_PER_USDC).toFixed(2).toString())} disabled={userUSDC === 0}>MAX</Button>
         </Input.Group>
       </Form.Item>
       <WalletSlider         
@@ -130,13 +142,13 @@ export const LiquidityProviderDeposit = (props: { isLoading: boolean, data: Arra
           </LinkLabel>
         </Button>
       </div>
-      <div style={{display:'flex', justifyContent:'space-between', marginTop:'1em'}}>
-        <Button onClick={onDeposit} disabled={Number(usdcAmount) === 0} style={{width:'48%', padding: '0.6em', height:'auto'}}>
+      <div style={{display:'flex', justifyContent:'space-between', marginTop:'1em', flexDirection: isMobile ? 'column' : 'row'}}>
+        <Button onClick={onDeposit} disabled={Number(usdcAmount) === 0} style={{width: isMobile ? '100%' : '48%', padding: '0.6em', height:'auto'}}>
           <LinkLabel style={{ margin:"auto" }}>
             <span>Deposit</span>
           </LinkLabel>
         </Button>
-        <Button style={{width:'48%', padding: '0.6em', height:'auto'}}>
+        <Button style={{width: isMobile ? '100%' : '48%', padding: '0.6em', height:'auto', marginTop: isMobile ? '1em' : 0}}>
           <LinkLabel style={{ margin:"auto" }}>
             <span>Deposit &amp; Stake</span>
           </LinkLabel>
@@ -154,9 +166,19 @@ export const LiquidityProviderDeposit = (props: { isLoading: boolean, data: Arra
         name="usdcAmount"
         rules={[{ required: true, message: "Please input the USDC amount." }]}>
         <Input.Group compact style={{display:'flex', alignItems:'center'}}>
-          <label style={{width: "30%"}}>Amount to stake: </label>
-          <Input placeholder={"House Token"} style={{ width: "50%" }} />
-          <Button style={{ border: "1px solid rgb(67, 67, 67)", width:"20%", padding:0}}>MAX</Button>
+          <label
+            style={isMobile ? {
+              width: '100%',
+              position: 'absolute',
+              top: 7,
+              left: 10,
+              fontSize: 10,
+              color: '#6a6a6a'
+            } : {
+              width: "30%"
+            }}>Amount to stake: </label>
+          <Input placeholder={"House Token"} style={isMobile ? {width: '80%', height: 50, paddingTop: 20} : { width: "50%" }} />
+          <Button style={{ border: "1px solid rgb(67, 67, 67)", width:"20%", height: isMobile ? 50 : 32, padding:0}}>MAX</Button>
         </Input.Group>
       </Form.Item>
       <WalletSlider 
