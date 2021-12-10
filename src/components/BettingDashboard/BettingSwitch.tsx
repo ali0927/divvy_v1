@@ -21,7 +21,6 @@ export const BettingSwitch = (props: { switchVal: number, setSwitchVal: any }) =
                     borderRadius: '30px',
                     top: 0,
                     left: `${props.switchVal * 50}%`,
-                    zIndex: -1,
                     transition: 'all 0.3s ease',
                 }}
             >

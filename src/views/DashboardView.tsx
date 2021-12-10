@@ -57,7 +57,7 @@ export const DashboardView = () => {
                     <Col span={24} xs={24} sm={24} md={20}>
                         <div style={{padding:'40px 4vw', height:'100vh', overflowY:'scroll'}}>
                             <ConnectLink />
-                            <header className="root-content">
+                            <header className="root-content" style={isMobile ? {padding: 0} : {}}>
                                 {isLoading ? <Loader /> : null}
                             </header>
                             <BettingDashboardMiddle  switchVal={switchVal} setSwitchVal={setSwitchVal} />
