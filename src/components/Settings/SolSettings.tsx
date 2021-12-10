@@ -8,7 +8,7 @@ export const SolSettings = () => {
 
   return (
     <>
-      <div style={{display:"grid"}} className="sol-setting-item">
+      <div style={{display:"grid", color: 'white'}} className="sol-setting-item">
         Display Currency:{" "}
         <Select
           value={CURRENCIES[0].name}
@@ -20,7 +20,7 @@ export const SolSettings = () => {
           ))}
         </Select>       
       </div>
-      <div style={{display:"grid", marginTop:'1rem'}} className="sol-setting-item">
+      <div style={{display:"grid", marginTop:'1rem', color: 'white'}} className="sol-setting-item">
         Display Language:{" "}
         <Select
           value={LANGUAGES[0].name}
@@ -32,7 +32,7 @@ export const SolSettings = () => {
           ))}
         </Select>       
       </div>
-      <div style={{display:"grid", marginTop:'1rem'}} className="sol-setting-item">
+      <div style={{display:"grid", marginTop:'1rem', color: 'white'}} className="sol-setting-item">
         Network:{" "}
         <Select
           onSelect={setEndpoint}

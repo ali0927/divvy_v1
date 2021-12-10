@@ -19,7 +19,7 @@ export const SolWalletSettings = () => {
       {connected && (
         <div>
           <div className="sol-wallet-info">
-            <div>
+            <div style={{color: 'white'}}>
               <img src={provider?.icon} style={{width:'20px', height:'20px', marginRight:'0.8rem'}} alt="" />
               {shortenAddress(`${wallet?.publicKey}`)}
             </div>    
