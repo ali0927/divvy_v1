@@ -558,7 +558,9 @@ body {
   height: auto !important;
   text-align: left !important;
 }
-
+.ant-popover-content .ant-popover-title {
+  color: white;
+}
 
 .ant-slider {
   width: 100%;
@@ -601,6 +603,10 @@ body {
   background-color: #0d0d0d;
   font-size: 16px;
   line-height: 24px;
+}
+
+.pool-activity-table .ant-table-container {
+  overflow-x: scroll;
 }
 
 @media (min-width: 768px) {

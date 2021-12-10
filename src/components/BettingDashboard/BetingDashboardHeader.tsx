@@ -26,7 +26,7 @@ export const BettingDashboardHeader = (props: { data: any , error: any}) => {
             </div>
         </Col>
         <Col md={14}>
-            <div className="liquidity-content">
+            <div className="liquidity-content" style={{overflowX: 'hidden'}}>
                 <span className="text-primary">Wallet ID:</span>
                 <h3 className="text-heavy">{wallet?.publicKey?.toString()}</h3>
             </div>
