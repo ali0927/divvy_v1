@@ -16,6 +16,7 @@ import { MARKET_STATE_ACCOUNT_DATA_LAYOUT } from "../models/sol/state/marketStat
 import { HPStateParser, HP_STATE_LAYOUT } from "../models/sol/state/hpState";
 import { ConnectLink } from "../components/Nav/ConnectLink";
 import { notify } from "../utils/notifications";
+import { useMediaQuery } from "../utils/utils";
 
 export const FaucetView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -29,6 +30,7 @@ export const FaucetView = () => {
     }
     const [inspectPubkey, setInspectPubkey] = useState("");
     const [inspectAccount, setInspectAccount] = useState<string>("");
+    let isMobile = useMediaQuery('(max-width: 400px)');
 
     const tryInspect = async (pubkeyString: string) => {
         setInspectPubkey(pubkeyString);
@@ -73,7 +75,7 @@ export const FaucetView = () => {
                         <NavBar />
                     </LeftSideBar>
                 </Col>
-                {!isMobileMenuVisible && !isBetSlipsVisible &&
+                {(!isMobile || !isMobileMenuVisible && !isBetSlipsVisible) &&
                     <Col span={24} xs={24} sm={24} md={20}>
                         <header className="root-content">
                             <ConnectLink />

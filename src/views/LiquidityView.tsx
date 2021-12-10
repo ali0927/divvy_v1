@@ -15,6 +15,7 @@ import { useGetPoolQuery } from "../store/getPool";
 import { MS_IN_DAY, BETS_VIEW_PATH } from "../constants";
 import { useGetTransactionsQuery } from "../store/getTransactions";
 import { ConnectLink } from "../components/Nav/ConnectLink";
+import { useMediaQuery } from "../utils/utils";
 
 const currTime = (new Date()).getTime(); 
 const LiquidityView = () => {
@@ -23,6 +24,7 @@ const LiquidityView = () => {
   const [interval, setInterval] = useState(MS_IN_DAY);
   const { data, error, isLoading } = useGetPoolQuery((currTime-interval).toString());
   const { data: transData, error: transError, isLoading: transIsLoading } = useGetTransactionsQuery(null);
+  let isMobile = useMediaQuery('(max-width: 400px)');
   return (
     <Layout style={{ backgroundColor: "#0D0D0D" }}>
       <Row>
@@ -34,7 +36,7 @@ const LiquidityView = () => {
             <NavBar />
           </LeftSideBar>
         </Col>
-        {!isMobileMenuVisible && !isBetSlipsVisible &&
+        {(!isMobile || !isMobileMenuVisible && !isBetSlipsVisible) &&
           <Col span={24} md={16}>
             <header className="root-content">
               <div>
