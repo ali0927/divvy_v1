@@ -29,13 +29,13 @@ const LiquidityView = () => {
         <Col xs={24} sm={24} md={0}>
           <MobileHeader headerType={HeaderTypes.Liquidity} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
         </Col>
-        <Col span={5} xs={isMobileMenuVisible ? 24 : 0} sm={isMobileMenuVisible ? 24 : 0} md={5}>
+        <Col span={4} xs={isMobileMenuVisible ? 24 : 0} sm={isMobileMenuVisible ? 24 : 0} md={4}>
           <LeftSideBar>
             <NavBar />
           </LeftSideBar>
         </Col>
         {!isMobileMenuVisible && !isBetSlipsVisible &&
-          <Col span={24} md={14}>
+          <Col span={24} md={16}>
             <header className="root-content">
               <div>
                 <Row  style={{display:'flex', justifyContent:'space-between'}}>
@@ -50,7 +50,7 @@ const LiquidityView = () => {
             </header>
           </Col>
         }
-        <Col span={5} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={5}>
+        <Col span={4} xs={isBetSlipsVisible ? 24 : 0} sm={isBetSlipsVisible ? 24 : 0} md={4}>
           <RightSideBar>
             <MyLiquidity />
           </RightSideBar>

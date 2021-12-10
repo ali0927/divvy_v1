@@ -30,9 +30,6 @@
                         <polygon id="Fill-9" fill="#FFFFFF" points="122.313739 28.3752326 115.646391 13.2531163 119.711565 13.2531163 124.290565 24.8914302 129.103348 13.2531163 132.891783 13.2531163 123.389304 34.6033605 119.508348 34.6033605"></polygon>
                     </g>
                 </g>
-                <text id="BETA" font-family="NunitoSans-ExtraBold, Nunito Sans" font-size="12" font-weight="600" line-spacing="12" letter-spacing="0.5" fill="#FFFFFF">
-                    <tspan x="137" y="17">POC</tspan>
-                </text>
             </g>
         </g>
     </g>
