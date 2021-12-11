@@ -11,11 +11,16 @@ export const MobileHeader = (props: { isMobileMenuVisible: boolean, setMobileMen
             <Col className="mobile-header" span={4} style={props.isMobileMenuVisible ? {visibility: 'hidden'} : {}}>
                 <HeaderLogo />
             </Col>
-            <Col className="mobile-header" span={props.headerType !== HeaderTypes.Dashboard ? 10 : 15} style={props.isMobileMenuVisible ? {visibility: 'hidden'} : {}}>
+            <Col className="mobile-header" span={
+                (props.headerType === HeaderTypes.Dashboard) || props.headerType == HeaderTypes.Liquidity && !props.isBetSlipsVisible 
+                ? 15 : 10} style={props.isMobileMenuVisible ? {visibility: 'hidden'} : {}}>
                 <WalletBalance />
             </Col>
             { props.headerType !== HeaderTypes.Dashboard ?
-                <Col className="mobile-header" span={5} style={props.isMobileMenuVisible ? {visibility: 'hidden'} : {}}>
+                <Col className="mobile-header" span={5} style={
+                    props.isMobileMenuVisible ? {visibility: 'hidden'} :
+                    !props.isBetSlipsVisible && props.headerType == HeaderTypes.Liquidity ? {display: 'none'} : {}}
+                >
                     {props.headerType === HeaderTypes.Bets ?
                         <MobileBetSlip isBetSlipsVisible={props.isBetSlipsVisible} setBetSlipsVisible={props.setBetSlipsVisible} setMobileMenuVisible={props.setMobileMenuVisible} /> :
                         <HousePoolHeader isBetSlipsVisible={props.isBetSlipsVisible} setBetSlipsVisible={props.setBetSlipsVisible} setMobileMenuVisible={props.setMobileMenuVisible} />
