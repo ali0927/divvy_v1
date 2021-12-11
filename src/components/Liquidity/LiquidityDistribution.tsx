@@ -13,15 +13,15 @@ export const LiquidityDistribution = () => {
       <div className="header-align">
         <div className="horizontal-outline" />
         <div className="liquidity-content">
-          <h6 className="text-secondary">Locked Liquidity</h6>
-          <h3><span className="liquidity-heavy">{tokenAmountToString(liveLiquidity + lockedLiquidity)}</span> USDC</h3>
-          <p className="text-primary">{tokenAmountToString((liveLiquidity + lockedLiquidity)*100 / (htBalance + liveLiquidity + lockedLiquidity), 0, 2)}% locked</p>
+          {/* <h6 className="text-secondary">Locked Liquidity</h6> */}
+          <h3><span className="liquidity-heavy">{tokenAmountToString((liveLiquidity + lockedLiquidity)*100 / (htBalance + liveLiquidity + lockedLiquidity), 0, 2)}%</span> locked</h3>
+          <p className="text-primary">{tokenAmountToString(liveLiquidity + lockedLiquidity)} USDC</p>
         </div>
         <div className="horizontal-outline" />
         <div className="liquidity-content">
-          <h6 className="text-secondary">Bettor's Risk</h6>
+          <h6 className="text-secondary">Reserved For</h6>
           {/* Change this */}
-          <h3><span className="liquidity-heavy">{tokenAmountToString(bettorBalance - lockedLiquidity - liveLiquidity)}</span> USDC</h3>
+          <h3><span className="liquidity-heavy">{pendingBets}</span> Pending <br />Bets</h3>
         </div>
         <div className="horizontal-outline" />
       </div>

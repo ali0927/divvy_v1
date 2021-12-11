@@ -45,7 +45,7 @@ const LiquidityView = () => {
                   <Col span={0} md={10}><ConnectLink /></Col>
                 </Row>
               </div>
-              <LiquidityGlobalStats />
+              <LiquidityGlobalStats setBetSlipsVisible={setBetSlipsVisible} />
               <LiquidityGlance data={data} setInterval={setInterval} transactions={transData} />
               <LiquidityPoolPerformance data={data} />
               <LiquidityPoolActivity transactions={transData} />
