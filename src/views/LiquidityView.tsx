@@ -21,7 +21,7 @@ const currTime = (new Date()).getTime();
 const LiquidityView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [isBetSlipsVisible, setBetSlipsVisible] = useState(false);
-  const [interval, setInterval] = useState(MS_IN_DAY);
+  const [interval, setInterval] = useState(MS_IN_DAY * 7);
   const { data, error, isLoading } = useGetPoolQuery((currTime-interval).toString());
   const { data: transData, error: transError, isLoading: transIsLoading } = useGetTransactionsQuery(null);
   let isMobile = useMediaQuery('(max-width: 400px)');
