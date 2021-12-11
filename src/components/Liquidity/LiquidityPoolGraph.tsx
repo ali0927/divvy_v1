@@ -1,10 +1,33 @@
-import { useState, useEffect } from 'react';
-import { Line, LineConfig } from '@ant-design/charts';
+import { useState, useEffect, useRef } from 'react';
+// import { Line, LineConfig } from '@ant-design/charts';
 import { Pool, PoolGraph } from '../../constants';
 import { DATE_STRING_TO_NUMBER } from '../../constants/DashboardColumns';
+import { CategoryScale, Chart as ChartJS, ChartArea, ChartData, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js';
+import { Line } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend
+);
+
+function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
+  const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+  gradient.addColorStop(0, '#7c01ff');
+  gradient.addColorStop(1, '#00d77d');
+  return gradient;
+}
 
 const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined, poolPerformance: number }) => {
-  const [chartData, setChartData] = useState<PoolGraph[]>([])
+  const [chartRawData, setChartRawData] = useState<PoolGraph[]>([])
+  const [chartData, setChartData] = useState<ChartData<'line'>>({
+    datasets: [],
+  });
+  const chartRef = useRef<any>(null);
+
   useEffect(() => {
     if(props.data) {
       let tmp : PoolGraph[] = [];
@@ -14,33 +37,37 @@ const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined, poolPerform
         tmpArr = d.split(" ")
         tmp.push({ "date": tmpArr[2]+"/"+(DATE_STRING_TO_NUMBER as any)[tmpArr[1]]+"/"+tmpArr[3], "performance": props.poolPerformance == 1 ? item?.earning : props.poolPerformance == 0 ? item?.balance : item?.volume })
       })
-      setChartData([ ...tmp ]);
+      setChartRawData([ ...tmp ]);
     } 
   }, [props.data, props.poolPerformance])
 
-  var config: LineConfig = {
-    data: chartData,
-    xField: "date",
-    yField: "performance",
-    lineStyle: {
-      stroke: 'l(270) 0:#7c01ff 1:#00d77d',
-      fillOpacity: 0.5,
-      cursor: 'pointer'
-    },
-    point: {
-      size: 5,
-      shape: 'circle',
-      style: {
-        fill: 'white',
-        stroke: '#2593fc',
-        lineWidth: 2,
-      },
-    },
-    
-  };
+  useEffect(() => {
+    const chart = chartRef.current;
+    if (!chart) {
+      return;
+    }
+
+    const chartDataBuf = {
+      labels: chartRawData.map(data => data.date),
+      datasets: [{
+        label: '',
+        data: chartRawData.map(data => data.performance),
+        borderColor: createGradient(chart.ctx, chart.chartArea),
+        backgroundColor: createGradient(chart.ctx, chart.chartArea),
+      }],
+    };
+
+    setChartData(chartDataBuf);
+  }, [chartRawData]);
 
   return (
-    <Line {...config} /> 
+    <Line ref={chartRef} data={chartData} options={{
+      plugins: {legend: {display: false}, tooltip: {enabled: true, mode: 'nearest'}},
+      scales: {
+        y: {grid: {color: 'gray'}, ticks: {color: 'gray'}},
+        x: {grid: {color: 'gray'}, ticks: {color: 'gray', autoSkip: true, maxTicksLimit: 10}}
+      },
+    }} />
   );
 };
 export default LiquidityPoolGraph;
