@@ -2,14 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 // import { Line, LineConfig } from '@ant-design/charts';
 import { Pool, PoolGraph } from '../../constants';
 import { DATE_STRING_TO_NUMBER } from '../../constants/DashboardColumns';
-import { CategoryScale, Chart as ChartJS, ChartArea, ChartData, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { BarElement, CategoryScale, Chart as ChartJS, ChartArea, ChartData, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js';
+import { Bar, Line } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Tooltip,
   Legend
 );
@@ -23,7 +24,7 @@ function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
 
 const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined, poolPerformance: number }) => {
   const [chartRawData, setChartRawData] = useState<PoolGraph[]>([])
-  const [chartData, setChartData] = useState<ChartData<'line'>>({
+  const [chartData, setChartData] = useState<ChartData<'bar'> | ChartData<'line'>>({
     datasets: [],
   });
   const chartRef = useRef<any>(null);
@@ -61,13 +62,25 @@ const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined, poolPerform
   }, [chartRawData]);
 
   return (
-    <Line ref={chartRef} data={chartData} options={{
-      plugins: {legend: {display: false}, tooltip: {enabled: true, mode: 'nearest'}},
-      scales: {
-        y: {grid: {color: 'gray'}, ticks: {color: 'gray'}},
-        x: {grid: {color: 'gray'}, ticks: {color: 'gray', autoSkip: true, maxTicksLimit: 10}}
-      },
-    }} />
+    <>
+    { props.poolPerformance == 1 ?
+      <Bar ref={chartRef} data={chartData as any} options={{
+        plugins: {legend: {display: false}, tooltip: {enabled: true, mode: 'nearest'}},
+        scales: {
+          y: {grid: {color: 'gray'}, ticks: {color: 'gray'}},
+          x: {grid: {color: 'gray'}, ticks: {color: 'gray', autoSkip: true, maxTicksLimit: 10}}
+        },
+      }} />
+      : 
+      <Line ref={chartRef} data={chartData as any} options={{
+        plugins: {legend: {display: false}, tooltip: {enabled: true, mode: 'nearest'}},
+        scales: {
+          y: {grid: {color: 'gray'}, ticks: {color: 'gray'}},
+          x: {grid: {color: 'gray'}, ticks: {color: 'gray', autoSkip: true, maxTicksLimit: 10}}
+        },
+      }} />
+    }
+    </>
   );
 };
 export default LiquidityPoolGraph;
