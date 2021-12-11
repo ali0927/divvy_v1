@@ -63,7 +63,7 @@ const LiquidityPoolGraph = (props: { data : Array<Pool> | undefined, poolPerform
 
   return (
     <>
-    { props.poolPerformance == 1 ?
+    { props.poolPerformance == 1 && window.location.pathname != ('/dashboard') ?
       <Bar ref={chartRef} data={chartData as any} options={{
         plugins: {legend: {display: false}, tooltip: {enabled: true, mode: 'nearest'}},
         scales: {
