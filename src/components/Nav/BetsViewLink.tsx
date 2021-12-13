@@ -5,7 +5,7 @@ import { BETS_VIEW_PATH } from "../../constants"
 export const BetsViewLink = () => {
   return (
     <Link to={BETS_VIEW_PATH}>
-      <div className="sidebar-section" style={{display:"flex", alignContent:"center"}}>
+      <div className="sidebar-section" style={{display:"flex", alignContent:"center", padding: '1.5em'}}>
         <Logo/>
       </div>
     </Link>

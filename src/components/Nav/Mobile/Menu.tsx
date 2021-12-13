@@ -9,7 +9,7 @@ export const MobileMenu = (props: { isMobileMenuVisible: boolean, setMobileMenuV
         <Button style={{ backgroundColor: "transparent", borderColor: "transparent", borderWidth: 0, padding: 0, width: "100%", height: "100%" }} onClick={() => { props.setBetSlipsVisible(false); props.setMobileMenuVisible(!props.isMobileMenuVisible) }}>
             {props.isMobileMenuVisible ? <CloseOutlined /> : <MenuOutlined />}
             <br />
-            Menu
+            {props.isMobileMenuVisible ? 'Close' : 'Menu'}
         </Button>
     );
 };

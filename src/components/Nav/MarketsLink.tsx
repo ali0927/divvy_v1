@@ -40,7 +40,7 @@ export const MarketsLink = ({ search = "" as any }) => {
         return market;
     }
     return (
-        <div className="sidebar-section sidebar-section-markets">
+        <div className="sidebar-section sidebar-section-markets" style={{padding: '1em 0.5em'}}>
             {error ? LABELS.SERVER_ERROR : null}
             {isLoading ? <Loader /> : null}
             {MarketsUI()}

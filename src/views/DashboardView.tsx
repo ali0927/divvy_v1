@@ -46,13 +46,13 @@ export const DashboardView = () => {
                 <Col xs={24} sm={24} md={0}>
                     <MobileHeader headerType={HeaderTypes.Bets} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
                 </Col>
-                <Col span={5} xs={isMobileMenuVisible ? 24 : 0} sm={isMobileMenuVisible ? 24 : 0} md={5}>
+                <Col span={4} xs={isMobileMenuVisible ? 24 : 0} sm={isMobileMenuVisible ? 24 : 0} md={4}>
                     <LeftSideBar>
                         <NavBar />
                     </LeftSideBar>
                 </Col>
                 {!isMobileMenuVisible && !isBetSlipsVisible &&
-                    <Col span={24} xs={24} sm={24} md={19}>
+                    <Col span={24} xs={24} sm={24} md={20}>
                         <div style={{padding:'40px 4vw', height:'100vh', overflowY:'scroll'}}>
                             <ConnectLink />
                             <header className="root-content">

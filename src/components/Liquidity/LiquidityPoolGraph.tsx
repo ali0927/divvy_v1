@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Line } from '@ant-design/charts';
-import { LineConfig } from "@ant-design/charts/es/plots/line";
+import { Line, LineConfig } from '@ant-design/charts';
 import { Pool, PoolGraph } from '../../constants';
 import { DATE_STRING_TO_NUMBER } from '../../constants/DashboardColumns';
 
