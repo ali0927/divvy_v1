@@ -10,7 +10,7 @@ export const Header = () => {
           {/*<div className="tagline">Be the House<br />Decentralized betting</div>
           <div className="message">Coming late 2021</div>*/}
           <div className="cta">
-            <a className="" href="#">Medium Blog</a>
+            <a className="" href="https://blog.divvy.bet/">Medium Blog</a>
           </div>   
           <div className="links">
               <Download />
