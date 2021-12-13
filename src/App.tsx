@@ -11,6 +11,7 @@ import { FaucetView } from "./views/FaucetView";
 import { GamesView } from "./views/Games/GamesView";
 import { MoonShot } from "./views/Games/MoonShot/MoonShot";
 import {MoonshotSocketContext, socket} from "./contexts/moonshot-socket";
+import LandingPageView from "./views/LandingPageView";
 
 const load = (Component: any) => (props: any) => (
   <Suspense fallback={<div></div>}>
@@ -51,6 +52,9 @@ function App() {
                 </Route>
                 <Route path={PATHS.GAMES_VIEW_PATH}>
                   <GamesView />
+                </Route>
+                <Route path={PATHS.LANDING_VIEW_PATH}>
+                  <LandingPageView />
                 </Route>
                 <Route path={PATHS.BETS_VIEW_PATH}>
                   <BetsView />
