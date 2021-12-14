@@ -23,12 +23,11 @@ export const SeasonGames = (props: { season: Season, search: string }) => {
                   return (
                     <Fragment key={value.marketId}>
                       <SingleMatchComponent market={value} />
-                      <Divider style={{ color: "gray" }} />
+                      <Divider style={{ color: "gray", margin: '10px 0' }} />
                     </Fragment>
                   )
                 }
-              }      
-              )}
+              })}
             </Panel>
           </Collapse>
         </Col>

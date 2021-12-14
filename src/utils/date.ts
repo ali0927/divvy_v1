@@ -26,7 +26,7 @@ export const getDate = (unixEpochMs: number) => {
   if(checkDate(d, yesterday)){
     return "Yesterday";
   }
-  return (days[d.getDay()] + ', ' + (months[d.getMonth()]) + ' ' + d.getDate());
+  return ((d.getMonth() + 1) + '/' + d.getDate());
 }
 export const getTime = (unixEpochMs: number) => {
   var d = new Date();
@@ -35,9 +35,10 @@ export const getTime = (unixEpochMs: number) => {
   return d.toLocaleTimeString(undefined, { timeStyle: "short", hour12: true }).replace("pm", "PM").replace("am", "AM")
 }
 let shortTimeZone: string;
-export const getShortTimezone = () => {
+export const getShortTimezone = (unixEpochMs: number) => {
   if (!shortTimeZone) {
     shortTimeZone = new Date().toLocaleTimeString('en-us', { timeZoneName: "short" }).split(' ')[2];
   }
-  return shortTimeZone;
+  var d = new Date();
+  return days[d.getDay()] + ' ' + shortTimeZone;
 }

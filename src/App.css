@@ -281,13 +281,27 @@ body {
 
 .team-logo {
   position: relative;
-  width: 80%; /* The size you want */
+  width: 60%; /* The size you want */
 }
 .team-logo:after {
   content: "";
   display: block;
   padding-bottom: 100%; /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
 }
+.team-logo div{
+  position: absolute; /* Take your picture out of the flow */
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 70%;
+  object-position: center;
+  object-fit: scale-down;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translate(-50%, -50%);
+}
+
 .team-logo img{
   position: absolute; /* Take your picture out of the flow */
   top: 50%;
@@ -298,7 +312,6 @@ body {
   object-fit: scale-down;
   transform: translate(-50%, -50%);
 }
-
 
 .overlay-banner {
   position: absolute;
@@ -319,8 +332,14 @@ body {
   text-align: center;
   cursor: pointer;
   padding: 5px 2px;
-  border-radius: 22.5px;
+  border-radius: 0px;
+  margin: 0 1px;
   background-color: var(--shade-black);
+}
+
+.odds label {
+  font-size: 0.7em;
+  color: gray;
 }
 
 .odds:hover {
@@ -334,7 +353,8 @@ body {
   border-radius: 22.5px;
   background-color: none;
 }
-.odds-active .text-secondary {
+
+.odds-active label {
   color: #fff;
 }
 
@@ -354,7 +374,8 @@ body {
     width: 100%;
     align-items: center;
     justify-content: center;
-    font-size: 1em;
+    font-size: 0.8em;
+    color: gray;
     text-align: center;
   }
 }
@@ -788,6 +809,7 @@ body {
   width: 3.5rem;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 .sports-list-item .search-button {
   color: gray;
@@ -799,7 +821,14 @@ body {
 .sports-list-item .team-logo {
   width: 100%;
 }
-
+.sports-list-item .sports-name {
+  position: absolute;
+  top: 100%;
+  margin-top: 10px;
+  color: gray;
+  font-size: 12px;
+  text-align: center;
+}
 .sports-list-item img {
   /* opacity: 80%; */
   border-radius: 50%;
@@ -1004,6 +1033,7 @@ h1 {
 }
 .season_sports_name {
   background: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
+  margin-right: 20px;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

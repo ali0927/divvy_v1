@@ -5,7 +5,8 @@ export const TeamDetails = (props: { name: string, logo: string }) => {
       <Row style={{display:'flex', alignItems:'center'}}>
         <Col span={0} md={8}>
           <div className="team-logo">
-            <img src={props.logo} alt="Team logo" />
+              {/* <img src={props.logo} /> */}
+              <div style={{backgroundImage: `url(${props.logo})`}}></div>
           </div>
         </Col>
         <Col span={24} md={16}>

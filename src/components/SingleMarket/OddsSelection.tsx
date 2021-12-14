@@ -8,12 +8,14 @@ import { LAMPORTS_PER_USDC } from "../../constants/math";
 import { tokenAmountToString } from "../../constants";
 import { Odds, BetType, Market, Bet, MarketSide, BetStatus } from "../../constants";
 import { BetsContext } from "../../contexts/bets";
+import { useMediaQuery } from "../../utils/utils";
 export const OddsSelection = (props: { market: Market, selection: string, odds: Odds, otherTeam: string, selectionTeam: string, marketSide: MarketSide }) => {
     const bets = useContext(BetsContext);
     const { htBalance } = useContext(HousePoolContext);
     const { htSupply } = useContext(HPTokenContext);
     const { liveLiquidity, lockedLiquidity } = useContext(BetStateContext)
     const { sport, changeSport } = useContext(SportContext)
+    let isMobile = useMediaQuery('(max-width: 400px)')
 
     const setSlip = (betType: BetType, odds: number, oddsFeed: string, marketPubkey: string, points: number) => {
         if (containsBet(betType)) {
@@ -61,25 +63,27 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
     }
 
     return (
-      <Row style={{display:'flex', alignItems:'center'}}>
-        <Col span={8} style={{padding: '0.5vw'}}        
+      <Row style={{display:'flex', alignItems:'center', margin: '1px 0'}}>
+        <Col span={props.marketSide === MarketSide.draw ? 24 : 8} style={{padding: 0}}
             onClick={() => setSlip(BetType.moneyline, props.odds.moneyline, props.odds.moneylineFeedPubkey, props.market.moneylineMarketPubkey, 0)}>
-          <div className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"}>
-            { props.marketSide === MarketSide.draw && <label>(Draw)</label>}
+          <div className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"} style={{borderRadius: props.marketSide !== MarketSide.draw ? '22.5px 0 0 22.5px' : '22.5px'}}>
+            <label>{ props.marketSide === MarketSide.draw ? '(Draw)' : 'Moneyline'}</label>
             <b style={{fontSize: '1em'}}>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline.toFixed(2)}`}</b>
           </div>
         </Col>
         { props.marketSide != MarketSide.draw && 
         <>
           {/* TODO: add after we enable spreads: onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)} */}
-          <Col onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.moneylineMarketPubkey, props.odds.spreadPoints)} span={8} style={{padding: '0.5vw'}} >
-            <div className={containsBet(BetType.spread) ? "odds odds-active" : "odds"}>
-              <b style={{fontSize: '1em'}}>{`${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints.toFixed(2))} (${String(props.odds.spread.toFixed(2))})`}</b>
+          <Col onClick={() => setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.moneylineMarketPubkey, props.odds.spreadPoints)} span={8} style={{padding: 0}} >
+            <div className={containsBet(BetType.spread) ? "odds odds-active" : "odds"} style={{borderRadius: 0}}>
+              <label>Spread</label>
+              <b style={{fontSize: '1em'}}>{`${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints.toFixed(2))}${isMobile ? '' : `(${String(props.odds.spread.toFixed(2))})`}`}</b>
             </div>
           </Col>
-          <Col onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.moneylineMarketPubkey, props.odds.totalPoints)} span={8} style={{padding: '0.5vw'}} >
-            <div className={containsBet(BetType.total) ? "odds odds-active" : "odds"}>
-              <b style={{fontSize: '1em'}}>{`${props.marketSide === MarketSide.teamB ? "O" : "U"} ${Math.abs(props.odds.totalPoints).toFixed(2)} (${props.odds.total.toFixed(2)})`}</b>
+          <Col onClick={() => setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.moneylineMarketPubkey, props.odds.totalPoints)} span={8} style={{padding: 0}} >
+            <div className={containsBet(BetType.total) ? "odds odds-active" : "odds"} style={{borderRadius: '0 22.5px 22.5px 0'}}>
+              <label>Total</label>
+              <b style={{fontSize: '1em'}}>{`${props.marketSide === MarketSide.teamB ? "O" : "U"} ${Math.abs(props.odds.totalPoints).toFixed(2)} ${isMobile ? '' : `(${props.odds.total.toFixed(2)})`}`}</b>
             </div>
           </Col>
           </>

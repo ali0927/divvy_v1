@@ -30,6 +30,7 @@ export const SportsList = ({ search = "" as any }) => {
                   <img src={sportData.sportLogo} alt="Sport logo" />
                 </div>
               </Button>
+              <h4 className='sports-name'>{sportData.sportName}</h4>
             </div>
           )
         }
@@ -37,7 +38,7 @@ export const SportsList = ({ search = "" as any }) => {
       return market;
     }
     return (
-        <div style={{display:'flex', margin:"3rem 0", justifyContent:'center', width:'100%'}}>
+        <div style={{display:'flex', margin:"2rem 0 4rem", justifyContent:'center', width:'100%'}}>
           {error ? LABELS.SERVER_ERROR : null}
           {isLoading ? <Loader /> : null}
           {ListsUI()}
