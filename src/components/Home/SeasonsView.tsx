@@ -17,9 +17,9 @@ export const SeasonsView = () => {
     return (
       <>
         <LiveMarkets />
-        {/* <HomeCarousel /> */}
+        <HomeCarousel />
         <SportsList />
-        <SeasonHeader refetch={refetch} seasonName={sport?.sportName} onChange={setSearch}/>
+        <SeasonHeader refetch={refetch} seasonName={sport?.sportName} value={search} onChange={setSearch}/>
         {error ? LABELS.SERVER_ERROR : null}
         {isLoading ? <Loader /> : null}
         {data?.map(season => <SeasonGames season={season} key={season.season.seasonId} search={search}/>)}

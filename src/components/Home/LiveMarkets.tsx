@@ -10,7 +10,7 @@ import { TeamDetails } from "../SingleMarket/TeamDetails";
 export const LiveMarkets = () => {
     const { data, error, isLoading } = useGetLiveMarketsQuery(null);
     return (
-        <div>
+        <div style={{margin: '3rem 0'}}>
             {/* <h2>Live Games</h2>
             {isLoading ? <Loader /> :
                 <div className="carousel" style={{ display: "flex" }}>
