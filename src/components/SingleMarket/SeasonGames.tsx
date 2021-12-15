@@ -5,7 +5,7 @@ import { Market, Season } from "../../constants";
 import { Fragment, useState, useEffect } from "react";
 import { OddsType } from './OddsType';
 const { Panel } = Collapse;
-export const SeasonGames = (props: { season: Season, search: string }) => {
+export const SeasonGames = (props: { season: Season, search: string, goToGame: any }) => {
   const [markets, setMarkets] = useState<Market[]>([]);
   useEffect(() => {
     const markets_arr = [...props.season.markets]
@@ -22,7 +22,7 @@ export const SeasonGames = (props: { season: Season, search: string }) => {
                 if(value.teamA.concat(value.teamB).toLowerCase().includes(props.search.toLowerCase())) {
                   return (
                     <Fragment key={value.marketId}>
-                      <SingleMatchComponent market={value} />
+                      <div className="market-container" onClick={() => {props.goToGame(value.marketId)}}><SingleMatchComponent market={value} /></div>
                       <Divider style={{ color: "gray", margin: '10px 0' }} />
                     </Fragment>
                   )

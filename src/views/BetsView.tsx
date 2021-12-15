@@ -14,6 +14,7 @@ import { useGetBetsQuery } from "../store/getBets";
 import { BetsContext } from "../contexts/bets";
 import { ConnectLink } from "../components/Nav/ConnectLink";
 import { useMediaQuery } from "../utils/utils";
+import { GoBack } from "../components/Common/GoBack";
 
 const BetsView = () => {
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);

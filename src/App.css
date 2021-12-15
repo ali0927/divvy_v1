@@ -119,6 +119,14 @@ body {
   overflow-y: auto;
 }
 
+/* .ant-layout .ant-input {
+  text-align: left;
+}
+
+.ant-layout {
+  text-align: left;
+} */
+
 .carousel-view {
   overflow-x: hidden;
   overflow-y: hidden;
@@ -914,6 +922,7 @@ h1 {
 
 .form-grey .ant-input {
   background-color: var(--dark-gray);
+  text-align: left;
 }
 
 .ant-form-item {
@@ -1034,6 +1043,50 @@ h1 {
 .season_sports_name {
   background: radial-gradient(circle at 0% 105%, var(--royal-purple), var(--win-green));
   margin-right: 20px;
+  font-size: 2em;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.market-container .single-match:hover {
+  background: rgb(0, 0, 0, .2);
+}
+
+.market-container .market-enter-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.market-match {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.market-match .season-header {
+  margin-top: 3em;
+}
+
+.market-match .home-team > div > div {
+  flex-direction: row-reverse;
+}
+
+.market-match .native-team b, .market-match .home-team b {
+  font-size: 2em !important;
+}
+
+@media (max-width: 400px) {
+  .market-match .native-team b, .market-match .home-team b {
+    font-size: 1em !important;
+  }
+}
+
+.market-match .team-logo {
+  width: 100%;
+}
+
+.market-match .home-team .team-logo {
+  float: right;
 }

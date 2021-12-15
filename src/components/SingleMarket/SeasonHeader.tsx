@@ -16,10 +16,10 @@ type SeasonHeaderProps = {
 export const SeasonHeader = ({ seasonName, value, onChange, refetch, switchVal, setSwitchVal, ...props }: SeasonHeaderProps) => {
   const isMobile = useMediaQuery('(max-width: 400px)');
   return (
-    <div style={isMobile ? {...style.wrapper, flexWrap: 'wrap' } : style.wrapper} {...props}>
-      <h1 className="season_sports_name">{seasonName}</h1>
+    <div style={isMobile ? {...style.wrapper, flexWrap: 'wrap', justifyContent: 'center' } : style.wrapper} {...props}>
+      <h1 className="season_sports_name" style={{marginTop: isMobile ? 5 : 0}}>{seasonName}</h1>
       <BetSwitch switchVal={switchVal} setSwitchVal={setSwitchVal} />
-      <div className="balance-container" style={isMobile ? {width: '100%'} : {}}>
+      <div className="balance-container" style={isMobile ? {width: '100%', marginTop: 5} : {}}>
         {/* <ReloadButton refetch={refetch} /> */}
         <Input  
           style={style.input}

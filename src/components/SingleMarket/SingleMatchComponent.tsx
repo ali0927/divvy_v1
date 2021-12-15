@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { Col, Row } from 'antd'
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { TeamDetails } from "./TeamDetails"
 import { OddsType } from './OddsType';
 import { OddsSelection } from './OddsSelection';
@@ -49,7 +50,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
               <Col span={0} md={2}></Col>
               <Col span={24} md={22}>
                 <div style={{position: 'relative'}}>
-                  <label className="text-secondary" style={{fontSize:"0.7em", position:'absolute', transform:'translate(0,-50%)'}}>Versus</label>
+                  <label className="text-secondary" style={{fontSize:"0.7em", position:'absolute', transform:'translate(0,-50%)', left: '40px'}}>Versus</label>
                 </div>
               </Col>
             </Row>
@@ -97,6 +98,7 @@ export const SingleMatchComponent = (props: { market: Market }) => {
             <div className="bet-time-container">
               {getDate(props.market.commenceTime) + ' ' + getTime(props.market.commenceTime)}<br />{getShortTimezone(props.market.commenceTime)}
             </div>
+            <div className="market-enter-icon"><RightOutlined /></div>
           </Col>
         </Row>
       </div>

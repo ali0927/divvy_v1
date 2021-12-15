@@ -1,5 +1,7 @@
 import { Row, Col } from 'antd'
+import { useMediaQuery } from '../../utils/utils';
 export const TeamDetails = (props: { name: string, logo: string }) => {
+  let isMobile = useMediaQuery('(max-width: 400px)');
   return (
     <div >
       <Row style={{display:'flex', alignItems:'center'}}>
@@ -10,7 +12,7 @@ export const TeamDetails = (props: { name: string, logo: string }) => {
           </div>
         </Col>
         <Col span={24} md={16}>
-          <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', height: '100%', justifyContent: isMobile ? 'center' : 'left' }}>
             <b style={{ fontSize: "1em", lineHeight: 'normal' }}>{props.name}</b>
           </div>
         </Col>
