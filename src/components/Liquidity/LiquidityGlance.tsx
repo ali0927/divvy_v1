@@ -35,7 +35,7 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
         setTransData({"percent": data["percent"], "trans": data["trans"]});
     }, [])
     const handleChange = (e : any) => {
-        let interval = (e === "24 hours" ? MS_IN_DAY : e === "1 week" ? MS_IN_DAY*7 : MS_IN_DAY*30);         
+        let interval = (e === "week" ? MS_IN_DAY * 7 : e === "month" ? MS_IN_DAY * 30 : MS_IN_DAY * 30 * 12);         
         props.setInterval(interval);
         let data = getTransPercent(interval)
         setTransData({"percent": data["percent"], "trans": data["trans"]});
@@ -47,10 +47,10 @@ export const LiquidityGlance = (props: { setInterval : any, data : any, transact
               <div className="heading-align-container">
                 <div className="header-align" style={{display:'flex', alignItems:'center'}}>
                   <span className="pool-header">At a glance</span>
-                  <Select defaultValue="24 hours" onSelect={handleChange} className="glance-select" suffixIcon={<DownOutlined style={{marginTop: 0, color: "#fff"}} className="direction-icon" />}>
-                    <Option value="24 hours">24 hours</Option>
-                    <Option value="1 week">1 week</Option>
-                    <Option value="1 month">1 month</Option>
+                  <Select defaultValue="week" onSelect={handleChange} className="glance-select" suffixIcon={<DownOutlined style={{marginTop: 0, color: "#fff"}} className="direction-icon" />}>
+                    <Option value="week">1 week</Option>
+                    <Option value="month">1 month</Option>
+                    <Option value="year">1 year</Option>
                   </Select>
                 </div>
               </div>

@@ -26,6 +26,7 @@ export const SolWallet = (props: { left?: JSX.Element; right?: JSX.Element }) =>
         title={LABELS.SETTINGS_TOOLTIP}
         content={<SolSettings />}
         trigger="click"
+        color='black'
       >
         <Button
           type="text"

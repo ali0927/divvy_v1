@@ -20,16 +20,16 @@ export const BettingDashboardOverview = () => {
                     <TransactionData textContext={"All time betting P&L"} percentage={114} data={"9,739.73 USDC"} />
                 </Col>
             </Row>
-            <Row style={{marginTop: 50}}>
+            <Row style={{marginTop: 50, justifyContent: 'space-between'}}>
                 <Col span={36} md={5}>
                     <CommonHeader side={true} heading={"Bets overview"} />
                 </Col>
-                <Col span={36} md={8}>
+                <Col span={36} md={5}>
                     <BettingFilterOptions setFilteredInfo={setFilteredInfo} />
                 </Col>
-                <Col span={36} md={11}>
+                {/* <Col span={36} md={11}>
                     <BettingSortOptions sortBy={sortBy} setSortBy={setSortBy} setSortedInfo={setSortedInfo} />
-                </Col>
+                </Col> */}
             </Row>
             <Row>
                 <Col span={36} md={24}>

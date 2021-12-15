@@ -1,4 +1,5 @@
 export enum HeaderTypes {
     Liquidity = "Liquidity",
-    Bets = "Bets"
+    Bets = "Bets",
+    Dashboard = "Dashboard",
 }

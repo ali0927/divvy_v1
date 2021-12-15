@@ -20,6 +20,7 @@ export const CurrentUserBadge = (props: {}) => {
       placement="topRight"
       content={<SolWalletSettings />}
       trigger="click"
+      color='black'
     >
       <Button style={{marginRight:'0.5rem'}}>
         <div className="wallet-wrapper">

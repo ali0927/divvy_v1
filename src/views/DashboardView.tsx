@@ -14,6 +14,7 @@ import { BetsContext } from "../contexts/bets";
 import { useWallet } from "../contexts/sol/wallet";
 import { useGetBetsQuery } from "../store/getBets";
 import { ConnectLink } from "../components/Nav/ConnectLink";
+import { useMediaQuery } from "../utils/utils";
 
 export const DashboardView = () => {
     const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -23,6 +24,7 @@ export const DashboardView = () => {
     const wallet = useWallet();
     const { data, error, isLoading } = useGetBetsQuery(wallet?.publicKey?.toString())
     const bets = useContext(BetsContext);
+    let isMobile = useMediaQuery('(max-width: 400px)');
     if (!isLoading && !error && data) {
       data.map((item) => {
         dataSource.push({
@@ -44,22 +46,22 @@ export const DashboardView = () => {
         <Layout style={{ backgroundColor: "#0D0D0D" }}>
             <Row>
                 <Col xs={24} sm={24} md={0}>
-                    <MobileHeader headerType={HeaderTypes.Bets} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
+                    <MobileHeader headerType={HeaderTypes.Dashboard} isBetSlipsVisible={isBetSlipsVisible} setBetSlipsVisible={setBetSlipsVisible} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
                 </Col>
                 <Col span={4} xs={isMobileMenuVisible ? 24 : 0} sm={isMobileMenuVisible ? 24 : 0} md={4}>
                     <LeftSideBar>
                         <NavBar />
                     </LeftSideBar>
                 </Col>
-                {!isMobileMenuVisible && !isBetSlipsVisible &&
+                {(!isMobile || !isMobileMenuVisible && !isBetSlipsVisible) &&
                     <Col span={24} xs={24} sm={24} md={20}>
                         <div style={{padding:'40px 4vw', height:'100vh', overflowY:'scroll'}}>
                             <ConnectLink />
-                            <header className="root-content">
+                            <header className="root-content" style={isMobile ? {padding: 0} : {}}>
                                 {isLoading ? <Loader /> : null}
                             </header>
-                            <BettingDashboardHeader data={data} error={error} />
                             <BettingDashboardMiddle  switchVal={switchVal} setSwitchVal={setSwitchVal} />
+                            <BettingDashboardHeader data={data} error={error} />
                             { switchVal === 0 &&
                                 <LiquidityProviderDashboard />
                             }

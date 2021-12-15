@@ -126,7 +126,7 @@ export const BettingDashboardTable = (props: { sortBy: string, sortedInfo: any, 
           sorter: {
             compare: (a: any, b: any) => convertToDate(a.placed)-convertToDate(b.placed)
           },
-          sortOrder: props.sortedInfo.columnKey === 'placed' && props.sortedInfo.order,
+          sortOrder: props.sortedInfo.columnKey === 'time' && props.sortedInfo.order,
         },
     ];
 

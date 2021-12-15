@@ -341,6 +341,19 @@ body {
   margin: 0 1.7vw 0 1.7vw;
 }
 
+.dashboard-graph-handler .header-align {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dashboard-graph-handler .header-align span {
+  align-self: center;
+}
+
+.my-house-balance-select {
+  width: 150px !important;
+}
+
 .header-side {
   margin: 0;
 }
@@ -488,8 +501,27 @@ body {
   line-height: initial;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
+.switch-tabs.pool-performance-tabs {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 30px;
+  position: relative;
+}
+.switch-tabs .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  color: black;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  transition: all 0.3s ease 0s;
+}
 .switch-tabs .ant-divider-vertical {
-  height: auto;
+  height: 25px;
+  align-self: center;
 }
 
 .switch-tab {
@@ -544,6 +576,8 @@ body {
 }
 .glance-select {
   width: 100px !important;
+  border: 1px solid white;
+  border-radius: 30px;
 }
 .glance-select .ant-select-selector {
   border: none !important;
@@ -558,7 +592,9 @@ body {
   height: auto !important;
   text-align: left !important;
 }
-
+.ant-popover-content .ant-popover-title {
+  color: white;
+}
 
 .ant-slider {
   width: 100%;
@@ -596,11 +632,17 @@ body {
   color: gray;
   line-height: 12px;
 }
-
+.pool-activity-table .ant-table-thead>tr>th:nth-of-type(3), .pool-activity-table .ant-table-thead>tr>th:nth-of-type(4), .pool-activity-table .ant-table-thead>tr>th:nth-of-type(5) {
+  text-align: right;
+}
 .pool-activity-table .ant-table-tbody>tr>td {
   background-color: #0d0d0d;
   font-size: 16px;
   line-height: 24px;
+}
+
+.pool-activity-table .ant-table-container {
+  overflow-x: scroll;
 }
 
 @media (min-width: 768px) {
