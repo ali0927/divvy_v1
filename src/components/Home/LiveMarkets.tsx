@@ -2,15 +2,17 @@ import { Row, Col } from "antd";
 import { Market, MarketSide } from "../../constants";
 import { useGetLiveMarketsQuery } from "../../store/getLiveMarkets"
 import { getDate, getTime, getShortTimezone } from "../../utils/date";
+import { GoBack } from "../Common/GoBack";
 import { Loader } from "../Loader"
 import { OddsSelection } from "../SingleMarket/OddsSelection";
 import { OddsType } from "../SingleMarket/OddsType";
 import { TeamDetails } from "../SingleMarket/TeamDetails";
 
-export const LiveMarkets = () => {
+export const LiveMarkets = (props: {game: number, backToSeason: any}) => {
     const { data, error, isLoading } = useGetLiveMarketsQuery(null);
     return (
-        <div>
+        <div style={{minHeight: '3em'}}>
+            {props.game != -1 && <div onClick={() => props.backToSeason(-1)}><GoBack path={`${'/'}`} label="Back to Betting"/></div>}
             {/* <h2>Live Games</h2>
             {isLoading ? <Loader /> :
                 <div className="carousel" style={{ display: "flex" }}>

@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { Col, Row } from 'antd'
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { TeamDetails } from "./TeamDetails"
 import { OddsType } from './OddsType';
 import { OddsSelection } from './OddsSelection';
@@ -7,25 +8,28 @@ import { americanToDecimal, Market, MarketSide } from '../../constants';
 import { getDate, getShortTimezone, getTime } from '../../utils/date';
 import { codes } from "../../constants/processed"
 import { SportContext } from "../../contexts/sport";
+import { useMediaQuery } from "../../utils/utils";
 
 export const SingleMatchComponent = (props: { market: Market }) => {
     const { sport, changeSport } = useContext(SportContext)
     const [oddsType, setoddsType] = useState("decimal")
+    let isMobile = useMediaQuery('(max-width: 400px)');
     return (
       <div className="single-match">
-        <OddsType />
+        {/* <OddsType /> */}
         <Row>
           <Col span={24} md={0}>
             <div className="bet-time-container text-secondary">
-              {getDate(props.market.commenceTime)} {getTime(props.market.commenceTime)} {getShortTimezone()}
+              {getDate(props.market.commenceTime) + ' ' + getTime(props.market.commenceTime)} {getShortTimezone(props.market.commenceTime)}
             </div>
           </Col>
           <Col span={24} md={20}>
           <Row style={{alignItems:'center'}}>
-              <Col span={6}>
+              <Col span={7}>
                 <TeamDetails name={props.market.teamB} logo={"https://storage.googleapis.com/divvy-cdn/MLB/" + props.market.teamB.toLowerCase().replaceAll(" ", "-").replaceAll("-fc", "")  + ".svg"} />
               </Col>
-              <Col span={18}>
+              {!isMobile && <Col span={2}></Col>}
+              <Col span={isMobile ? 17 : 9}>
                 <OddsSelection marketSide={MarketSide.teamB} market={props.market} selectionTeam={props.market.teamB} otherTeam={props.market.teamA} selection={"teamB"} odds={{
                   moneyline: americanToDecimal(props.market.teamBOddsMoneyline),
                   spread: americanToDecimal(props.market.teamBOddsSpread),
@@ -39,22 +43,24 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                   totalPointsFeedPubkey: props.market.teamATotalPointsFeedPubkey,
                 }} />
               </Col>
+              {!isMobile && <Col span={6}></Col>}
             </Row>
 
             <Row>
               <Col span={0} md={2}></Col>
               <Col span={24} md={22}>
                 <div style={{position: 'relative'}}>
-                  <label className="text-secondary" style={{fontSize:"0.8em", position:'absolute', transform:'translate(0,-50%)'}}>@</label>
+                  <label className="text-secondary" style={{fontSize:"0.7em", position:'absolute', transform:'translate(0,-50%)', left: '40px'}}>Versus</label>
                 </div>
               </Col>
             </Row>
 
             <Row style={{alignItems:'center'}}>
-              <Col span={6}>
+              <Col span={7}>
                 <TeamDetails name={props.market.teamA} logo={"https://storage.googleapis.com/divvy-cdn/MLB/" + props.market.teamA.toLowerCase().replaceAll(" ", "-").replaceAll("-fc", "")  + ".svg"} />
               </Col>
-              <Col span={18}>
+              {!isMobile && <Col span={2}></Col>}
+              <Col span={isMobile ? 17 : 9}>
                 <OddsSelection marketSide={MarketSide.teamA} market={props.market} selectionTeam={props.market.teamA} otherTeam={props.market.teamB} selection={"teamA"} odds={{
                   moneyline: americanToDecimal(props.market.teamAOddsMoneyline),
                   spread: americanToDecimal(props.market.teamAOddsSpread),
@@ -68,13 +74,9 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                   totalPointsFeedPubkey: props.market.teamBTotalPointsFeedPubkey,
                 }} />
               </Col>
-            </Row>
-            
-            { sport?.sportId === 3 &&
-              <Row>
-                <Col span={6} md={6}>
-                </Col>
-                <Col span={18}>
+              {isMobile && <Col span={7} />}
+              { sport?.sportId === 3 &&
+                <Col span={isMobile ? 6 : 3}>
                   <OddsSelection marketSide={MarketSide.draw} market={props.market} selectionTeam={props.market.draw} otherTeam={props.market.teamA} selection={"Draw"} odds={{
                     moneyline: americanToDecimal(props.market.drawOddsMoneyline),
                     spread: americanToDecimal(props.market.drawOddsSpread),
@@ -88,14 +90,15 @@ export const SingleMatchComponent = (props: { market: Market }) => {
                     totalPointsFeedPubkey: props.market.drawTotalPointsFeedPubkey,
                   }} />
                 </Col>
-              </Row>
-            }
-            
-          </Col>         
+              }
+              {!isMobile && <Col span={3}></Col>}
+            </Row>
+          </Col>
           <Col span={0} md={4}>
             <div className="bet-time-container">
-              {getDate(props.market.commenceTime)}<br />{getTime(props.market.commenceTime)}<br />{getShortTimezone()}
+              {getDate(props.market.commenceTime) + ' ' + getTime(props.market.commenceTime)}<br />{getShortTimezone(props.market.commenceTime)}
             </div>
+            <div className="market-enter-icon"><RightOutlined /></div>
           </Col>
         </Row>
       </div>
