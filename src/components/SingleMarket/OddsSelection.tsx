@@ -66,8 +66,8 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
       <Row style={{display:'flex', alignItems:'center', margin: '1px 0'}}>
         <Col span={props.marketSide === MarketSide.draw ? 24 : 8} style={{padding: 0}}
             onClick={(e) => {e.stopPropagation();setSlip(BetType.moneyline, props.odds.moneyline, props.odds.moneylineFeedPubkey, props.market.moneylineMarketPubkey, 0);}}>
-          <div className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"} style={{borderRadius: props.marketSide !== MarketSide.draw ? '22.5px 0 0 22.5px' : '22.5px'}}>
-            <label>{ props.marketSide === MarketSide.draw ? '(Draw)' : 'Moneyline'}</label>
+          <div className={containsBet(BetType.moneyline) ? "odds odds-active" : "odds"} style={{margin: '0 0.5em', borderRadius: props.marketSide !== MarketSide.draw ? '22.5px' : '22.5px'}}>
+            <label>{ props.marketSide === MarketSide.draw ? '(Draw)' : ''}</label>
             <b style={{fontSize: '1em'}}>{`${props.odds.moneyline >= 0 ? "+" : ""}${props.odds.moneyline.toFixed(2)}`}</b>
           </div>
         </Col>
@@ -75,18 +75,18 @@ export const OddsSelection = (props: { market: Market, selection: string, odds: 
         <>
           {/* TODO: add after we enable spreads: onClick={(e) => {e.stopPropagation();setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.spreadMarketPubKey)}} */}
           <Col onClick={(e) => {e.stopPropagation();setSlip(BetType.spread, props.odds.spread, props.odds.spreadFeedPubkey, props.market.moneylineMarketPubkey, props.odds.spreadPoints);}} span={8} style={{padding: 0}} >
-            <div className={containsBet(BetType.spread) ? "odds odds-active" : "odds"} style={{borderRadius: 0}}>
-              <label>Spread</label>
-              <b style={{fontSize: '1em'}}>{`${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints.toFixed(2))}${isMobile ? '' : `(${String(props.odds.spread.toFixed(2))})`}`}</b>
+            <div className={containsBet(BetType.spread) ? "odds odds-active" : "odds"} style={{margin: '0 0.5em', borderRadius: '22.5px'}}>
+              <label></label>
+              <b style={{fontSize: '1em'}}>{`${props.odds.spreadPoints >= 0 ? "+" : ""}${String(props.odds.spreadPoints.toFixed(2))} ${isMobile ? '' : `(${String(props.odds.spread.toFixed(2))})`}`}</b>
             </div>
           </Col>
           <Col onClick={(e) => {e.stopPropagation();setSlip(BetType.total, props.odds.total, props.odds.totalFeedPubkey, props.market.moneylineMarketPubkey, props.odds.totalPoints);}} span={8} style={{padding: 0}} >
-            <div className={containsBet(BetType.total) ? "odds odds-active" : "odds"} style={{borderRadius: '0 22.5px 22.5px 0'}}>
-              <label>Total</label>
+            <div className={containsBet(BetType.total) ? "odds odds-active" : "odds"} style={{margin: '0 0.5em', borderRadius: '22.5px'}}>
+              <label></label>
               <b style={{fontSize: '1em'}}>{`${props.marketSide === MarketSide.teamB ? "O" : "U"} ${Math.abs(props.odds.totalPoints).toFixed(2)} ${isMobile ? '' : `(${props.odds.total.toFixed(2)})`}`}</b>
             </div>
           </Col>
-          </>
+        </>
         }
       </Row>
     )
