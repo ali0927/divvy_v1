@@ -30,7 +30,7 @@ export const SeasonsView = () => {
         <LiveMarkets game={gameId} backToSeason={setGameId} />
         { gameId == -1 &&
         <>
-          <HomeCarousel />
+          {/* <HomeCarousel /> */}
           <SportsList />
           <SeasonHeader
             refetch={refetch}
@@ -44,9 +44,10 @@ export const SeasonsView = () => {
         }
         {error ? LABELS.SERVER_ERROR : null}
         {isLoading ? <Loader /> : null}
-        {switchVal == 0 ?
+        {/* {switchVal == 0 ? */}
           <>
-          {gameId == -1 ? (
+          {/* {gameId == -1 ? ( */}
+          {
             data?.map(season =>
               <SeasonGames
                 season={season}
@@ -58,12 +59,12 @@ export const SeasonsView = () => {
                 }}
               />
             )
-            )
-          : selectedSeason &&
-            <SeasonGamesMatch season={selectedSeason} matchId={gameId} />
+          // )
+          // : selectedSeason &&
+          //   <SeasonGamesMatch season={selectedSeason} matchId={gameId} />
           }
           </>
-        :
+        {/* :
           <div style={{
             height: '200px',
             display: 'flex',
@@ -72,7 +73,7 @@ export const SeasonsView = () => {
           }}>
             <h3>Future betting is coming soon</h3>
           </div>
-        }
+        } */}
         {isMobile && gameId == -1 &&
           <div style={isMobile ? {display: 'flex', width: '100%', flexDirection: 'inherit', justifyContent: 'center'} : {display: 'none'}}>
             <Button type="text" onClick={() => setSearch('')} style={{width: '95%'}}>Clear Search</Button>
