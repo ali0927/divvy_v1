@@ -40,20 +40,22 @@ export const LiquidityProviderDashboard = () => {
                     <Divider />
                     <Row style={{width: '100%'}}>
                         <Col span={0} md={4}></Col>
-                        <Col span={12} md={10}>
+                        <Col span={10} md={10}>
                             <LiquidityProviderData textContext={"House balance"} percentage={'0.173% owned'} data={"9,739.73 USDC"} />
                         </Col>
-                        <Col span={12} md={10}>
+                        <Col span={4} md={0}></Col>
+                        <Col span={10} md={10}>
                             <LiquidityProviderData textContext={"Divvy rewards balance"} percentage='' data={"9,739.73 DVY"} />
                         </Col>
                     </Row>
                     <Divider />
                     <Row style={{width: '100%'}}>
                         <Col span={0} md={4}></Col>
-                        <Col span={12} md={10}>
+                        <Col span={10} md={10}>
                             <LiquidityProviderData textContext={"House APY"} percentage={''} data={"56%"} />
                         </Col>
-                        <Col span={12} md={10}>
+                        <Col span={4} md={0}></Col>
+                        <Col span={10} md={10}>
                             <LiquidityProviderData textContext={"Rewards APY"} percentage='' data={"43%"} />
                         </Col>
                     </Row>
